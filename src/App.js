@@ -7,7 +7,7 @@ import { Footer } from './layouts/Footer'
 
 function App() {
   return (
-    <div className='font-sans bg-white w-[1780px] mx-auto overflow-hidden sssssssssss'>
+    <div className='font-sans bg-white w-[1780px] mx-auto overflow-hidden'>
       <Training/>
       <Food/>
       <Progress/>
