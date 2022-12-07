@@ -9,7 +9,7 @@ import NotFound from './Pages/PageNotFound'
 
 function App() {
   return (
-    <div className='font-sans bg-white w-[1780px] mx-auto overflow-hidden s'>
+    <div className='font-sans bg-white w-[1780px] mx-auto overflow-hidden sss'>
       <Routes>
         <Route path='/' element={<HomePage/>} />
         <Route path='/login' element={<Login/>} />
