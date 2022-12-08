@@ -51,7 +51,7 @@ const subsData: subsDataType = {
 export const Subscribe = () => {
 
   return (
-  <div className='flex flex-col mb-[158px]'>
+  <div className='flex flex-col mb-[78px]'>
     <p className='
       font-[600] text-[64px] text-[#1F2117] leading-[75.14px]
       w-[842px] h-[75px] text-center mx-auto mb-[127px]'>Подписки</p>

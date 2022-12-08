@@ -5,21 +5,16 @@ module.exports = {
   ],
   theme: {
     extend: {
-      translate: {
-        'finput': '172px',
-        'finput-s': '200px',
-        'sinput': '85px',
-        'sinput-s': '112px',
-        'tinput': '3px',
-        'tinput-s': '23px',
-        'frinput': '91px',
-        'frinput-s': '64px',
-        'one': '85px',
-        'two': '112px',
+      keyframes: {
+        wiggle: {
+          '0%': { display: 'none', opacity: '0' },
+          '80%': { display: 'none', opacity: '0' },
+          '100%': { display: 'block', opacity: '1' },
+        }
       },
       animation: {
-        'all': 'all 4s easy-in-out',
-      },
+        wiggle: 'wiggle 1s ease-in-out',
+      }
     },
   },
   plugins: [],
