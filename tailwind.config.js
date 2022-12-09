@@ -14,6 +14,9 @@ module.exports = {
       },
       animation: {
         wiggle: 'wiggle 1s ease-in-out',
+      },
+      boxShadow: {
+        'card': '0px 0px 20px rgba(223, 223, 223, 0.15)'
       }
     },
   },

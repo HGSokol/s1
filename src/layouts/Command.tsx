@@ -53,7 +53,7 @@ export const Command = () => {
 
 
   return (
-    <div className='gap-[15px] mb-[50px]'>
+    <div className='gap-[15px] mb-[50px] overflow-hidden'>
       <div className='flex flex-row mb-[64px] space-x-[200px] justify-between'>
         <div className='font-[600] text-[64px] text-[#1F2117] leading-[75.14px] '>Знакомство с командой</div>
         <div className='flex flex-row gap-[10px]'>
