@@ -11,7 +11,8 @@ import { Footer } from '../layouts/Footer'
 
 function HomePage() {
   return (
-    <div className='font-sans bg-white w-[1780px] mx-auto overflow-hidden'>
+    <>
+    <div className='font-sans bg-white mx-[16px] md:mx-[120px] '>
       <Header />
       <Preview />
       <About />
@@ -20,8 +21,9 @@ function HomePage() {
       <Progress/>
       <Command/>
       <Subscribe/>
-      <Footer/>
     </div>
+    <Footer/>
+    </>
   );
 }
 

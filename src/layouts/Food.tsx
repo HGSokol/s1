@@ -29,9 +29,10 @@ export const Food = () => {
     <div className='pt-[90px]'>
       <div className='mb-[32px] w-[814px]'>
         {
-          data.map(item => {
+          data.map((item,i) => {
             return (
               <button 
+                key={i}
                 className={`w-[132px] h-[43px] mr-[10px] rounded-[40px] font-[400] text-[16px] leading-[19px] duration-[600ms]
                 ${active === item? ' bg-[#FFB700] text-[#FAFAFA]': ' bg-[#FFFFFF] text-[#1F2117] drop-shadow-md'}`}
                 onClick={() => activeButton(item)}>{item}</button>

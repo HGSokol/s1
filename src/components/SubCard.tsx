@@ -24,9 +24,9 @@ export const SubCard = ({subsData}: subsDataType) => {
         <p className='font-[600] text-[40px] mb-[48px] group-hover/card:text-white duration-[200ms]'>{text}</p>
         <div className='relative'>
           {
-            data.map(item => {
+            data.map((item,i) => {
               return (
-                <div className='flex flex-row '>
+                <div key={i} className='flex flex-row '>
                   <div className='absolute translate-y-[4px] -translate-x-[10px] rounded-full p-[2px] border-[1px] border-black
                    group-hover/card:bg-white group-hover/card:border-[0px] '>
                     <IoIosCheckmark size='20px' className='fill-black group-hover/card:fill-[#FFB700] duration-[200ms]'/>

@@ -69,7 +69,7 @@ export const Command = () => {
       {
         data.map((e,i) => {
           return(
-            <div className='grid grid-rows-[420px_400px]'>
+            <div key={i} className='grid grid-rows-[420px_400px]'>
               <div 
                 ref={ref}
                 className={`bg-cover bg-center delay-300 duration-[500ms] rounded-[20px] z-0
