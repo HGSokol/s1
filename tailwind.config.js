@@ -5,6 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        body: ['Raleway'],
+      },
       keyframes: {
         wiggle: {
           '0%': { display: 'none', opacity: '0' },

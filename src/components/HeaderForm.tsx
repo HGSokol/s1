@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 export const HeaderForm = () => {
 
  return (
-  <div className='mx-[120px] my-[20px] grid grid-cols-[auto_auto] justify-items-start mb-[40px]'>
+  <div className='mx-auto md:mx-[120px] md:my-[20px] md:grid md:grid-cols-[auto_auto] md:justify-items-start mb-[40px]'>
     <div className=''>
       <svg viewBox="0 0 126 56" fill="none" xmlns="http://www.w3.org/2000/svg" className='w-[82px] h-[36px] md:w-[126px] md:h-[56px]'>
         <path d="M6.68241 4.4514V51.5486H23.6529V56H2.19141V0H23.6529V4.4514H6.68241Z" fill="#FAB513"/>
@@ -24,14 +24,13 @@ export const HeaderForm = () => {
         <path d="M117.454 42.5921H114.671L119.114 32.0908H121.605L126 42.5921H123.156L122.333 40.5283H118.236L117.454 42.5921ZM118.965 38.4982H121.632L120.312 34.8898L118.965 38.4982Z" fill="#1F2117"/>
       </svg>
     </div>
-    <Link to='/' className='justify-self-end'>
+    <Link to='/' className='hidden md:block md:justify-self-end '>
       <button className='w-[132px] py-[16px] px-[24px] rounded-full border-[1px] border-[#1F2117] flex flex-row items-center'>
           <p className='font-[600] text-[16px] text-[#1F2117] leading-[19.09px] mr-[14px] flex items-center'>Назад</p>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M20.25 12L3.75 12" stroke="#1F2117" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
             <path d="M10.5 5.25L3.75 12L10.5 18.75" stroke="#1F2117" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
-
       </button>
     </Link>
   </div>
