@@ -13,7 +13,7 @@ export const Training = () => {
   }
 
   return (
-  <div className='grid grid-rows-[auto_355px] mb-[117px] grid-cols-1 md:grid-cols-[auto_auto] md:grid-rows-1 md:mb-[169px]'>
+  <div className='grid grid-rows-[auto_h-min] mb-[117px] grid-cols-1 md:grid-cols-[auto_auto] md:grid-rows-1 md:mb-[169px]'>
     <div className='md:pt-[90px] '>
       <div className='md:mb-[32px] flex flex-row gap-[8px] md:gap-[10px]'>
         {
@@ -33,7 +33,7 @@ export const Training = () => {
         Более чем 1500 тренировок, с помощью которых вы быстрее достигнете своей цели.</p>
     </div>
     <div className='order-last'>
-      <img className ='w-[236.37px] mx-auto'
+      <img className ='w-[236.37px] mx-auto' 
         src={IMG1} alt='eat1'/>
     </div>
   </div>
