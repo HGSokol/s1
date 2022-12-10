@@ -48,7 +48,7 @@ export const Footer = () => {
             </div>
           </a>
       </div>
-      <div className='font-sans font-[600] text-[16px] leading-[19.09px] text-white'>© 2022 Фитнес как наука.</div>
+      <div className='font-bodyalt font-[600] text-[16px] leading-[19.09px] text-white'>© 2022 Фитнес как наука.</div>
     </div>
     </div>
   )

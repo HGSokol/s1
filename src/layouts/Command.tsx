@@ -60,8 +60,8 @@ export const Command = () => {
           <button className='rounded-full border-[1px] border-[#1F2117] w-[56px] h-[56px] text-black grid place-content-center cursor-pointer group/arrow1 hover:bg-[#FFB700] hover:text-white hover:border-none duration-[200ms]'
             onClick={left}>
               <svg className='w-[18px] h-[18px] md:w-[24px] md:h-[24px] stroke-black group-hover/arrow1:stroke-white' viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20.25 12.5L3.75 12.5"  stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M10.5 19.25L3.75 12.5L10.5 5.75" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M20.25 12.5L3.75 12.5"  strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M10.5 19.25L3.75 12.5L10.5 5.75" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </button>
           <button className='rounded-full border-[1px] border-[#1F2117] w-[56px] h-[56px] text-black grid place-content-center mr-[120px] cursor-pointer group/arrow2 hover:bg-[#FFB700] hover:text-white hover:border-none duration-[200ms]'
@@ -110,7 +110,7 @@ export const Command = () => {
                 }
                 {
                   active === i? (
-                  <div className='font-sans py-[14px] text-[14px] leading-[16.71px] md:p-[20px] animate-wiggle text-[#777872] md:text-[22px] font-[400]'>{e.description}</div>
+                  <div className='font-bodyalt py-[14px] text-[14px] leading-[16.71px] md:p-[20px] animate-wiggle text-[#777872] md:text-[22px] font-[400]'>{e.description}</div>
                   ): null
                 }
               </div>

@@ -24,6 +24,7 @@ const schema = yup.object({
 const Login = () => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
+    mode:'onBlur'
   });
 
   const onSubmit = (data: IFormInputs) => {
@@ -32,13 +33,13 @@ const Login = () => {
   };
 
   return (
-    <div className='mx-[16px]'>
+    <div className='font-bodyalt mx-[16px]'>
       <HeaderForm />
-      <h1 className='font-serif font-600 text-[22px] leading-[26.25px] text-center mb-[32px]'>Вход</h1>
+      <h1 className='font-[600] text-[22px] leading-[26.25px] text-center mb-[32px]'>Вход</h1>
       <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-[10px]'>
         <div className=''>
           <input 
-            placeholder='Введите e-mail'
+            placeholder='Ваш e-mail'
             type='text' 
             {...register("email")} 
             className='outline-none w-full h-[48px] px-[16px] rounded-[8px] bg-white border-[1px] border-[#1F211714] placeholder:text-[12px] placeholder:font-[400] placeholder:text-[#AAAAAA]' />
@@ -47,7 +48,7 @@ const Login = () => {
         <div className='relative mb-[14px]'>
           <div className='absolute translate-x-[250px] translate-y-[14px] '><AiOutlineEye size='20px' color='#AAAAAA'/></div>
           <input 
-            placeholder='Введите пароль' 
+            placeholder='Ваш пароль' 
             type='password' 
             {...register("password")} 
             className='outline-none w-full h-[48px] px-[16px] rounded-[8px] bg-white border-[1px] border-[#1F211714] placeholder:text-[12px] placeholder:font-[400] placeholder:text-[#AAAAAA]'/>

@@ -38,7 +38,7 @@ export const Subscribe = () => {
       <SubCard subsData={subsData.sub2}/>
       <SubCard subsData={subsData.sub3}/> 
     </div>
-    <div className='font-sans flex justify-center'>
+    <div className='font-bodyalt flex justify-center'>
       <button className='bg-[#FFB700] text-[12px] w-full leading-[14.32px] h-[42px] rounded-full md:w-[349px] md:h-[56px] md:text-[16px] text-center text-white tracking-[0.04em] flex flex-row items-center justify-center hover:bg-[rgba(255,209,101,1)]'>
         <p className='font-[600] text-[14px] leading-[14.32px] md:leading-[19.09px] md:text-[16px] text-[#FAFAFA] tracking-[0.04em] mr-[14px]'>Оплатить подписку</p>
         <svg className='w-[18px] h-[18px] md:w-[24px] md:h-[24px]' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

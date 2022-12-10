@@ -21,7 +21,7 @@ export const Training = () => {
             return (
               <button 
                 key={i}
-                className={`font-sans px-[12px] py-[8px] w-max h-[30px] font-[400] text-[12px] leading-[14.32px] rounded-[40px] mb-[24px] md:text-[16px] md:leading-[19px] md:w-[132px] md:h-[43px] md:mr-[10px] duration-[600ms]
+                className={`font-bodyalt px-[12px] py-[8px] w-max h-[30px] font-[400] text-[12px] leading-[14.32px] rounded-[40px] mb-[24px] md:text-[16px] md:leading-[19px] md:w-[132px] md:h-[43px] md:mr-[10px] duration-[600ms]
                 ${active === item? ' bg-[#FFB700] text-[#FAFAFA]': ' bg-[#FFFFFF] text-[#1F2117] drop-shadow-md'}`}
                 onClick={() => activeButton(item)}>{item}</button>
             )
@@ -29,7 +29,7 @@ export const Training = () => {
         }
       </div>
       <h2 className='font-[600] text-[32px] leading-[37.57px] mb-[24px] md:text-[64px] md:leading-[75.14px] text-[#1F2117] md:w-[842px] md:h-[150px] md:mb-[32px]'>Тренируйся. Будь сильнее. Укрепи здоровье.</h2>
-      <p className='font-sans font-[400] text-[14px] leading-[16.71px] mb-[22px] md:text-[22px] md:leading-[32px] text-[#777872] md:w-[734px] md:h-[128px] tracking-[0.02em]'>Уровень твоей подготовки не имеет значения. Наши программы выстроены под любой уровень физической подготовки. 
+      <p className='font-bodyalt font-[400] text-[14px] leading-[16.71px] mb-[22px] md:text-[22px] md:leading-[32px] text-[#777872] md:w-[734px] md:h-[128px] tracking-[0.02em]'>Уровень твоей подготовки не имеет значения. Наши программы выстроены под любой уровень физической подготовки. 
         Более чем 1500 тренировок, с помощью которых вы быстрее достигнете своей цели.</p>
     </div>
     <div className='order-last'>

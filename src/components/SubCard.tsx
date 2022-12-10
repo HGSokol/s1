@@ -14,7 +14,7 @@ export const SubCard = ({subsData}: subsDataType) => {
         {
           top === 'top' ? (
             <div className='
-              font-sans absolute bg-[#FFB700] w-[150px] h-[18px] translate-x-[147px] -translate-y-[7px] md:translate-x-[340px] md:-translate-y-[7px]
+              font-bodyalt absolute bg-[#FFB700] w-[150px] h-[18px] translate-x-[147px] -translate-y-[7px] md:translate-x-[340px] md:-translate-y-[7px]
               font-[400] text-[10px] md:text-[16px] text-[#FAFAFA] text-center rotate-[38deg] 
               group-hover/card:bg-white group-hover/card:text-[#1F2117]'>
                 лучший выбор
@@ -23,7 +23,7 @@ export const SubCard = ({subsData}: subsDataType) => {
         }
       <div className='flex flex-col justify-center gap-[24px]'>
         <p className='font-[600] text-[24px] leading-[28.18px] md:text-[40px] md:leading-[46.96px] text-[#1F2117] text-center'>{price}</p>
-        <p className='font-sans font-[400] text-[14px] leading-[16.71px] md:text-[22px] md:leading-[32px] text-[#777872] text-center'>{text}</p>
+        <p className='font-bodyalt font-[400] text-[14px] leading-[16.71px] md:text-[22px] md:leading-[32px] text-[#777872] text-center'>{text}</p>
       </div>
     </div>
   )

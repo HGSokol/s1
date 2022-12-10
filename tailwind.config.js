@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       fontFamily: {
         body: ['Raleway'],
+        bodyalt: ['Roboto'],
       },
       keyframes: {
         wiggle: {

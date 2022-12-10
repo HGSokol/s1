@@ -6,14 +6,14 @@ export const Preview = () => {
     <div className='w-full h-min relative mb-[72px] md:mb-[413px] md:mt-[32px]'>
       <img className='hidden md:block md:absolute md:translate-x-[870px] md:translate-y-[40px]' src={IMG1} alt='logo'/>
       <div className=''>
-        <p className='font-sans text-[#DE9F00] font-[600] h-[20px] text-[14px] mb-[14px] tracking-[0.04em] leading-[16px]
+        <p className='font-bodyalt text-[#DE9F00] font-[600] h-[20px] text-[14px] mb-[14px] tracking-[0.04em] leading-[16px]
           md:text-[20px] md:leading-[24px]'>Секрет успеха — сделать первый шаг.</p>
         <p className='text-[#1F2117] font-[900] mb-[24px] text-[30px] leading-[35px] md:text-[75px] md:mb-[48px] md:w-[1124px] md:leading-[73px]'>Построй здоровое и сильное тело вместе с нами</p>
-        <p className='font-sans hidden md:block md:text-[#777872] md:text-[20px] md:font-[400] md:mb-[48px] md:w-[533px] md:leading-[32px] md:tracking-[0.02em]'>Следуй программам тренировок и питания, которые созданы настоящими профессионалами.</p>
+        <p className='font-bodyalt hidden md:block md:text-[#777872] md:text-[20px] md:font-[400] md:mb-[48px] md:w-[533px] md:leading-[32px] md:tracking-[0.02em]'>Следуй программам тренировок и питания, которые созданы настоящими профессионалами.</p>
         <div>
           <img className='mb-[32px] mx-auto md:hidden' src={IMG2} alt='logo'/>
         </div>
-        <div className='font-sans flex flex-col mb-[48px] md:mb-[96px] md:flex-row '>
+        <div className='font-bodyalt flex flex-col mb-[48px] md:mb-[96px] md:flex-row '>
           <button className='bg-[#FFB700] text-[12px] mb-[14px] w-full leading-[14.32px] h-[42px] rounded-full md:w-[228px] md:h-[56px] md:text-[16px] text-center text-white md:mr-[32px] tracking-[0.04em] flex flex-row items-center justify-center hover:bg-[rgba(255,209,101,1)]'>
               <p className='font-[600] text-[12px] md:text-[15px] text-[#FAFAFA] tracking-[0.04em] mr-[14px]'>Оплатить подписку</p>
             <svg className='w-[18px] h-[18px] md:w-[24px] md:h-[24px]' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -23,7 +23,7 @@ export const Preview = () => {
           </button>
           <button className='p-auto rounded-full w-full h-[42px] text-[12px] leading-[14.32px] text-center md:w-[164px] md:h-[56px] font-[600] md:text-[16px] text-[#1F2117] border-[1px] border-[#1F2117] hover:duration-[200ms] tracking-[0.04em] hover:border-[#FFB700] hover:text-[#FFB700]'>Ознакомиться</button>
         </div>
-        <div className='font-sans flex flex-row'>
+        <div className='font-bodyalt flex flex-row items-center'>
           <svg viewBox="0 0 194 56" xmlns="http://www.w3.org/2000/svg" className='group/svg bg-white rounded-[4px] border-[1px] border-[#1F2117] md:rounded-[8px] hover:bg-black duration-[450ms] w-[110px] h-[35px] md:w-[194px] md:h-[56px]'>
             <path d="M43.261 27.6979C43.2194 23.1857 47.0504 20.9905 47.2255 20.8883C45.0559 17.8041 41.693 17.3827 40.5113 17.3491C37.6869 17.0593 34.9472 18.9969 33.5084 18.9969C32.0409 18.9969 29.8253 17.3771 27.4374 17.4247C24.3646 17.4709 21.4899 19.2055 19.9133 21.8991C16.6596 27.3913 19.0863 35.4623 22.2036 39.9017C23.763 42.0759 25.5851 44.5035 27.9701 44.4181C30.3035 44.3243 31.1751 42.9677 33.9909 42.9677C36.7808 42.9677 37.5993 44.4181 40.0317 44.3635C42.5359 44.3243 44.1125 42.1795 45.6173 39.9857C47.4194 37.4937 48.1431 35.0395 48.1718 34.9135C48.1129 34.8939 43.3084 33.1061 43.261 27.6979Z" fill="#1F2117" className='group-hover/svg:fill-white'/>
             <path d="M38.6661 14.4287C39.9211 12.8985 40.7798 10.8167 40.5414 8.7041C38.725 8.7825 36.4534 9.9291 35.1453 11.4257C33.988 12.7445 32.9541 14.9061 33.2212 16.9389C35.2616 17.0873 37.3566 15.9351 38.6661 14.4287Z" fill="#1F2117" className='group-hover/svg:fill-white'/>
@@ -49,7 +49,7 @@ export const Preview = () => {
             <path d="M165.823 18.806H164.317V15.054C164.317 13.871 163.863 13.2788 162.954 13.2788C162.256 13.2788 161.779 13.6218 161.518 14.3078C161.474 14.452 161.448 14.6284 161.448 14.8356V18.8046H159.944V9.17822H161.448V13.1556H161.476C161.95 12.4318 162.629 12.0706 163.51 12.0706C164.133 12.0706 164.648 12.2694 165.058 12.6684C165.567 13.1654 165.823 13.9046 165.823 14.8818V18.806Z" fill="#1F2117" className='group-hover/svg:fill-white'/>
             <path d="M174.04 15.1942C174.04 15.4574 174.02 15.6786 173.984 15.8592H169.471C169.491 16.5116 169.707 17.0086 170.125 17.353C170.507 17.661 170.999 17.815 171.602 17.815C172.27 17.815 172.879 17.7114 173.427 17.5028L173.663 18.522C173.021 18.7936 172.266 18.9294 171.391 18.9294C170.343 18.9294 169.517 18.6284 168.92 18.0264C168.32 17.4244 168.022 16.6166 168.022 15.603C168.022 14.6076 168.3 13.7788 168.858 13.118C169.441 12.4124 170.229 12.0596 171.225 12.0596C172.198 12.0596 172.938 12.4124 173.437 13.118C173.841 13.678 174.04 14.371 174.04 15.1942ZM172.604 14.8148C172.616 14.3794 172.517 14.0042 172.313 13.6878C172.052 13.2804 171.654 13.076 171.115 13.076C170.624 13.076 170.224 13.2748 169.918 13.6738C169.668 13.9916 169.52 14.371 169.471 14.8148H172.604Z" fill="#1F2117" className='group-hover/svg:fill-white'/>
           </svg>
-          <p className='font-sans font-[600] text-[12px] text-[#777872] h-[28px] w-[153px] ml-[14px] leading-[14.32px] md:ml-[25px] md:w-[275px] md:h-[48px]  md:text-[20px] md:leading-[23.87px] '>Скачивайте наше приложение в App Store</p>
+          <p className='font-bodyalt font-[600] text-[12px] text-[#777872] h-[28px] w-[153px] ml-[14px] leading-[14.32px] md:ml-[25px] md:w-[275px] md:h-[48px]  md:text-[20px] md:leading-[23.87px] '>Скачивайте наше приложение в App Store</p>
         </div>
       </div>
     </div>

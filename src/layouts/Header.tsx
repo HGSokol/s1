@@ -24,7 +24,7 @@ export const Header = () => {
           <path d="M117.454 42.5921H114.671L119.114 32.0908H121.605L126 42.5921H123.156L122.333 40.5283H118.236L117.454 42.5921ZM118.965 38.4982H121.632L120.312 34.8898L118.965 38.4982Z" fill="#1F2117"/>
         </svg>
       </div>
-      <div className='font-sans'>
+      <div className='font-bodyalt'>
         <Link to='/login'>
           <button className='p-auto w-[50px] font-[600] text-[#777872] tracking-[0.04em] p-[7px] text-[12px]
           md:text-[17px] md:w-[151px]'>Вход</button>
