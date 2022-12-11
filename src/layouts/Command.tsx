@@ -43,7 +43,8 @@ export const Command = () => {
     active! <= 0 ? setActive(data.length-1) : setActive(prev => prev! - 1)
   }
 
-  const trLength = active! >4 ? `${(size+20)*(active!-3)}px`: '0px'
+  const trLength = active! >4 ? `${(size+20)*(active!-3)}`: 0
+  const sizeCarousel = trLength >= 2200? '2200px' : `${trLength}px`
 
   React.useEffect(() => {
     if(ref.current) {
@@ -53,7 +54,7 @@ export const Command = () => {
 
 
   return (
-    <div className='mb-[20px] gap-[10px] md:gap-[15px] md:mb-[50px] overflow-hidden'>
+    <div className='mb-[71px] gap-[10px] md:gap-[15px] md:mb-[50px] md:overflow-hidden'>
       <div className='flex flex-row mb-[32px] md:mb-[64px] space-x-[200px] justify-between'>
         <div className='font-[600] text-[32px] leading-[37.57px] md:text-[64px] text-[#1F2117] md:leading-[75.14px] '>Знакомство с командой</div>
         <div className='hidden md:flex md:flex-row md:gap-[10px]'>
@@ -74,21 +75,20 @@ export const Command = () => {
         </div>
       </div>
       <div 
-        className='flex flex-row gap-[20px] md:h-[620px] cursor-pointer duration-[600ms]'
-        style={{transform: `translateX(-${trLength})`}}>
+        className='flex flex-row gap-[20px] md:h-[620px] cursor-pointer duration-[600ms] snap-mandatory snap-x overflow-scroll md:snap-none md:overflow-visible -wekbit-scrollbar:w-[0px]'
+        style={{transform: `translateX(-${sizeCarousel})`}}>
       {
         data.map((e,i) => {
           return(
-            <div key={i} className='grid grid-rows-[1fr_1fr]'>
+            <div key={i} className='grid grid-rows-[h-min_40%] md:grid-rows-[1fr_1fr] snap-center'>
               <div 
                 ref={ref}
                 className={`bg-cover bg-center delay-300 duration-[500ms] rounded-[20px] z-0 w-[288px] h-[300px]
                 ${active === i? ' md:w-[530px]': ' md:w-[255px]' }`}
                 style={{ backgroundImage:`url(${e.img})` }}
                 onClick={() =>activeButton(i)}>
-                {
-                  active === i? (
-                  <div className='grid grid-cols-[1fr_1fr] p-[32px] z-5 place-items-end w-full h-full dulay-100 animate-wiggle'>
+                  <div className={`grid grid-cols-[1fr_1fr] p-[32px] z-5 place-items-end w-full h-full dulay-100 animate-wiggle
+                  md:${active === i? 'visible' : 'hidden'}`}>
                     <div className=''>
                       <p className='text-[#777872] text-[14px] md:text-[22px] font-[400] '>{e.prof}</p>
                       <p className='text-white text-[24px] leading-[28.18px] md:text-[40px] font-[600] md:leading-[40px]'>{e.name}</p>
@@ -106,14 +106,11 @@ export const Command = () => {
                       </div>
                     </div>
                   </div>
-                  ): null
-                }
-                {
-                  active === i? (
-                  <div className='font-bodyalt py-[14px] text-[14px] leading-[16.71px] md:p-[20px] animate-wiggle text-[#777872] md:text-[22px] font-[400]'>{e.description}</div>
-                  ): null
-                }
               </div>
+                  <div className={`font-bodyalt py-[14px] text-[14px] leading-[16.71px] md:p-[20px] animate-wiggle text-[#777872] md:text-[22px] font-[400]
+                  md:${active === i? 'visible' : 'hidden'}`}>
+                      {e.description}
+                  </div>
             </div>
           )
         })
