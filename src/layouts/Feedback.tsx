@@ -27,18 +27,17 @@ const data: DataType = [
 
 export const Feedback = () => { 
   const [size, setSize] = useState<number>(0)
+  const [translate, setTranslate] = useState<number>(0)
   const ref = useRef<HTMLDivElement | null>(null)
 
-  const userBlock = Number(ref?.current?.getBoundingClientRect().width)
-
   const right = () =>{
-    if(size <= (userBlock*data.length - userBlock*4)){
-      setSize(prev => prev + userBlock)
+    if(translate <= (size*data.length - size*4)){
+      setTranslate(prev => Math.round(prev + size))
     }
   }
   const left = () =>{
-    if(size !== 0){
-      setSize(prev => prev - userBlock)
+    if(translate > 0){
+      setTranslate(prev => Math.round(prev - size))
     }
   }
 
@@ -47,9 +46,7 @@ export const Feedback = () => {
   } 
 
   React.useEffect(() => {
-    if(ref.current) {
-      setSize(0)
-    }
+    setSize(Number(ref.current?.getBoundingClientRect().width))
   },[])
 
   return (
@@ -75,7 +72,7 @@ export const Feedback = () => {
       </div>
       <div 
         className='flex flex-row gap-[16px] duration-[600ms] snap-mandatory snap-x overflow-scroll md:snap-none md:overflow-visible'
-        style={{transform: `translateX(-${size}px)`}}>
+        style={{transform: `translateX(-${translate}px)`}}>
       {
         data.map((e,i) => {
           return(
