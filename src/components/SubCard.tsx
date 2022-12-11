@@ -8,14 +8,15 @@ export const SubCard = ({subsData}: subsDataType) => {
 
   return (
     <div className='
-      h-[126px] w-[288px] py-[24px] px-[32px]
-      md:h-[207px] md:w-[533px] md:py-[36px] md:px-[32px] relative overflow-hidden border-white cursor-pointer border-[1px] hover:border-[#FFB700]
+     bg-white h-[126px] w-[288px] py-[24px] px-[32px]
+      md:h-[207px] md:w-[533px] md:py-[36px] md:px-[32px] relative overflow-hidden border-[1px] border-[#fafafa] hover:border-[1px] cursor-pointer hover:border-[#FFB700]
       flex flex-col justify-between shadow-2xl rounded-[20px]'>
         {
           top === 'top' ? (
             <div className='
-              font-bodyalt absolute bg-[#FFB700] w-[150px] h-[18px] translate-x-[147px] -translate-y-[7px] md:translate-x-[340px] md:-translate-y-[7px]
-              font-[400] text-[10px] md:text-[16px] text-[#FAFAFA] text-center rotate-[38deg] 
+              flex justify-center items-center
+              font-bodyalt absolute bg-[#FFB700] w-[150px] h-[18px] translate-x-[147px] -translate-y-[7px] 
+              font-[400] text-[10px] text-center md:text-[16px] md:h-[42px] md:w-[220px] md:translate-x-[335px] md:-translate-y-[12px]  text-[#FAFAFA] rotate-[38deg] 
               group-hover/card:bg-white group-hover/card:text-[#1F2117]'>
                 лучший выбор
             </div>

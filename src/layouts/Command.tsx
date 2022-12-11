@@ -54,7 +54,7 @@ export const Command = () => {
 
 
   return (
-    <div className='mb-[71px] gap-[10px] md:gap-[15px] md:mb-[50px] md:overflow-hidden'>
+    <div className='mb-[50px] gap-[10px] md:gap-[15px] md:mb-[50px] md:overflow-hidden'>
       <div className='flex flex-row mb-[32px] md:mb-[64px] space-x-[200px] justify-between'>
         <div className='font-[600] text-[32px] leading-[37.57px] md:text-[64px] text-[#1F2117] md:leading-[75.14px] '>Знакомство с командой</div>
         <div className='hidden md:flex md:flex-row md:gap-[10px]'>
@@ -107,10 +107,10 @@ export const Command = () => {
                     </div>
                   </div>
               </div>
-                  <div className={`font-bodyalt py-[14px] text-[14px] leading-[16.71px] md:p-[20px] animate-wiggle text-[#777872] md:text-[22px] font-[400]
-                  md:${active === i? 'visible' : 'hidden'}`}>
-                      {e.description}
-                  </div>
+                <div className={`font-bodyalt py-[14px] text-[14px] leading-[16.71px] md:pl-[20px] md:pt-[20px] animate-wiggle text-[#777872] md:text-[22px] font-[400]
+                md:${active === i? 'visible' : 'hidden'}`}>
+                    {e.description}
+                </div>
             </div>
           )
         })

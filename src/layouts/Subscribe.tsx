@@ -31,9 +31,9 @@ export const Subscribe = () => {
   return (
   <div className='flex flex-col mb-[120px] md:mb-[200px]'>
     <p className='
-      font-[600] text-[32px] leading-[37.57px]  mb-[32px] md:text-[64px] text-[#1F2117] md:leading-[75.14px]
-      md:w-[842px] md:h-[75px] text-center mx-auto md:mb-[127px]'>Подписки</p>
-    <div className='grid grid-rows-3 grid-cols-1 md:grid-cols-[auto_auto_auto] md:h-[207px] mx-auto gap-[16px] md:gap-[40px] mb-[64px]'>
+      font-[600] text-[32px] leading-[37.57px] mb-[32px] md:text-[64px] text-[#1F2117] md:leading-[75.14px]
+      md:w-[842px] md:h-[75px] md:text-center md:mx-auto md:mb-[127px]'>Подписки</p>
+    <div className='grid grid-rows-3 grid-cols-1 md:grid-cols-[auto_auto_auto] md:h-[207px] mx-auto gap-[16px] md:gap-[40px] mb-[32px] md:mb-[64px]'>
       <SubCard subsData={subsData.sub1}/>
       <SubCard subsData={subsData.sub2}/>
       <SubCard subsData={subsData.sub3}/> 

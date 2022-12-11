@@ -8,12 +8,13 @@ import { Progress } from '../layouts/Progress'
 import { Command } from '../layouts/Command'
 import { Subscribe } from '../layouts/Subscribe'
 import { Footer } from '../layouts/Footer'
+import { Feedback } from '../layouts/Feedback';
 
 
 function HomePage() {
   return (
     <>
-      <div className='bg-white mx-[16px] md:mx-[120px] '>
+      <div className='mx-[16px] md:mx-[120px] '>
         <Header/>
         <Preview/>
         <About/>
@@ -22,6 +23,7 @@ function HomePage() {
         <Food/>
         <Progress/>
         <Command/>
+        <Feedback/>
         <Subscribe/>
       </div>
       <Footer/>

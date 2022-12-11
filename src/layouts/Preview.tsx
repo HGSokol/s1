@@ -14,14 +14,14 @@ export const Preview = () => {
           <img className='mb-[32px] mx-auto md:hidden' src={IMG2} alt='logo'/>
         </div>
         <div className='font-bodyalt flex flex-col mb-[48px] md:mb-[96px] md:flex-row '>
-          <button className='bg-[#FFB700] text-[12px] mb-[14px] w-full leading-[14.32px] h-[42px] rounded-full md:w-[228px] md:h-[56px] md:text-[16px] text-center text-white md:mr-[32px] tracking-[0.04em] flex flex-row items-center justify-center hover:bg-[rgba(255,209,101,1)]'>
+          <button className='bg-[#FFB700] text-[12px] mb-[14px] w-full leading-[14.32px] h-[42px] rounded-full md:w-[228px] md:h-[56px] md:text-[16px] text-center text-[#FAFAFA] md:mr-[32px] tracking-[0.04em] flex flex-row items-center justify-center hover:bg-[rgba(255,209,101,1)]'>
               <p className='font-[600] text-[12px] md:text-[15px] text-[#FAFAFA] tracking-[0.04em] mr-[14px]'>Оплатить подписку</p>
             <svg className='w-[18px] h-[18px] md:w-[24px] md:h-[24px]' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M3.75 12L20.25 12" stroke="#FAFAFA" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M13.5 18.75L20.25 12L13.5 5.25" stroke="#FAFAFA" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </button>
-          <button className='p-auto rounded-full w-full h-[42px] text-[12px] leading-[14.32px] text-center md:w-[164px] md:h-[56px] font-[600] md:text-[16px] text-[#1F2117] border-[1px] border-[#1F2117] hover:duration-[200ms] tracking-[0.04em] hover:border-[#FFB700] hover:text-[#FFB700]'>Ознакомиться</button>
+          <button className='bg-[#FAFAFA] p-auto rounded-full w-full h-[42px] text-[12px] leading-[14.32px] text-center md:w-[164px] md:h-[56px] font-[600] md:text-[16px] text-[#1F2117] border-[1px] border-[#1F2117] hover:duration-[200ms] tracking-[0.04em] hover:border-[#FFB700] hover:text-[#FFB700]'>Ознакомиться</button>
         </div>
         <div className='font-bodyalt flex flex-row items-center'>
           <svg viewBox="0 0 194 56" xmlns="http://www.w3.org/2000/svg" className='group/svg bg-white rounded-[4px] border-[1px] border-[#1F2117] md:rounded-[8px] hover:bg-black duration-[450ms] w-[110px] h-[35px] md:w-[194px] md:h-[56px]'>
