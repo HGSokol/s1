@@ -71,13 +71,13 @@ export const Feedback = () => {
         </div>
       </div>
       <div 
-        className='flex flex-row gap-[16px] duration-[600ms] snap-mandatory snap-x overflow-scroll md:snap-none md:overflow-visible'
+        className='flex flex-row gap-[16px] duration-[600ms] h-[290px] md:h-[330px] items-center snap-mandatory snap-x overflow-scroll md:snap-none md:overflow-visible'
         style={{transform: `translateX(-${translate}px)`}}>
       {
         data.map((e,i) => {
           return(
             <div ref={ref} key={i} className='snap-center'>
-              <div key={i} className='w-[226px] h-[256px] rounded-[20px] p-[16px] bg-white md:w-[500px] md:h-[319px] md:p-[24px] md:flex md:flex-col md:justify-between'>
+              <div key={i} className='w-[226px] h-[256px] rounded-[20px] p-[16px] bg-white shadow-md md:w-[500px] md:h-[319px] md:p-[24px] md:flex md:flex-col md:justify-between'>
                 <div className='font-bodyalt tracking-[0.02em] font-[600] h-[140px] text-[14px] text-[#1F2117] leading-[16.71px] mb-[17.4px] md:text-[22px] md:leading-[32px] '>
                   {e.text}
                 </div>

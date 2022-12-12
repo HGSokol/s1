@@ -1,190 +1,120 @@
-import React, {useEffect, useRef, useState} from 'react'
-import { Link } from 'react-router-dom'
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
+import { AiOutlineEye } from 'react-icons/ai'
+import { FcGoogle } from 'react-icons/fc'
+import { FaFacebook } from 'react-icons/fa'
+import { BsApple } from 'react-icons/bs'
+import { HeaderForm } from "../components/HeaderForm";
+import { Link } from "react-router-dom";
 
-interface Data {
+import IMG from '../images/authorization.png'
+import { useState } from "react";
+
+interface IFormInputs {
   firstName: string,
-  lastName: string,
+  lastName:string,
   email: string,
-  password: string,
+  password: number,
 }
 
-type PopupClick = MouseEvent & {
-  path: Node[]
-}
+const schema = yup.object({
+  firstName: yup.string().required('Обязательное поле'),
+  lastName: yup.string().required('Обязательное поле'),
+  email: yup.string().email('Не правильный email').required('Обязательное поле'),
+  password: yup.string()
+  .required('Обязательное поле') 
+  .min(8, 'Пароль слишком короткий - минимум 8 знаков.')
+  .matches(/[a-zA-Z0-9]/, 'Пароль может содержать только латинские буквы')
+}).required();
 
-const Register = () => {
-  // контролируемый инпут
-  const [value, setValue] = useState<Data>({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-  })
-  const [dataForm ,setDataForm]  = useState<Data>({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-  })
-  const [active, setActive] = useState({
-    input1: false,
-    input2: false,
-    input3: false,
-    input4: false,
-  })
-  const sortRef1 = useRef<HTMLInputElement | null>(null)
-  const sortRef2 = useRef<HTMLInputElement | null>(null)
-  const sortRef3 = useRef<HTMLInputElement | null>(null)
-  const sortRef4 = useRef<HTMLInputElement | null>(null)
-  
-  const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>, tag: string) => {
-    setValue({
-      firstName: tag === 'firstName'? event.target.value: value.firstName,
-      lastName: tag === 'lastName'? event.target.value: value.lastName,
-      email: tag === 'email'? event.target.value: value.email,
-      password: tag === 'password'? event.target.value: value.password,
-    });
+const Login = () => {
+  const [type, setType] = useState(true)
+
+  const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IFormInputs>({
+    resolver: yupResolver(schema),
+    mode:'onBlur'
+  });
+
+  const onSubmit = (data: IFormInputs) => {
+      alert(JSON.stringify(data))
+      reset()
+  };
+
+  const onClickChangeType = () => {
+    setType(prev => !prev)
   }
-  
-  // отправка данных
-  const sendForm = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    if(value.firstName.length !== 0 || value.lastName.length !== 0 || value.email.length !== 0 || value.password.length !== 0){
-      setDataForm({
-        ...value
-      })
-        // f send
-      // const dataFrom: Data = {
-        //   email: e.currentTarget.email.value,
-        //   password: e.currentTarget.password.value
-        // }
-        // setValue(dataFrom)
-        // console.log(dataFrom,'otpavka')
-        
-        e.currentTarget.reset()
-        setActive({
-          input1: false,
-          input2: false,
-          input3: false,
-          input4: false,
-        })
-        setValue({
-          firstName: '',
-          lastName: '',
-          email: '',
-          password: '',
-        })
-      }
-    }
-      
-      // на инпуте или нет
-    useEffect(() => { 
-      const handleClickOutside = (e: MouseEvent) => {
-        const _event = e as PopupClick
-        
-        if(sortRef1.current && _event.path.includes(sortRef1.current) ){
-          setActive({
-            input1: true,
-            input2: value.lastName.length > 0? true: false,
-            input3: value.email.length > 0? true: false,
-            input4: value.password.length > 0? true: false,
-          })
-        } else if(sortRef2.current && _event.path.includes(sortRef2.current) ){
-          setActive({
-            input1: value.firstName.length > 0? true: false,
-            input2: true,
-            input3: value.email.length > 0? true: false,
-            input4: value.password.length > 0? true: false,
-          })
-        }else if(sortRef3.current && _event.path.includes(sortRef3.current) ){
-          setActive({
-            input1: value.firstName.length > 0? true: false,
-            input2: value.lastName.length > 0? true: false,
-            input3: true,
-            input4: value.password.length > 0? true: false,
-          })
-        } else if(sortRef4.current && _event.path.includes(sortRef4.current) ){
-          setActive({
-            input1: value.firstName.length > 0? true: false,
-            input2: value.lastName.length > 0? true: false,
-            input3: value.email.length > 0? true: false,
-            input4: true,
-          })
-        } else {
-          setActive({
-            input1: value.firstName.length > 0? true: false,
-            input2: value.lastName.length > 0? true: false,
-            input3: value.email.length > 0? true: false,
-            input4: value.password.length > 0? true: false,
-          })
-        }
-      }
-      
-      document.body.addEventListener('click', handleClickOutside)
-      return () => document.body.removeEventListener('click', handleClickOutside)
-    }, [value])
-      
-    useEffect(() =>{
-      console.log(dataForm, 'данные из формы')
-      
-    },[dataForm])
 
-  return(
-    <div className='mx-auto max-w-sm text-center px-4 relative'>
-      <h1 className='font-bold text-3xl mt-20 mb-10'>Health Project</h1>
-      <h2 className='font-semibold text-xl mb-5'>Train, Eat & Live better with Chris Hemsworth's team</h2>
-      <p className='mb-5'>Save 25% with our Cyber offer on a 12-month plan. Start today with 7 days free.</p>
-      <form 
-        className='flex flex-col justify-center'
-        onSubmit={e => sendForm(e)}>
-          <input 
-            ref={sortRef1}
-            required
-            type='text' 
-            name='firstName' 
-            className='border-2 rounded-md mb-8 h-14 p-3.5'
-            value={value.firstName}
-            onChange={(event) => onChangeInput(event, 'firstName')}
-          />
-          <div className={`bg-white w-24 absolute translate-x-4 animate ${active.input1 ?'-translate-y-finput-s text-black scale-75': '-translate-y-finput text-slate-400 '}`}>First name</div>
-          <input 
-            ref={sortRef2}
-            required
-            type='text' 
-            name='lastName' 
-            className='border-2 rounded-md mb-8 h-14 p-3.5'
-            value={value.lastName}
-            onChange={(event) => onChangeInput(event, 'lastName')}
-          />
-          <div className={`bg-white w-24 absolute translate-x-4 -translate-y-sinput-s ${active.input2 ?'-translate-y-sinput-s text-black scale-75': '-translate-y-sinput text-slate-400'}`}>Last name</div>
-          <input 
-            ref={sortRef3}
-            required
-            type='email' 
-            name='email' 
-            className='border-2 rounded-md mb-8 h-14 p-3.5'
-            value={value.email}
-            onChange={(event) => onChangeInput(event, 'email')}
-          />
-          <div className={`bg-white w-14 absolute translate-x-5 -translate-y-tinput-s ${active.input3 ?'-translate-y-tinput-s text-black scale-75': 'translate-y-tinput text-slate-400'}`}>Email</div>
-          <input 
-            ref={sortRef4}
-            required
-            type='password' 
-            name='password' 
-            className='border-2 rounded-md mb-8 h-14 p-3.5'
-            value={value.password}
-            onChange={(event) => onChangeInput(event, 'password')}
-          />
-          <div className={`bg-white w-20 absolute ${active.input4 ?'translate-y-frinput-s text-black scale-75': 'translate-y-frinput text-slate-400'} translate-x-5`}>Password</div>
-        <button className='bg-yellow-200 rounded-md mb-4 h-8 hover:bg-yellow-100'>CREATE ACCOUNT</button>
-    </form>
-    <p>
-      Already have an ccount?
-      <Link to='/' className='text-blue-400 font-medium hover:text-blue-300'> Log In</Link>
-    </p>
-  </div>
-  )
+
+
+  return (
+    <div className='font-bodyalt mx-[16px] md:mx-[0px]  md:grid md:grid-cols-[1fr_1fr]'>
+      <div>
+        <HeaderForm />
+        <div className='w-[288px] md:w-[441px] mx-auto'>
+          <h1 className='font-body font-[600] text-[22px] leading-[26.25px] text-center mb-[32px] md:text-[40px] md:leading-[46.96px] md:mb-[48px]'>Вход</h1>
+          <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
+          <div className='mb-[16px] md:mb-[20px]'>
+              <input 
+                placeholder='Ваше имя'
+                type='text' 
+                {...register("firstName")} 
+                className='outline-none w-full h-[48px] px-[16px] rounded-[8px] bg-white border-[1px] border-[#1F211714] placeholder:text-[12px] placeholder:font-[400] placeholder:text-[#AAAAAA] md:h-[56px] md:placeholder:text-[16px]  '/>
+                <p className='text-red-600'>{errors.firstName?.message}</p>
+            </div> <div className='mb-[16px] md:mb-[20px]'>
+              <input 
+                placeholder='Ваша фамилия'
+                type='text' 
+                {...register("lastName")} 
+                className='outline-none w-full h-[48px] px-[16px] rounded-[8px] bg-white border-[1px] border-[#1F211714] placeholder:text-[12px] placeholder:font-[400] placeholder:text-[#AAAAAA] md:h-[56px] md:placeholder:text-[16px]  '/>
+                <p className='text-red-600'>{errors.lastName?.message}</p>
+            </div>
+            <div className='mb-[16px] md:mb-[20px]'>
+              <input 
+                placeholder='Ваш e-mail'
+                type='text' 
+                {...register("email")} 
+                className='outline-none w-full h-[48px] px-[16px] rounded-[8px] bg-white border-[1px] border-[#1F211714] placeholder:text-[12px] placeholder:font-[400] placeholder:text-[#AAAAAA] md:h-[56px] md:placeholder:text-[16px]  '/>
+                <p className='text-red-600'>{errors.email?.message}</p>
+            </div>
+            <div className='relative mb-[14px] md:mb-[16px]'>
+              <div className='absolute translate-x-[400px] translate-y-[18px] cursor-pointer' 
+                onClick={onClickChangeType}><AiOutlineEye size='20px' color='#AAAAAA'/></div>
+              <input 
+                placeholder='Ваш пароль' 
+                type={`${type === true ? 'password' : 'text'}`}
+                {...register("password")} 
+                className='outline-none w-full h-[48px] px-[16px] rounded-[8px] bg-white border-[1px] border-[#1F211714] placeholder:text-[12px] placeholder:font-[400] placeholder:text-[#AAAAAA] md:h-[56px] md:placeholder:text-[16px]'/>
+                <p className='text-red-600'>{errors.password?.message}</p>
+            </div> 
+            <Link to='/changePassword/stage1' className='mb-[32px] md:mb-[48px]'>
+              <p className='font-bodyalt text-[12px] text-[#777872] font-[600] text-end md:text-[16px]'>Забыли пароль?</p>
+            </Link>  
+            <div className='mb-[36px]'>
+              <button type="submit" disabled={!isValid} className={`${ isValid === true ? ' bg-[#FFB700]': ' bg-[#FFB700]/50'} mb-[20px] md:mb-[24px] w-full h-[42px] py-[14px] px-[18px] text-[12px] text-white font-[600] rounded-[40px] md:h-[56px] md:py-[16px] md:px-[24px] md:text-[16px]`}>
+                Зарегистрироваться
+              </button>
+              <div className='flex flex-row justify-center px-[8.5px] gap-[8px] md:mb-[64px]'>
+                <p className='text-[12px] text-[#777872] font-[400] md:text-[16px]'>У вас уже есть аккаунт? </p>
+                <Link to='/login'>
+                  <p className='text-[12px] text-[#000000] font-[600] md:text-[16px]'>Войти</p>
+                </Link>
+              </div>
+            </div>
+            <div className='mb-[162px]'>
+              <h4 className='text-center text-[12px] text-[#777872] font-[400] mb-[14px] md:mb-[24px] md:text-[16px]'>Зарегистрироваться с помощь</h4>
+              <div className='flex flex-row gap-[30px] justify-center md:gap-[24px]'>
+                <div className='w-[50px] h-[50px] rounded-[10px] bg-[#1877F2] grid place-content-center md:w-[64px] md:h-[64px]'><FaFacebook className='w-[24px] h-[24px] md:w-[34.5px] md:h-[34.5px]' fill='white'/></div>
+                <div className='w-[50px] h-[50px] rounded-[10px] bg-white border-[1px] grid place-content-center md:w-[64px] md:h-[64px]'><FcGoogle className='w-[24px] h-[24px] md:w-[34.5px] md:h-[34.5px]' /></div>
+                <div className='w-[50px] h-[50px] rounded-[10px] bg-black grid place-content-center md:w-[64px] md:h-[64px]'><BsApple className='w-[24px] h-[24px] md:w-[34.5px] md:h-[34.5px]' fill='white'/></div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div className='hidden md:block bg-[url("images/authorization.png")] bg-cover bg-no-repeat bg-center h-full'></div>
+    </div>
+  );
 }
 
-export default Register
+export default Login
