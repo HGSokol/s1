@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { HeaderForm } from "../components/HeaderForm";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import IMG from '../images/authorization.png'
 import { useState } from "react";
@@ -16,14 +16,16 @@ const schema = yup.object({
 }).required();
 
 const ChangePassword = () => {
+  const navigate = useNavigate()
+
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
     mode:'onBlur'
   });
 
   const onSubmit = (data: IFormInputs) => {
-      alert(JSON.stringify(data))
-      redirect("/registration/stage2");
+    alert(JSON.stringify(data))
+    navigate("/changePassword/stage2");
   };
 
 
@@ -32,10 +34,10 @@ const ChangePassword = () => {
       <div className='mb-[347px]'>
         <HeaderForm />
         <div className='w-[288px] md:w-[492px] mx-auto'>
-          <h1 className='font-body font-[600] text-[22px] leading-[26.25px] text-center mb-[32px] md:text-[40px] md:leading-[46.96px] md:mb-[24px]'>Восстановление пороля</h1>
-          <h3 className='font-body text-[#777872] font-[600] text-[22px] leading-[26.25px] text-center mb-[32px] md:text-[22px] md:leading-[32px] md:mb-[48px]'>На указанный Email  будет отправлен код для восстановления пароля</h3>
+          <h1 className='font-body font-[600] text-[22px] leading-[26.25px] text-center mb-[14px] md:text-[40px] md:leading-[46.96px] md:mb-[24px]'>Восстановление пароля</h1>
+          <h3 className='font-body text-[#777872] font-[600] text-[14px] leading-[26.25px] text-center mb-[32px] md:text-[22px] md:leading-[32px] md:mb-[48px]'>На указанный Email  будет отправлен код для восстановления пароля</h3>
           <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col w-[288px] md:w-[441px] mx-auto'>
-            <div className='mb-[16px] md:mb-[48px]'>
+            <div className='mb-[32px] md:mb-[48px]'>
               <input 
                 placeholder='Ваш e-mail'
                 type='text' 

@@ -45,7 +45,7 @@ const Login = () => {
 
 
   return (
-    <div className='font-bodyalt mx-[16px] md:mx-[0px]  md:grid md:grid-cols-[1fr_1fr]'>
+    <div className='font-bodyalt mx-[16px] md:mx-[0px] h-full md:grid md:grid-cols-[1fr_1fr] '>
       <div>
         <HeaderForm />
         <div className='w-[288px] md:w-[441px] mx-auto'>
@@ -60,7 +60,7 @@ const Login = () => {
                 <p className='text-red-600'>{errors.email?.message}</p>
             </div>
             <div className='relative mb-[14px] md:mb-[16px]'>
-              <div className='absolute translate-x-[400px] translate-y-[18px] cursor-pointer' 
+              <div className='absolute translate-x-[250px] translate-y-[14px] md:translate-x-[400px] md:translate-y-[18px] cursor-pointer' 
                 onClick={onClickChangeType}><AiOutlineEye size='20px' color='#AAAAAA'/></div>
               <input 
                 placeholder='Ваш пароль' 

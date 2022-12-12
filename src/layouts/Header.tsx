@@ -31,7 +31,7 @@ export const Header = () => {
         </Link>
         {/* w-[151px] */}
         <Link to='/registration'>
-          <button className='#FAFAFA p-auto rounded-full w-[110px] h-[42px] font-[600] tracking-[0.02em] border-[1px] text-[black] border-black text-[12px]
+          <button className='#FAFAFA p-auto rounded-full w-[110px] h-[42px] font-[600] tracking-[0.02em] border-[1px] text-[black] border-[#1F2117] text-[12px]
           md:text-[17px] md:w-[151px] md:h-[56px]'>Регистрация</button>
         </Link>
       </div>
