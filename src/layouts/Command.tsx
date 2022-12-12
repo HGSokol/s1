@@ -87,7 +87,7 @@ export const Command = () => {
                 ${active === i? ' md:w-[530px]': ' md:w-[255px]' }`}
                 style={{ backgroundImage:`url(${e.img})` }}
                 onClick={() =>activeButton(i)}>
-                        <div className='w-full h-full z-5 rounded-[20px] bg-[#1F2117]/30 group-hover/about:bg-yellow-500/30 duration-[400ms]'></div>
+                  <div className='w-full h-full z-5 rounded-[20px] bg-[#1F2117]/30 group-hover/about:bg-yellow-500/30 duration-[400ms]'></div>
                   <div className={`grid grid-cols-[1fr_1fr] p-[16px] md:p-[32px] z-5 place-items-end w-full h-full dulay-100 animate-wiggle
                   md:${active === i? 'visible' : 'hidden'}`}>
                     <div className=''>
