@@ -36,8 +36,8 @@ export const Article = () => {
         }
       </div>
       <h2 className='font-[600] text-[32px] leading-[37.57px] h-[114px] mb-[24px] md:text-[64px] md:leading-[75.14px] text-[#1F2117] md:w-[842px] md:h-[150px] md:mb-[32px]'>Получай ценные знания каждый день.</h2>
-      <p className=' font-bodyalt font-[400] text-[14px] leading-[16.71px] h-[68px] md:text-[22px] md:leading-[32px] text-[#777872] md:w-[734px] md:h-[128px] tracking-[0.02em]'>В нашем приложение собраны 
-        <p className='inline-block relative'>
+      <div className=' font-bodyalt font-[400] text-[14px] leading-[16.71px] h-[68px] md:text-[22px] md:leading-[32px] text-[#777872] md:w-[734px] md:h-[128px] tracking-[0.02em]'>В нашем приложение собраны 
+        <div className='inline-block relative'>
           <div className='z-10 relative'>
             &nbsp;тысячи&nbsp;
           </div>
@@ -46,8 +46,8 @@ export const Article = () => {
               <path d="M152.226 5.87917C152.226 5.87917 152.345 5.96151 152.18 6.34634C152.096 6.39578 151.774 6.64456 150.969 7.08498C149.783 7.98078 103.914 4.26149 77.2313 6.90812L0.3698 13.497C-0.34056 13.5484 0.211171 12.8273 0.211171 12.8273C10.1775 9.17608 20.4009 5.29578 47.2288 3.31143C65.6471 1.22719 99.8388 -0.194657 106.805 0.254519C117.21 0.621249 139.301 3.30028 152.226 5.87917Z" fill="#FFB700"/>
             </svg>
           </div>
-        </p>
-         статей и лекций на темы спорта и здоровья. Изуйчай новую информацию, чтобы лучше разбираться в том, как работает наше тело.</p>
+        </div>
+         статей и лекций на темы спорта и здоровья. Изуйчай новую информацию, чтобы лучше разбираться в том, как работает наше тело.</div>
     </div>
   </div>
   )

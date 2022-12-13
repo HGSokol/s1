@@ -1,10 +1,15 @@
 import { AboutCard } from '../components/AboutCard'
 
-const data: string[] = [
-  'Статьи\n и лекции',
-  'Тренировки',
-  'Планы питания',
-  'Статистика',
+export interface dataAboutCard {
+  text: string,
+  img: string,
+}
+
+const data: dataAboutCard[] = [
+  {text: 'Статьи\n и лекции', img: require("../images/about1.png")},
+  {text: 'Тренировки', img: require("../images/about2.png")},
+  {text: 'Планы питания', img: require("../images/about3.png")},
+  {text: 'Статистика', img: require("../images/about4.png")},
 ]
 
 export const About = () => {
