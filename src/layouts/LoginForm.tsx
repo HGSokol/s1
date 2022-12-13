@@ -43,7 +43,7 @@ export const LoginForm = () => {
 
 
   return (
-    <div className='w-[288px] lg:w-[441px] mx-auto'>
+  <div className='w-[288px] lg:w-[441px] mx-auto mt-[155px]'>
     <h1 className='font-body font-[600] text-[22px] leading-[26.25px] text-center mb-[32px] lg:text-[40px] lg:leading-[46.96px] lg:mb-[48px]'>Вход</h1>
     <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
       <div className='mb-[16px] lg:mb-[20px]'>
@@ -71,14 +71,14 @@ export const LoginForm = () => {
         <button type="submit" disabled={!isValid} className={`${ isValid === true ? ' bg-[#FFB700]': ' bg-[#FFB700]/50'} mb-[20px] lg:mb-[24px] w-full h-[42px] py-[14px] px-[18px] text-[12px] text-white font-[600] rounded-[40px] lg:h-[56px] lg:py-[16px] lg:px-[24px] lg:text-[16px]`}>
           Войти
         </button>
-        <div className='flex flex-row justify-center px-[8.5px] gap-[8px] lg:mb-[64px]'>
+        <div className='flex flex-row justify-center px-[8.5px] gap-[8px] lg:mb-[20px]'>
           <p className='text-[12px] text-[#777872] font-[400] lg:text-[16px]'>У вас нет аккаунта? </p>
           <Link to='/login/registration'>
             <p className='text-[12px] text-[#000000] font-[600] lg:text-[16px]'>Зарегистрироваться</p>
           </Link>
         </div>
       </div>
-      <div className='mb-[132px]'>
+      <div className=''>
         <h4 className='text-center text-[12px] text-[#777872] font-[400] mb-[14px] lg:mb-[24px] lg:text-[16px]'>Войти с помощью</h4>
         <div className='flex flex-row gap-[30px] justify-center lg:gap-[24px]'>
           <div className='w-[50px] h-[50px] rounded-[10px] bg-[#1877F2] grid place-content-center lg:w-[64px] lg:h-[64px]'><FaFacebook className='w-[24px] h-[24px] lg:w-[34.5px] lg:h-[34.5px]' fill='white'/></div>

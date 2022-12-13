@@ -1,11 +1,12 @@
-import { IoIosCheckmark } from 'react-icons/io'
-
 import { subsDataType } from '../layouts/Subscribe'
 
+interface SubCard {
+  children: JSX.Element,
+  top: string
+}
 
-export const SubCard = ({subsData}: subsDataType) => {
-  const {text, price, top='null'} = subsData
 
+export const SubCard = ({children, top = 'null'}: SubCard) => {
   return (
     <div className='relative overflow-hidden rounded-[20px] shadow-xl' >
       <div className='
@@ -23,10 +24,7 @@ export const SubCard = ({subsData}: subsDataType) => {
               </div>
             ) : null
           }
-        <div className='flex flex-col justify-center gap-[24px]'>
-          <p className='font-[600] text-[24px] leading-[28.18px] md:text-[40px] md:leading-[46.96px] text-[#1F2117] text-center'>{price}</p>
-          <p className='font-bodyalt font-[400] text-[14px] leading-[16.71px] md:text-[22px] md:leading-[32px] text-[#777872] text-center'>{text}</p>
-        </div>
+          {children}
       </div>
     </div>
   )

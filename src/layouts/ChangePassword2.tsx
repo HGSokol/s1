@@ -42,10 +42,10 @@ const ChangePassword2 = () => {
 
   return (
     <>
-      <div className='w-[288px] lg:w-[492px] mx-auto'>
+      <div className='w-[288px] lg:w-[492px] mx-auto mt-[223px]'>
         <h1 className='font-body font-[600] text-[22px] leading-[26.25px] text-center mb-[14px] lg:text-[40px] lg:leading-[46.96px] lg:mb-[24px]'>Восстановление пароля</h1>
         <h3 className='font-body text-[#777872] font-[600] text-[14px] leading-[26.25px] text-center mb-[32px] lg:text-[22px] lg:leading-[32px] lg:mb-[48px]'>Введите код подтверждения, который мы отправили Вам на указанный Email </h3>
-        <form onSubmit={handleSubmit(onSubmit)} className='grid grid-rows-[1fr_56px] lg:grid-rows-[1fr_80px] w-[288px] lg:w-[441px] mx-auto place-items-center'>
+        <form onSubmit={handleSubmit(onSubmit)} className='grid grid-rows-[1fr_56px] lg:grid-rows-[1fr_65px] w-[288px] lg:w-[441px] mx-auto place-items-center lg:mb-[24px]'>
           <div className='flex flex-row gap-[20px] w-[275px] mb-[32px] lg:mb-[48px]'>
             <div className='h-[48px] lg:h-[56px]'>
               <input 
@@ -86,10 +86,10 @@ const ChangePassword2 = () => {
             </button>
           </div>
         </form>
-      </div>
-      <div className='flex flex-row justify-center px-[8.5px] gap-[8px]'>
-        <p className='text-[12px] text-[#777872] font-[400] lg:text-[16px]'>Не пришел код?</p>
-        <p className='text-[12px] text-[#000000] font-[600] lg:text-[16px]'>Отправить код снова</p>
+        <div className='flex flex-row justify-center px-[8.5px] gap-[8px]'>
+          <p className='text-[12px] text-[#777872] font-[400] lg:text-[16px]'>Не пришел код?</p>
+          <p className='text-[12px] text-[#000000] font-[600] lg:text-[16px]'>Отправить код снова</p>
+        </div>
       </div>
     </>
   );

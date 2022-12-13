@@ -34,10 +34,37 @@ export const Subscribe = () => {
     <p className='
       font-[600] text-[32px] leading-[37.57px] mb-[32px] md:text-[64px] text-[#1F2117] md:leading-[75.14px]
       md:w-[842px] md:h-[75px] md:text-center md:mx-auto md:mb-[127px]'>Подписки</p>
-    <div className='grid grid-rows-3 grid-cols-1 md:grid-cols-3 md:grid-rows-1 md:h-[207px] mx-auto gap-[16px] md:gap-[40px] mb-[32px] md:mb-[64px]'>
-      <SubCard subsData={subsData.sub1}/>
-      <SubCard subsData={subsData.sub2}/>
-      <SubCard subsData={subsData.sub3}/> 
+    <div className='grid grid-rows-3 grid-cols-1 md:grid-cols-3 md:grid-rows-1 md:h-[207px] mx-auto gap-[16px] md:gap-[40px] mb-[32px] md:mb-[64px] whitespace-pre-line'>
+      <SubCard top={'null'}>
+        <div className='flex flex-col justify-center gap-[24px]'>
+          <p className='font-[600] text-[24px] leading-[28.18px] md:text-[40px] md:leading-[46.96px] text-[#1F2117] text-center'>
+          1200 руб./ мес.  
+          </p>
+          <p className='font-bodyalt font-[400] text-[14px] leading-[16.71px] md:text-[22px] md:leading-[32px] text-[#777872] text-center'>
+          Подписка на 1 месяц
+          </p>
+        </div>
+      </SubCard>
+      <SubCard top={'null'}>
+        <div className='flex flex-col justify-center gap-[24px]'>
+          <p className='font-[600] text-[24px] leading-[28.18px] md:text-[40px] md:leading-[46.96px] text-[#1F2117] text-center'>
+          1000 руб./ мес.
+          </p>
+          <p className='font-bodyalt font-[400] text-[14px] leading-[16.71px] md:text-[22px] md:leading-[32px] text-[#777872] text-center'>
+         {`При подписке на 3 месяца.${'\n'}3000 руб. за 3 месяца`}
+          </p>
+        </div>
+      </SubCard>
+      <SubCard top={'top'}>
+        <div className='flex flex-col justify-center gap-[24px]'>
+          <div className='font-[600] text-[24px] leading-[28.18px] md:text-[40px] md:leading-[46.96px] text-[#1F2117] text-center'>
+          800 руб./ мес.
+          </div>
+          <div className='font-bodyalt font-[400] text-[14px] leading-[16.71px] md:text-[22px] md:leading-[32px] text-[#777872] text-center'>
+          {`При подписке на год.${'\n'}9600 руб. в год`}
+          </div>
+        </div>
+      </SubCard>
     </div>
     <Link to='/login'>
       <div className='font-bodyalt flex justify-center'>
