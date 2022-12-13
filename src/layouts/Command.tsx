@@ -83,13 +83,13 @@ export const Command = () => {
             <div key={i} className='grid grid-rows-[300px_130px] md:grid-rows-[420px_150px] snap-center'>
               <div 
                 ref={ref}
-                className={`h-[300px] md:h-[420px] bg-cover bg-center delay-300 duration-[500ms] rounded-[20px] z-0 w-[288px]
+                className={`relative h-[300px] md:h-[420px] bg-cover bg-center delay-300 duration-[500ms] rounded-[20px] z-0 w-[288px]
                 ${active === i? ' md:w-[530px]': ' md:w-[255px]' }`}
                 style={{ backgroundImage:`url(${e.img})` }}
                 onClick={() =>activeButton(i)}>
-                  <div className='w-full h-full z-5 rounded-[20px] bg-[#1F2117]/30 group-hover/about:bg-yellow-500/30 duration-[400ms]'></div>
-                  <div className={`grid grid-cols-[1fr_1fr] p-[16px] md:p-[32px] z-5 place-items-end w-full h-full dulay-100 animate-wiggle
-                  md:${active === i? 'visible' : 'hidden'}`}>
+                  <div className=' w-full h-full rounded-[20px] bg-[#1F2117]/30 group-hover/about:bg-yellow-500/30 duration-[400ms] -z-1 absolute'></div>
+                  <div className={`relative grid grid-cols-[1fr_1fr] p-[16px] md:p-[32px] z-5 place-items-end w-full h-full dulay-100 animate-wiggle
+                  md:${active === i? 'visible' : 'hidden'} z-5`}>
                     <div className=''>
                       <p className='text-[#D2D2D2] text-[14px] md:text-[22px] font-[400] mb-[6px]'>{e.prof}</p>
                       <p className='text-white text-[24px] leading-[28.18px] md:text-[40px] font-[600] md:leading-[40px]'>{e.name}</p>

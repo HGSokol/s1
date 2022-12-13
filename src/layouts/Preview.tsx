@@ -7,15 +7,25 @@ export const Preview = () => {
       <img className='hidden md:block md:absolute md:translate-x-[870px] md:translate-y-[40px]' src={IMG1} alt='logo'/>
       <div className=''>
         <p className='font-bodyalt text-[#DE9F00] font-[600] h-[20px] text-[14px] mb-[14px] tracking-[0.04em] leading-[16px]
-          md:text-[20px] md:leading-[24px]'>Секрет успеха — сделать первый шаг.</p>
-        <p className='text-[#1F2117] font-[900] mb-[24px] text-[30px] leading-[35px] md:text-[75px] md:mb-[48px] md:w-[1124px] md:leading-[73px]'>Построй здоровое и сильное тело вместе с нами</p>
+          md:text-[20px] md:leading-[24px] md:mb-[24px]'>Секрет успеха — сделать первый шаг.</p>
+        <div className='relative text-[#1F2117] font-[900] mb-[24px] text-[29px] leading-[35px] md:text-[75px] md:mb-[48px] md:w-[1124px] md:leading-[73px] z-100 '>
+          <p className='inline-block'>
+            <div className='z-10 relative'>
+            Построй здоровое&nbsp;
+            </div>
+            <div className='-z-0 absolute'>
+              <svg className='w-[163px] h-[42px] -translate-y-[36px] translate-x-[120px]  md:w-[421px] md:h-[99px] md:-translate-y-[80px] md:translate-x-[310px]' viewBox="0 0 421 99" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M196.819 0.477709C173.175 0.652874 146.207 3.50784 118.671 8.75097C81.0378 15.9169 44.7422 27.8126 24.4665 39.6267C4.48685 51.2684 -3.06474 62.7202 2.84573 72.4131C4.41259 74.9827 9.36331 79.7359 12.9067 82.0734C15.725 83.932 20.7943 86.3213 26.2196 88.3472C36.355 92.1321 49.4921 94.617 69.4007 96.5148C81.1563 97.6357 113.351 99.0051 127.659 98.9929C153.792 98.9709 179.077 97.8845 212.506 95.347C246.419 92.7729 271.538 89.9328 305.595 84.822C343.053 79.2008 360.527 75.893 377.95 71.1252C395.359 66.3609 405.761 61.9105 411.98 56.5668C417.394 51.9133 420.063 47.7003 420.247 43.5168C420.456 38.7726 418.32 36.1524 411.051 32.2357C405.855 29.4351 400.654 27.4385 391.196 24.6118C378.863 20.926 366.387 18.1181 351.322 15.6376C317.102 10.0035 294.871 8.51232 243.369 8.39672C228.004 8.36218 199.478 8.57548 198.17 8.7348C197.094 8.866 197.38 9.79987 198.63 10.2355C199.269 10.458 206.828 11.478 215.428 12.5021C230.751 14.3265 255.217 17.4008 290.145 21.8909C299.777 23.1289 312.871 24.7664 319.242 25.5295C345.28 28.6477 364.693 32.0486 379.456 36.077C390.861 39.1892 396.765 41.5624 396.692 43.0053C396.636 44.1063 395.379 46.0622 393.899 47.351C388.666 51.9075 371.951 57.9248 351.064 62.7711C334.926 66.5155 294.365 73.3778 264.789 77.3677C234.391 81.4681 199.514 84.6768 165.386 86.5129C138.579 87.9552 118.341 88.0569 90.8913 86.887C63.7489 85.7299 48.4143 83.9673 36.502 80.6345C21.1792 76.3473 14.0866 69.106 17.2062 60.9339C19.9998 53.6155 33.4048 43.9186 52.5 35.402C83.2728 21.6773 124.386 10.9669 165.679 5.91779C195.073 2.32363 226.036 2.39306 249.372 6.10526C252.312 6.57311 255.411 7.16073 256.258 7.41142C258.248 8.00044 258.272 7.56089 256.292 6.78333C252.063 5.12249 241.546 3.16777 230.648 2.01711C223.864 1.30102 204.522 0.420724 196.819 0.477709ZM137.804 11.5576C131.233 11.8207 129.798 11.9536 129.783 12.2995C129.74 13.309 130.941 13.3524 137.927 12.5937C141.67 12.1873 145.268 11.8173 145.923 11.7718C147.405 11.6685 148.038 11.2731 146.754 11.2524C146.233 11.2441 142.205 11.3815 137.804 11.5576Z" fill="#FFB700"/>
+              </svg>
+            </div>
+          </p>и сильное тело вместе с нами</div>
         <p className='font-bodyalt hidden md:block md:text-[#777872] md:text-[20px] md:font-[400] md:mb-[48px] md:w-[533px] md:leading-[32px] md:tracking-[0.02em]'>Следуй программам тренировок и питания, которые созданы настоящими профессионалами.</p>
         <div>
           <img className='mb-[32px] mx-auto md:hidden' src={IMG2} alt='logo'/>
         </div>
         <div className='font-bodyalt flex flex-col mb-[48px] md:mb-[96px] md:flex-row '>
           <button className='bg-[#FFB700] text-[12px] mb-[14px] w-full leading-[14.32px] h-[42px] rounded-full md:w-[228px] md:h-[56px] md:text-[16px] text-center text-[#FAFAFA] md:mr-[32px] tracking-[0.04em] flex flex-row items-center justify-center hover:bg-[rgba(255,209,101,1)]'>
-              <p className='font-[600] text-[12px] md:text-[15px] text-[#FAFAFA] tracking-[0.04em] mr-[14px]'>Оплатить подписку</p>
+              <p className='font-[600] text-[12px] md:text-[16px] text-[#FAFAFA] tracking-[0.04em] mr-[14px]'>Оплатить подписку</p>
             <svg className='w-[18px] h-[18px] md:w-[24px] md:h-[24px]' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M3.75 12L20.25 12" stroke="#FAFAFA" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M13.5 18.75L20.25 12L13.5 5.25" stroke="#FAFAFA" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
