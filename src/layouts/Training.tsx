@@ -43,7 +43,7 @@ export const Training = () => {
       тренировок, с помощью которых вы быстрее достигнете своей цели.</p>
     </div>
     <div className='order-last'>
-      <img className ='w-[236.37px] mx-auto' 
+      <img className ='w-[236.37px] mx-auto md:w-[523px]' 
         src={IMG1} alt='eat1'/>
     </div>
   </div>

@@ -13,8 +13,8 @@ import { Feedback } from '../layouts/Feedback';
 
 function HomePage() {
   return (
-    <>
-      <div className='mx-[16px] md:mx-[120px] '>
+    <div className='md:mx-auto md:w-[1920px]'>
+      <div className='mx-[16px] md:mx-[120px] overflow-hidden'>
         <Header/>
         <Preview/>
         <About/>
@@ -27,7 +27,7 @@ function HomePage() {
         <Subscribe/>
       </div>
       <Footer/>
-    </>
+    </div>
   );
 }
 

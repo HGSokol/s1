@@ -11,7 +11,7 @@ import NotFound from './Pages/PageNotFound'
 
 function App() {
   return (
-    <div className='font-body bg-[#fafafa] md:w-[1920px] md:mx-auto overflow-hidden'>
+    <div className='font-body bg-[#fafafa]'>
       <Routes>
         <Route path='/' element={<HomePage/>} />
         <Route path='/login' element={<Login/>} />

@@ -43,7 +43,7 @@ export const Progress = () => {
     благодаря собранной в одном месте статистике по питанию и тренировкам.</p>
     </div>
     <div className='order-last'>
-      <img className ='mx-auto w-[252px]'
+      <img className ='mx-auto w-[252px] md:w-[562px]'
         src={IMG3} alt='eat1'/>
     </div>
   </div>

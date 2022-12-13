@@ -21,9 +21,9 @@ export const Food = () => {
   }
 
   return (
-  <div className='grid grid-rows-[auto_274px] grid-col-1 mb-[92px] md:grid-cols-[1fr_1fr] md:grid-rows-1 md:mb-[150px]'>
+  <div className='relative grid grid-rows-[auto_274px] grid-col-1 mb-[92px] md:grid-cols-[1fr_1fr] md:grid-rows-1 md:mb-[150px]'>
     <div className='order-2 md:order-1'>
-      <img className ='mx-auto w-[241.3px] h-[273.93px] md:w-[852px] md:h-[538px] md:mx-auto '
+      <img className ='absolute mx-auto md:mx-auto md:-translate-x-[120px] md:-translate-y-[20px] '
         src={IMG2} alt='eat1'/>
     </div>
     <div className='md:pt-[90px] order-1 md:order-2'>
