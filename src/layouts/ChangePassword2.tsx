@@ -42,7 +42,7 @@ const ChangePassword2 = () => {
 
   return (
     <>
-      <div className='w-[288px] lg:w-[492px] mx-auto mt-[223px]'>
+      <div className='w-[288px] lg:w-[492px] mx-auto mt-[24px] lg:mt-[223px]'>
         <h1 className='font-body font-[600] text-[22px] leading-[26.25px] text-center mb-[14px] lg:text-[40px] lg:leading-[46.96px] lg:mb-[24px]'>Восстановление пароля</h1>
         <h3 className='font-body text-[#777872] font-[600] text-[14px] leading-[26.25px] text-center mb-[32px] lg:text-[22px] lg:leading-[32px] lg:mb-[48px]'>Введите код подтверждения, который мы отправили Вам на указанный Email </h3>
         <form onSubmit={handleSubmit(onSubmit)} className='grid grid-rows-[1fr_56px] lg:grid-rows-[1fr_65px] w-[288px] lg:w-[441px] mx-auto place-items-center lg:mb-[24px]'>

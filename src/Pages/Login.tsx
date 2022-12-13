@@ -8,7 +8,7 @@ const Login = () => {
     <div className='font-bodyalt h-[100vh] w-full lg:grid lg:grid-cols-[1fr_1fr] '>
       <div>
         <HeaderForm />
-        <div className='grid place-items-center h-[50vh]'>
+        <div className='grid place-items-center'>
           <Outlet />
         </div>
       </div>

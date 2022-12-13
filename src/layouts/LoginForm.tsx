@@ -6,9 +6,10 @@ import { FcGoogle } from 'react-icons/fc'
 import { FaFacebook } from 'react-icons/fa'
 import { BsApple } from 'react-icons/bs'
 import { Link } from "react-router-dom";
+import { GooglleLogin } from "./googleLogin";
 
 import IMG from '../images/authorization.png'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface IFormInputs {
   email: string
@@ -31,6 +32,7 @@ export const LoginForm = () => {
     mode:'onBlur'
   });
 
+
   const onSubmit = (data: IFormInputs) => {
     console.log(JSON.stringify(data))
       // alert(JSON.stringify(data))
@@ -41,9 +43,9 @@ export const LoginForm = () => {
     setType(prev => !prev)
   }
 
-
+ 
   return (
-  <div className='w-[288px] lg:w-[441px] mx-auto mt-[155px]'>
+  <div className='w-[288px] lg:w-[441px] mx-auto mt-[24px] lg:mt-[155px]'>
     <h1 className='font-body font-[600] text-[22px] leading-[26.25px] text-center mb-[32px] lg:text-[40px] lg:leading-[46.96px] lg:mb-[48px]'>Вход</h1>
     <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
       <div className='mb-[16px] lg:mb-[20px]'>
@@ -82,7 +84,7 @@ export const LoginForm = () => {
         <h4 className='text-center text-[12px] text-[#777872] font-[400] mb-[14px] lg:mb-[24px] lg:text-[16px]'>Войти с помощью</h4>
         <div className='flex flex-row gap-[30px] justify-center lg:gap-[24px]'>
           <div className='w-[50px] h-[50px] rounded-[10px] bg-[#1877F2] grid place-content-center lg:w-[64px] lg:h-[64px]'><FaFacebook className='w-[24px] h-[24px] lg:w-[34.5px] lg:h-[34.5px]' fill='white'/></div>
-          <div className='w-[50px] h-[50px] rounded-[10px] bg-white border-[1px] grid place-content-center lg:w-[64px] lg:h-[64px]'><FcGoogle className='w-[24px] h-[24px] lg:w-[34.5px] lg:h-[34.5px]' /></div>
+          <GooglleLogin/>
           <div className='w-[50px] h-[50px] rounded-[10px] bg-black grid place-content-center lg:w-[64px] lg:h-[64px]'><BsApple className='w-[24px] h-[24px] lg:w-[34.5px] lg:h-[34.5px]' fill='white'/></div>
         </div>
       </div>
