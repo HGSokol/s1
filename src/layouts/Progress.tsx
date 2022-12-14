@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import IMG3 from '../images/eat3.png'
 
+
 type Data = string[]
 
 const data: Data = ['Питание', 'Тренировки']

@@ -1,9 +1,9 @@
 import {useState} from 'react'
 import IMG2 from '../images/eat2.png'
 
-type DataT = string[]
+type buttonName = string[]
 
-const data: DataT = [
+const data: buttonName = [
     'Веганская диета', 
     'Кето-диета', 
     'Низкоуглеводная диета', 

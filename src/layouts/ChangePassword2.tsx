@@ -1,11 +1,8 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { HeaderForm } from "../components/HeaderForm";
 import { useNavigate } from "react-router-dom";
 
-import IMG from '../images/authorization.png'
-import { useState } from "react";
 
 interface IFormInputs {
   n1: number,

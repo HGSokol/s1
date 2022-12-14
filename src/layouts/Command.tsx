@@ -4,13 +4,13 @@ import { AiFillInstagram } from 'react-icons/ai'
 import { ImYoutube2 } from 'react-icons/im'
 
 
-type dataT = {
+type dataCard = {
   img: string,
   prof: string,
   name: string,
   description: string
 }
-type DataType = dataT[]
+type DataType = dataCard[]
 
 const data: DataType = [
   {img: require('../images/face1.png'), prof:'Нутрициолог', name: 'Мария Павловец',  description: 'Победитель кубка РБ по бодибилдингу 90+ Неоднократный призер республиканских соревнований по бодибилдингу. Сертифицированный инструктор тренажерного зала и персональный тренер.'},

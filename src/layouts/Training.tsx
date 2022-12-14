@@ -1,5 +1,6 @@
-import {useState} from 'react'
+import { useState } from 'react'
 import IMG1 from '../images/eat1.png'
+
 
 type DataType = string[]
 

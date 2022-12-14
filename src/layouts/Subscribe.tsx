@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { SubCard } from '../components/SubCard'
 
+
 export type Sub = {
   text: string,
   price: string,

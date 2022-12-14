@@ -1,8 +1,7 @@
 import {Route, Routes} from 'react-router-dom'
-
 import HomePage from './Pages/Home'
 import Login from './Pages/Login'
-import Register from './layouts/Register'
+import Register from './layouts/Registration'
 import ChangePassword from './layouts/ChangePassword'
 import ChangePassword2 from './layouts/ChangePassword2'
 import ChangePassword3 from './layouts/ChangePassword3'

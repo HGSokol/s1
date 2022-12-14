@@ -1,14 +1,14 @@
 import React, {useState, useRef} from 'react'
 
 
-type dataT = {
+type dataCard = {
   text:string,
   img:string,
   name: string,
   prof: string,
   rate: number,
 }
-type DataType = dataT[]
+type DataType = dataCard[]
 
 const data: DataType = [
   {text:'Удобное отслеживание прогресса. хороший мотиватор делать лучше и больше. Неплохой набор действительно бесплатных функций. ', img: require('../images/feedbackphoto.png'), name: 'Игорь Василевский', prof: 'Фитнес-тренер', rate: 5 },

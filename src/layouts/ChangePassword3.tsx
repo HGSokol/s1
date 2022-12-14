@@ -2,7 +2,6 @@ import { useState, useRef } from 'react'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { HeaderForm } from "../components/HeaderForm";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineEye } from 'react-icons/ai'
 
@@ -11,7 +10,6 @@ interface IFormInputs {
   password: string
   password2: string
 }
-
 
 // password: yup.string()
 // .required('Обязательное поле') 

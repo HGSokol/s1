@@ -1,6 +1,7 @@
 import IMG1 from '../images/preview1.png'
 import IMG2 from '../images/preview2.png'
 
+
 export const Preview = () => {
   return (
     <div className='w-full h-min relative mb-[72px] md:mb-[413px] md:mt-[32px]'>

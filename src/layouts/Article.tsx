@@ -1,9 +1,10 @@
-import {useState} from 'react'
+import { useState } from 'react'
 import IMG1 from '../images/article.png'
 
-type DataT = string[]
 
-const data: DataT = [
+type buttonName = string[]
+
+const data: buttonName = [
     'Статьи', 
     'Лекции',   
   ]

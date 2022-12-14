@@ -2,6 +2,7 @@ import { FaFacebookF, FaTelegramPlane } from 'react-icons/fa'
 import { AiFillInstagram } from 'react-icons/ai'
 import { HiMail } from 'react-icons/hi'
 
+
 export const Footer = () => {
   return (
   <div className='bg-black md:h-[135px] h-[203px] py-[32px] px-[56px] md:py-[32px] md:px-[120px]

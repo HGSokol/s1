@@ -2,14 +2,12 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { AiOutlineEye } from 'react-icons/ai'
-import { FcGoogle } from 'react-icons/fc'
-import { FaFacebook } from 'react-icons/fa'
-import { BsApple } from 'react-icons/bs'
-import { HeaderForm } from "../components/HeaderForm";
 import { Link } from "react-router-dom";
-
-import IMG from '../images/authorization.png'
 import { useState } from "react";
+import { FacebookLogin } from "../components/facebookLogin";
+import { GoogleLogin } from "../components/googleLogin";
+import { AppleLogin } from "../components/appleLogin";
+
 
 interface IFormInputs {
   firstName: string,
@@ -98,9 +96,9 @@ const Login = () => {
         <div className='mb-[20px]'>
           <h4 className='text-center text-[12px] text-[#777872] font-[400] mb-[14px] lg:mb-[24px] lg:text-[16px]'>Зарегистрироваться с помощь</h4>
           <div className='flex flex-row gap-[30px] justify-center lg:gap-[24px]'>
-            <div className='w-[50px] h-[50px] rounded-[10px] bg-[#1877F2] grid place-content-center lg:w-[64px] lg:h-[64px]'><FaFacebook className='w-[24px] h-[24px] lg:w-[34.5px] lg:h-[34.5px]' fill='white'/></div>
-            <div className='w-[50px] h-[50px] rounded-[10px] bg-white border-[1px] grid place-content-center lg:w-[64px] lg:h-[64px]'><FcGoogle className='w-[24px] h-[24px] lg:w-[34.5px] lg:h-[34.5px]' /></div>
-            <div className='w-[50px] h-[50px] rounded-[10px] bg-black grid place-content-center lg:w-[64px] lg:h-[64px]'><BsApple className='w-[24px] h-[24px] lg:w-[34.5px] lg:h-[34.5px]' fill='white'/></div>
+            <FacebookLogin />
+            <GoogleLogin />
+            <AppleLogin />
           </div>
         </div>
       </form>

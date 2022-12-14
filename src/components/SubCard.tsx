@@ -1,10 +1,9 @@
-import { subsDataType } from '../layouts/Subscribe'
+
 
 interface SubCard {
   children: JSX.Element,
   top: string
 }
-
 
 export const SubCard = ({children, top = 'null'}: SubCard) => {
   return (
