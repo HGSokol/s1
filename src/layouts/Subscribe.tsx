@@ -37,8 +37,8 @@ export const Subscribe = () => {
       {
         subsData.map((item,i) => {
           return(
-            <div onClick={() => setActive(i)}>
-              <SubCard key={i} item={item} active={active === i ? 'active': ''}/>
+            <div key={i} onClick={() => setActive(i)}>
+              <SubCard item={item} active={active === i ? 'active': ''}/>
             </div>
           )
         })
