@@ -51,7 +51,7 @@ export const GoogleLogin = () => {
         console.log(err);
       }}
     >
-        <button className='cursor-pointer w-[50px] h-[50px] rounded-[10px] bg-white border-[1px] grid place-content-center lg:w-[64px] lg:h-[64px]'>
+        <button className='drop-shadow-md cursor-pointer w-[50px] h-[50px] rounded-[10px] bg-white grid place-content-center lg:w-[64px] lg:h-[64px]'>
           <FcGoogle className='w-[24px] h-[24px] lg:w-[34.5px] lg:h-[34.5px]' />
         </button>
       </LoginSocialGoogle>

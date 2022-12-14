@@ -52,7 +52,7 @@ export const FacebookLogin = () => {
           console.log(err);
         }}
       >
-        <div className='w-[50px] h-[50px] rounded-[10px] bg-[#1877F2] grid place-content-center lg:w-[64px] lg:h-[64px]'>
+        <div className='drop-shadow-md w-[50px] h-[50px] rounded-[10px] bg-[#1877F2] grid place-content-center lg:w-[64px] lg:h-[64px]'>
           <FaFacebook className='w-[24px] h-[24px] lg:w-[34.5px] lg:h-[34.5px]' fill='white'/>
         </div>
       </LoginSocialFacebook>

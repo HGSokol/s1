@@ -4,6 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineEye } from 'react-icons/ai'
+import { BsEyeSlash } from 'react-icons/bs';
 
 
 interface IFormInputs {
@@ -60,7 +61,11 @@ const ChangePassword3 = () => {
       <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col w-[288px] lg:w-[441px] mx-auto'>
         <div className='relative mb-[16px] lg:mb-[20px]'>
             <div className='absolute translate-x-[250px] translate-y-[14px] lg:translate-x-[400px] lg:translate-y-[18px] cursor-pointer' 
-              onClick={onClickChangeType}><AiOutlineEye size='20px' color='#AAAAAA'/></div>
+              onClick={onClickChangeType}>
+                {
+                  type ? (<BsEyeSlash size='20px' color='#AAAAAA'/>) : (<AiOutlineEye size='20px' color='#AAAAAA'/>)
+                }  
+              </div>
             <input 
               placeholder='Ваш пароль' 
               type={`${type === true ? 'password' : 'text'}`}
@@ -70,7 +75,11 @@ const ChangePassword3 = () => {
         </div>
         <div className='relative mb-[32px] lg:mb-[48px]'>
           <div className='absolute translate-x-[250px] translate-y-[14px] lg:translate-x-[400px] lg:translate-y-[18px] cursor-pointer' 
-            onClick={onClickChangeType}><AiOutlineEye size='20px' color='#AAAAAA'/></div>
+            onClick={onClickChangeType}>
+              {
+                type ? (<BsEyeSlash size='20px' color='#AAAAAA'/>) : (<AiOutlineEye size='20px' color='#AAAAAA'/>)
+              }  
+            </div>
           <input 
             placeholder='Подтвердите пароль' 
             type={`${type === true ? 'password' : 'text'}`}

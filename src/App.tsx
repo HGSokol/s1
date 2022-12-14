@@ -11,7 +11,7 @@ import { LoginForm } from './layouts/LoginForm'
 
 function App() {
   return (
-    <div className='font-body bg-[#fafafa]'>
+    <div className='font-body'>
       <Routes>
         <Route path='/' element={<HomePage/>} />
         <Route path='/login' element={<Login/>} >

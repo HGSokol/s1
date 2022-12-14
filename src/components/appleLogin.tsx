@@ -48,7 +48,7 @@ export const AppleLogin = () => {
         console.log(err);
       }}
     > */}
-        <div className='w-[50px] h-[50px] rounded-[10px] bg-black grid place-content-center lg:w-[64px] lg:h-[64px]'>
+        <div className='drop-shadow-md w-[50px] h-[50px] rounded-[10px] bg-black grid place-content-center lg:w-[64px] lg:h-[64px]'>
           <BsApple className='w-[24px] h-[24px] lg:w-[34.5px] lg:h-[34.5px]' fill='white'/>
         </div>
       {/* </LoginSocialGoogle> */}

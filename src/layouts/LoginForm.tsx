@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { AiOutlineEye } from 'react-icons/ai'
+import { BsEyeSlash } from 'react-icons/bs'
 import { Link } from "react-router-dom";
 import { GoogleLogin } from "../components/googleLogin";
 import { FacebookLogin } from "../components/facebookLogin";
@@ -55,7 +56,11 @@ export const LoginForm = () => {
       </div>
       <div className='relative mb-[14px] lg:mb-[16px]'>
         <div className='absolute translate-x-[250px] translate-y-[14px] lg:translate-x-[400px] lg:translate-y-[18px] cursor-pointer' 
-          onClick={onClickChangeType}><AiOutlineEye size='20px' color='#AAAAAA'/></div>
+          onClick={onClickChangeType}>
+            {
+              type ? (<BsEyeSlash size='20px' color='#AAAAAA'/>) : (<AiOutlineEye size='20px' color='#AAAAAA'/>)
+            }
+          </div>
         <input 
           placeholder='Ваш пароль' 
           type={`${type === true ? 'password' : 'text'}`}
