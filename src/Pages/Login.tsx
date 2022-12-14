@@ -5,7 +5,7 @@ import { HeaderForm } from "../components/HeaderForm";
 const Login = () => {
 
   return (
-    <div className='font-bodyalt h-[100vh] w-full lg:grid lg:grid-cols-[1fr_1fr] '>
+    <div className='font-bodyalt h-[100vh] w-full lg:grid lg:grid-cols-[50%_50%] '>
       <div>
         <HeaderForm />
         <div className='flex justify-center'>

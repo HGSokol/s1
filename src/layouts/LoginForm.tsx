@@ -23,7 +23,7 @@ const schema = yup.object({
   .matches(/[a-zA-Z0-9]/, 'Пароль может содержать только латинские буквы')
 }).required();
 
-export const LoginForm = () => {
+const LoginForm = () => {
   const [type, setType] = useState(true)
 
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IFormInputs>({
@@ -94,3 +94,5 @@ export const LoginForm = () => {
   </div>
   )
 }
+
+export default LoginForm

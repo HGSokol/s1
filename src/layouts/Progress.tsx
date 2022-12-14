@@ -1,15 +1,23 @@
 import {useState} from 'react'
+
 import IMG3 from '../images/eat3.png'
+import Group from '../images/group.png'
+import Shadow from '../images/Ellipse.png'
 
 
 type Data = string[]
 
+const frameInteractive = [
+  {img1: require('../images/HeartRate.png'), img2: require('../images/Frame.png') },
+  {img1: require('../images/gr2.png'), img2: require('../images/g2.png')},
+]
+
 const data: Data = ['Питание', 'Тренировки']
 
 export const Progress = () => {
-  const [active, setActive] = useState('Питание') 
+  const [active, setActive] = useState(0) 
 
-  const activeButton =(item: string) => {
+  const activeButton =(item: number) => {
     setActive(item)
   }
 
@@ -23,8 +31,8 @@ export const Progress = () => {
               <button 
                 key={i}
                 className={`bg-white font-bodyalt w-max h-[30px] py-[8px] text-[12px] px-[12px] leading-[14.32px]  md:w-[132px] md:h-[43px] rounded-[40px] font-[400] md:text-[16px] md:leading-[19px] duration-[600ms]
-                ${active === item? ' bg-[#FFB700] text-[#FAFAFA]': ' bg-[#FFFFFF] text-[#1F2117] drop-shadow-md'}`}
-                onClick={() => activeButton(item)}>{item}</button>
+                ${active === i? ' bg-[#FFB700] text-[#FAFAFA]': ' bg-[#FFFFFF] text-[#1F2117] drop-shadow-md'}`}
+                onClick={() => activeButton(i)}>{item}</button>
             )
           })
         }
@@ -43,7 +51,12 @@ export const Progress = () => {
         </div>
     благодаря собранной в одном месте статистике по питанию и тренировкам.</div>
     </div>
-    <div className='order-last'>
+    <div className='relative order-last mx-auto md:mx-[0]'>
+      <div className='absolute w-[45px] h-[40px] translate-x-[197px] translate-y-[25px] md:translate-x-[570px] md:w-[118px] md:h-[108px] md:translate-y-[45px]'><img src={frameInteractive[active].img1} alt='heart'/></div>
+      <div className='absolute w-[46px] h-[45px] -translate-x-[18px] translate-y-[240px] md:translate-x-[70px] md:w-[103px] md:h-[99px] md:translate-y-[540px]'><img src={frameInteractive[active].img2} alt='frame'/></div>
+      <div className='absolute w-[26px] h-[27px] translate-x-[95px] translate-y-[30px] md:translate-x-[340px] md:w-[59px] md:h-[61px] md:translate-y-[65px]'><img src={Group} alt='group'/></div>
+      <div className='absolute w-[26px] h-[27px] translate-x-[120px] translate-y-[285px] md:translate-x-[410px] md:w-[59px] md:h-[61px] md:translate-y-[630px] rotate-[180deg]'><img src={Group} alt='group'/></div>
+      <div className='absolute w-[240px] h-[8.57px] translate-x-[5px] translate-y-[305px] md:translate-x-[130px] md:w-[555px] md:h-[107px] md:translate-y-[700px]'><img src={Shadow} alt='ellipse'/></div>
       <img className ='mx-auto w-[252px] md:w-[562px]'
         src={IMG3} alt='eat1'/>
     </div>

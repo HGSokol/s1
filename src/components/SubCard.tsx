@@ -1,17 +1,18 @@
-
+import {Sub} from '../layouts/Subscribe'
 
 interface SubCard {
-  children: JSX.Element,
-  top: string
+  item: Sub
+  active:string
 }
 
-export const SubCard = ({children, top = 'null'}: SubCard) => {
+export const SubCard = ({item, active}: SubCard) => {
+  const {text, price, top = ''} = item
   return (
     <div className='relative overflow-hidden rounded-[20px] shadow-xl' >
-      <div className='
+      <div className={`
       bg-white h-[126px] w-[288px] py-[24px] px-[32px]
-        md:h-[207px] md:w-[533px] md:py-[36px] md:px-[32px] overflow-hidden border-[1px] border-transparent hover:border-[1px] cursor-pointer hover:border-[#FFB700]
-        flex flex-col justify-between rounded-[20px]'>
+        md:h-[207px] md:w-[533px] md:py-[36px] md:px-[32px] overflow-hidden border-[1px] border-transparent hover:border-[1px] cursor-pointer  ${active === 'active'? ' border-[#FFB700]': ''}
+        flex flex-col justify-between rounded-[20px]`}>
           {
             top === 'top' ? (
               <div className='
@@ -23,7 +24,14 @@ export const SubCard = ({children, top = 'null'}: SubCard) => {
               </div>
             ) : null
           }
-          {children}
+          <div className='flex flex-col justify-center gap-[24px]'>
+            <p className='font-[600] text-[24px] leading-[28.18px] md:text-[40px] md:leading-[46.96px] text-[#1F2117] text-center'>
+           {price} 
+            </p>
+            <p className='font-bodyalt font-[400] text-[14px] leading-[16.71px] md:text-[22px] md:leading-[32px] text-[#777872] text-center'>
+            {text}
+            </p>
+        </div>
       </div>
     </div>
   )

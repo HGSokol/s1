@@ -1,24 +1,37 @@
 import { useState } from 'react'
+
 import IMG1 from '../images/article.png'
+import Group from '../images/group.png'
+import Shadow from '../images/Ellipse.png'
 
 
 type buttonName = string[]
 
+const frameInteractive = [
+  {img1: require('../images/HeartRate.png'), img2: require('../images/Frame.png') },
+  {img1: require('../images/gr2.png'), img2: require('../images/g2.png')},
+]
+
 const data: buttonName = [
-    'Статьи', 
-    'Лекции',   
-  ]
+  'Статьи', 
+  'Лекции',   
+]
 
 export const Article = () => {
-  const [active, setActive] = useState('Статьи') 
+  const [active, setActive] = useState(0) 
 
-  const activeButton =(item: string) => {
+  const activeButton =(item: number) => {
     setActive(item)
   }
 
   return (
   <div className='grid grid-rows-[auto_274px] grid-col-1 mb-[116.52px] md:grid-cols-[1fr_1fr] md:grid-rows-1 md:mb-[150px]'>
-    <div className='order-2 md:order-1'>
+    <div className='relative order-2 md:order-1 duration-300 mx-auto'>
+      <div className='absolute w-[45px] h-[40px] translate-x-[200px] -translate-y-[10px] md:translate-x-[430px] md:w-[118px] md:h-[108px] md:-translate-y-[35px]'><img src={frameInteractive[active].img1} alt='heart'/></div>
+      <div className='absolute w-[46px] h-[45px] -translate-x-[20px] translate-y-[215px] md:-translate-x-[70px] md:w-[103px] md:h-[99px] md:translate-y-[470px]'><img src={frameInteractive[active].img2} alt='frame'/></div>
+      <div className='absolute w-[26px] h-[27px] translate-x-[95px] -translate-y-[5px] md:translate-x-[210px] md:w-[59px] md:h-[61px] md:-translate-y-[20px]'><img src={Group} alt='group'/></div>
+      <div className='absolute w-[26px] h-[27px] translate-x-[120px] translate-y-[250px] md:translate-x-[270px] md:w-[59px] md:h-[61px] md:translate-y-[560px] rotate-[180deg]'><img src={Group} alt='group'/></div>
+      <div className='absolute w-[240px] h-[8.57px] translate-x-[5px] translate-y-[270px] md:translate-x-[0px] md:w-[555px] md:h-[107px] md:translate-y-[620px]'><img src={Shadow} alt='ellipse'/></div>
       <img className ='mx-auto w-[241.3px] h-[273.93px] md:w-[537px] md:h-[607px] md:mx-auto '
         src={IMG1} alt='eat1'/>
     </div>
@@ -30,8 +43,8 @@ export const Article = () => {
               <button 
                 key={i}
                 className={`bg-white font-bodyalt w-[64px] h-[30px] py-[8px] text-[12px] px-[12px] leading-[14.32px]  md:w-[132px] md:h-[43px] md:mr-[10px] rounded-[40px] font-[400] md:text-[16px] md:leading-[19px] duration-[600ms]
-                ${active === item? ' bg-[#FFB700] text-[#FAFAFA]': ' bg-[#FFFFFF] text-[#1F2117] drop-shadow-md'}`}
-                onClick={() => activeButton(item)}>{item}</button>
+                ${active === i? ' bg-[#FFB700] text-[#FAFAFA]': ' bg-[#FFFFFF] text-[#1F2117] drop-shadow-md'}`}
+                onClick={() => activeButton(i)}>{item}</button>
             )
           })
         }

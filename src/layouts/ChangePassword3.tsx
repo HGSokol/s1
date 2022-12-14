@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
@@ -11,16 +11,6 @@ interface IFormInputs {
   password: string
   password2: string
 }
-
-// password: yup.string()
-// .required('Обязательное поле') 
-// .min(8, 'Пароль слишком короткий - минимум 8 знаков.')
-// .matches(/[a-zA-Z0-9]/, 'Пароль может содержать только латинские буквы'),
-// password2: yup.string()
-// .required('Обязательное поле') 
-// .min(8, 'Пароль слишком короткий - минимум 8 знаков.')
-// .matches(/[a-zA-Z0-9]/, 'Пароль может содержать только латинские буквы')
-
 
 const schema = yup.object({
   password: yup
@@ -35,7 +25,6 @@ const schema = yup.object({
 }).required();
 
 const ChangePassword3 = () => {
-  const ref = useRef()
   const [type, setType] = useState(true)
   const navigate = useNavigate()
 

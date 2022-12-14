@@ -8,24 +8,81 @@ type dataCard = {
   img: string,
   prof: string,
   name: string,
-  description: string
+  description: string,
+  links: {
+    instagram: string,
+    telegram: string,
+    youtube: string
+  }
 }
 type DataType = dataCard[]
 
 const data: DataType = [
-  {img: require('../images/face1.png'), prof:'Нутрициолог', name: 'Мария Павловец',  description: 'Победитель кубка РБ по бодибилдингу 90+ Неоднократный призер республиканских соревнований по бодибилдингу. Сертифицированный инструктор тренажерного зала и персональный тренер.'},
-  {img: require('../images/face2.png'), prof:'Нутрициолог', name: 'Мария Павловец',  description: 'Победитель кубка РБ по бодибилдингу 90+ Неоднократный призер республиканских соревнований по бодибилдингу. Сертифицированный инструктор тренажерного зала и персональный тренер.'},
-  {img: require('../images/face3.png'), prof:'Нутрициолог', name: 'Мария Павловец',  description: 'Победитель кубка РБ по бодибилдингу 90+ Неоднократный призер республиканских соревнований по бодибилдингу. Сертифицированный инструктор тренажерного зала и персональный тренер.'},
-  {img: require('../images/face4.png'), prof:'Нутрициолог', name: 'Мария Павловец',  description: 'Победитель кубка РБ по бодибилдингу 90+ Неоднократный призер республиканских соревнований по бодибилдингу. Сертифицированный инструктор тренажерного зала и персональный тренер.'},
-  {img: require('../images/face5.png'), prof:'Нутрициолог', name: 'Мария Павловец',  description: 'Победитель кубка РБ по бодибилдингу 90+ Неоднократный призер республиканских соревнований по бодибилдингу. Сертифицированный инструктор тренажерного зала и персональный тренер.'},
-  {img: require('../images/face6.png'), prof:'Нутрициолог', name: 'Мария Павловец',  description: 'Победитель кубка РБ по бодибилдингу 90+ Неоднократный призер республиканских соревнований по бодибилдингу. Сертифицированный инструктор тренажерного зала и персональный тренер.'},
-  {img: require('../images/face7.png'), prof:'Нутрициолог', name: 'Мария Павловец',  description: 'Победитель кубка РБ по бодибилдингу 90+ Неоднократный призер республиканских соревнований по бодибилдингу. Сертифицированный инструктор тренажерного зала и персональный тренер.'},
-  {img: require('../images/face1.png'), prof:'Нутрициолог', name: 'Мария Павловец',  description: 'Победитель кубка РБ по бодибилдингу 90+ Неоднократный призер республиканских соревнований по бодибилдингу. Сертифицированный инструктор тренажерного зала и персональный тренер.'},
-  {img: require('../images/face2.png'), prof:'Нутрициолог', name: 'Мария Павловец',  description: 'Победитель кубка РБ по бодибилдингу 90+ Неоднократный призер республиканских соревнований по бодибилдингу. Сертифицированный инструктор тренажерного зала и персональный тренер.'},
-  {img: require('../images/face3.png'), prof:'Нутрициолог', name: 'Мария Павловец',  description: 'Победитель кубка РБ по бодибилдингу 90+ Неоднократный призер республиканских соревнований по бодибилдингу. Сертифицированный инструктор тренажерного зала и персональный тренер.'},
-  {img: require('../images/face4.png'), prof:'Нутрициолог', name: 'Мария Павловец',  description: 'Победитель кубка РБ по бодибилдингу 90+ Неоднократный призер республиканских соревнований по бодибилдингу. Сертифицированный инструктор тренажерного зала и персональный тренер.'},
-  {img: require('../images/face5.png'), prof:'Нутрициолог', name: 'Мария Павловец',  description: 'Победитель кубка РБ по бодибилдингу 90+ Неоднократный призер республиканских соревнований по бодибилдингу. Сертифицированный инструктор тренажерного зала и персональный тренер.'},
-  {img: require('../images/face6.png'), prof:'Нутрициолог', name: 'Мария Павловец',  description: 'Победитель кубка РБ по бодибилдингу 90+ Неоднократный призер республиканских соревнований по бодибилдингу. Сертифицированный инструктор тренажерного зала и персональный тренер.'},
+  {img: require('../images/face1.png'), prof:'Нутрициолог', name: 'Мария Павловец',  description: 'Победитель кубка РБ по бодибилдингу 90+ Неоднократный призер республиканских соревнований по бодибилдингу. Сертифицированный инструктор тренажерного зала и персональный тренер.', links: {
+    instagram: 'https://www.instagram.com/',
+    telegram: 'https://web.telegram.org',
+    youtube: 'https://www.youtube.com/'
+  }},
+  {img: require('../images/face2.png'), prof:'Нутрициолог', name: 'Мария Павловец',  description: 'Победитель кубка РБ по бодибилдингу 90+ Неоднократный призер республиканских соревнований по бодибилдингу. Сертифицированный инструктор тренажерного зала и персональный тренер.', links: {
+    instagram: 'https://www.instagram.com/',
+    telegram: 'https://web.telegram.org',
+    youtube: 'https://www.youtube.com/'
+  }},
+  {img: require('../images/face3.png'), prof:'Нутрициолог', name: 'Мария Павловец',  description: 'Победитель кубка РБ по бодибилдингу 90+ Неоднократный призер республиканских соревнований по бодибилдингу. Сертифицированный инструктор тренажерного зала и персональный тренер.', links: {
+    instagram: 'https://www.instagram.com/',
+    telegram: 'https://web.telegram.org',
+    youtube: 'https://www.youtube.com/'
+  }},
+  {img: require('../images/face4.png'), prof:'Нутрициолог', name: 'Мария Павловец',  description: 'Победитель кубка РБ по бодибилдингу 90+ Неоднократный призер республиканских соревнований по бодибилдингу. Сертифицированный инструктор тренажерного зала и персональный тренер.', links: {
+    instagram: 'https://www.instagram.com/',
+    telegram: 'https://web.telegram.org',
+    youtube: 'https://www.youtube.com/'
+  }},
+  {img: require('../images/face5.png'), prof:'Нутрициолог', name: 'Мария Павловец',  description: 'Победитель кубка РБ по бодибилдингу 90+ Неоднократный призер республиканских соревнований по бодибилдингу. Сертифицированный инструктор тренажерного зала и персональный тренер.', links: {
+    instagram: 'https://www.instagram.com/',
+    telegram: 'https://web.telegram.org',
+    youtube: 'https://www.youtube.com/'
+  }},
+  {img: require('../images/face6.png'), prof:'Нутрициолог', name: 'Мария Павловец',  description: 'Победитель кубка РБ по бодибилдингу 90+ Неоднократный призер республиканских соревнований по бодибилдингу. Сертифицированный инструктор тренажерного зала и персональный тренер.', links: {
+    instagram: 'https://www.instagram.com/',
+    telegram: 'https://web.telegram.org',
+    youtube: 'https://www.youtube.com/'
+  }},
+  {img: require('../images/face7.png'), prof:'Нутрициолог', name: 'Мария Павловец',  description: 'Победитель кубка РБ по бодибилдингу 90+ Неоднократный призер республиканских соревнований по бодибилдингу. Сертифицированный инструктор тренажерного зала и персональный тренер.', links: {
+    instagram: 'https://www.instagram.com/',
+    telegram: 'https://web.telegram.org',
+    youtube: 'https://www.youtube.com/'
+  }},
+  {img: require('../images/face1.png'), prof:'Нутрициолог', name: 'Мария Павловец',  description: 'Победитель кубка РБ по бодибилдингу 90+ Неоднократный призер республиканских соревнований по бодибилдингу. Сертифицированный инструктор тренажерного зала и персональный тренер.', links: {
+    instagram: 'https://www.instagram.com/',
+    telegram: 'https://web.telegram.org',
+    youtube: 'https://www.youtube.com/'
+  }},
+  {img: require('../images/face2.png'), prof:'Нутрициолог', name: 'Мария Павловец',  description: 'Победитель кубка РБ по бодибилдингу 90+ Неоднократный призер республиканских соревнований по бодибилдингу. Сертифицированный инструктор тренажерного зала и персональный тренер.', links: {
+    instagram: 'https://www.instagram.com/',
+    telegram: 'https://web.telegram.org',
+    youtube: 'https://www.youtube.com/'
+  }},
+  {img: require('../images/face3.png'), prof:'Нутрициолог', name: 'Мария Павловец',  description: 'Победитель кубка РБ по бодибилдингу 90+ Неоднократный призер республиканских соревнований по бодибилдингу. Сертифицированный инструктор тренажерного зала и персональный тренер.', links: {
+    instagram: 'https://www.instagram.com/',
+    telegram: 'https://web.telegram.org',
+    youtube: 'https://www.youtube.com/'
+  }},
+  {img: require('../images/face4.png'), prof:'Нутрициолог', name: 'Мария Павловец',  description: 'Победитель кубка РБ по бодибилдингу 90+ Неоднократный призер республиканских соревнований по бодибилдингу. Сертифицированный инструктор тренажерного зала и персональный тренер.', links: {
+    instagram: 'https://www.instagram.com/',
+    telegram: 'https://web.telegram.org',
+    youtube: 'https://www.youtube.com/'
+  }},
+  {img: require('../images/face5.png'), prof:'Нутрициолог', name: 'Мария Павловец',  description: 'Победитель кубка РБ по бодибилдингу 90+ Неоднократный призер республиканских соревнований по бодибилдингу. Сертифицированный инструктор тренажерного зала и персональный тренер.', links: {
+    instagram: 'https://www.instagram.com/',
+    telegram: 'https://web.telegram.org',
+    youtube: 'https://www.youtube.com/'
+  }},
+  {img: require('../images/face6.png'), prof:'Нутрициолог', name: 'Мария Павловец',  description: 'Победитель кубка РБ по бодибилдингу 90+ Неоднократный призер республиканских соревнований по бодибилдингу. Сертифицированный инструктор тренажерного зала и персональный тренер.', links: {
+    instagram: 'https://www.instagram.com/',
+    telegram: 'https://web.telegram.org',
+    youtube: 'https://www.youtube.com/'
+  }},
 ]
 
 export const Command = () => {
@@ -95,16 +152,22 @@ export const Command = () => {
                       <p className='text-white text-[24px] leading-[28.18px] md:text-[40px] font-[600] md:leading-[40px]'>{e.name}</p>
                     </div>
                     <div className=' flex flex-col gap-[10px] items-end'>
-                      <div className='w-min bg-white rounded-[10px] p-[5px] group/inst hover:bg-black delay-[100ms] duration-[400ms]'>
-                        <AiFillInstagram size='30px' className='fill-black group-hover/inst:fill-white delay-[100ms] duration-[400ms]' />
-                      </div>
-                      <div className='w-min bg-white rounded-[10px] p-[5px] group/telega hover:bg-black delay-[100ms] duration-[400ms]'>
-                        <FaTelegramPlane size='30px' className='fill-black group-hover/telega:fill-white delay-[100ms] duration-[400ms]'/>
-                      </div>
-                      <div className='w-[80px] h-[40px] bg-white rounded-[10px] overflow-hidden flex justify-center items-center
-                        group/telega hover:bg-black delay-[100ms] duration-[400ms]'>
-                        <ImYoutube2 size='70px' className='fill-black group-hover/telega:fill-white delay-[100ms] duration-[400ms]'/>
-                      </div>
+                      <a href={e.links.instagram} target='_blank' rel="noreferrer">
+                        <div className='w-min bg-white rounded-[10px] p-[5px] group/inst hover:bg-black delay-[100ms] duration-[400ms]'>
+                          <AiFillInstagram size='30px' className='fill-black group-hover/inst:fill-white delay-[100ms] duration-[400ms]' />
+                        </div>
+                      </a>
+                      <a href={e.links.telegram} target='_blank' rel="noreferrer">
+                        <div className='w-min bg-white rounded-[10px] p-[5px] group/telega hover:bg-black delay-[100ms] duration-[400ms]'>
+                          <FaTelegramPlane size='30px' className='fill-black group-hover/telega:fill-white delay-[100ms] duration-[400ms]'/>
+                        </div>
+                      </a>
+                      <a href={e.links.youtube} target='_blank' rel="noreferrer">
+                        <div className='w-[80px] h-[40px] bg-white rounded-[10px] overflow-hidden flex justify-center items-center
+                          group/telega hover:bg-black delay-[100ms] duration-[400ms]'>
+                          <ImYoutube2 size='70px' className='fill-black group-hover/telega:fill-white delay-[100ms] duration-[400ms]'/>
+                        </div>
+                      </a>
                     </div>
                   </div>
               </div>

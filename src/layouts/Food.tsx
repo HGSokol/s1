@@ -1,5 +1,19 @@
 import {useState} from 'react'
-import IMG2 from '../images/eat2.png'
+
+import IMG2 from '../images/img1.png'
+import Group from '../images/group.png'
+import Shadow from '../images/Ellipse.png'
+
+
+const frameInteractive = [
+  {img1: require('../images/HeartRate.png'), img2: require('../images/Frame.png') },
+  {img1: require('../images/gr2.png'), img2: require('../images/g2.png')},
+  {img1: require('../images/HeartRate.png'), img2: require('../images/Frame.png') },
+  {img1: require('../images/gr2.png'), img2: require('../images/g2.png')},
+  {img1: require('../images/HeartRate.png'), img2: require('../images/Frame.png') },
+  {img1: require('../images/gr2.png'), img2: require('../images/g2.png')},
+  {img1: require('../images/HeartRate.png'), img2: require('../images/Frame.png') },
+]
 
 type buttonName = string[]
 
@@ -21,9 +35,14 @@ export const Food = () => {
   }
 
   return (
-  <div className='relative grid grid-rows-[auto_274px] grid-col-1 mb-[92px] md:grid-cols-[1fr_1fr] md:grid-rows-1 md:mb-[150px]'>
-    <div className='order-2 md:order-1'>
-      <img className ='absolute mx-auto md:mx-auto md:-translate-x-[120px] md:-translate-y-[20px] '
+  <div className='relative grid grid-rows-[auto_274px] grid-col-1 mb-[122px] md:grid-cols-[1fr_1fr] md:grid-rows-1 md:mb-[150px]'>
+    <div className='relative order-2 md:order-1 mx-auto md:mx-[0]'>
+      <div className='z-10 absolute w-[45px] h-[40px] translate-x-[195px] translate-y-[0px] md:translate-x-[515px] md:w-[118px] md:h-[108px] md:-translate-y-[30px]'><img src={frameInteractive[active].img1} alt='heart'/></div>
+      <div className='absolute w-[46px] h-[45px] -translate-x-[15px] translate-y-[205px] md:translate-x-[15px] md:w-[103px] md:h-[99px] md:translate-y-[470px]'><img src={frameInteractive[active].img2} alt='frame'/></div>
+      <div className='absolute w-[26px] h-[27px] translate-x-[95px] translate-y-[5px] md:translate-x-[295px] md:w-[59px] md:h-[61px] md:-translate-y-[10px]'><img src={Group} alt='group'/></div>
+      <div className='absolute w-[26px] h-[27px] translate-x-[125px] translate-y-[245px] md:translate-x-[355px] md:w-[59px] md:h-[61px] md:translate-y-[560px] rotate-[180deg]'><img src={Group} alt='group'/></div>
+      <div className='absolute w-[240px] h-[8.57px] translate-x-[5px] translate-y-[270px] md:translate-x-[80px] md:w-[555px] md:h-[107px] md:translate-y-[620px]'><img src={Shadow} alt='ellipse'/></div>
+      <img className ='z-0 w-[252px] mx-auto md:w-min md:-translate-x-[60px] md:-translate-y-[20px] '
         src={IMG2} alt='eat1'/>
     </div>
     <div className='md:pt-[90px] order-1 md:order-2'>

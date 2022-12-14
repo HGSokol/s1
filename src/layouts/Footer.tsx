@@ -28,22 +28,22 @@ export const Footer = () => {
     </div>
     <div className='grid grid-rows-2 w-[209px] h-[71px] mx-auto md:mx-0 place-items-center md:place-items-end gap-[12px]'>
       <div className='flex flex-row gap-[16px] items-center items-self-start'>
-          <a href='#' target="_blank">
+          <a href='https://www.facebook.com/' target="_blank" rel="noreferrer">
             <div className='w-[28px] h-[28px] rounded-full border-[2px] grid place-items-center'>
               <FaFacebookF color='white'/>
             </div>
           </a>
-          <a href='#' target="_blank">
+          <a href='https://www.instagram.com/' target="_blank" rel="noreferrer">
             <div className='w-[28px] h-[28px] rounded-full border-[2px] grid place-items-center'>
               <AiFillInstagram color='white'/>
             </div>
           </a>
-          <a href='#' target="_blank">
+          <a href='https://web.telegram.org/z/' target="_blank" rel="noreferrer">
             <div className='w-[28px] h-[28px] rounded-full border-[2px] grid place-items-center'>
               <FaTelegramPlane color='white'/>
             </div>
           </a>
-          <a href='#' target="_blank">
+          <a href='#' target="_blank" rel="noreferrer">
             <div className='w-[28px] h-[28px] rounded-full border-[2px] grid place-items-center '>
               <HiMail color='white'/>
             </div>

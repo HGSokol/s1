@@ -1,5 +1,6 @@
 import { AboutCard } from '../components/AboutCard'
 
+
 export interface dataAboutCard {
   text: string,
   img: string,

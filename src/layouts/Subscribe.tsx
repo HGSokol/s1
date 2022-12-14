@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { SubCard } from '../components/SubCard'
 
@@ -8,27 +9,24 @@ export type Sub = {
   top?: string,
 }
 
-export interface subsDataType {
-  [key: string]: Sub
-}
-
-const subsData: subsDataType = {
-  sub1: {
+const subsData: Sub[] = [
+  {
     text: 'Подписка на 1 месяц',
     price: '1200 руб./ мес.',
   },
-  sub2: {
-    text: 'При подписке на 3 месяца. 3000 руб. за 3 месяца',
+  {
+    text: `При подписке на 3 месяца.\n3000 руб. за 3 месяца`,
     price: '1000 руб./ мес.',
   },
-  sub3: {
-    text: 'При подписке на год. 9600 руб. в год',
+  {
+    text: `При подписке на год.\n9600 руб. в год`,
     price: '800 руб./ мес.',
     top: 'top'
   }
-}
+]
 
 export const Subscribe = () => {
+  const [active, setActive] = useState<number | null>(null)
 
   return (
   <div className='flex flex-col mb-[120px] md:mb-[200px]'>
@@ -36,36 +34,15 @@ export const Subscribe = () => {
       font-[600] text-[32px] leading-[37.57px] mb-[32px] md:text-[64px] text-[#1F2117] md:leading-[75.14px]
       md:w-[842px] md:h-[75px] md:text-center md:mx-auto md:mb-[127px]'>Подписки</p>
     <div className='grid grid-rows-3 grid-cols-1 md:grid-cols-3 md:grid-rows-1 md:h-[207px] mx-auto gap-[16px] md:gap-[40px] mb-[32px] md:mb-[64px] whitespace-pre-line'>
-      <SubCard top={'null'}>
-        <div className='flex flex-col justify-center gap-[24px]'>
-          <p className='font-[600] text-[24px] leading-[28.18px] md:text-[40px] md:leading-[46.96px] text-[#1F2117] text-center'>
-          1200 руб./ мес.  
-          </p>
-          <p className='font-bodyalt font-[400] text-[14px] leading-[16.71px] md:text-[22px] md:leading-[32px] text-[#777872] text-center'>
-          Подписка на 1 месяц
-          </p>
-        </div>
-      </SubCard>
-      <SubCard top={'null'}>
-        <div className='flex flex-col justify-center gap-[24px]'>
-          <p className='font-[600] text-[24px] leading-[28.18px] md:text-[40px] md:leading-[46.96px] text-[#1F2117] text-center'>
-          1000 руб./ мес.
-          </p>
-          <p className='font-bodyalt font-[400] text-[14px] leading-[16.71px] md:text-[22px] md:leading-[32px] text-[#777872] text-center'>
-         {`При подписке на 3 месяца.${'\n'}3000 руб. за 3 месяца`}
-          </p>
-        </div>
-      </SubCard>
-      <SubCard top={'top'}>
-        <div className='flex flex-col justify-center gap-[24px]'>
-          <div className='font-[600] text-[24px] leading-[28.18px] md:text-[40px] md:leading-[46.96px] text-[#1F2117] text-center'>
-          800 руб./ мес.
-          </div>
-          <div className='font-bodyalt font-[400] text-[14px] leading-[16.71px] md:text-[22px] md:leading-[32px] text-[#777872] text-center'>
-          {`При подписке на год.${'\n'}9600 руб. в год`}
-          </div>
-        </div>
-      </SubCard>
+      {
+        subsData.map((item,i) => {
+          return(
+            <div onClick={() => setActive(i)}>
+              <SubCard key={i} item={item} active={active === i ? 'active': ''}/>
+            </div>
+          )
+        })
+      }
     </div>
     <Link to='/login'>
       <div className='font-bodyalt flex justify-center'>
