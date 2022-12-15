@@ -2,9 +2,9 @@ import { useState, useCallback } from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import { LoginSocialGoogle, IResolveParams } from 'reactjs-social-login'
 
+const _appId = '1018011035779-9cva0vmc8e8a6nanr5url7uk2b8lj8do'
 
 export const GoogleLogin = () => {
-  const _appId = '1018011035779-9cva0vmc8e8a6nanr5url7uk2b8lj8do'
 
   const [provider, setProvider] = useState('');
   const [profile, setProfile] = useState<any>();
@@ -37,21 +37,21 @@ export const GoogleLogin = () => {
     <div className='cursor-pointer'>
     <LoginSocialGoogle
       client_id={_appId || ''}
-      // onLoginStart={onLoginStart}
+      onLoginStart={onLoginStart}
       redirect_uri={'https://cors.sh/localhost:3000/'}
-      // scope="openid profile email"
-      // discoveryDocs="claims_supported"
-      // access_type="offline"
+      scope="openid profile email"
+      discoveryDocs="claims_supported"
+      access_type="online"
       onResolve={({ provider, data }: IResolveParams) => {
         setProvider(provider);
         setProfile(data);
-        // console.log(data)
+        console.log(data)
       }}
       onReject={err => {
-        // console.log(err);
+        console.log(err);
       }}
     >
-        <button className='drop-shadow-md cursor-pointer w-[50px] h-[50px] rounded-[10px] bg-white grid place-content-center lg:w-[64px] lg:h-[64px]'>
+        <button className=' w-[50px] h-[50px] rounded-[10px] bg-white grid place-content-center drop-shadow-md cursor-pointer lg:w-[64px] lg:h-[64px]'>
           <FcGoogle className='w-[24px] h-[24px] lg:w-[34.5px] lg:h-[34.5px]' />
         </button>
       </LoginSocialGoogle>

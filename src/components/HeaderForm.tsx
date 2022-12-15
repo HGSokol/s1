@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 export const HeaderForm = () => {
 
  return (
-  <div className='mt-[18px] lg:mx-[120px] grid place-content-center lg:place-content-start lg:mt-[32px] '>
+  <div className='mt-[18px] grid place-content-center lg:place-content-start lg:mx-[120px] lg:mt-[32px] '>
     <Link to='/' className=''>
       <svg viewBox="0 0 126 56" fill="none" xmlns="http://www.w3.org/2000/svg" className='w-[108px] h-[48px] lg:w-[126px] lg:h-[56px]'>
         <path d="M6.68241 4.4514V51.5486H23.6529V56H2.19141V0H23.6529V4.4514H6.68241Z" fill="#FAB513"/>

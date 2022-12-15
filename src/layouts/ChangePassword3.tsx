@@ -44,7 +44,7 @@ const ChangePassword3 = () => {
 
 
   return (
-    <div className='w-[288px] lg:w-[492px] mx-auto mt-[24px] lg:mt-[223px]'>
+    <div className='w-[288px] mx-auto mt-[24px] lg:w-[492px] lg:mt-[223px]'>
       <h1 className='font-body font-[600] text-[22px] leading-[26.25px] text-center mb-[14px] lg:text-[40px] lg:leading-[46.96px] lg:mb-[24px]'>Восстановление пароля</h1>
       <h3 className='font-body text-[#777872] font-[600] text-[14px] leading-[26.25px] text-center mb-[32px] lg:text-[22px] lg:leading-[32px] lg:mb-[48px]'>Введите новый пароль</h3>
       <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col w-[288px] lg:w-[441px] mx-auto'>
