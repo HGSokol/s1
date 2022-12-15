@@ -4,10 +4,8 @@ import * as yup from "yup";
 import { AiOutlineEye } from 'react-icons/ai'
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { FacebookLogin } from "../components/facebookLogin";
-import { GoogleLogin } from "../components/googleLogin";
-import { AppleLogin } from "../components/appleLogin";
 import { BsEyeSlash } from "react-icons/bs";
+import { AlternativeLogin } from "../components/AlternativeLogin";
 
 
 interface IFormInputs {
@@ -99,12 +97,9 @@ const Login = () => {
           </div>
         </div>
         <div className='mb-[20px]'>
-          <h4 className='text-center text-[12px] text-[#777872] font-[400] mb-[14px] lg:mb-[24px] lg:text-[16px]'>Зарегистрироваться с помощь</h4>
-          <div className='flex flex-row gap-[30px] justify-center lg:gap-[24px]'>
-            <FacebookLogin />
-            <GoogleLogin />
-            <AppleLogin />
-          </div>
+          <AlternativeLogin>
+            <h4 className='text-center text-[12px] text-[#777872] font-[400] mb-[14px] lg:mb-[24px] lg:text-[16px]'>Зарегистрироваться с помощь</h4>
+          </AlternativeLogin>
         </div>
       </form>
     </div>

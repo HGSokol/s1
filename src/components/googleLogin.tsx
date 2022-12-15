@@ -4,7 +4,7 @@ import { LoginSocialGoogle, IResolveParams } from 'reactjs-social-login'
 
 
 export const GoogleLogin = () => {
-  const _appId = '1018011035779-9cva0vmc8e8a6nanr5url7uk2b8lj8do.apps.googleusercontent.com'
+  const _appId = '1018011035779-9cva0vmc8e8a6nanr5url7uk2b8lj8do'
 
   const [provider, setProvider] = useState('');
   const [profile, setProfile] = useState<any>();
@@ -37,18 +37,18 @@ export const GoogleLogin = () => {
     <div className='cursor-pointer'>
     <LoginSocialGoogle
       client_id={_appId || ''}
-      onLoginStart={onLoginStart}
-      redirect_uri={'http://localhost:3000/login'}
-      scope="openid profile email"
-      discoveryDocs="claims_supported"
-      access_type="offline"
+      // onLoginStart={onLoginStart}
+      redirect_uri={'https://cors.sh/localhost:3000/'}
+      // scope="openid profile email"
+      // discoveryDocs="claims_supported"
+      // access_type="offline"
       onResolve={({ provider, data }: IResolveParams) => {
         setProvider(provider);
         setProfile(data);
-        console.log(data)
+        // console.log(data)
       }}
       onReject={err => {
-        console.log(err);
+        // console.log(err);
       }}
     >
         <button className='drop-shadow-md cursor-pointer w-[50px] h-[50px] rounded-[10px] bg-white grid place-content-center lg:w-[64px] lg:h-[64px]'>

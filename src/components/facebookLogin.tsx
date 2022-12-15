@@ -46,10 +46,10 @@ export const FacebookLogin = () => {
         onResolve={({ provider, data }: IResolveParams) => {
           setProvider(provider);
           setProfile(data);
-          console.log(data)
+          // console.log(data)
         }}
         onReject={err => {
-          console.log(err);
+          // console.log(err);
         }}
       >
         <div className='drop-shadow-md w-[50px] h-[50px] rounded-[10px] bg-[#1877F2] grid place-content-center lg:w-[64px] lg:h-[64px]'>
