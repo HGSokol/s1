@@ -32,7 +32,7 @@ export const Subscribe = () => {
   <div className='flex flex-col mb-[120px] md:mb-[200px]'>
     <p className='
       font-[600] text-[32px] leading-[37.57px] mb-[32px] md:text-[64px] text-[#1F2117] md:leading-[75.14px]
-      md:w-[842px] md:h-[75px] md:text-center md:mx-auto md:mb-[127px]'>Подписки</p>
+      md:w-[842px] md:h-[75px] md:text-center md:mx-auto md:mb-[127px]'>Подпискиs</p>
     <div className='grid grid-rows-3 grid-cols-1 md:grid-cols-3 md:grid-rows-1 md:h-[207px] mx-auto gap-[16px] md:gap-[40px] mb-[32px] md:mb-[64px] whitespace-pre-line'>
       {
         subsData.map((item,i) => {
