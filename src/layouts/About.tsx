@@ -22,7 +22,7 @@ export const About = () => {
     2lg:mb-[235px]'>
       <p className='text-[32px] mb-[32px] leading-[37.57px] font-[600] text-[#1F2117]
       md:block md:text-[65px] md:leading-[75px] md:mb-[50px]
-      lg:block lg:text-[64px] lg:leading-[75px] lg:mb-[75px]
+      lg:block lg:text-[34px] lg:leading-[34px] lg:mb-[34px]
       2lg:block 2lg:text-[64px] 2lg:leading-[75px] 2lg:mb-[75px]'>О приложении</p>
       <div className='grid grid-rows-[1fr] gap-[25px] mb-[100px] 
       lg:gap-[20px] lg:grid-rows-[2] lg:grid-cols-[1fr_1fr_1fr_1fr]
