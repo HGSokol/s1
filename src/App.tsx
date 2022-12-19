@@ -1,9 +1,8 @@
 import { lazy, Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
-
+import HomePage from './Pages/Home'
 import Spinner from './components/Spinner'
 
-const HomePage = lazy(() => import('./Pages/Home'))
 const Login = lazy(() => import('./Pages/Login'))
 const LoginForm = lazy(() => import('./layouts/LoginForm'))
 const Register = lazy(() => import('./layouts/Registration'))
@@ -19,14 +18,14 @@ function App() {
       <Suspense fallback={<Spinner/>}>
         <Routes>
           <Route path='/' element={<HomePage/>} />
-          <Route path='/login' element={<Login/>} >
-            <Route index element={<LoginForm/>} />
-            <Route path='/login/registration' element={<Register/>} />
-            <Route path='/login/stage1' element={<ChangePassword/>} />
-            <Route path='/login/stage2' element={<ChangePassword2/>} />
-            <Route path='/login/stage3' element={<ChangePassword3/>} />
-          </Route>
-          <Route path='*' element={<NotFound/>} />
+            <Route path='/login' element={<Login/>} >
+              <Route index element={<LoginForm/>} />
+              <Route path='/login/registration' element={<Register/>} />
+              <Route path='/login/stage1' element={<ChangePassword/>} />
+              <Route path='/login/stage2' element={<ChangePassword2/>} />
+              <Route path='/login/stage3' element={<ChangePassword3/>} />
+            </Route>
+            <Route path='*' element={<NotFound/>} />
         </Routes>
       </Suspense>
     </div>

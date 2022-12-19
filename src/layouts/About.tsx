@@ -1,5 +1,6 @@
 import { AboutCard } from '../components/AboutCard'
 
+import IMG1 from '../images/about2.svg'
 
 export interface dataAboutCard {
   text: string,
@@ -8,16 +9,24 @@ export interface dataAboutCard {
 
 const data: dataAboutCard[] = [
   {text: 'Статьи\n и лекции', img: require("../images/about1.png")},
-  {text: 'Тренировки', img: require("../images/about2.png")},
+  {text: 'Тренировки', img: IMG1},
+  // {text: 'Тренировки', img: require("../images/about2.svg")},
   {text: 'Планы питания', img: require("../images/about3.png")},
   {text: 'Статистика', img: require("../images/about4.png")},
 ]
 
 export const About = () => {
   return (
-    <div className='mb-[72px] md:mb-[235px]'>
-      <p className='text-[32px] mb-[32px] leading-[37.57px] font-[600] md:block md:text-[64px] text-[#1F2117] md:leading-[75px] md:mb-[75px]'>О приложении</p>
-      <div className='grid grid-rows-[1fr] gap-[16px] mb-[100px] md:gap-[20px] md:grid-rows-[2] md:grid-cols-[1fr_1fr_1fr_1fr]'>
+    <div className='mb-[72px] 
+    lg:mb-[235px]
+    2lg:mb-[235px]'>
+      <p className='text-[32px] mb-[32px] leading-[37.57px] font-[600] text-[#1F2117]
+      md:block md:text-[65px] md:leading-[75px] md:mb-[50px]
+      lg:block lg:text-[64px] lg:leading-[75px] lg:mb-[75px]
+      2lg:block 2lg:text-[64px] 2lg:leading-[75px] 2lg:mb-[75px]'>О приложении</p>
+      <div className='grid grid-rows-[1fr] gap-[25px] mb-[100px] 
+      lg:gap-[20px] lg:grid-rows-[2] lg:grid-cols-[1fr_1fr_1fr_1fr]
+      2lg:gap-[20px] 2lg:grid-rows-[2] 2lg:grid-cols-[1fr_1fr_1fr_1fr]'>
         {
           data.map((item,i) => {
             return (

@@ -1,41 +1,75 @@
 import IMG1 from '../images/preview1.png'
-import IMG2 from '../images/preview2.png'
+import IMG2 from '../images/preview2.svg'
 
 
 export const Preview = () => {
   return (
-    <div className='w-full h-min relative mb-[72px] md:mb-[413px] md:mt-[32px]'>
-      <img className='hidden md:block md:absolute md:translate-x-[870px] md:translate-y-[40px]' src={IMG1} alt='logo'/>
+    <div className='w-full h-min relative mb-[72px] 
+    md:mb-[200px]
+    lg:mb-[313px]
+    2lg:mb-[413px]'>
+      <img className='hidden lg:block 
+      lg:absolute lg:translate-x-[420px] lg:translate-y-[30px] lg:w-[500px]
+      2lg:translate-x-[870px] 2lg:translate-y-[40px] 2lg:w-[782px] ' src={IMG1} alt='logo'/>
       <div className=''>
         <div className='font-bodyalt text-[#DE9F00] font-[600] h-[20px] text-[14px] mb-[14px] tracking-[0.04em] leading-[16px]
-          md:text-[20px] md:leading-[24px] md:mb-[24px]'>Секрет успеха — сделать первый шаг.</div>
-        <div className='relative text-[#1F2117] font-[900] mb-[24px] text-[29px] leading-[35px] md:text-[75px] md:mb-[48px] md:w-[1124px] md:leading-[73px] z-100 '>
+        md:text-[27px] md:leading-[20px] md:mb-[35px]
+        lg:text-[10.6px] lg:leading-[20px] lg:mb-[12px]
+        2lg:text-[20px] 2lg:leading-[24px] 2lg:mb-[24px]'>Секрет успеха — сделать первый шаг.</div>
+        <div className='relative text-[#1F2117] font-[900] mb-[24px] text-[29px] leading-[35px] z-100
+        md:text-[60px] md:mb-[38px] md:w-full md:leading-[60px]
+        lg:text-[39.75px] lg:mb-[32px] lg:w-[600px] lg:leading-[40px]
+        2lg:text-[75px] 2lg:mb-[48px] 2lg:w-[1124px] 2lg:leading-[73px]'>
           <div className='inline-block'>
             <div className='z-10 relative'>
             Построй здоровое&nbsp;
             </div>
             <div className='-z-0 absolute'>
-              <svg className='w-[163px] h-[42px] -translate-y-[36px] translate-x-[120px]  md:w-[421px] md:h-[99px] md:-translate-y-[80px] md:translate-x-[310px]' viewBox="0 0 421 99" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg className='w-[163px] h-[42px] -translate-y-[36px] translate-x-[120px]  
+              md:w-[330px] md:h-[80px] md:-translate-y-[65px] md:translate-x-[250px]
+              lg:w-[200px] lg:h-[99px] lg:-translate-y-[70px] lg:translate-x-[140px]
+              2lg:w-[421px] 2lg:h-[99px] 2lg:-translate-y-[80px] 2lg:translate-x-[310px]' viewBox="0 0 421 99" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fillRule="evenodd" clipRule="evenodd" d="M196.819 0.477709C173.175 0.652874 146.207 3.50784 118.671 8.75097C81.0378 15.9169 44.7422 27.8126 24.4665 39.6267C4.48685 51.2684 -3.06474 62.7202 2.84573 72.4131C4.41259 74.9827 9.36331 79.7359 12.9067 82.0734C15.725 83.932 20.7943 86.3213 26.2196 88.3472C36.355 92.1321 49.4921 94.617 69.4007 96.5148C81.1563 97.6357 113.351 99.0051 127.659 98.9929C153.792 98.9709 179.077 97.8845 212.506 95.347C246.419 92.7729 271.538 89.9328 305.595 84.822C343.053 79.2008 360.527 75.893 377.95 71.1252C395.359 66.3609 405.761 61.9105 411.98 56.5668C417.394 51.9133 420.063 47.7003 420.247 43.5168C420.456 38.7726 418.32 36.1524 411.051 32.2357C405.855 29.4351 400.654 27.4385 391.196 24.6118C378.863 20.926 366.387 18.1181 351.322 15.6376C317.102 10.0035 294.871 8.51232 243.369 8.39672C228.004 8.36218 199.478 8.57548 198.17 8.7348C197.094 8.866 197.38 9.79987 198.63 10.2355C199.269 10.458 206.828 11.478 215.428 12.5021C230.751 14.3265 255.217 17.4008 290.145 21.8909C299.777 23.1289 312.871 24.7664 319.242 25.5295C345.28 28.6477 364.693 32.0486 379.456 36.077C390.861 39.1892 396.765 41.5624 396.692 43.0053C396.636 44.1063 395.379 46.0622 393.899 47.351C388.666 51.9075 371.951 57.9248 351.064 62.7711C334.926 66.5155 294.365 73.3778 264.789 77.3677C234.391 81.4681 199.514 84.6768 165.386 86.5129C138.579 87.9552 118.341 88.0569 90.8913 86.887C63.7489 85.7299 48.4143 83.9673 36.502 80.6345C21.1792 76.3473 14.0866 69.106 17.2062 60.9339C19.9998 53.6155 33.4048 43.9186 52.5 35.402C83.2728 21.6773 124.386 10.9669 165.679 5.91779C195.073 2.32363 226.036 2.39306 249.372 6.10526C252.312 6.57311 255.411 7.16073 256.258 7.41142C258.248 8.00044 258.272 7.56089 256.292 6.78333C252.063 5.12249 241.546 3.16777 230.648 2.01711C223.864 1.30102 204.522 0.420724 196.819 0.477709ZM137.804 11.5576C131.233 11.8207 129.798 11.9536 129.783 12.2995C129.74 13.309 130.941 13.3524 137.927 12.5937C141.67 12.1873 145.268 11.8173 145.923 11.7718C147.405 11.6685 148.038 11.2731 146.754 11.2524C146.233 11.2441 142.205 11.3815 137.804 11.5576Z" fill="#FFB700"/>
               </svg>
             </div>
           </div>и сильное тело вместе с нами</div>
-        <p className='font-bodyalt hidden md:block md:text-[#777872] md:text-[20px] md:font-[400] md:mb-[48px] md:w-[533px] md:leading-[32px] md:tracking-[0.02em]'>Следуй программам тренировок и питания, которые созданы настоящими профессионалами.</p>
+        <p className='font-bodyalt hidden text-[#777872] 
+        lg:block lg:text-[10.6px] lg:font-[400] lg:mb-[48px] lg:w-[270px] lg:leading-[15px] lg:tracking-[0.02em]
+        2lg:text-[20px] 2lg:font-[400] 2lg:mb-[48px] 2lg:w-[533px] 2lg:leading-[32px] 2lg:tracking-[0.02em]'>Следуй программам тренировок и питания, которые созданы настоящими профессионалами.</p>
         <div>
-          <img className='mb-[32px] mx-auto md:hidden' src={IMG2} alt='logo'/>
+          <img className='mb-[32px] mx-auto 
+          md:w-[600px]
+          lg:hidden' src={IMG2} alt='logo'/>
         </div>
-        <div className='font-bodyalt flex flex-col mb-[48px] md:mb-[96px] md:flex-row '>
-          <button className='bg-[#FFB700] text-[12px] mb-[14px] w-full leading-[14.32px] h-[42px] rounded-full md:w-[228px] md:h-[56px] md:text-[16px] text-center text-[#FAFAFA] md:mr-[32px] tracking-[0.04em] flex flex-row items-center justify-center hover:bg-[#FFB700]/75'>
-              <p className='font-[600] text-[12px] md:text-[16px] text-[#FAFAFA] tracking-[0.04em] mr-[14px]'>Оплатить подписку</p>
-            <svg className='w-[18px] h-[18px] md:w-[24px] md:h-[24px]' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div className='font-bodyalt flex flex-col mb-[48px] 
+        lg:mb-[96px] lg:flex-row
+        2lg:mb-[96px] 2lg:flex-row '>
+          <button className='bg-[#FFB700] text-[12px] mb-[14px] w-full leading-[14.32px] h-[42px] rounded-full 
+          text-center text-[#FAFAFA] tracking-[0.04em] flex flex-row items-center justify-center hover:bg-[#FFB700]/75
+          md:h-[67px] md:text-[16px] md:mr-[40px]
+          lg:w-[228px] lg:h-[56px] lg:text-[8.5px] lg:mr-[32px]
+          2lg:w-[228px] 2lg:h-[56px] 2lg:text-[16px] 2lg:mr-[32px] '>
+              <p className='font-[600] text-[12px] text-[#FAFAFA] tracking-[0.04em] mr-[14px]
+              md:text-[23px] 
+              lg:text-[8.5px]
+              2lg:text-[16px]'>Оплатить подписку</p>
+            <svg className='w-[18px] h-[18px] 
+            md:w-[38px] md:h-[38px]
+            lg:w-[24px] lg:h-[24px]
+            2lg:w-[24px] 2lg:h-[24px]' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M3.75 12L20.25 12" stroke="#FAFAFA" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M13.5 18.75L20.25 12L13.5 5.25" stroke="#FAFAFA" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </button>
-          <button className='bg-[#FAFAFA] p-auto rounded-full w-full h-[42px] text-[12px] leading-[14.32px] text-center md:w-[164px] md:h-[56px] font-[600] md:text-[16px] text-[#1F2117] border-[1px] border-[#1F2117] hover:duration-[200ms] tracking-[0.04em] hover:border-[#FFB700] hover:text-[#FFB700]'>Ознакомиться</button>
+          <button className='bg-[#FAFAFA] p-auto rounded-full w-full h-[42px] text-[12px] leading-[14.32px] text-center font-[600] text-[#1F2117] border-[1px] border-[#1F2117] hover:duration-[200ms] tracking-[0.04em] hover:border-[#FFB700] hover:text-[#FFB700]
+          md:h-[67px] md:text-[23px]
+          lg:w-[164px] lg:h-[56px] lg:text-[8.5px]
+          2lg:w-[164px] 2lg:h-[56px] 2lg:text-[16px]'>Ознакомиться</button>
         </div>
         <div className='font-bodyalt flex flex-row items-center'>
-          <svg viewBox="0 0 194 56" xmlns="http://www.w3.org/2000/svg" className='group/svg bg-white rounded-[4px] border-[1px] border-[#1F2117] md:rounded-[8px] hover:bg-black duration-[450ms] w-[110px] h-[35px] md:w-[194px] md:h-[56px]'>
+          <svg viewBox="0 0 194 56" xmlns="http://www.w3.org/2000/svg" 
+          className='group/svg bg-white rounded-[4px] border-[1px] border-[#1F2117] hover:bg-black duration-[450ms] w-[110px] h-[35px]
+          md:rounded-[8px] md:w-[240px] md:h-[70px]'>
             <path d="M43.261 27.6979C43.2194 23.1857 47.0504 20.9905 47.2255 20.8883C45.0559 17.8041 41.693 17.3827 40.5113 17.3491C37.6869 17.0593 34.9472 18.9969 33.5084 18.9969C32.0409 18.9969 29.8253 17.3771 27.4374 17.4247C24.3646 17.4709 21.4899 19.2055 19.9133 21.8991C16.6596 27.3913 19.0863 35.4623 22.2036 39.9017C23.763 42.0759 25.5851 44.5035 27.9701 44.4181C30.3035 44.3243 31.1751 42.9677 33.9909 42.9677C36.7808 42.9677 37.5993 44.4181 40.0317 44.3635C42.5359 44.3243 44.1125 42.1795 45.6173 39.9857C47.4194 37.4937 48.1431 35.0395 48.1718 34.9135C48.1129 34.8939 43.3084 33.1061 43.261 27.6979Z" fill="#1F2117" className='group-hover/svg:fill-white'/>
             <path d="M38.6661 14.4287C39.9211 12.8985 40.7798 10.8167 40.5414 8.7041C38.725 8.7825 36.4534 9.9291 35.1453 11.4257C33.988 12.7445 32.9541 14.9061 33.2212 16.9389C35.2616 17.0873 37.3566 15.9351 38.6661 14.4287Z" fill="#1F2117" className='group-hover/svg:fill-white'/>
             <path d="M77.0288 44.1058H73.7679L71.9816 38.6332H65.7728L64.0713 44.1058H60.8965L67.0479 25.4746H70.8473L77.0288 44.1058ZM71.4431 36.3372L69.8278 31.4722C69.6569 30.9752 69.3367 29.8048 68.8643 27.9624H68.8068C68.6187 28.7548 68.3158 29.9252 67.8994 31.4722L66.3127 36.3372H71.4431Z" fill="#1F2117" className='group-hover/svg:fill-white'/>
@@ -60,7 +94,10 @@ export const Preview = () => {
             <path d="M165.823 18.806H164.317V15.054C164.317 13.871 163.863 13.2788 162.954 13.2788C162.256 13.2788 161.779 13.6218 161.518 14.3078C161.474 14.452 161.448 14.6284 161.448 14.8356V18.8046H159.944V9.17822H161.448V13.1556H161.476C161.95 12.4318 162.629 12.0706 163.51 12.0706C164.133 12.0706 164.648 12.2694 165.058 12.6684C165.567 13.1654 165.823 13.9046 165.823 14.8818V18.806Z" fill="#1F2117" className='group-hover/svg:fill-white'/>
             <path d="M174.04 15.1942C174.04 15.4574 174.02 15.6786 173.984 15.8592H169.471C169.491 16.5116 169.707 17.0086 170.125 17.353C170.507 17.661 170.999 17.815 171.602 17.815C172.27 17.815 172.879 17.7114 173.427 17.5028L173.663 18.522C173.021 18.7936 172.266 18.9294 171.391 18.9294C170.343 18.9294 169.517 18.6284 168.92 18.0264C168.32 17.4244 168.022 16.6166 168.022 15.603C168.022 14.6076 168.3 13.7788 168.858 13.118C169.441 12.4124 170.229 12.0596 171.225 12.0596C172.198 12.0596 172.938 12.4124 173.437 13.118C173.841 13.678 174.04 14.371 174.04 15.1942ZM172.604 14.8148C172.616 14.3794 172.517 14.0042 172.313 13.6878C172.052 13.2804 171.654 13.076 171.115 13.076C170.624 13.076 170.224 13.2748 169.918 13.6738C169.668 13.9916 169.52 14.371 169.471 14.8148H172.604Z" fill="#1F2117" className='group-hover/svg:fill-white'/>
           </svg>
-          <p className='font-bodyalt font-[600] text-[12px] text-[#777872] h-[28px] w-[153px] ml-[14px] leading-[14.32px] md:ml-[25px] md:w-[275px] md:h-[48px]  md:text-[20px] md:leading-[23.87px] '>Скачивайте наше приложение в App Store</p>
+          <p className='font-bodyalt font-[600] text-[12px] text-[#777872] h-[28px] w-[153px] ml-[14px] leading-[14.32px] 
+          md:ml-[25px] md:w-[300px] md:h-[48px] md:text-[26px] md:leading-[23.87px]
+          lg:ml-[25px] lg:w-[125px] lg:h-[48px]  lg:text-[10.6px] lg:leading-[15px]
+          2lg:ml-[25px] 2lg:w-[275px] 2lg:h-[48px]  2lg:text-[20px] 2lg:leading-[23.87px] '>Скачивайте наше приложение в App Store</p>
         </div>
       </div>
     </div>
