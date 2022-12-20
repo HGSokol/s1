@@ -100,16 +100,21 @@ export const Command = () => {
     active! <= 0 ? setActive(data.length-1) : setActive(prev => prev! - 1)
   }
 
-  const trLength = active! >4 ? `${(size+20)*(active!-3)}`: 0
+  const clientWidth = (window.innerWidth >= 1024 && window.innerWidth<=1919) ? 10: 20
+
+  const trLength = active! > 4 ? `${(size + clientWidth)*(active!-3)}`: 0
   const sizeCarousel = trLength >= 2200? '2200px' : `${trLength}px`
 
   React.useEffect(() => {
     if(ref.current) {
       setSize(ref.current.getBoundingClientRect().width)
     }
+
   },[])
-
-
+  
+  
+  console.log(size*data.length)
+  console.log(window.innerWidth)
   return (
     <div className='mb-[50px] gap-[10px]
     lg:gap-[15px] lg:mb-[30px] lg:overflow-hidden
