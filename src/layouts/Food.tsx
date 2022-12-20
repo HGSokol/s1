@@ -36,7 +36,7 @@ export const Food = () => {
 
   return (
   <div className='relative grid grid-rows-[auto_274px] grid-col-1 mb-[122px] 
-  md:grid-rows-[auto_auto] 
+  md:grid-rows-[auto_auto] md:mb-[222px]
   lg:grid-cols-[1fr_1fr] lg:grid-rows-1 lg:mb-[100px]
   2lg:grid-cols-[1fr_1fr] 2lg:grid-rows-1 2lg:mb-[150px]'>
     <div className='relative order-2  mx-auto 
@@ -79,10 +79,10 @@ export const Food = () => {
             return (
               <button 
                 key={i}
-                className={`bg-white font-bodyalt py-[8px] px-[12px] w-max text-[12px] leading-[14.32px] rounded-[40px] font-[400] duration-[600ms]
+                className={`bg-white font-bodyalt py-[8px] px-[12px] w-max text-[12px] leading-[14.32px] rounded-[40px] font-[400] duration-[600ms] whitespace-nowrap
                 md:w-max md:h-max md:mr-[10px] md:text-[25px] md:leading-[19px] md:px-[20px] md:py-[20px]
-                lg:w-max lg:h-[23px] lg:mr-[0px] lg:text-[8.5px] lg:leading-[10px] lg:px-[8px] lg:py-[0px]
-                2lg:w-max 2lg:h-[43px] 2lg:text-[16px] 2lg:leading-[19px] 2lg:px-[20px] 2lg:py-[0px]
+                lg:w-max lg:h-[23px] lg:mr-[0px] lg:text-[8.5px] lg:leading-[10px] lg:px-[12px] lg:py-[0px]
+                2lg:w-max 2lg:h-[43px] 2lg:text-[16px] 2lg:leading-[19px] 2lg:px-[24px] 2lg:py-[0px]
                 ${active === i? ' bg-[#FFB700] text-[#FAFAFA]': ' bg-[#FFFFFF] text-[#1F2117] drop-shadow-md'}`}
                 onClick={() => activeButton(i)}>{item}</button>
             )
@@ -94,7 +94,7 @@ export const Food = () => {
       lg:text-[34px] lg:leading-[37px] lg:h-min lg:mb-[17px] 
       2lg:text-[64px] 2lg:leading-[75.14px] 2lg:w-[842px] 2lg:h-[150px] 2lg:mb-[32px]'>Питайся вкусно, полезно и разнообразно </h2>
       <div className='font-bodyalt font-[400] text-[14px] leading-[16.71px] mb-[17px] text-[#777872] tracking-[0.02em]
-      md:text-[29px] md:leading-[32px] md:h-max 
+      md:text-[29px] md:leading-[32px] md:h-max md:mb-[90px]
       lg:text-[11.66px] lg:leading-[18px] lg:h-min lg:w-[370px] 
       2lg:text-[22px] 2lg:leading-[32px] 2lg:w-[734px] 2lg:h-[128px] '>Ежедневный индивидуальный план питания с учетом вашего здоровья, образа жизни и целей.&nbsp;
         <div className='inline-block relative'>

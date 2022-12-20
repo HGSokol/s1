@@ -51,7 +51,7 @@ export const Feedback = () => {
 
   return (
     <div className='mb-[72px] gap-[10px] 
-    md:gap-[15px] md:mb-[50px] md:overflow-hidden
+    md:gap-[15px] md:overflow-hidden md:mb-[144px]
     lg:gap-[7px] lg:mb-[79.5px] lg:overflow-hidden
     2lg:gap-[15px] 2lg:mb-[150px]'>
       <div className='flex flex-row mb-[32px] space-x-[200px] justify-between 
@@ -66,7 +66,7 @@ export const Feedback = () => {
         2lg:gap-[10px]'>
           <button className='rounded-full border-[1px] border-[#1F2117] w-[56px] h-[56px] text-black grid place-content-center cursor-pointer group/arrow1 hover:bg-[#FFB700] hover:text-white hover:border-none duration-[200ms] 
           lg:w-[29.68px] lg:h-[29.68px] 
-          2lg:w-[29.68px] 2lg:h-[29.68px]'
+          2lg:w-[56px] 2lg:h-[56px]'
             onClick={left}>
               <svg className='w-[18px] h-[18px] stroke-black group-hover/arrow1:stroke-white 
               lg:w-[13px] lg:h-[13px] 
@@ -77,7 +77,7 @@ export const Feedback = () => {
             </button>
           <button className='rounded-full border-[1px] border-[#1F2117] w-[56px] h-[56px] text-black grid place-content-center mr-[120px] cursor-pointer group/arrow2 hover:bg-[#FFB700] hover:text-white hover:border-none duration-[200ms] 
           lg:w-[29.68px] lg:h-[29.68px] lg:mr-[60px]
-          2lg:w-[29.68px] 2lg:h-[29.68px] 2lg:mr-[120px]'
+          2lg:w-[56px] 2lg:h-[56px] 2lg:mr-[120px]'
             onClick={right}>
               <svg className='w-[18px] h-[18px] stroke-black group-hover/arrow2:stroke-white 
                lg:w-[13px] lg:h-[13px] 

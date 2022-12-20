@@ -11,12 +11,12 @@ export const AboutCard = ({item}: TextItem) => {
   return (
     <div className='mx-auto w-[288px] h-[200px] rounded-[24px] relative overflow-hidden group/about 
     md:w-full md:h-[450px] md:rounded-[50px]
-    lg:w-[207px] lg:h-[207px] lg:rounded-[12px]
-    2lg:w-[390px] 2lg:h-[390px] 2lg:rounded-[50px] '>
+    lg:w-[227px] lg:h-[227px] lg:rounded-[12px]
+    2lg:w-[390px] 2lg:h-[390px] 2lg:rounded-[24px] '>
       <div className={`w-[288px] h-[200px] duration-[400ms] bg-cover bg-no-repeat bg-center rounded-[24px] flex flex-row items-end space-x-4 absolute z-1 overflow-hidden group-hover/about:scale-[1.2] 
       md:w-full md:h-[450px]
-      lg:w-[207px] lg:h-[207px] lg:rounded-[12px]
-      2lg:w-[390px] 2lg:h-[390px] 2lg:rounded-[50px] `}
+      lg:w-[227px] lg:h-[227px] lg:rounded-[12px]
+      2lg:w-[390px] 2lg:h-[390px] 2lg:rounded-[24px] `}
       style={{ backgroundImage:`url(${img})` }}>
         <div className='w-full h-full z-5 bg-[#1F2117]/30 group-hover/about:bg-yellow-500/30 duration-[400ms]'></div>
       </div>

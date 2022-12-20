@@ -6,7 +6,7 @@ export const Preview = () => {
   return (
     <div className='w-full h-min relative mb-[72px] 
     md:mb-[200px]
-    lg:mb-[333px]
+    lg:mb-[318.89px]
     2lg:mb-[413px]'>
       <img className='hidden lg:block 
       lg:absolute lg:translate-x-[460px] lg:translate-y-[20px] lg:w-[500px]
@@ -38,15 +38,16 @@ export const Preview = () => {
         2lg:text-[20px] 2lg:font-[400] 2lg:mb-[48px] 2lg:w-[493px] 2lg:leading-[32px] 2lg:tracking-[0.02em]'>Следуй программам тренировок и питания, которые созданы настоящими профессионалами.</p>
         <div>
           <img className='mb-[32px] mx-auto 
-          md:w-[600px]
+          md:w-[600px] md:mb-[64px]
           lg:hidden' src={IMG2} alt='logo'/>
         </div>
         <div className='font-bodyalt flex flex-col mb-[48px] 
+        md:mb-[96px]
         lg:mb-[48px] lg:flex-row
         2lg:mb-[96px] 2lg:flex-row '>
           <button className='bg-[#FFB700] text-[12px] mb-[14px] w-full leading-[14.32px] h-[42px] rounded-full 
           text-center text-[#FAFAFA] tracking-[0.04em] flex flex-row items-center justify-center hover:bg-[#FFB700]/75
-          md:h-[67px] md:text-[16px] md:mr-[40px]
+          md:h-[67px] md:text-[16px] md:mr-[40px] md:mb-[28px] md:w-[688px]
           lg:w-[121px] lg:h-[30px] lg:text-[8.5px] lg:mr-[16px]
           2lg:w-[228px] 2lg:h-[56px] 2lg:text-[16px] 2lg:mr-[32px] '>
               <p className='font-[600] text-[12px] text-[#FAFAFA] tracking-[0.04em] mr-[14px]
@@ -62,7 +63,7 @@ export const Preview = () => {
             </svg>
           </button>
           <button className='bg-[#FAFAFA] p-auto rounded-full w-full h-[42px] text-[12px] leading-[14.32px] text-center font-[600] text-[#1F2117] border-[1px] border-[#1F2117] hover:duration-[200ms] tracking-[0.04em] hover:border-[#FFB700] hover:text-[#FFB700]
-          md:h-[67px] md:text-[23px]
+          md:h-[67px] md:text-[23px] md:w-[688px]
           lg:w-[89px] lg:h-[30px] lg:text-[8.5px]
           2lg:w-[164px] 2lg:h-[56px] 2lg:text-[16px]'>Ознакомиться</button>
         </div>
@@ -70,8 +71,8 @@ export const Preview = () => {
           <svg viewBox="0 0 194 56" xmlns="http://www.w3.org/2000/svg" 
           className='group/svg bg-white rounded-[4px] border-[1px] border-[#1F2117] hover:bg-black duration-[450ms] w-[110px] h-[35px]
           md:rounded-[8px] md:w-[240px] md:h-[70px]
-          lg:rounded-[8px] lg:w-[100px] lg:h-[32px]
-          2lg:rounded-[8px] 2lg:w-[240px] 2lg:h-[70px]'>
+          lg:rounded-[4px] lg:w-[100px] lg:h-[32px]
+          2lg:rounded-[8px] 2lg:w-[193.85px] 2lg:h-[56px]'>
             <path d="M43.261 27.6979C43.2194 23.1857 47.0504 20.9905 47.2255 20.8883C45.0559 17.8041 41.693 17.3827 40.5113 17.3491C37.6869 17.0593 34.9472 18.9969 33.5084 18.9969C32.0409 18.9969 29.8253 17.3771 27.4374 17.4247C24.3646 17.4709 21.4899 19.2055 19.9133 21.8991C16.6596 27.3913 19.0863 35.4623 22.2036 39.9017C23.763 42.0759 25.5851 44.5035 27.9701 44.4181C30.3035 44.3243 31.1751 42.9677 33.9909 42.9677C36.7808 42.9677 37.5993 44.4181 40.0317 44.3635C42.5359 44.3243 44.1125 42.1795 45.6173 39.9857C47.4194 37.4937 48.1431 35.0395 48.1718 34.9135C48.1129 34.8939 43.3084 33.1061 43.261 27.6979Z" fill="#1F2117" className='group-hover/svg:fill-white'/>
             <path d="M38.6661 14.4287C39.9211 12.8985 40.7798 10.8167 40.5414 8.7041C38.725 8.7825 36.4534 9.9291 35.1453 11.4257C33.988 12.7445 32.9541 14.9061 33.2212 16.9389C35.2616 17.0873 37.3566 15.9351 38.6661 14.4287Z" fill="#1F2117" className='group-hover/svg:fill-white'/>
             <path d="M77.0288 44.1058H73.7679L71.9816 38.6332H65.7728L64.0713 44.1058H60.8965L67.0479 25.4746H70.8473L77.0288 44.1058ZM71.4431 36.3372L69.8278 31.4722C69.6569 30.9752 69.3367 29.8048 68.8643 27.9624H68.8068C68.6187 28.7548 68.3158 29.9252 67.8994 31.4722L66.3127 36.3372H71.4431Z" fill="#1F2117" className='group-hover/svg:fill-white'/>
@@ -98,7 +99,7 @@ export const Preview = () => {
           </svg>
           <p className='font-bodyalt font-[600] text-[12px] text-[#777872] h-[28px] w-[153px] ml-[14px] leading-[14.32px] 
           md:ml-[25px] md:w-[300px] md:h-[48px] md:text-[26px] md:leading-[23.87px]
-          lg:ml-[13px] lg:w-[125px] lg:h-min lg:text-[10.6px] lg:leading-[15px]
+          lg:ml-[13px] lg:w-[125px] lg:h-min lg:text-[10.6px] lg:leading-[10px]
           2lg:ml-[25px] 2lg:w-[275px] 2lg:h-[48px]  2lg:text-[20px] 2lg:leading-[23.87px] '>Скачивайте наше приложение в App Store</p>
         </div>
       </div>

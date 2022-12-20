@@ -18,9 +18,8 @@ export const SubCard = ({item, active}: SubCard) => {
               <div className='
                 flex justify-center items-center font-bodyalt absolute bg-[#FFB700] w-[150px] h-[18px] translate-x-[147px] -translate-y-[7px] font-[400] text-[10px] text-center text-[#FAFAFA] rotate-[38deg]  group-hover/card:bg-white group-hover/card:text-[#1F2117] 
                 md:text-[16px] md:h-[42px] md:w-[220px] md:translate-x-[335px] md:-translate-y-[12px]
-                lg:text-[8.5px] lg:h-[22px] lg:w-[220px] lg:translate-x-[125px] lg:-translate-y-[9px] 
-                2lg:text-[16px] 2lg:h-[42px] 2lg:w-[220px] 2lg:translate-x-[335px] 2lg:-translate-y-[12px]  
-                '>
+                lg:text-[8.5px] lg:h-[22px] lg:w-[220px] lg:translate-x-[125px] lg:-translate-y-[5px] 
+                2lg:text-[16px] 2lg:h-[42px] 2lg:w-[220px] 2lg:translate-x-[335px] 2lg:-translate-y-[12px] '>
                 лучший выбор
               </div>
             ) : null

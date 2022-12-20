@@ -118,15 +118,15 @@ export const Command = () => {
       lg:mb-[32px]
       2lg:mb-[64px]'>
         <div className='font-[600] text-[32px] leading-[37.57px] text-[#1F2117]
-        md:text-[64px] md:leading-[75.14px] md:w-[400px] 
+        md:text-[64px] md:leading-[75.14px] md:w-[400px] md:mb-[20px]
         lg:text-[33.92px] lg:leading-[37px]
-        2lg:text-[64px] 2lg:leading-[75.14px] '>Знакомство с командой</div>
+        2lg:text-[64px] 2lg:leading-[75.14px] 2lg:w-[800px]'>Знакомство с командой</div>
         <div className='hidden 
         lg:flex lg:flex-row lg:gap-[10px]
         2lg:flex 2lg:flex-row 2lg:gap-[10px]'>
           <button className='rounded-full border-[1px] border-[#1F2117] w-[56px] h-[56px] text-black grid place-content-center cursor-pointer group/arrow1 hover:bg-[#FFB700] hover:text-white hover:border-none duration-[200ms] 
           lg:w-[29.68px] lg:h-[29.68px] 
-          2lg:w-[29.68px] 2lg:h-[29.68px]'
+          2lg:w-[56px] 2lg:h-[56px]'
             onClick={left}>
               <svg className='w-[18px] h-[18px] stroke-black group-hover/arrow1:stroke-white 
               lg:w-[13px] lg:h-[13px]
@@ -137,7 +137,7 @@ export const Command = () => {
             </button>
           <button className='rounded-full border-[1px] border-[#1F2117] w-[56px] h-[56px] text-black grid place-content-center mr-[120px] cursor-pointer group/arrow2 hover:bg-[#FFB700] hover:text-white hover:border-none duration-[200ms] 
           lg:w-[29.68px] lg:h-[29.68px] lg:mr-[60px]
-          2lg:w-[29.68px] 2lg:h-[29.68px] 2lg:mr-[120px]'
+          2lg:w-[56px] 2lg:h-[56px] 2lg:mr-[120px]'
             onClick={right}>
               <svg className='w-[18px] h-[18px] stroke-black group-hover/arrow2:stroke-white 
               lg:w-[13px] lg:h-[13px]

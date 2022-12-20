@@ -34,13 +34,13 @@ export const Header = () => {
         <Link to='/login'>
           <button className='p-auto w-[50px] font-[600] text-[#777872] tracking-[0.04em] p-[7px] text-[12px]
           md:text-[17px] md:w-[151px]
-          lg:text-[8.5px] lg:w-[80px]
+          lg:text-[8.5px] lg:w-[60px]
           2lg:text-[17px] 2lg:w-[151px]'>Вход</button>
         </Link>
         <Link to='/login/registration'>
           <button className='#FAFAFA p-auto rounded-full w-[110px] h-[42px] font-[600] tracking-[0.02em] border-[1px] text-[black] border-[#1F2117] text-[12px]
           md:text-[17px] md:w-[151px] md:h-[56px]
-          lg:text-[8.5px] lg:w-[80px] lg:h-[29.68px]
+          lg:text-[8.5px] lg:w-[80px] lg:h-[30px]
           2lg:text-[17px] 2lg:w-[151px] 2lg:h-[56px]
           '>Регистрация</button>
         </Link>

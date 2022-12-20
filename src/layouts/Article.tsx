@@ -26,7 +26,7 @@ export const Article = () => {
 
   return (
   <div className='grid grid-rows-[auto_274px] grid-col-1 mb-[116.52px] 
-  md:grid-rows-[auto_auto]
+  md:grid-rows-[auto_auto] md:mb-[216.52px] 
   lg:grid-cols-[1fr_1fr] lg:grid-rows-1 lg:mb-[100px]
   2lg:grid-cols-[1fr_1fr] 2lg:grid-rows-1 2lg:mb-[150px]'>
     <div className='relative order-2 duration-300 mx-auto
@@ -58,6 +58,7 @@ export const Article = () => {
         src={IMG1} alt='eat1'/>
     </div>
     <div className='order-1 mb-[49px] 
+    md:mb-[90px]
     lg:pt-[60px]
     2lg:pt-[90px]'>
       <div className='mb-[32px]  flex flex-row gap-[8px] 
@@ -68,10 +69,10 @@ export const Article = () => {
             return (
               <button 
                 key={i}
-                className={`bg-white font-bodyalt w-[64px] h-[30px] py-[8px] text-[12px] px-[12px] leading-[14.32px] rounded-[40px] font-[400] duration-[600ms] 
+                className={`bg-white font-bodyalt w-[64px] h-[30px] py-[8px] text-[12px] px-[12px] leading-[14.32px] rounded-[40px] font-[400] duration-[600ms] whitespace-nowrap
                 md:w-max md:h-max md:mr-[10px] md:text-[25px] md:leading-[19px] md:px-[20px] md:py-[20px]
-                lg:w-max lg:h-[23px] lg:mr-[0px] lg:text-[8.5px] lg:leading-[10px] lg:px-[8px] lg:py-[0px]
-                2lg:w-[132px] 2lg:h-[43px] 2lg:mr-[10px] 2lg:text-[16px] 2lg:leading-[19px] 2lg:px-[0px] 2lg:py-[0px]
+                lg:w-max lg:h-[23px] lg:mr-[0px] lg:text-[8.5px] lg:leading-[10px] lg:px-[12px] lg:py-[0px]
+                2lg:w-max 2lg:h-[43px] 2lg:mr-[10px] 2lg:text-[16px] 2lg:leading-[19px] 2lg:px-[24px] 2lg:py-[0px]
                 ${active === i? ' bg-[#FFB700] text-[#FAFAFA]': ' bg-[#FFFFFF] text-[#1F2117] drop-shadow-md'}`}
                 onClick={() => activeButton(i)}>{item}</button>
             )
