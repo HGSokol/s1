@@ -5,10 +5,10 @@ import { HeaderForm } from "../components/HeaderForm";
 const Login = () => {
 
   return (
-    <div className='font-bodyalt h-[100vh] w-full lg:grid lg:grid-cols-[50%_50%] '>
+    <div className='font-bodyalt h-[100vh] lg:grid lg:grid-cols-[50%_50%] '>
       <div>
         <HeaderForm />
-        <div className='flex justify-center'>
+        <div className='flex justify-center w-full'>
           <Outlet />
         </div>
       </div>

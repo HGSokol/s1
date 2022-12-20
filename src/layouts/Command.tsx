@@ -112,7 +112,7 @@ export const Command = () => {
 
   return (
     <div className='mb-[50px] gap-[10px]
-    lg:gap-[15px] lg:mb-[50px] lg:overflow-hidden
+    lg:gap-[15px] lg:mb-[30px] lg:overflow-hidden
     2lg:gap-[15px] 2lg:mb-[50px] 2lg:overflow-hidden'>
       <div className='flex flex-row mb-[32px]  space-x-[200px] justify-between
       lg:mb-[32px]

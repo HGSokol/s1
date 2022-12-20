@@ -35,7 +35,7 @@ export const Footer = () => {
     <div className='grid grid-rows-2 w-[209px] h-[71px] mx-auto place-items-center gap-[12px]
     md:w-[209px] md:h-[71px] md:gap-[20px]
     lg:mx-0 lg:place-items-end lg:gap-[0px] lg:h-[37.63px]
-    2lg:mx-0 2lg:place-items-end 2lg:gap-[20px]'>
+    2lg:mx-0 2lg:place-items-end 2lg:h-[71px]'>
       <div className='flex flex-row gap-[16px] items-center items-self-start
       lg:gap-[8px]
       2lg:gap-[16px] '>

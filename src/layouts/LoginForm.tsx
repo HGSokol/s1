@@ -41,18 +41,18 @@ const LoginForm = () => {
   }
 
   return (
-  <div className='w-[288px] lg:w-[441px] mx-auto mt-[24px] lg:mt-[155px]'>
+  <div className='w-[288px] lg:w-[441px] mx-auto mt-[24px] lg:mt-[155px] mb-[20px]'>
     <h1 className='font-body font-[600] text-[22px] leading-[26.25px] text-center mb-[32px] lg:text-[40px] lg:leading-[46.96px] lg:mb-[48px]'>Вход</h1>
     <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
-      <div className='mb-[16px] lg:mb-[20px]'>
+      <div className=''>
         <input 
           placeholder='Ваш e-mail'
           type='text' 
           {...register("email")} 
           className='outline-none w-full h-[48px] px-[16px] rounded-[8px] bg-white border-[1px] border-[#1F211714] placeholder:text-[12px] placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56px] lg:placeholder:text-[16px]  '/>
-          <p className='text-red-600'>{errors.email?.message}</p>
+          <p className='text-red-600 h-[24px] text-[15px]'>{errors.email?.message}</p>
       </div>
-      <div className='relative mb-[14px] lg:mb-[16px]'>
+      <div className='relative '>
         <div className='absolute translate-x-[250px] translate-y-[14px] lg:translate-x-[400px] lg:translate-y-[18px] cursor-pointer' 
           onClick={onClickChangeType}>
             {
@@ -64,7 +64,7 @@ const LoginForm = () => {
           type={`${type === true ? 'password' : 'text'}`}
           {...register("password")} 
           className='outline-none w-full h-[48px] px-[16px] rounded-[8px] bg-white border-[1px] border-[#1F211714] placeholder:text-[12px] placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56px] lg:placeholder:text-[16px]'/>
-          <p className='text-red-600'>{errors.password?.message}</p>
+          <p className='text-red-600 h-[24px] text-[15px]'>{errors.password?.message}</p>
       </div> 
       <Link to='/login/stage1' className='mb-[32px] lg:mb-[48px]'>
         <p className='font-bodyalt text-[12px] text-[#777872] font-[600] text-end lg:text-[16px]'>Забыли пароль?</p>

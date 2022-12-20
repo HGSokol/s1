@@ -31,13 +31,13 @@ const ChangePassword = () => {
       <h1 className='font-body font-[600] text-[22px] leading-[26.25px] text-center mb-[14px] lg:text-[40px] lg:leading-[46.96px] lg:mb-[24px]'>Восстановление пароля</h1>
       <h3 className='font-body text-[#777872] font-[600] text-[14px] leading-[26.25px] text-center mb-[32px] lg:text-[22px] lg:leading-[32px] lg:mb-[48px]'>На указанный Email  будет отправлен код для восстановления пароля</h3>
       <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col w-[288px] mx-auto lg:w-[441px]'>
-        <div className='mb-[32px] lg:mb-[48px]'>
+        <div className='mb-[17px] lg:mb-[33px]'>
           <input 
             placeholder='Ваш e-mail'
             type='text' 
             {...register("email")} 
             className='outline-none w-full h-[48px] px-[16px] rounded-[8px] bg-white border-[1px] border-[#1F211714] placeholder:text-[12px] placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56px] lg:placeholder:text-[16px]  '/>
-            <p className='text-red-600'>{errors.email?.message}</p>
+            <p className='text-red-600 h-[24px] text-[15px]'>{errors.email?.message}</p>
         </div>
 
         <div className='mb-[36px]'>
