@@ -112,9 +112,7 @@ export const Command = () => {
 
   },[])
   
-  
-  console.log(size*data.length)
-  console.log(window.innerWidth)
+
   return (
     <div className='mb-[50px] gap-[10px]
     lg:gap-[15px] lg:mb-[30px] lg:overflow-hidden

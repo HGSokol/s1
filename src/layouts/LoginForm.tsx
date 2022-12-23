@@ -6,6 +6,7 @@ import * as yup from "yup";
 import { AiOutlineEye } from 'react-icons/ai'
 import { BsEyeSlash } from 'react-icons/bs'
 import { AlternativeLogin } from "../components/AlternativeLogin";
+import axios from "axios";
 
 
 interface IFormInputs {
@@ -23,6 +24,7 @@ const schema = yup.object({
 
 const LoginForm = () => {
   const [type, setType] = useState(true)
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
 
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
@@ -31,9 +33,29 @@ const LoginForm = () => {
 
 
   const onSubmit = (data: IFormInputs) => {
-    // console.log(JSON.stringify(data))
-      alert(JSON.stringify(data))
-      reset()
+    const userInfo= {
+      ...data,
+      deviceName: 'deckstop'
+    }
+
+    axios.post('https://stage.fitnesskaknauka.com/api/auth/login', userInfo, {
+      headers: {
+        'Content-type':'application/json',
+        'Timezone': `${timezone}`
+      }
+    })
+    .then((res) => {
+      console.log(res)
+      console.log(res.data)
+    })
+    .catch((error) => {
+      console.log(error)
+      console.log(error.response.data)
+    })
+
+
+
+    reset()
   };
 
   const onClickChangeType = () => {

@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
-
+import axios from 'axios'
 
 interface IFormInputs {
   email: string
@@ -14,6 +14,8 @@ const schema = yup.object({
 
 const ChangePassword = () => {
   const navigate = useNavigate()
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+
 
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
@@ -21,6 +23,27 @@ const ChangePassword = () => {
   });
 
   const onSubmit = (data: IFormInputs) => {
+    const userInfo= {
+      ...data
+    }
+
+    axios.post('https://stage.fitnesskaknauka.com/api/auth/send-reset-code', userInfo, {
+      headers: {
+        'Content-type':'application/json',
+        'Timezone': `${timezone}`
+      }
+    })
+    .then((res) => {
+      console.log(res)
+      console.log(res.data)
+    })
+    .catch((error) => {
+      console.log(error)
+      console.log(error.response.data)
+    })
+
+
+
     alert(JSON.stringify(data))
     navigate("/login/stage2");
   };

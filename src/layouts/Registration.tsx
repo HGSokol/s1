@@ -6,17 +6,18 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { BsEyeSlash } from "react-icons/bs";
 import { AlternativeLogin } from "../components/AlternativeLogin";
+import axios from 'axios'
 
 
 interface IFormInputs {
-  firstName: string,
+  name: string,
   lastName:string,
   email: string,
   password: number,
 }
 
 const schema = yup.object({
-  firstName: yup.string().required('Обязательное поле'),
+  name: yup.string().required('Обязательное поле'),
   lastName: yup.string().required('Обязательное поле'),
   email: yup.string().email('Не правильный email').required('Обязательное поле'),
   password: yup.string()
@@ -27,6 +28,7 @@ const schema = yup.object({
 
 const Login = () => {
   const [type, setType] = useState(true)
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
 
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
@@ -34,8 +36,28 @@ const Login = () => {
   });
 
   const onSubmit = (data: IFormInputs) => {
-      alert(JSON.stringify(data))
-      reset()
+    const userInfo= {
+      ...data,
+      deviceName: 'deckstop'
+    }
+
+    axios.post('https://stage.fitnesskaknauka.com/api/auth/register', userInfo, {
+      headers: {
+        'Content-type':'application/json',
+        'Timezone': `${timezone}`
+      }
+    })
+    .then((res) => {
+      console.log(res)
+      console.log(res.data)
+    })
+    .catch((error) => {
+      console.log(error)
+      console.log(error.response.data)
+    })
+
+
+    reset()
   };
 
   const onClickChangeType = () => {
@@ -52,9 +74,9 @@ const Login = () => {
           <input 
             placeholder='Ваше имя'
             type='text' 
-            {...register("firstName")} 
+            {...register("name")} 
             className='outline-none w-full h-[48px] px-[16px] rounded-[8px] bg-white border-[1px] border-[#1F211714] placeholder:text-[12px] placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56px] lg:placeholder:text-[16px]  '/>
-            <p className='text-red-600 h-[24px] text-[15px]'>{errors.firstName?.message}</p>
+            <p className='text-red-600 h-[24px] text-[15px]'>{errors.name?.message}</p>
         </div> <div className='first-line:'>
           <input 
             placeholder='Ваша фамилия'

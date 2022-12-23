@@ -5,7 +5,7 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineEye } from 'react-icons/ai'
 import { BsEyeSlash } from 'react-icons/bs';
-
+import axios from 'axios'
 
 interface IFormInputs {
   password: string
@@ -27,6 +27,8 @@ const schema = yup.object({
 const ChangePassword3 = () => {
   const [type, setType] = useState(true)
   const navigate = useNavigate()
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+
 
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
@@ -34,8 +36,33 @@ const ChangePassword3 = () => {
   });
 
   const onSubmit = (data: IFormInputs) => {
-    alert(JSON.stringify(data))
-    navigate("/login");
+    const userInfo = JSON.stringify({
+      password: data.password,
+      email:'g.w.sokolov98@mail.ru',
+      token: "46|qgrWEcYvlgeud95THCFXOcgQBZNS7IfvXqPKWVZE",
+      deviceName: 'mobile'
+    })
+
+    console.log(userInfo)
+
+    axios.put('https://stage.fitnesskaknauka.com/api/auth/reset-password', userInfo, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Timezone': `${timezone}`
+      }
+    })
+    .then((res) => {
+      console.log(res)
+      console.log(res.data)
+
+    })
+    .catch((error) => {
+      console.log(error)
+      console.log(error.response.data)
+    })
+
+
+    // navigate("/login");
   };
 
   const onClickChangeType = () => {
