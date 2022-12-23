@@ -31,7 +31,6 @@ const ChangePassword3 = () => {
   const { user, countryId, deviceName } = useContext(Profile)
   const [type, setType] = useState(true)
   const navigate = useNavigate()
-  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
 
 
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IFormInputs>({
@@ -40,12 +39,12 @@ const ChangePassword3 = () => {
   });
 
   const onSubmit = (data: IFormInputs) => {
-    const userInfo = JSON.stringify({
+    const userInfo = {
       password: data.password,
-      email: user?.email,
-      token: "46|qgrWEcYvlgeud95THCFXOcgQBZNS7IfvXqPKWVZE",
+      email: `${user?.email}`,
+      token: `${user?.token}`,
       deviceName,
-    })
+    }
 
     console.log(userInfo, user)
 
@@ -59,14 +58,13 @@ const ChangePassword3 = () => {
       console.log(res)
       console.log(res.data)
 
+      reset()
+      navigate('/login')
     })
     .catch((error) => {
       console.log(error)
       console.log(error.response.data)
     })
-
-
-    // navigate("/login");
   };
 
   const onClickChangeType = () => {

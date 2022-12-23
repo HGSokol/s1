@@ -29,6 +29,7 @@ const schema = yup.object({
 
 const Login = () => {
   const [type, setType] = useState(true)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const navigate = useNavigate()
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
 
@@ -56,8 +57,7 @@ const Login = () => {
       navigate('/login')
     })
     .catch((error) => {
-      console.log(error)
-      console.log(error.response.data)
+      setErrorMessage(error.response.data.message)
     })
 
 
@@ -110,7 +110,10 @@ const Login = () => {
             {...register("password")} 
             className='outline-none w-full h-[48px] px-[16px] rounded-[8px] bg-white border-[1px] border-[#1F211714] placeholder:text-[12px] placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56px] lg:placeholder:text-[16px]'/>
             <p className='text-red-600 h-[24px] text-[15px]'>{errors.password?.message}</p>
-        </div>  
+        </div>
+        {
+          errorMessage ? (<p className='text-[15px] text-red-400 text-center'>{errorMessage}</p>) : null
+        }  
         <div className='mb-[36px]'>
           <button type="submit" disabled={!isValid} className={`${ isValid === true ? ' bg-[#FFB700]': ' bg-[#FFB700]/50'} mb-[20px] lg:mb-[24px] w-full h-[42px] py-[14px] px-[18px] text-[12px] text-white font-[600] rounded-[40px] lg:h-[56px] lg:py-[16px] lg:px-[24px] lg:text-[16px]`}>
             Зарегистрироваться

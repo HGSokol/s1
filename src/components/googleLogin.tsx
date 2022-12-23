@@ -14,16 +14,16 @@ export const GoogleLogin = () => {
   const navigate = useNavigate()
   const googleUser = useRef<User | null>(null)
   const onLoginStart = useCallback(() => {
-    alert('login start');
+    // alert('login start');
   }, []);
   
   
   useEffect(() => {
       googleUser.current = user
 
-      if(googleUser.current &&googleUser.current.token){
+      if(googleUser.current && googleUser.current.token){
         axios.post('https://stage.fitnesskaknauka.com/api/auth/google', {
-          idToken: googleUser.current?.token,
+          idToken: `${googleUser.current?.token}`,
           deviceName,
         }, {
           headers: {

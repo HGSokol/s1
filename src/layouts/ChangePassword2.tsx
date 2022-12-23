@@ -26,7 +26,8 @@ const schema = yup.object({
 }).required();
 
 const ChangePassword2 = () => {
-  const { user, countryId } = useContext(Profile)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const { setUser, user, countryId } = useContext(Profile)
   const navigate = useNavigate()
   const { register, handleSubmit, formState: { errors, isValid }, reset, setFocus } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
@@ -38,27 +39,36 @@ const ChangePassword2 = () => {
 
     const userInfo = {
       email: user?.email,
-      token: key,
+      token:`${key}`,
     }
 
-    axios.put('https://stage.fitnesskaknauka.com/api/auth/confirm-reset-code', userInfo, {
-      headers: {
-        'Content-type':'application/json',
-        'Timezone': `${countryId}`
-      }
-    })
-    .then((res) => {
-      console.log(res)
-      console.log(res.data)
-    })
-    .catch((error) => {
-      console.log(error)
-      console.log(error.response.data)
-    })
+    if(user && user.email) {
+
+      console.log(userInfo)
+
+      axios.put('https://stage.fitnesskaknauka.com/api/auth/confirm-reset-code', userInfo, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Timezone': `${countryId}`
+        }
+      })
+      .then((res) => {
+        console.log(res)
+        console.log(res.data)
+
+        setUser({
+          ...user,
+          token: res.data.token
+        })
+        navigate("/login/stage3");
+      })
+      .catch((error) => {
+        setErrorMessage(error.response.data.message)
+      })
+    }
 
 
     // if(rightCode === true) {
-    //   navigate("/login/stage3");
     // }
     // reset()
   };
@@ -149,14 +159,14 @@ const ChangePassword2 = () => {
                 className='outline-none w-full text-center h-[56px] px-[16px] rounded-[8px] bg-white border-[1px] border-[#1F211714] placeholder:text-[12px] placeholder:text-center placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56px] lg:placeholder:text-[16px]  '/>
             </div>
           </div>
+          {
+            errorMessage ? (<p className='text-[15px] text-red-400 text-center'>{errorMessage}</p>) : null
+          }
           <div className='w-full'>
             <button type="submit" disabled={!isValid} className={`${ isValid === true ? ' bg-[#FFB700]': ' bg-[#FFB700]/50'} w-full h-[42px] py-[14px] px-[18px] text-[12px] text-white font-[600] rounded-[40px] lg:h-[56px] lg:py-[16px] lg:px-[24px] lg:text-[16px]`}>
               Подтвердить
             </button>
           </div>
-          {/* {
-            rightCode === false ? <p>не правильный код</p> : null
-          } */}
         </form>
         <div className='flex flex-row justify-center px-[8.5px] gap-[8px]'>
           <p className='text-[12px] text-[#777872] font-[400] lg:text-[16px]'>Не пришел код?</p>

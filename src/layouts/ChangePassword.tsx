@@ -46,16 +46,14 @@ const ChangePassword = () => {
     .then((res) => {
       console.log(res)
       console.log(res.data)
+
+      reset()
+      navigate("/login/stage2");
     })
     .catch((error) => {
       console.log(error)
       console.log(error.response.data)
     })
-
-
-
-    alert(JSON.stringify(data))
-    navigate("/login/stage2");
   };
 
 
