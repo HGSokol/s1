@@ -27,7 +27,6 @@ const schema = yup.object({
 
 const ChangePassword2 = () => {
   const { user, countryId } = useContext(Profile)
-  const [rightCode, setRightCode] = useState<boolean | null>(null)
   const navigate = useNavigate()
   const { register, handleSubmit, formState: { errors, isValid }, reset, setFocus } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
@@ -37,10 +36,10 @@ const ChangePassword2 = () => {
   const onSubmit = (data: IFormInputs) => {
     const key = Number([data.n1, data.n2, data.n3, data.n4, data.n5, data.n6].join(''))
 
-    const userInfo= JSON.stringify({
+    const userInfo = {
       email: user?.email,
       token: key,
-    })
+    }
 
     axios.put('https://stage.fitnesskaknauka.com/api/auth/confirm-reset-code', userInfo, {
       headers: {

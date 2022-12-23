@@ -44,10 +44,10 @@ const ChangePassword3 = () => {
       password: data.password,
       email: user?.email,
       token: "46|qgrWEcYvlgeud95THCFXOcgQBZNS7IfvXqPKWVZE",
-      deviceName: deviceName
+      deviceName,
     })
 
-    console.log(userInfo)
+    console.log(userInfo, user)
 
     axios.put('https://stage.fitnesskaknauka.com/api/auth/reset-password', userInfo, {
       headers: {
