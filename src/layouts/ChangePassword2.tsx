@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
+import { Profile } from '../App'
+
 
 interface IFormInputs {
   n1: number,
@@ -24,10 +26,9 @@ const schema = yup.object({
 }).required();
 
 const ChangePassword2 = () => {
+  const { user, countryId } = useContext(Profile)
   const [rightCode, setRightCode] = useState<boolean | null>(null)
   const navigate = useNavigate()
-  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
-
   const { register, handleSubmit, formState: { errors, isValid }, reset, setFocus } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
     mode:'onChange'
@@ -37,21 +38,19 @@ const ChangePassword2 = () => {
     const key = Number([data.n1, data.n2, data.n3, data.n4, data.n5, data.n6].join(''))
 
     const userInfo= JSON.stringify({
-      email:'g.w.sokolov98@mail.ru',
-      token: 858752,
+      email: user?.email,
+      token: key,
     })
 
     axios.put('https://stage.fitnesskaknauka.com/api/auth/confirm-reset-code', userInfo, {
       headers: {
         'Content-type':'application/json',
-        'Timezone': `${timezone}`
+        'Timezone': `${countryId}`
       }
     })
     .then((res) => {
       console.log(res)
       console.log(res.data)
-
-      // setRightCode(res.data.message === "Success")
     })
     .catch((error) => {
       console.log(error)
@@ -73,7 +72,7 @@ const ChangePassword2 = () => {
     axios.post('https://stage.fitnesskaknauka.com/api/auth/send-reset-code', userInfo, {
       headers: {
         'Content-type':'application/json',
-        'Timezone': 'Europe/Moscow'
+        'Timezone': `${countryId}`
       }
     })
     .then((res) => {
@@ -87,12 +86,7 @@ const ChangePassword2 = () => {
 
   }
 
-  interface Key {
-    event: React.KeyboardEvent<HTMLElement>,
-    num: IFormInputs,
-  }
-
-  
+ 
 
   return (
     <>

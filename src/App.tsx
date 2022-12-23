@@ -13,7 +13,7 @@ const Account = lazy(() => import('./Pages/Account'))
 const NotFound = lazy(() => import('./Pages/PageNotFound'))
 
 
-interface User {
+export interface User {
   name?: string | null,
   lastName?: string | null,
   email?: string | null,

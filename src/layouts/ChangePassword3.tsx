@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
@@ -6,6 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { AiOutlineEye } from 'react-icons/ai'
 import { BsEyeSlash } from 'react-icons/bs';
 import axios from 'axios'
+
+import { Profile } from '../App'
+
 
 interface IFormInputs {
   password: string
@@ -25,6 +28,7 @@ const schema = yup.object({
 }).required();
 
 const ChangePassword3 = () => {
+  const { user, countryId, deviceName } = useContext(Profile)
   const [type, setType] = useState(true)
   const navigate = useNavigate()
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
@@ -38,9 +42,9 @@ const ChangePassword3 = () => {
   const onSubmit = (data: IFormInputs) => {
     const userInfo = JSON.stringify({
       password: data.password,
-      email:'g.w.sokolov98@mail.ru',
+      email: user?.email,
       token: "46|qgrWEcYvlgeud95THCFXOcgQBZNS7IfvXqPKWVZE",
-      deviceName: 'mobile'
+      deviceName: deviceName
     })
 
     console.log(userInfo)
@@ -48,7 +52,7 @@ const ChangePassword3 = () => {
     axios.put('https://stage.fitnesskaknauka.com/api/auth/reset-password', userInfo, {
       headers: {
         'Content-Type': 'application/json',
-        'Timezone': `${timezone}`
+        'Timezone': `${countryId}`
       }
     })
     .then((res) => {

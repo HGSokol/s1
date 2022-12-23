@@ -1,10 +1,10 @@
-import { useState, useCallback, useContext, useEffect } from 'react'
+import { useState, useCallback, useContext, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
 import { LoginSocialGoogle, IResolveParams } from 'reactjs-social-login'
 import axios from 'axios'
 
-import { Profile } from '../App'
+import { Profile, User } from '../App'
 
 
 const _appId = '1018011035779-9cva0vmc8e8a6nanr5url7uk2b8lj8do'
@@ -12,19 +12,19 @@ const _appId = '1018011035779-9cva0vmc8e8a6nanr5url7uk2b8lj8do'
 export const GoogleLogin = () => {
   const { setUser, setIsAuthenticated, isAuthenticated,  countryId, user, deviceName } = useContext(Profile)
   const navigate = useNavigate()
-
+  const googleUser = useRef<User | null>(null)
   const onLoginStart = useCallback(() => {
     alert('login start');
   }, []);
-
-
+  
+  
   useEffect(() => {
-    if(user && user.token) {
-      console.log(user.token)
+      googleUser.current = user
 
-      axios.post('https://stage.fitnesskaknauka.com/api/auth/google', {
-      idToken: user.token,
-      deviceName,
+      if(googleUser.current &&googleUser.current.token){
+        axios.post('https://stage.fitnesskaknauka.com/api/auth/google', {
+          idToken: googleUser.current?.token,
+          deviceName,
         }, {
           headers: {
           'Content-type':'application/json',
@@ -38,10 +38,16 @@ export const GoogleLogin = () => {
           .catch((error) => {
           console.log(error.response.data)
           })
-    }
+      }
 
 
-      navigate(isAuthenticated === true? '/account' : '/login')
+        // setUser({
+        //   ...googleUser.current
+        // })
+        // setIsAuthenticated(true)
+
+
+      // navigate(isAuthenticated === true? '/account' : '/login')
 
   }, [user])
 
@@ -57,14 +63,14 @@ export const GoogleLogin = () => {
         discoveryDocs="claims_supported"
         access_type="online"
         onResolve={({ data }: IResolveParams) => {
-          setUser({
-            token: data?.access_token,
-            email: data?.email,
-            name: data?.family_name,
-            lastName: data?.given_name,
-          },)
-          setIsAuthenticated(true)
-          
+          if(data){
+            setUser({
+              token: data.access_token,
+              email: data.email,
+              name: data.family_name,
+              lastName: data.given_name,
+            })          
+          }
         }}
         onReject={err => {
           console.log(err);
