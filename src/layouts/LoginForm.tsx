@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -7,6 +7,7 @@ import { AiOutlineEye } from 'react-icons/ai'
 import { BsEyeSlash } from 'react-icons/bs'
 import { AlternativeLogin } from "../components/AlternativeLogin";
 import axios from "axios";
+
 
 
 interface IFormInputs {
@@ -23,6 +24,8 @@ const schema = yup.object({
 }).required();
 
 const LoginForm = () => {
+  // const { setName } = useContext(Profile)
+
   const [type, setType] = useState(true)
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
 
