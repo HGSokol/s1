@@ -1,13 +1,14 @@
 import { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { AiOutlineEye } from 'react-icons/ai'
 import { BsEyeSlash } from 'react-icons/bs'
-import { AlternativeLogin } from "../components/AlternativeLogin";
 import axios from "axios";
 
+import { AlternativeLogin } from "../components/AlternativeLogin";
+import { Profile } from '../App'
 
 
 interface IFormInputs {
@@ -24,11 +25,9 @@ const schema = yup.object({
 }).required();
 
 const LoginForm = () => {
-  // const { setName } = useContext(Profile)
-
-  const [type, setType] = useState(true)
-  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
-
+  const { countryId, deviceName, setUser, setIsAuthenticated } = useContext(Profile)
+  const [ type, setType ] = useState(true)
+  const navigate = useNavigate()
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
     mode:'onBlur'
@@ -38,21 +37,30 @@ const LoginForm = () => {
   const onSubmit = (data: IFormInputs) => {
     const userInfo= {
       ...data,
-      deviceName: 'deckstop'
+      deviceName: deviceName
     }
 
     axios.post('https://stage.fitnesskaknauka.com/api/auth/login', userInfo, {
       headers: {
         'Content-type':'application/json',
-        'Timezone': `${timezone}`
+        'Timezone': `${countryId}`
       }
     })
     .then((res) => {
-      console.log(res)
-      console.log(res.data)
+      // console.log(res)
+      // console.log(res.data)
+
+      setUser({
+        email: res.data.email,
+        name: res.data.name,
+        lastName: res.data.lastName,
+        token: res.data.token,
+      })
+      setIsAuthenticated(true)
+
+      navigate('/account')
     })
     .catch((error) => {
-      console.log(error)
       console.log(error.response.data)
     })
 

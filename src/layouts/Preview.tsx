@@ -1,8 +1,15 @@
+import { useContext } from 'react'
+import { Link } from 'react-router-dom'
+
+import { Profile } from '../App'
+
 import IMG1 from '../images/preview1.png'
 import IMG2 from '../images/preview2.svg'
 
 
 export const Preview = () => {
+  const { isAuthenticated } = useContext(Profile)
+
   return (
     <div className='w-full h-min relative mb-[72px] 
     md:mb-[200px]
@@ -50,10 +57,12 @@ export const Preview = () => {
           md:h-[67px] md:text-[16px] md:mr-[40px] md:mb-[28px] md:w-[688px]
           lg:w-[121px] lg:h-[30px] lg:text-[8.5px] lg:mr-[16px]
           2lg:w-[228px] 2lg:h-[56px] 2lg:text-[16px] 2lg:mr-[32px] '>
+            <Link to={isAuthenticated ? '/account' : '/login'}>
               <p className='font-[600] text-[12px] text-[#FAFAFA] tracking-[0.04em] mr-[14px]
               md:text-[23px] 
               lg:text-[8.5px] lg:mr-[10px]
               2lg:text-[16px] 2lg:mr-[14px]'>Оплатить подписку</p>
+            </Link>
             <svg className='w-[18px] h-[18px] 
             md:w-[38px] md:h-[38px]
             lg:w-[13px] lg:h-[13px]

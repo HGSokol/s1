@@ -1,6 +1,9 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
+
 import { SubCard } from '../components/SubCard'
+import { Profile } from '../App'
+
 
 
 export type Sub = {
@@ -26,6 +29,7 @@ const subsData: Sub[] = [
 ]
 
 export const Subscribe = () => {
+  const { isAuthenticated } = useContext(Profile)
   const [active, setActive] = useState<number | null>(null)
 
   return (
@@ -51,7 +55,7 @@ export const Subscribe = () => {
         })
       }
     </div>
-    <Link to='/login'>
+    <Link to={isAuthenticated ? '/account' : '/login'}>
       <div className='font-bodyalt flex justify-center'>
         <button className='bg-[#FFB700] text-[12px] w-full leading-[14.32px] h-[42px] rounded-full text-center text-white tracking-[0.04em] flex flex-row items-center justify-center hover:bg-[rgba(255,209,101,1)]
         md:w-[550px] md:h-[67px] md:text-[16px] 

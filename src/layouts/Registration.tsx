@@ -2,11 +2,12 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { AiOutlineEye } from 'react-icons/ai'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { BsEyeSlash } from "react-icons/bs";
-import { AlternativeLogin } from "../components/AlternativeLogin";
 import axios from 'axios'
+
+import { AlternativeLogin } from "../components/AlternativeLogin";
 
 
 interface IFormInputs {
@@ -28,6 +29,7 @@ const schema = yup.object({
 
 const Login = () => {
   const [type, setType] = useState(true)
+  const navigate = useNavigate()
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
 
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IFormInputs>({
@@ -50,6 +52,8 @@ const Login = () => {
     .then((res) => {
       console.log(res)
       console.log(res.data)
+
+      navigate('/login')
     })
     .catch((error) => {
       console.log(error)

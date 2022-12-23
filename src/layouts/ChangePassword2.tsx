@@ -36,10 +36,10 @@ const ChangePassword2 = () => {
   const onSubmit = (data: IFormInputs) => {
     const key = Number([data.n1, data.n2, data.n3, data.n4, data.n5, data.n6].join(''))
 
-    const userInfo= {
+    const userInfo= JSON.stringify({
       email:'g.w.sokolov98@mail.ru',
-      token: key,
-    }
+      token: 858752,
+    })
 
     axios.put('https://stage.fitnesskaknauka.com/api/auth/confirm-reset-code', userInfo, {
       headers: {

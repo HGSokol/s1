@@ -3,6 +3,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
+import { useContext } from "react";
+
+import { Profile } from '../App'
+
+
 
 interface IFormInputs {
   email: string
@@ -13,16 +18,21 @@ const schema = yup.object({
 }).required();
 
 const ChangePassword = () => {
+  const { countryId, setUser, user } = useContext(Profile)
   const navigate = useNavigate()
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
 
 
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
-    mode:'onBlur'
+    mode:'onChange'
   });
 
   const onSubmit = (data: IFormInputs) => {
+    setUser({
+      email: data.email
+    })
+    
     const userInfo= {
       ...data
     }
@@ -30,7 +40,7 @@ const ChangePassword = () => {
     axios.post('https://stage.fitnesskaknauka.com/api/auth/send-reset-code', userInfo, {
       headers: {
         'Content-type':'application/json',
-        'Timezone': `${timezone}`
+        'Timezone': `${countryId}`
       }
     })
     .then((res) => {

@@ -1,7 +1,11 @@
+import { useContext } from 'react'
 import { Link } from "react-router-dom"
+
+import { Profile } from '../App'
 
 
 export const Header = () => {
+  const { user, isAuthenticated } = useContext(Profile)
   return (
     <div className='h-[66px] flex flex-row justify-between items-center mb-[24px]
     md:mb-[40px] md:h-[120px]
@@ -30,21 +34,29 @@ export const Header = () => {
           <path d="M117.454 42.5921H114.671L119.114 32.0908H121.605L126 42.5921H123.156L122.333 40.5283H118.236L117.454 42.5921ZM118.965 38.4982H121.632L120.312 34.8898L118.965 38.4982Z" fill="#1F2117"/>
         </svg>
       </div>
-      <div className='font-bodyalt'>
-        <Link to='/login'>
-          <button className='p-auto w-[50px] font-[600] text-[#777872] tracking-[0.04em] p-[7px] text-[12px]
-          md:text-[17px] md:w-[151px]
-          lg:text-[8.5px] lg:w-[60px]
-          2lg:text-[17px] 2lg:w-[151px]'>Вход</button>
-        </Link>
-        <Link to='/login/registration'>
-          <button className='#FAFAFA p-auto rounded-full w-[110px] h-[42px] font-[600] tracking-[0.02em] border-[1px] text-[black] border-[#1F2117] text-[12px]
-          md:text-[17px] md:w-[151px] md:h-[56px]
-          lg:text-[8.5px] lg:w-[80px] lg:h-[30px]
-          2lg:text-[17px] 2lg:w-[151px] 2lg:h-[56px]
-          '>Регистрация</button>
-        </Link>
-      </div>
+      {
+        isAuthenticated && user ? (
+          <Link to='/account' >
+            <p>{`Привет ${user.name} ${user.lastName}`}</p>
+          </Link>
+        ) : (
+          <div className='font-bodyalt'>
+            <Link to='/login'>
+              <button className='p-auto w-[50px] font-[600] text-[#777872] tracking-[0.04em] p-[7px] text-[12px]
+              md:text-[17px] md:w-[151px]
+              lg:text-[8.5px] lg:w-[60px]
+              2lg:text-[17px] 2lg:w-[151px]'>Вход</button>
+            </Link>
+            <Link to='/login/registration'>
+              <button className='#FAFAFA p-auto rounded-full w-[110px] h-[42px] font-[600] tracking-[0.02em] border-[1px] text-[black] border-[#1F2117] text-[12px]
+              md:text-[17px] md:w-[151px] md:h-[56px]
+              lg:text-[8.5px] lg:w-[80px] lg:h-[30px]
+              2lg:text-[17px] 2lg:w-[151px] 2lg:h-[56px]
+              '>Регистрация</button>
+            </Link>
+          </div>
+        )
+      }
     </div>
   )
 }
