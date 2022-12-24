@@ -50,7 +50,7 @@ const ChangePassword2 = () => {
 
     if(user && user.email) {
 
-      console.log(userInfo)
+      // console.log(userInfo)
 
       axios.put('https://stage.fitnesskaknauka.com/api/auth/confirm-reset-code', userInfo, {
         headers: {
@@ -59,8 +59,8 @@ const ChangePassword2 = () => {
         }
       })
       .then((res) => {
-        console.log(res)
-        console.log(res.data)
+        // console.log(res)
+        // console.log(res.data)
 
         localStorage.setItem('user', JSON.stringify({
           ...user,

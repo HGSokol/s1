@@ -15,7 +15,7 @@ const _appId = '1018011035779-9cva0vmc8e8a6nanr5url7uk2b8lj8do'
 export const GoogleLogin = () => {
   const { setUser, setIsAuthenticated, isAuthenticated,  countryId, user, deviceName } = useContext(Profile)
   const navigate = useNavigate()  
-  console.log(user)
+  // console.log(user)
   const onLogout = useCallback(() => {}, []);
   
 
@@ -23,7 +23,7 @@ export const GoogleLogin = () => {
 
   const login = useGoogleLogin({
     onSuccess: (tokenResponse ) => {
-      console.log(tokenResponse )
+      // console.log(tokenResponse )
 
       const token = tokenResponse.code
 

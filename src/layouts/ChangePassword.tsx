@@ -36,9 +36,9 @@ const ChangePassword = () => {
     }))
 
     const userInfo = {
-      ...user
+      email: data.email
     }
-
+    
     axios.post('https://stage.fitnesskaknauka.com/api/auth/send-reset-code', userInfo, {
       headers: {
         'Content-type':'application/json',
@@ -46,13 +46,11 @@ const ChangePassword = () => {
       }
     })
     .then((res) => {
-      console.log(res)
-      console.log(res.data)
-
-      reset()
       navigate("/login/stage2");
     })
     .catch((error) => {
+      reset()
+
       console.log(error)
       console.log(error.response.data)
     })
