@@ -25,15 +25,14 @@ export const GoogleLogin = () => {
     onSuccess: (tokenResponse ) => {
       console.log(tokenResponse )
 
+      const token = tokenResponse.code
 
       axios.post('https://stage.fitnesskaknauka.com/api/auth/google', {
-        idToken:`${tokenResponse.code}`,
+        idToken:`${token}`,
         deviceName,
       }, {
         headers: {
-          // 'Authorization': `Bearer ${TokenResponse.code}`,
           'Accept': 'application/json',
-          // 'Content-Type': 'application/x-www-form-urlencoded',
           'Timezone': `${countryId}`
         }
       })

@@ -16,8 +16,6 @@ const NotFound = lazy(() => import('./Pages/PageNotFound'))
 
 
 
-
-
 export interface User {
   name?: string | null,
   lastName?: string | null,
@@ -31,10 +29,8 @@ export interface User {
 interface ProfileContext {
   isAuthenticated: boolean;
   user: User | null;
-  resetCode: string | null;
   setIsAuthenticated: (isAuthenticated: boolean) => void,
   setUser: (user: User | null) => void,
-  setResetCode: (token: string | null) => void,
   countryId: string,
   deviceName: string,
 }
@@ -42,10 +38,8 @@ interface ProfileContext {
 const ProfileUser: ProfileContext = {
   isAuthenticated: false,
   user: null,
-  resetCode: null,
   setIsAuthenticated: () => {},
   setUser: () => {},
-  setResetCode: () => {},
   countryId: '',
   deviceName: '',
 }
@@ -55,7 +49,6 @@ export const Profile = createContext<ProfileContext>(ProfileUser);
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
   const [user, setUser] = useState<User | null>(null)
-  const [resetCode, setResetCode] = useState<string | null>(null)
   const countryId = Intl.DateTimeFormat().resolvedOptions().timeZone
   const deviceName = 'mobile'
 
@@ -80,8 +73,6 @@ function App() {
           setIsAuthenticated,
           user,
           setUser,
-          resetCode,
-          setResetCode,
           countryId,
           deviceName
         }}>

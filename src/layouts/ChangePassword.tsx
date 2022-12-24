@@ -35,8 +35,8 @@ const ChangePassword = () => {
       email: data.email
     }))
 
-    const userInfo= {
-      ...data
+    const userInfo = {
+      ...user
     }
 
     axios.post('https://stage.fitnesskaknauka.com/api/auth/send-reset-code', userInfo, {

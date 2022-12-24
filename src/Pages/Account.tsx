@@ -24,11 +24,11 @@ const Account = () => {
         <p>{user?.email}</p>
       </div>
       <div className='flex flex-row gap-[15px]'>
-        <button onClick={logout} className='cursor-pointer w-[150px] h-[40px] bg-yellow-400' >
+        <button onClick={logout} className='cursor-pointer w-[150px] h-[40px] bg-yellow-400 rounded-full' >
           Выход
         </button>
         <Link to='/'>
-          <button className='cursor-pointer w-[150 px] h-[40px] bg-yellow-400' >
+          <button className='cursor-pointer w-[150 px] h-[40px] bg-yellow-400 rounded-full' >
             На Главную
           </button>
         </Link>
