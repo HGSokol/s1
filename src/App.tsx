@@ -3,8 +3,6 @@ import { Route, Routes } from 'react-router-dom'
 import HomePage from './Pages/Home'
 import Spinner from './components/Spinner'
 
-import { GoogleOAuthProvider } from '@react-oauth/google';
-
 const Login = lazy(() => import('./Pages/Login'))
 const LoginForm = lazy(() => import('./layouts/LoginForm'))
 const Register = lazy(() => import('./layouts/Registration'))
@@ -62,11 +60,9 @@ function App() {
     }
   },[])
 
-  // console.log(localStorage)
+
     return (
     <div className='font-body'>
-      <GoogleOAuthProvider clientId="1018011035779-9cva0vmc8e8a6nanr5url7uk2b8lj8do.apps.googleusercontent.com">
-
       <Suspense fallback={<Spinner/>}>
         <Profile.Provider value={{ 
           isAuthenticated,
@@ -95,8 +91,6 @@ function App() {
           </Routes>
         </Profile.Provider>
       </Suspense>
-
-    </GoogleOAuthProvider>;
     </div>
   );
 }
