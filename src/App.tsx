@@ -1,7 +1,9 @@
-import { lazy, Suspense, createContext, useState } from 'react'
+import { lazy, Suspense, createContext, useState, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import HomePage from './Pages/Home'
 import Spinner from './components/Spinner'
+
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const Login = lazy(() => import('./Pages/Login'))
 const LoginForm = lazy(() => import('./layouts/LoginForm'))
@@ -11,6 +13,9 @@ const ChangePassword2 = lazy(() => import('./layouts/ChangePassword2'))
 const ChangePassword3 = lazy(() => import('./layouts/ChangePassword3'))
 const Account = lazy(() => import('./Pages/Account'))
 const NotFound = lazy(() => import('./Pages/PageNotFound'))
+
+
+
 
 
 export interface User {
@@ -54,10 +59,21 @@ function App() {
   const countryId = Intl.DateTimeFormat().resolvedOptions().timeZone
   const deviceName = 'mobile'
 
+  useEffect(() => {
+    const user = localStorage.getItem('user')
+    const authenticated = localStorage.getItem('authenticated')
 
-  console.log(isAuthenticated, user)
+    if(user && authenticated) {
+      setUser(JSON.parse(user))
+      setIsAuthenticated(JSON.parse(authenticated))
+    }
+  },[])
+
+  console.log(localStorage)
     return (
     <div className='font-body'>
+      <GoogleOAuthProvider clientId="1018011035779-9cva0vmc8e8a6nanr5url7uk2b8lj8do.apps.googleusercontent.com">
+
       <Suspense fallback={<Spinner/>}>
         <Profile.Provider value={{ 
           isAuthenticated,
@@ -88,6 +104,8 @@ function App() {
           </Routes>
         </Profile.Provider>
       </Suspense>
+
+    </GoogleOAuthProvider>;
     </div>
   );
 }

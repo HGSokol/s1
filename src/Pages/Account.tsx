@@ -9,6 +9,7 @@ const Account = () => {
   const navigate = useNavigate()
 
   const logout = () => {
+    localStorage.clear()
     setUser(null)
     setIsAuthenticated(false)
     

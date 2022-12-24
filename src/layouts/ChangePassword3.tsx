@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState,useEffect , useContext } from 'react'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
@@ -31,12 +31,16 @@ const ChangePassword3 = () => {
   const { user, countryId, deviceName } = useContext(Profile)
   const [type, setType] = useState(true)
   const navigate = useNavigate()
-
-
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
     mode:'onChange'
   });
+
+  useEffect(() => {   
+    if(!user || !user.token) {
+      navigate('/login/stage1')
+    }
+  },[]) 
 
   const onSubmit = (data: IFormInputs) => {
     const userInfo = {
@@ -45,8 +49,6 @@ const ChangePassword3 = () => {
       token: `${user?.token}`,
       deviceName,
     }
-
-    console.log(userInfo, user)
 
     axios.put('https://stage.fitnesskaknauka.com/api/auth/reset-password', userInfo, {
       headers: {

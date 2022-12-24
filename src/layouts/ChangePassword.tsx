@@ -20,7 +20,6 @@ const schema = yup.object({
 const ChangePassword = () => {
   const { countryId, setUser, user } = useContext(Profile)
   const navigate = useNavigate()
-  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
 
 
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IFormInputs>({
@@ -32,7 +31,10 @@ const ChangePassword = () => {
     setUser({
       email: data.email
     })
-    
+    localStorage.setItem('user', JSON.stringify({
+      email: data.email
+    }))
+
     const userInfo= {
       ...data
     }

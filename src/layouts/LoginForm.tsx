@@ -25,7 +25,7 @@ const schema = yup.object({
 }).required();
 
 const LoginForm = () => {
-  const { countryId, deviceName, setUser, setIsAuthenticated } = useContext(Profile)
+  const { countryId, deviceName, setUser, user, setIsAuthenticated } = useContext(Profile)
   const [ type, setType ] = useState(true)
   const navigate = useNavigate()
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IFormInputs>({
@@ -50,6 +50,14 @@ const LoginForm = () => {
       // console.log(res)
       // console.log(res.data)
 
+      localStorage.setItem('user', JSON.stringify({
+        email: res.data.email,
+        name: res.data.name,
+        lastName: res.data.lastName,
+        token: res.data.token,
+      }))
+      localStorage.setItem('authenticated', JSON.stringify(true))
+      
       setUser({
         email: res.data.email,
         name: res.data.name,

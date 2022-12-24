@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
@@ -34,6 +34,12 @@ const ChangePassword2 = () => {
     mode:'onChange'
   });
 
+  useEffect(() => {   
+    if(!user) {
+      navigate('/login/stage1')
+    }
+  },[]) 
+  
   const onSubmit = (data: IFormInputs) => {
     const key = Number([data.n1, data.n2, data.n3, data.n4, data.n5, data.n6].join(''))
 
@@ -56,10 +62,15 @@ const ChangePassword2 = () => {
         console.log(res)
         console.log(res.data)
 
+        localStorage.setItem('user', JSON.stringify({
+          ...user,
+          token: res.data.token
+        }))
         setUser({
           ...user,
           token: res.data.token
         })
+
         navigate("/login/stage3");
       })
       .catch((error) => {
@@ -67,10 +78,7 @@ const ChangePassword2 = () => {
       })
     }
 
-
-    // if(rightCode === true) {
-    // }
-    // reset()
+    reset()
   };
 
   const sendCode = () => {
