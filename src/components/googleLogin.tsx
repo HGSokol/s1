@@ -10,42 +10,41 @@ import { Profile, User } from '../App'
 import { useGoogleLogin } from '@react-oauth/google';
 
 
-const _appId = '1018011035779-9cva0vmc8e8a6nanr5url7uk2b8lj8do'
+// const _appId = '148113392760-243a1pc16e8vbu20eqogoalrvppil48v.apps.googleusercontent.com'
 
 export const GoogleLogin = () => {
   const { setUser, setIsAuthenticated, isAuthenticated,  countryId, user, deviceName } = useContext(Profile)
   const navigate = useNavigate()  
-  console.log(user)
+  // console.log(user)
   const onLogout = useCallback(() => {}, []);
   
 
-
-
   const login = useGoogleLogin({
     onSuccess: (tokenResponse ) => {
-      console.log(tokenResponse )
+      // console.log(tokenResponse )
 
       const token = tokenResponse.code
+      // console.log(`${token}`)
 
       axios.post('https://stage.fitnesskaknauka.com/api/auth/google', {
-        idToken:`${token}`,
+        idToken: `${token}`,
         deviceName,
       }, {
         headers: {
-          'Accept': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
           'Timezone': `${countryId}`
         }
       })
       .then((res) => {
-        console.log(res)
-        console.log(res.data, 'jndtn')
+        // console.log(res)
+        // console.log(res.data, 'jndtn')
 
         localStorage.setItem('authenticated', JSON.stringify(true))
         setIsAuthenticated(true)
         navigate('/account')
       })
       .catch((error) => {
-        console.log(error.response.data)
+        // console.log(error.response.data)
       })
 
 

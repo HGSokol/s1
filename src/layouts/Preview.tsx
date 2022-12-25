@@ -52,17 +52,16 @@ export const Preview = () => {
         md:mb-[96px]
         lg:mb-[48px] lg:flex-row
         2lg:mb-[96px] 2lg:flex-row '>
+        <Link to={isAuthenticated ? '/account' : '/login'}>
           <button className='bg-[#FFB700] text-[12px] mb-[14px] w-full leading-[14.32px] h-[42px] rounded-full 
           text-center text-[#FAFAFA] tracking-[0.04em] flex flex-row items-center justify-center hover:bg-[#FFB700]/75
           md:h-[67px] md:text-[16px] md:mr-[40px] md:mb-[28px] md:w-[688px]
           lg:w-[121px] lg:h-[30px] lg:text-[8.5px] lg:mr-[16px]
           2lg:w-[228px] 2lg:h-[56px] 2lg:text-[16px] 2lg:mr-[32px] '>
-            <Link to={isAuthenticated ? '/account' : '/login'}>
               <p className='font-[600] text-[12px] text-[#FAFAFA] tracking-[0.04em] mr-[14px]
               md:text-[23px] 
               lg:text-[8.5px] lg:mr-[10px]
               2lg:text-[16px] 2lg:mr-[14px]'>Оплатить подписку</p>
-            </Link>
             <svg className='w-[18px] h-[18px] 
             md:w-[38px] md:h-[38px]
             lg:w-[13px] lg:h-[13px]
@@ -71,6 +70,7 @@ export const Preview = () => {
               <path d="M13.5 18.75L20.25 12L13.5 5.25" stroke="#FAFAFA" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </button>
+          </Link>
           <button className='bg-[#FAFAFA] p-auto rounded-full w-full h-[42px] text-[12px] leading-[14.32px] text-center font-[600] text-[#1F2117] border-[1px] border-[#1F2117] hover:duration-[200ms] tracking-[0.04em] hover:border-[#FFB700] hover:text-[#FFB700]
           md:h-[67px] md:text-[23px] md:w-[688px]
           lg:w-[89px] lg:h-[30px] lg:text-[8.5px]

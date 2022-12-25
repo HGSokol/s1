@@ -1,3 +1,5 @@
+import {useEffect, useContext} from 'react'
+import { Profile } from '../App'
 import { Header } from '../layouts/Header';
 import { Preview } from '../layouts/Preview';
 import { About } from '../layouts/About';
@@ -12,6 +14,9 @@ import { Feedback } from '../layouts/Feedback';
 
 
 function HomePage() {
+  const { setUser, setIsAuthenticated } = useContext(Profile)
+
+
   return (
     <div className='md:mx-auto lg:w-[1024px] 2lg:w-[1920px]'>
       <div className='mx-[16px] md:mx-[40px] 2lg:mx-[120px] overflow-hidden'>

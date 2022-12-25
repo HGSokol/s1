@@ -57,15 +57,15 @@ const ChangePassword3 = () => {
       }
     })
     .then((res) => {
-      console.log(res)
-      console.log(res.data)
+      // console.log(res)
+      // console.log(res.data)
 
       reset()
       navigate('/login')
     })
     .catch((error) => {
-      console.log(error)
-      console.log(error.response.data)
+      // console.log(error)
+      // console.log(error.response.data)
     })
   };
 

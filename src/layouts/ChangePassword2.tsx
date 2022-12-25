@@ -41,8 +41,10 @@ const ChangePassword2 = () => {
   },[]) 
   
   const onSubmit = (data: IFormInputs) => {
-    const key = Number([data.n1, data.n2, data.n3, data.n4, data.n5, data.n6].join(''))
+    const key = [data.n1, data.n2, data.n3, data.n4, data.n5, data.n6].join('')
 
+
+    // console.log(typeof(key), key)
     const userInfo = {
       email: user?.email,
       token:`${key}`,
@@ -50,7 +52,7 @@ const ChangePassword2 = () => {
 
     if(user && user.email) {
 
-      console.log(userInfo)
+      // console.log(userInfo)
 
       axios.put('https://stage.fitnesskaknauka.com/api/auth/confirm-reset-code', userInfo, {
         headers: {
@@ -59,8 +61,8 @@ const ChangePassword2 = () => {
         }
       })
       .then((res) => {
-        console.log(res)
-        console.log(res.data)
+        // console.log(res)
+        // console.log(res.data)
 
         localStorage.setItem('user', JSON.stringify({
           ...user,
@@ -93,12 +95,12 @@ const ChangePassword2 = () => {
       }
     })
     .then((res) => {
-      console.log(res)
-      console.log(res.data)
+      // console.log(res)
+      // console.log(res.data)
     })
     .catch((error) => {
-      console.log(error)
-      console.log(error.response.data)
+      // console.log(error)
+      // console.log(error.response.data)
     })
 
   }

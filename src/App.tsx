@@ -60,12 +60,11 @@ function App() {
       setUser(JSON.parse(user))
       setIsAuthenticated(JSON.parse(authenticated))
     }
-  },[])
-
-  console.log(localStorage)
+  },[localStorage])
+  // console.log(localStorage)
     return (
     <div className='font-body'>
-      <GoogleOAuthProvider clientId="1018011035779-9cva0vmc8e8a6nanr5url7uk2b8lj8do.apps.googleusercontent.com">
+      <GoogleOAuthProvider clientId="148113392760-243a1pc16e8vbu20eqogoalrvppil48v.apps.googleusercontent.com">
 
       <Suspense fallback={<Spinner/>}>
         <Profile.Provider value={{ 
