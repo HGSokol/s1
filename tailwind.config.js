@@ -7,7 +7,7 @@ module.exports = {
     extend: {
       fontFamily: {
         body: ['Raleway'],
-        bodyalt: ['Roboto'],
+        bodyalt: ['SF Pro Display'],
       },
       keyframes: {
         wiggle: {

@@ -38,15 +38,15 @@ export const Preview = () => {
           lg:hidden' src={IMG2} alt='logo'/>
         </div>
         <div className='font-bodyalt flex flex-col mb-[48rem] 
-        lg:mb-[96rem] lg:flex-row '>
+        lg:mb-[96rem] lg:flex-row'>
         <Link to={user ? '/account' : '/login'}>
           <button className='bg-[#FFB700] text-[12rem] mb-[14rem] w-full leading-[14.32rem] h-[42rem] rounded-full 
           text-center text-[#FAFAFA] tracking-[0.04em] flex flex-row items-center justify-center hover:bg-[#F0AD04]
-          lg:w-[228rem] lg:h-[56rem] lg:text-[16rem] lg:mr-[32rem] '>
+          lg:w-max lg:h-[56rem] lg:text-[16rem] lg:mr-[32rem] '>
               <p className='font-[600] text-[12rem] text-[#FAFAFA] tracking-[0.04em] mr-[14rem]
-              lg:text-[16rem] lg:mr-[14rem]'>Оплатить подписку</p>
+              lg:text-[16rem] lg:mr-[14rem] lg:ml-[24rem]'>Оплатить подписку</p>
             <svg className='w-[18rem] h-[18rem] 
-            lg:w-[24rem] lg:h-[24rem]' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            lg:w-[24rem] lg:h-[24rem] lg:mr-[21rem]' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M3.75 12L20.25 12" stroke="#FAFAFA" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M13.5 18.75L20.25 12L13.5 5.25" stroke="#FAFAFA" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
