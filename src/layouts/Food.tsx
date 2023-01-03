@@ -50,20 +50,20 @@ export const Food = () => {
       <div className='absolute w-[240rem] h-[8.57rem] translate-x-[5rem] translate-y-[270rem] 
       lg:translate-x-[80rem] lg:w-[555rem] lg:h-[107rem] lg:translate-y-[620rem]'><img src={Shadow} alt='ellipse'/></div>
       <img className ='z-0 w-[252rem] mx-auto 
-      lg:h-[656rem] lg:w-[594rem] lg:mx-auto lg:w-min lg:-translate-x-[60rem] lg:-translate-y-[20rem] '
+      lg:h-[656rem] lg:w-[594rem] lg:mx-auto  lg:-translate-x-[60rem] lg:-translate-y-[20rem] '
         src={IMG2} alt='eat1'/>
     </div>
     <div className='order-1 
     lg:pt-[90rem] lg:order-2'>
       <div className='mb-[24rem] flex flex-wrap gap-[8rem] 
-      lg:mb-[32rem] lg:w-[814rem] lg:gap-[10rem]'>
+      lg:mb-[32rem] lg:w-[814rem] lg:gap-[18rem]'>
         {
           data.map((item,i) => {
             return (
               <button 
                 key={i}
                 className={`bg-white font-bodyalt py-[8rem] rem-[12rem] w-max text-[12rem] leading-[14.32rem] rounded-[40rem] font-[400] duration-[600ms] whitespace-nowrap
-                lg:w-max lg:h-[43rem] lg:text-[16rem] lg:leading-[19rem] lg:rem-[24rem] lg:py-[0rem]
+                lg:h-[43rem] lg:text-[16rem] lg:leading-[19rem] lg:rem-[24rem] lg:py-[12rem] lg:w-max lg:px-[24rem]
                 ${active === i? ' bg-[#FFB700] text-[#FAFAFA]': ' bg-[#FFFFFF] text-[#1F2117] drop-shadow-md'}`}
                 onClick={() => activeButton(i)}>{item}</button>
             )

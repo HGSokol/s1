@@ -85,7 +85,7 @@ export const Feedback = () => {
       {
         data.map((e,i) => {
           return(
-            <div ref={ref} key={i} className='snap-center'>
+            <div ref={ref} key={i} className='snap-center ml-[20rem]'>
               <div key={i} className='w-[226rem] h-[256rem] rounded-[20rem] p-[16rem] bg-white shadow-md 
               lg:justify-between lg:w-[500rem] lg:h-[319rem] lg:p-[24rem] lg:flex lg:flex-col'>
                 <div className='font-bodyalt tracking-[0.02em] font-[600] h-[140rem] text-[14rem] text-[#1F2117] leading-[16.71rem] mb-[17.4rem] 

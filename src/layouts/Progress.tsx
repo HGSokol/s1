@@ -26,14 +26,14 @@ export const Progress = () => {
   lg:grid-cols-[1fr_1fr] lg:grid-rows-1 lg:mb-[150rem]'>
     <div className='2lg:pt-[90rem]'>
       <div className='mb-[24rem] flex flex-row gap-[8rem] 
-      lg:pt-[90rem] lg:mb-[32rem] lg:mr-[10rem]'>
+      lg:pt-[90rem] lg:mb-[32rem] lg:gap-[18rem]'>
         {
           data.map((item,i) => {
             return (
               <button 
                 key={i}
                 className={`bg-white font-bodyalt w-max h-[30rem] py-[8rem] text-[12rem] rem-[12rem] leading-[14.32rem] rounded-[40rem] font-[400] duration-[600ms] whitespace-nowrap
-                lg:w-max lg:h-[43rem] lg:text-[16rem] lg:leading-[19rem] lg:rem-[24rem] lg:py-[0rem]
+                lg:h-[43rem] lg:text-[16rem] lg:leading-[19rem] lg:rem-[24rem] lg:py-[12rem] lg:w-max lg:px-[24rem]
                 ${active === i? ' bg-[#FFB700] text-[#FAFAFA]': ' bg-[#FFFFFF] text-[#1F2117] drop-shadow-md'}`}
                 onClick={() => activeButton(i)}>{item}</button>
             )

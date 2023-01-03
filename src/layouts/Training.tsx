@@ -27,14 +27,14 @@ export const Training = () => {
     <div className='
     lg:pt-[120rem] '>
       <div className='flex flex-row gap-[8rem]
-      lg:gap-[10rem]'>
+      lg:gap-[18rem]'>
         {
           data.map((item,i) => {
             return (
               <button 
                 key={i}
                 className={`bg-white font-bodyalt rem-[12rem] py-[8rem] w-max h-[30rem] font-[400] text-[12rem] leading-[14.32rem] rounded-[40rem] mb-[24rem] duration-[600ms] whitespace-nowrap
-                lg:text-[16rem] lg:leading-[19rem] lg:w-max lg:h-[43rem] lg:mr-[10rem] lg:rem-[24rem] lg:py-[0rem]
+                lg:h-[43rem] lg:text-[16rem] lg:leading-[19rem] lg:rem-[24rem] lg:py-[12rem] lg:w-max lg:px-[24rem]
                 ${active === i? ' bg-[#FFB700] text-[#FAFAFA]': ' bg-[#FFFFFF] text-[#1F2117] drop-shadow-md'}`}
                 onClick={() => activeButton(i)}>{item}</button>
             )

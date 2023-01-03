@@ -46,15 +46,14 @@ export const Article = () => {
     <div className='order-1 mb-[49rem] 
     lg:pt-[90rem]'>
       <div className='mb-[32rem]  flex flex-row gap-[8rem] 
-      lg:w-[814rem] lg:mb-[32rem]'>
+      lg:w-[814rem] lg:mb-[32rem] lg:gap-[18rem]'>
         {
           data.map((item,i) => {
             return (
               <button 
                 key={i}
                 className={`bg-white font-bodyalt w-[64rem] h-[30rem] py-[8rem] text-[12rem] rem-[12rem] leading-[14.32rem] rounded-[40rem] font-[400] duration-[600ms] whitespace-nowrap
-                md:w-max md:h-max md:mr-[10rem] md:text-[25rem] md:leading-[19rem] md:rem-[20rem] md:py-[20rem]
-                lg:w-max lg:h-[43rem] lg:mr-[10rem] lg:text-[16rem] lg:leading-[19rem] lg:rem-[24rem] lg:py-[0rem]
+                lg:h-[43rem] lg:text-[16rem] lg:leading-[19rem] lg:rem-[24rem] lg:py-[12rem] lg:w-max lg:px-[24rem]
                 ${active === i? ' bg-[#FFB700] text-[#FAFAFA]': ' bg-[#FFFFFF] text-[#1F2117] drop-shadow-md'}`}
                 onClick={() => activeButton(i)}>{item}</button>
             )

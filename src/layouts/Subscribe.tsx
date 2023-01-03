@@ -30,7 +30,7 @@ const subsData: Sub[] = [
 
 export const Subscribe = () => {
   const { user } = useContext(Profile)
-  const [active, setActive] = useState<number | null>(null)
+  const [active, setActive] = useState<number>(2)
 
   return (
   <div className='flex flex-col mb-[120rem] 

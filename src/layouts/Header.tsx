@@ -38,11 +38,11 @@ export const Header = () => {
         ) : (
           <div className='font-bodyalt'>
             <Link to='/login'>
-              <button className='p-auto w-[50rem] font-[600] text-[#777872] tracking-[0.04em] p-[7rem] text-[12rem]
+              <button className='p-auto w-[50rem] font-[600] text-[#777872] hover:text-[#1F2117] tracking-[0.04em] p-[7rem] text-[12rem]
               lg:text-[17rem] lg:w-[151rem]'>Вход</button>
             </Link>
             <Link to='/login/registration'>
-              <button className='#FAFAFA p-auto rounded-full w-[110rem] h-[42rem] font-[600] tracking-[0.02em] border-[1rem] text-[black] border-[#1F2117] text-[12rem]
+              <button className='#FAFAFA p-auto rounded-full w-[110rem] h-[42rem] font-[600] tracking-[0.02em] border-[1rem] text-[black] border-[#1F2117] hover:text-[#FFB700] hover:border-[#FFB700] text-[12rem]
               lg:text-[17rem] lg:w-[151rem] lg:h-[56rem]
               '>Регистрация</button>
             </Link>

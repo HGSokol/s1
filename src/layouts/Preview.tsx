@@ -41,7 +41,7 @@ export const Preview = () => {
         lg:mb-[96rem] lg:flex-row '>
         <Link to={user ? '/account' : '/login'}>
           <button className='bg-[#FFB700] text-[12rem] mb-[14rem] w-full leading-[14.32rem] h-[42rem] rounded-full 
-          text-center text-[#FAFAFA] tracking-[0.04em] flex flex-row items-center justify-center hover:bg-[#FFB700]/75
+          text-center text-[#FAFAFA] tracking-[0.04em] flex flex-row items-center justify-center hover:bg-[#F0AD04]
           lg:w-[228rem] lg:h-[56rem] lg:text-[16rem] lg:mr-[32rem] '>
               <p className='font-[600] text-[12rem] text-[#FAFAFA] tracking-[0.04em] mr-[14rem]
               lg:text-[16rem] lg:mr-[14rem]'>Оплатить подписку</p>

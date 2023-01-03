@@ -88,6 +88,8 @@ const data: DataType = [
 export const Command = () => {
   const [active, setActive] = useState<number | null>(null) 
   const [size, setSize] = useState<number>(0)
+  const [gap, setGap] = useState<number>(0)
+  const [wrapper, setWrapper] = useState<number>(0)
   const ref = useRef<HTMLDivElement | null>(null)
 
   const activeButton =(i: number) => {
@@ -100,19 +102,25 @@ export const Command = () => {
     active! <= 0 ? setActive(data.length-1) : setActive(prev => prev! - 1)
   }
 
-  const clientWidth = (window.innerWidth >= 1024 && window.innerWidth<=1919) ? 10: 20
+  // const clientWidth = (window.innerWidth >= 1024 && window.innerWidth<=1919) ? 10: 20
 
-  const trLength = active! > 4 ? `${(size + clientWidth)*(active!-3)}`: 0
-  const sizeCarousel = trLength >= 2200? '2200rem' : `${trLength}rem`
+  const trLength = active! > 4 ? `${(size + gap)*(active!-3)}`: 0
+  const sizeCarousel = trLength >= 2200? '2200rem' : `${trLength}px`
 
   React.useEffect(() => {
     if(ref.current) {
       setSize(ref.current.getBoundingClientRect().width)
+      setGap(window.innerWidth/1920*20)
     }
-
+    
   },[])
-  
 
+  React.useEffect(() => {
+    setWrapper(size*6+gap*5)
+    
+  },[size,gap])
+
+  console.log(wrapper)
   return (
     <div className='mb-[50rem] gap-[10rem]
     lg:gap-[15rem] lg:mb-[50rem] lg:overflow-hidden'>
@@ -142,69 +150,71 @@ export const Command = () => {
             </button>
         </div>
       </div>
-      <div 
-        className='flex flex-row gap-[20rem] cursor-pointer duration-[600ms] snap-mandatory snap-x overflow-scroll -wekbit-scrollbar:w-[0rem] 
-        lg:snap-none lg:overflow-visible lg:gap-[20rem]'
-        style={{transform: `translateX(-${sizeCarousel})`}}>
-      {
-        data.map((e,i) => {
-          return(
-            <div key={i} className='grid grid-rows-[300rem_130rem] snap-center
-            lg:grid-rows-[420rem_150rem] '>
-              <div 
-                ref={ref}
-                className={`relative h-[300rem] bg-cover bg-center delay-300 duration-[500ms] rounded-[20rem] z-0 w-[288rem]
-                lg:h-[420rem] lg:rounded-[20rem]
-                ${active === i? ' lg:w-[530rem]': ' lg:w-[255rem]' }`}
-                style={{ backgroundImage:`url(${e.img})` }}
-                onClick={() =>activeButton(i)}>
-                  <div className=' w-full h-full rounded-[20rem] bg-[#1F2117]/30 group-hover/about:bg-yellow-500/30 duration-[400ms] -z-1 absolute
-                  lg:rounded-[20rem]'></div>
-                  <div className={`relative grid grid-cols-[1fr_1fr] p-[16rem] z-5 place-items-end w-full h-full dulay-100 animate-wiggle
-                  lg:p-[32rem] 
-                  lg:${active === i? 'visible' : 'hidden'} z-5`}>
-                    <div className=''>
-                      <p className='text-[#D2D2D2] text-[14rem] font-[400] mb-[6rem]
-                      lg:text-[22rem] '>{e.prof}</p>
-                      <p className='text-white text-[24rem] leading-[28.18rem] font-[600]
-                      lg:text-[40rem] lg:leading-[40rem]'>{e.name}</p>
+      <div className='overflow-hidden' style={{width: `${wrapper}px`}}>
+        <div 
+          className='flex flex-row gap-[20rem] cursor-pointer duration-[600ms] snap-mandatory snap-x overflow-scroll -wekbit-scrollbar:w-[0rem] 
+          lg:snap-none lg:overflow-visible lg:gap-[20rem]'
+          style={{transform: `translateX(-${sizeCarousel})`}}>
+        {
+          data.map((e,i) => {
+            return(
+              <div key={i} className='grid grid-rows-[300rem_130rem] snap-center
+              lg:grid-rows-[420rem_150rem] '>
+                <div 
+                  ref={ref}
+                  className={`relative h-[300rem] bg-cover bg-center delay-300 duration-[500ms] rounded-[20rem] z-0 w-[288rem]
+                  lg:h-[420rem] lg:rounded-[20rem]
+                  ${active === i? ' lg:w-[530rem]': ' lg:w-[255rem]' }`}
+                  style={{ backgroundImage:`url(${e.img})` }}
+                  onClick={() =>activeButton(i)}>
+                    <div className=' w-full h-full rounded-[20rem] bg-[#1F2117]/30 group-hover/about:bg-yellow-500/30 duration-[400ms] -z-1 absolute
+                    lg:rounded-[20rem]'></div>
+                    <div className={`relative grid grid-cols-[1fr_1fr] p-[16rem] z-5 place-items-end w-full h-full dulay-100 animate-wiggle
+                    lg:p-[32rem] 
+                    lg:${active === i? 'visible' : 'hidden'} z-5`}>
+                      <div className=''>
+                        <p className='text-[#D2D2D2] text-[14rem] font-[400] mb-[6rem]
+                        lg:text-[22rem] '>{e.prof}</p>
+                        <p className='text-white text-[24rem] leading-[28.18rem] font-[600]
+                        lg:text-[40rem] lg:leading-[40rem]'>{e.name}</p>
+                      </div>
+                      <div className=' flex flex-col gap-[10rem] items-end
+                      lg:gap-[20rem]'>
+                        <a href={e.links.instagram} target='_blank' rel="noreferrer">
+                          <div className='w-min bg-white rounded-[10rem] p-[5rem] group/inst hover:bg-black delay-[100ms] duration-[400ms]
+                          lg:rounded-[20rem] '>
+                            <AiFillInstagram size='30rem' className='fill-black group-hover/inst:fill-white delay-[100ms] duration-[400ms]
+                            lg:w-[60rem] lg:h-[60rem]' />
+                          </div>
+                        </a>
+                        <a href={e.links.telegram} target='_blank' rel="noreferrer">
+                          <div className='w-min bg-white rounded-[10rem] p-[5rem] group/telega hover:bg-black delay-[100ms] duration-[400ms]
+                          lg:rounded-[20rem]'>
+                            <FaTelegramPlane size='30rem' className='fill-black group-hover/telega:fill-white delay-[100ms] duration-[400ms]
+                            lg:w-[60rem] lg:h-[60rem]'/>
+                          </div>
+                        </a>
+                        <a href={e.links.youtube} target='_blank' rel="noreferrer">
+                          <div className='w-[80rem] h-[40rem] bg-white rounded-[10rem] overflow-hidden flex justify-center items-center
+                            group/telega hover:bg-black delay-[100ms] duration-[400ms]
+                            lg:w-[130rem] lg:h-[65rem] lg:p-[15rem] lg:rounded-[20rem]'>
+                            <ImYoutube2 size='70rem' className='fill-black group-hover/telega:fill-white delay-[100ms] duration-[400ms]
+                            lg:w-[150rem] lg:h-[150rem]'/>
+                          </div>
+                        </a>
+                      </div>
                     </div>
-                    <div className=' flex flex-col gap-[10rem] items-end
-                    lg:gap-[20rem]'>
-                      <a href={e.links.instagram} target='_blank' rel="noreferrer">
-                        <div className='w-min bg-white rounded-[10rem] p-[5rem] group/inst hover:bg-black delay-[100ms] duration-[400ms]
-                        lg:rounded-[20rem] '>
-                          <AiFillInstagram size='30rem' className='fill-black group-hover/inst:fill-white delay-[100ms] duration-[400ms]
-                          lg:w-[60rem] lg:h-[60rem]' />
-                        </div>
-                      </a>
-                      <a href={e.links.telegram} target='_blank' rel="noreferrer">
-                        <div className='w-min bg-white rounded-[10rem] p-[5rem] group/telega hover:bg-black delay-[100ms] duration-[400ms]
-                        lg:rounded-[20rem]'>
-                          <FaTelegramPlane size='30rem' className='fill-black group-hover/telega:fill-white delay-[100ms] duration-[400ms]
-                          lg:w-[60rem] lg:h-[60rem]'/>
-                        </div>
-                      </a>
-                      <a href={e.links.youtube} target='_blank' rel="noreferrer">
-                        <div className='w-[80rem] h-[40rem] bg-white rounded-[10rem] overflow-hidden flex justify-center items-center
-                          group/telega hover:bg-black delay-[100ms] duration-[400ms]
-                          lg:w-[130rem] lg:h-[65rem] lg:p-[15rem] lg:rounded-[20rem]'>
-                          <ImYoutube2 size='70rem' className='fill-black group-hover/telega:fill-white delay-[100ms] duration-[400ms]
-                          lg:w-[150rem] lg:h-[150rem]'/>
-                        </div>
-                      </a>
-                    </div>
+                </div>
+                  <div className={`font-bodyalt py-[14rem] text-[14rem] leading-[16.71rem] animate-wiggle text-[#777872]/60 font-[400]
+                  lg:leading-[32.71rem] lg:pl-[20rem] lg:pt-[20rem] lg:text-[22rem] 
+                  lg:${active === i? 'visible' : 'hidden'}`}>
+                      {e.description}
                   </div>
               </div>
-                <div className={`font-bodyalt py-[14rem] text-[14rem] leading-[16.71rem] animate-wiggle text-[#777872]/60 font-[400]
-                lg:leading-[32.71rem] lg:pl-[20rem] lg:pt-[20rem] lg:text-[22rem] 
-                lg:${active === i? 'visible' : 'hidden'}`}>
-                    {e.description}
-                </div>
-            </div>
-          )
-        })
-      }
+            )
+          })
+        }
+        </div>
       </div>
     </div>
   )
