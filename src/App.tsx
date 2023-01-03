@@ -1,9 +1,8 @@
 import { lazy, Suspense, createContext, useState, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
+import {GoogleOAuthProvider} from '@react-oauth/google'
 import HomePage from './Pages/Home'
 import Spinner from './components/Spinner'
-
-import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const Login = lazy(() => import('./Pages/Login'))
 const LoginForm = lazy(() => import('./layouts/LoginForm'))
@@ -54,11 +53,12 @@ function App() {
     if(user) {
       setUser(JSON.parse(user))
     }
-  },[localStorage])
-  // console.log(localStorage)
+  },[])
+
+  console.log(localStorage)
     return (
     <div className='font-body'>
-      <GoogleOAuthProvider clientId="148113392760-243a1pc16e8vbu20eqogoalrvppil48v.apps.googleusercontent.com">
+      <GoogleOAuthProvider clientId="1018011035779-9cva0vmc8e8a6nanr5url7uk2b8lj8do.apps.googleusercontent.com">
 
       <Suspense fallback={<Spinner/>}>
         <Profile.Provider value={{ 
@@ -86,7 +86,8 @@ function App() {
           </Routes>
         </Profile.Provider>
       </Suspense>
-    </GoogleOAuthProvider>
+
+    </GoogleOAuthProvider>;
     </div>
   );
 }
