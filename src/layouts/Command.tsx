@@ -120,7 +120,6 @@ export const Command = () => {
     
   },[size,gap])
 
-  console.log(wrapper)
   return (
     <div className='mb-[50rem] gap-[10rem]
     lg:gap-[15rem] lg:mb-[50rem] lg:overflow-hidden'>

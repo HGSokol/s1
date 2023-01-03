@@ -25,7 +25,7 @@ export const Article = () => {
   }
 
   return (
-  <div className='grid grid-rows-[auto_274rem] grid-col-1 mb-[116.52rem] 
+  <div id='article' className='grid grid-rows-[auto_274rem] grid-col-1 mb-[116.52rem] 
   lg:grid-cols-[1fr_1fr] lg:grid-rows-1 lg:mb-[150rem]'>
     <div className='relative order-2 duration-300 mx-auto
     lg:order-1'>

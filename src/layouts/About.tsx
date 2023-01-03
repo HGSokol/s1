@@ -5,19 +5,20 @@ import IMG1 from '../images/about2.svg'
 export interface dataAboutCard {
   text: string,
   img: string,
+  idName:string,
 }
 
 const data: dataAboutCard[] = [
-  {text: 'Статьи\n и лекции', img: require("../images/about1.png")},
-  {text: 'Тренировки', img: IMG1},
+  {text: 'Статьи\n и лекции', img: require("../images/about1.png"), idName: 'article'},
+  {text: 'Тренировки', img: IMG1, idName: 'training'},
   // {text: 'Тренировки', img: require("../images/about2.svg")},
-  {text: 'Планы питания', img: require("../images/about3.png")},
-  {text: 'Статистика', img: require("../images/about4.png")},
+  {text: 'Планы питания', img: require("../images/about3.png"), idName: 'food'},
+  {text: 'Статистика', img: require("../images/about4.png"), idName: 'progress'},
 ]
 
 export const About = () => {
   return (
-    <div className='mb-[72rem] 
+    <div id='about' className='mb-[72rem] 
     2lg:mb-[235rem]'>
       <p className='text-[32rem] mb-[32rem] leading-[37.57rem] font-[600] text-[#1F2117]
       lg:block lg:text-[64rem] lg:leading-[75rem] lg:mb-[75rem]'>О приложении</p>

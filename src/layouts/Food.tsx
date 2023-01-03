@@ -35,7 +35,7 @@ export const Food = () => {
   }
 
   return (
-  <div className='relative grid grid-rows-[auto_274rem] grid-col-1 mb-[122rem] 
+  <div id='food' className='relative grid grid-rows-[auto_274rem] grid-col-1 mb-[122rem] 
   lg:grid-cols-[1fr_1fr] lg:grid-rows-1 lg:mb-[150rem]'>
     <div className='relative order-2  mx-auto 
     lg:order-1 lg:mx-[0]'>

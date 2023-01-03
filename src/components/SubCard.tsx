@@ -10,7 +10,7 @@ export const SubCard = ({item, active}: SubCard) => {
   return (
     <div className='relative overflow-hidden rounded-[20rem] shadow-xl' >
       <div className={`bg-white h-[126rem] w-[288rem] py-[24rem] px-[32rem] overflow-hidden border-[1rem] border-transparent cursor-pointer flex flex-col justify-between rounded-[20rem] 
-        lg:h-[207rem] lg:w-[533rem] lg:py-[36rem] lg:px-[32rem] hover:border-[1rem] ${active === 'active'? ' border-[#FFB700]': ''}`}>
+        lg:h-[207rem] lg:w-[533rem] lg:py-[36rem] lg:px-[32rem] hover:border-[1rem] ${active === 'active'? ' border-[#FFB700]': 'hover:border-[#CBCBCB]'}`}>
           {
             top === 'top' ? (
               <div className='

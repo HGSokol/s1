@@ -52,8 +52,8 @@ export const Preview = () => {
             </svg>
           </button>
           </Link>
-          <button className='bg-[#FAFAFA] p-auto rounded-full w-full h-[42rem] text-[12rem] leading-[14.32rem] text-center font-[600] text-[#1F2117] border-[1rem] border-[#1F2117] hover:duration-[200ms] tracking-[0.04em] hover:border-[#FFB700] hover:text-[#FFB700]
-          lg:w-[164rem] lg:h-[56rem] lg:text-[16rem]'>Ознакомиться</button>
+          <a href='#about' className='flex justify-center items-center bg-[#FAFAFA] p-auto rounded-full w-full h-[42rem] text-[12rem] leading-[14.32rem] text-center font-[600] text-[#1F2117] border-[1rem] border-[#1F2117] hover:duration-[200ms] tracking-[0.04em] hover:border-[#FFB700] hover:text-[#FFB700]
+          lg:w-[164rem] lg:h-[56rem] lg:text-[16rem]'>Ознакомиться</a>
         </div>
         <div className='font-bodyalt flex flex-row items-center'>
           <svg viewBox="0 0 194 56" xmlns="http://www.w3.org/2000/svg" 

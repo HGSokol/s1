@@ -5,11 +5,11 @@ interface TextItem {
 }
 
 export const AboutCard = ({item}: TextItem) => {
-  const { text, img } = item
+  const { text, img, idName } = item
 
 
   return (
-    <div className='mx-auto w-[288rem] h-[200rem] rounded-[24rem] relative overflow-hidden group/about 
+    <a href={`#${idName}`} className='mx-auto w-[288rem] h-[200rem] rounded-[24rem] relative overflow-hidden group/about 
     lg:w-[390rem] lg:h-[390rem] lg:rounded-[24rem] '>
       <div className={`w-[288rem] h-[200rem] duration-[400ms] bg-cover bg-no-repeat bg-center rounded-[24rem] flex flex-row items-end space-x-4 absolute z-1 overflow-hidden group-hover/about:scale-[1.2] 
       lg:w-[390rem] lg:h-[390rem] lg:rounded-[24rem] `}
@@ -18,7 +18,7 @@ export const AboutCard = ({item}: TextItem) => {
       </div>
       <div className='w-full h-full p-[16rem] flex flex-row justify-between items-end space-x-4 z-10 
       lg:p-[32rem] '>
-        <p className='font-[600] text-[24rem] text-[#FAFAFA] z-10 
+        <p className='font-[600] text-[24rem] text-[#FAFAFA] z-10 w-[230rem]
         lg:text-[36rem] '>{`${text}`}</p>
         <button className='rounded-full bg-[#FAFAFA] w-[42rem] h-[42rem] flex justify-center items-center rotate-[45deg] group-hover/about:bg-[#FFB700] 
         lg:w-[50rem] lg:h-[50rem]'>
@@ -29,6 +29,6 @@ export const AboutCard = ({item}: TextItem) => {
           </svg>
         </button>
       </div>
-    </div>
+    </a>
   )
 }

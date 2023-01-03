@@ -22,7 +22,7 @@ export const Progress = () => {
   }
 
   return (
-  <div className='grid grid-rows-[h-max_h-min] grid-cols-1 mb-[120rem] 
+  <div id='progress' className='grid grid-rows-[h-max_h-min] grid-cols-1 mb-[120rem] 
   lg:grid-cols-[1fr_1fr] lg:grid-rows-1 lg:mb-[150rem]'>
     <div className='2lg:pt-[90rem]'>
       <div className='mb-[24rem] flex flex-row gap-[8rem] 

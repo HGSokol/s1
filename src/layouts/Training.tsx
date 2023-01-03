@@ -22,7 +22,7 @@ export const Training = () => {
   }
 
   return (
-  <div className='grid grid-rows-[auto_h-min] mb-[117rem] grid-cols-1 
+  <div id='training' className='grid grid-rows-[auto_h-min] mb-[117rem] grid-cols-1 
   lg:grid-cols-[auto_auto] lg:grid-rows-1 lg:mb-[169rem]'>
     <div className='
     lg:pt-[120rem] '>

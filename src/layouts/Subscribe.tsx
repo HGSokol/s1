@@ -52,7 +52,7 @@ export const Subscribe = () => {
     </div>
     <Link to={user ? '/account' : '/login'}>
       <div className='font-bodyalt flex justify-center'>
-        <button className='bg-[#FFB700] text-[12rem] w-full leading-[14.32rem] h-[42rem] rounded-full text-center text-white tracking-[0.04em] flex flex-row items-center justify-center hover:bg-[rgba(255,209,101,1)]
+        <button className='bg-[#FFB700] text-[12rem] w-full leading-[14.32rem] h-[42rem] rounded-full text-center text-white tracking-[0.04em] flex flex-row items-center justify-center hover:bg-[#F0AD04]
         lg:w-[349rem] lg:h-[56rem] lg:text-[16rem] '>
           <p className='font-[600] text-[14rem] leading-[14.32rem] text-[#FAFAFA] tracking-[0.04em] mr-[14rem]
           lg:leading-[19.09rem] lg:text-[16rem] lg:mr-[14rem]'>Оплатить подписку</p>
