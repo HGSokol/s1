@@ -109,78 +109,80 @@ const ChangePassword2 = () => {
 
   return (
     <>
-      <div className='w-[288px] mx-auto mt-[24px] lg:w-[492px] lg:mt-[223px]'>
-        <h1 className='font-body font-[600] text-[22px] leading-[26.25px] text-center mb-[14px] lg:text-[40px] lg:leading-[46.96px] lg:mb-[24px]'>Восстановление пароля</h1>
-        <h3 className='font-body text-[#777872] font-[600] text-[14px] leading-[26.25px] text-center mb-[32px] lg:text-[22px] lg:leading-[32px] lg:mb-[48px]'>Введите код подтверждения, который мы отправили Вам на указанный Email </h3>
-        <form onSubmit={handleSubmit(onSubmit)} className='grid grid-rows-[1fr_56px] w-[288px] lg:w-[441px] mx-auto place-items-center lg:grid-rows-[1fr_65px] lg:mb-[24px]'>
-          <div className='flex flex-row gap-[20px] w-min mb-[32px] lg:mb-[48px]'>
-            <div className='h-[48px] lg:h-[56px] w-[56px]'>
+      <div className='w-[288rem] mx-auto mt-[24rem] lg:w-[492rem] lg:mt-[223rem]'>
+        <h1 className='font-body font-[600] text-[22rem] leading-[26.25rem] text-center mb-[14rem] 
+        lg:text-[40rem] lg:leading-[46.96rem] lg:mb-[24rem]'>Восстановление пароля</h1>
+        <h3 className='font-body text-[#777872] font-[600] text-[14rem] leading-[26.25rem] text-center mb-[32rem] 
+        lg:text-[22rem] lg:leading-[32rem] lg:mb-[48rem]'>Введите код подтверждения, который мы отправили Вам на указанный Email </h3>
+        <form onSubmit={handleSubmit(onSubmit)} className='grid grid-rows-[1fr_56rem] w-[288rem] lg:w-[441rem] mx-auto place-items-center lg:grid-rows-[1fr_65rem] lg:mb-[24rem]'>
+          <div className='flex flex-row gap-[20rem] w-min mb-[32rem] lg:mb-[48rem]'>
+            <div className='h-[48rem] lg:h-[56rem] w-[56rem]'>
               <input 
                 placeholder='-'
                 type='text'
                 maxLength={1}
                 {...register("n1")}   
                 onKeyUp={(e) => e.code !== 'Backspace' ?setFocus('n2'): setFocus('n1')}            
-                className='outline-none w-full text-center h-[56px] px-[16px] rounded-[8px] bg-white border-[1px] border-[#1F211714] placeholder:text-[12px] placeholder:text-center placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56px] lg:placeholder:text-[16px]  '/>
+                className='outline-none w-full text-center h-[56rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[12rem] placeholder:text-center placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56rem] lg:placeholder:text-[16rem]  '/>
             </div>
-            <div className='h-[48px] lg:h-[56px] w-[56px]'>
+            <div className='h-[48rem] lg:h-[56rem] w-[56rem]'>
               <input 
                 placeholder='-'
                 type='text' 
                 maxLength={1}
                 {...register("n2")} 
                 onKeyUp={(e) => e.code !== 'Backspace' ?setFocus('n3'): setFocus('n1')} 
-                className='outline-none w-full text-center h-[56px] px-[16px] rounded-[8px] bg-white border-[1px] border-[#1F211714] placeholder:text-[12px] placeholder:text-center placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56px] lg:placeholder:text-[16px]  '/>
+                className='outline-none w-full text-center h-[56rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[12rem] placeholder:text-center placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56rem] lg:placeholder:text-[16rem]  '/>
             </div>
-            <div className='h-[48px] lg:h-[56px] w-[56px]'>
+            <div className='h-[48rem] lg:h-[56rem] w-[56rem]'>
               <input 
                 placeholder='-'
                 type='text' 
                 maxLength={1}
                 {...register("n3")} 
                 onKeyUp={(e) => e.code !== 'Backspace' ?setFocus('n4'): setFocus('n2')} 
-                className='outline-none w-full text-center h-[56px] px-[16px] rounded-[8px] bg-white border-[1px] border-[#1F211714] placeholder:text-[12px] placeholder:text-center placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56px] lg:placeholder:text-[16px]  '/>
+                className='outline-none w-full text-center h-[56rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[12rem] placeholder:text-center placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56rem] lg:placeholder:text-[16rem]  '/>
             </div>
-            <div className='h-[48px] lg:h-[56px] w-[56px]'>
+            <div className='h-[48rem] lg:h-[56rem] w-[56rem]'>
               <input 
                 placeholder='-'
                 type='text' 
                 maxLength={1}
                 {...register("n4")} 
                 onKeyUp={(e) => e.code !== 'Backspace' ?setFocus('n5'): setFocus('n3')} 
-                className='outline-none w-full text-center h-[56px] px-[16px] rounded-[8px] bg-white border-[1px] border-[#1F211714] placeholder:text-[12px] placeholder:text-center placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56px] lg:placeholder:text-[16px]  '/>
+                className='outline-none w-full text-center h-[56rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[12rem] placeholder:text-center placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56rem] lg:placeholder:text-[16rem]  '/>
             </div>
-            <div className='h-[48px] lg:h-[56px] w-[56px]'>
+            <div className='h-[48rem] lg:h-[56rem] w-[56rem]'>
               <input 
                 placeholder='-'
                 type='text'
                 maxLength={1}
                 {...register("n5")} 
                 onKeyUp={(e) => e.code !== 'Backspace' ?setFocus('n6'): setFocus('n4')} 
-                className='outline-none w-full text-center h-[56px] px-[16px] rounded-[8px] bg-white border-[1px] border-[#1F211714] placeholder:text-[12px] placeholder:text-center placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56px] lg:placeholder:text-[16px]  '/>
+                className='outline-none w-full text-center h-[56rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[12rem] placeholder:text-center placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56rem] lg:placeholder:text-[16rem]  '/>
             </div>
-            <div className='h-[48px] lg:h-[56px] w-[56px]'>
+            <div className='h-[48rem] lg:h-[56rem] w-[56rem]'>
               <input 
                 placeholder='-'
                 type='text'
                 maxLength={1}
                 {...register("n6")} 
                 onKeyUp={(e) => e.code !== 'Backspace' ?setFocus('n6'): setFocus('n5')} 
-                className='outline-none w-full text-center h-[56px] px-[16px] rounded-[8px] bg-white border-[1px] border-[#1F211714] placeholder:text-[12px] placeholder:text-center placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56px] lg:placeholder:text-[16px]  '/>
+                className='outline-none w-full text-center h-[56rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[12rem] placeholder:text-center placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56rem] lg:placeholder:text-[16rem]  '/>
             </div>
           </div>
           {
-            errorMessage ? (<p className='text-[15px] text-red-400 text-center'>{errorMessage}</p>) : null
+            errorMessage ? (<p className='text-[15rem] text-red-400 text-center'>{errorMessage}</p>) : null
           }
           <div className='w-full'>
-            <button type="submit" disabled={!isValid} className={`${ isValid === true ? ' bg-[#FFB700]': ' bg-[#FFB700]/50'} w-full h-[42px] py-[14px] px-[18px] text-[12px] text-white font-[600] rounded-[40px] lg:h-[56px] lg:py-[16px] lg:px-[24px] lg:text-[16px]`}>
+            <button type="submit" disabled={!isValid} className={`${ isValid === true ? ' bg-[#FFB700]': ' bg-[#FFB700]/50'} w-full h-[42rem] py-[14rem] rem-[18rem] text-[12rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem]`}>
               Подтвердить
             </button>
           </div>
         </form>
-        <div className='flex flex-row justify-center px-[8.5px] gap-[8px]'>
-          <p className='text-[12px] text-[#777872] font-[400] lg:text-[16px]'>Не пришел код?</p>
-          <p className='text-[12px] text-[#000000] font-[600] lg:text-[16px] cursor-pointer'
+        <div className='flex flex-row justify-center rem-[8.5rem] gap-[8rem]'>
+          <p className='text-[12rem] text-[#777872] font-[400] lg:text-[16rem]'>Не пришел код?</p>
+          <p className='text-[12rem] text-[#000000] font-[600] lg:text-[16rem] cursor-pointer'
           onClick={sendCode}>Отправить код снова</p>
         </div>
       </div>

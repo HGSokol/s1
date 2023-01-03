@@ -29,22 +29,17 @@ const subsData: Sub[] = [
 ]
 
 export const Subscribe = () => {
-  const { isAuthenticated } = useContext(Profile)
+  const { user } = useContext(Profile)
   const [active, setActive] = useState<number | null>(null)
 
   return (
-  <div className='flex flex-col mb-[120px] 
-  lg:mb-[100px]
-  2lg:mb-[200px]'>
+  <div className='flex flex-col mb-[120rem] 
+  lg:mb-[200rem]'>
     <p className='
-      font-[600] text-[32px] leading-[37.57px] mb-[32px] text-[#1F2117] 
-      md:text-[64px] md:leading-[75.14px] md:h-[75px] md:mb-[64px] 
-      lg:text-[33.92px] lg:leading-[37px] lg:w-[842px] lg:h-max lg:text-center lg:mx-auto lg:mb-[30px]
-      2lg:text-[64px] 2lg:leading-[75.14px] 2lg:w-[842px] 2lg:h-[75px] 2lg:text-center 2lg:mx-auto 2lg:mb-[127px]'>Подписки</p>
-    <div className='grid grid-rows-3 grid-cols-1 mx-auto gap-[16px] mb-[32px] whitespace-pre-line 
-    md:gap-[32px] md:mb-[64px] 
-    lg:gap-[20px] lg:mb-[32px] lg:grid-cols-3 lg:grid-rows-1 lg:h-[110px] 
-    2lg:gap-[40px] 2lg:mb-[64px] 2lg:grid-cols-3 2lg:grid-rows-1 2lg:h-[207px] '>
+      font-[600] text-[32rem] leading-[37.57rem] mb-[32rem] text-[#1F2117] 
+      lg:text-[64rem] lg:leading-[75.14rem] lg:w-[842rem] lg:h-[75rem] lg:text-center lg:mx-auto lg:mb-[127rem]'>Подписки</p>
+    <div className='grid grid-rows-3 grid-cols-1 mx-auto gap-[16rem] mb-[32rem] whitespace-pre-line 
+    lg:gap-[40rem] lg:mb-[64rem] lg:grid-cols-3 lg:grid-rows-1 lg:h-[207rem] '>
       {
         subsData.map((item,i) => {
           return(
@@ -55,20 +50,14 @@ export const Subscribe = () => {
         })
       }
     </div>
-    <Link to={isAuthenticated ? '/account' : '/login'}>
+    <Link to={user ? '/account' : '/login'}>
       <div className='font-bodyalt flex justify-center'>
-        <button className='bg-[#FFB700] text-[12px] w-full leading-[14.32px] h-[42px] rounded-full text-center text-white tracking-[0.04em] flex flex-row items-center justify-center hover:bg-[rgba(255,209,101,1)]
-        md:w-[550px] md:h-[67px] md:text-[16px] 
-        lg:w-[185px] lg:h-[29.68px] lg:text-[16px] lg:px-[15px]
-        2lg:w-[349px] 2lg:h-[56px] 2lg:text-[16px] '>
-          <p className='font-[600] text-[14px] leading-[14.32px] text-[#FAFAFA] tracking-[0.04em] mr-[14px]
-          md:leading-[19.09px] md:text-[16px] 
-          lg:leading-[10px] lg:text-[8.5px] lg:mr-[7px]
-          2lg:leading-[19.09px] 2lg:text-[16px] 2lg:mr-[14px]'>Оплатить подписку</p>
-          <svg className='w-[18px] h-[18px] 
-          md:w-[24px] md:h-[24px] 
-          lg:w-[12px] lg:h-[12px]
-          2lg:w-[24px] 2lg:h-[24px]' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <button className='bg-[#FFB700] text-[12rem] w-full leading-[14.32rem] h-[42rem] rounded-full text-center text-white tracking-[0.04em] flex flex-row items-center justify-center hover:bg-[rgba(255,209,101,1)]
+        lg:w-[349rem] lg:h-[56rem] lg:text-[16rem] '>
+          <p className='font-[600] text-[14rem] leading-[14.32rem] text-[#FAFAFA] tracking-[0.04em] mr-[14rem]
+          lg:leading-[19.09rem] lg:text-[16rem] lg:mr-[14rem]'>Оплатить подписку</p>
+          <svg className='w-[18rem] h-[18rem] 
+          lg:w-[24rem] lg:h-[24rem]' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M3.75 12L20.25 12" stroke="#FAFAFA" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
             <path d="M13.5 18.75L20.25 12L13.5 5.25" stroke="#FAFAFA" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>

@@ -3,67 +3,85 @@ import { useNavigate } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
 import { LoginSocialGoogle, IResolveParams } from 'reactjs-social-login'
 import axios from 'axios'
+import { hasGrantedAllScopesGoogle } from '@react-oauth/google';
+
+
 
 import { Profile, User } from '../App'
 
 
-import { useGoogleLogin } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
 
 
 // const _appId = '148113392760-243a1pc16e8vbu20eqogoalrvppil48v.apps.googleusercontent.com'
 
-export const GoogleLogin = () => {
-  const { setUser, setIsAuthenticated, isAuthenticated,  countryId, user, deviceName } = useContext(Profile)
+export const GoogleLogin1 = () => {
+  const { setUser, countryId, user, deviceName } = useContext(Profile)
   const navigate = useNavigate()  
   // console.log(user)
   const onLogout = useCallback(() => {}, []);
   
 
-  const login = useGoogleLogin({
-    onSuccess: (tokenResponse ) => {
-      // console.log(tokenResponse )
+  // const login = useGoogleLogin({
+  //   onSuccess: (tokenResponse ) => {
+  //     console.log(tokenResponse )
+  //     // const hasAccess = hasGrantedAllScopesGoogle(
+  //     //   tokenResponse,
+  //     //   'google-scope-1',
+  //     //   'google-scope-2',
+  //     // );
 
-      const token = tokenResponse.code
-      // console.log(`${token}`)
+  //     const token = tokenResponse.code
+  //     // console.log(`${token}`)
 
-      axios.post('https://stage.fitnesskaknauka.com/api/auth/google', {
-        idToken: `${token}`,
-        deviceName,
-      }, {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Timezone': `${countryId}`
-        }
-      })
-      .then((res) => {
-        // console.log(res)
-        // console.log(res.data, 'jndtn')
+  //     axios.post('https://stage.fitnesskaknauka.com/api/auth/google', {
+  //       idToken: `${token}`,
+  //       deviceName,
+  //     }, {
+  //       headers: {
+  //         'Content-Type': 'application/x-www-form-urlencoded',
+  //         'Timezone': `${countryId}`
+  //       }
+  //     })
+  //     .then((res) => {
+  //       // console.log(res)
+  //       // console.log(res.data, 'jndtn')
 
-        localStorage.setItem('authenticated', JSON.stringify(true))
-        setIsAuthenticated(true)
-        navigate('/account')
-      })
-      .catch((error) => {
-        // console.log(error.response.data)
-      })
-
-
+  //       localStorage.setItem('authenticated', JSON.stringify(true))
+  //       setIsAuthenticated(true)
+  //       navigate('/account')
+  //     })
+  //     .catch((error) => {
+  //       // console.log(error.response.data)
+  //     })
 
 
 
 
 
-    },
-    flow: 'auth-code',
-  });
+
+
+  //   },
+  //   flow: 'auth-code',
+  // });
 
   return ( 
     <>
-       <button 
+       {/* <button 
        onClick={() =>login()}
        className=' w-[50px] h-[50px] rounded-[10px] bg-white grid place-content-center drop-shadow-md cursor-pointer lg:w-[64px] lg:h-[64px]'>
          <FcGoogle className='w-[24px] h-[24px] lg:w-[34.5px] lg:h-[34.5px]' />
-       </button>
+       </button> */}
+       <GoogleLogin
+          onSuccess={credentialResponse => {
+            console.log(credentialResponse);
+          }}
+          onError={() => {
+            console.log('Login Failed');
+          }}
+          type='icon'
+          size='large'
+        />
     </>
     
 

@@ -5,14 +5,12 @@ import { Profile } from '../App'
 
 
 const Account = () => {
-  const { user, setUser, setIsAuthenticated } = useContext(Profile)
+  const { user, setUser } = useContext(Profile)
   const navigate = useNavigate()
 
   const logout = () => {
     localStorage.clear()
-    setUser(null)
-    setIsAuthenticated(false)
-    
+    setUser(null)    
     navigate('/login')
   }
 
@@ -23,12 +21,12 @@ const Account = () => {
         <p>{user?.lastName}</p>
         <p>{user?.email}</p>
       </div>
-      <div className='flex flex-row gap-[15px]'>
-        <button onClick={logout} className='cursor-pointer w-[150px] h-[40px] bg-yellow-400 rounded-full' >
+      <div className='flex flex-row gap-[15rem]'>
+        <button onClick={logout} className='cursor-pointer w-[150rem] h-[40rem] bg-yellow-400 rounded-full' >
           Выход
         </button>
         <Link to='/'>
-          <button className='cursor-pointer w-[150 px] h-[40px] bg-yellow-400 rounded-full' >
+          <button className='cursor-pointer w-[150 rem] h-[40rem] bg-yellow-400 rounded-full' >
             На Главную
           </button>
         </Link>

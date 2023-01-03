@@ -27,18 +27,14 @@ export interface User {
 }
 
 interface ProfileContext {
-  isAuthenticated: boolean;
   user: User | null;
-  setIsAuthenticated: (isAuthenticated: boolean) => void,
   setUser: (user: User | null) => void,
   countryId: string,
   deviceName: string,
 }
 
 const ProfileUser: ProfileContext = {
-  isAuthenticated: false,
   user: null,
-  setIsAuthenticated: () => {},
   setUser: () => {},
   countryId: '',
   deviceName: '',
@@ -47,7 +43,6 @@ const ProfileUser: ProfileContext = {
 export const Profile = createContext<ProfileContext>(ProfileUser);
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
   const [user, setUser] = useState<User | null>(null)
   const countryId = Intl.DateTimeFormat().resolvedOptions().timeZone
   const deviceName = 'mobile'
@@ -56,9 +51,8 @@ function App() {
     const user = localStorage.getItem('user')
     const authenticated = localStorage.getItem('authenticated')
 
-    if(user && authenticated) {
+    if(user) {
       setUser(JSON.parse(user))
-      setIsAuthenticated(JSON.parse(authenticated))
     }
   },[localStorage])
   // console.log(localStorage)
@@ -68,8 +62,6 @@ function App() {
 
       <Suspense fallback={<Spinner/>}>
         <Profile.Provider value={{ 
-          isAuthenticated,
-          setIsAuthenticated,
           user,
           setUser,
           countryId,
@@ -78,7 +70,7 @@ function App() {
           <Routes>
             <Route path='/' element={<HomePage/>} />
             {
-              isAuthenticated ? (
+              user ? (
                 <Route path='/account' element={<Account/>} />
               ) : (
                 <Route path='/login' element={<Login/>} >
@@ -94,8 +86,7 @@ function App() {
           </Routes>
         </Profile.Provider>
       </Suspense>
-
-    </GoogleOAuthProvider>;
+    </GoogleOAuthProvider>
     </div>
   );
 }

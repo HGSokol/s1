@@ -75,40 +75,40 @@ const ChangePassword3 = () => {
 
 
   return (
-    <div className='w-[288px] mx-auto mt-[24px] lg:w-[492px] lg:mt-[223px]'>
-      <h1 className='font-body font-[600] text-[22px] leading-[26.25px] text-center mb-[14px] lg:text-[40px] lg:leading-[46.96px] lg:mb-[24px]'>Восстановление пароля</h1>
-      <h3 className='font-body text-[#777872] font-[600] text-[14px] leading-[26.25px] text-center mb-[32px] lg:text-[22px] lg:leading-[32px] lg:mb-[48px]'>Введите новый пароль</h3>
-      <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col w-[288px] lg:w-[441px] mx-auto'>
-        <div className='relative mb-[16px] lg:mb-[20px]'>
-            <div className='absolute translate-x-[250px] translate-y-[14px] lg:translate-x-[400px] lg:translate-y-[18px] cursor-pointer' 
+    <div className='w-[288rem] mx-auto mt-[24rem] lg:w-[492rem] lg:mt-[223rem]'>
+      <h1 className='font-body font-[600] text-[22rem] leading-[26.25rem] text-center mb-[14rem] lg:text-[40rem] lg:leading-[46.96rem] lg:mb-[24rem]'>Восстановление пароля</h1>
+      <h3 className='font-body text-[#777872] font-[600] text-[14rem] leading-[26.25rem] text-center mb-[32rem] lg:text-[22rem] lg:leading-[32rem] lg:mb-[48rem]'>Введите новый пароль</h3>
+      <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col w-[288rem] lg:w-[441rem] mx-auto'>
+        <div className='relative mb-[16rem] lg:mb-[20rem]'>
+            <div className='absolute translate-x-[250rem] translate-y-[14rem] lg:translate-x-[400rem] lg:translate-y-[18rem] cursor-pointer' 
               onClick={onClickChangeType}>
                 {
-                  type ? (<BsEyeSlash size='20px' color='#AAAAAA'/>) : (<AiOutlineEye size='20px' color='#AAAAAA'/>)
+                  type ? (<BsEyeSlash size='20rem' color='#AAAAAA'/>) : (<AiOutlineEye size='20rem' color='#AAAAAA'/>)
                 }  
               </div>
             <input 
               placeholder='Ваш пароль' 
               type={`${type === true ? 'password' : 'text'}`}
               {...register("password")} 
-              className='outline-none w-full h-[48px] px-[16px] rounded-[8px] bg-white border-[1px] border-[#1F211714] placeholder:text-[12px] placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56px] lg:placeholder:text-[16px]'/>
-              <p className='text-red-600 h-[24px] text-[15px]'>{errors.password?.message}</p>
+              className='outline-none w-full h-[48rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[12rem] placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56rem] lg:placeholder:text-[16rem]'/>
+              <p className='text-red-600 h-[24rem] text-[15rem]'>{errors.password?.message}</p>
         </div>
-        <div className='relative mb-[32px] lg:mb-[48px]'>
-          <div className='absolute translate-x-[250px] translate-y-[14px] lg:translate-x-[400px] lg:translate-y-[18px] cursor-pointer' 
+        <div className='relative mb-[32rem] lg:mb-[48rem]'>
+          <div className='absolute translate-x-[250rem] translate-y-[14rem] lg:translate-x-[400rem] lg:translate-y-[18rem] cursor-pointer' 
             onClick={onClickChangeType}>
               {
-                type ? (<BsEyeSlash size='20px' color='#AAAAAA'/>) : (<AiOutlineEye size='20px' color='#AAAAAA'/>)
+                type ? (<BsEyeSlash size='20rem' color='#AAAAAA'/>) : (<AiOutlineEye size='20rem' color='#AAAAAA'/>)
               }  
             </div>
           <input 
             placeholder='Подтвердите пароль' 
             type={`${type === true ? 'password' : 'text'}`}
             {...register("password2")} 
-            className='outline-none w-full h-[48px] px-[16px] rounded-[8px] bg-white border-[1px] border-[#1F211714] placeholder:text-[12px] placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56px] lg:placeholder:text-[16px]'/>
-            <p className='text-red-600 h-[24px] text-[15px]'>{errors.password2?.message}</p>
+            className='outline-none w-full h-[48rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[12rem] placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56rem] lg:placeholder:text-[16rem]'/>
+            <p className='text-red-600 h-[24rem] text-[15rem]'>{errors.password2?.message}</p>
         </div>
-        <div className='mb-[36px]'>
-          <button type="submit" disabled={!isValid} className={`${ isValid === true ? ' bg-[#FFB700]': ' bg-[#FFB700]/50'} mb-[20px] lg:mb-[24px] w-full h-[42px] py-[14px] px-[18px] text-[12px] text-white font-[600] rounded-[40px] lg:h-[56px] lg:py-[16px] lg:px-[24px] lg:text-[16px]`}>
+        <div className='mb-[36rem]'>
+          <button type="submit" disabled={!isValid} className={`${ isValid === true ? ' bg-[#FFB700]': ' bg-[#FFB700]/50'} mb-[20rem] lg:mb-[24rem] w-full h-[42rem] py-[14rem] rem-[18rem] text-[12rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem]`}>
             Сохранить
           </button>
         </div>

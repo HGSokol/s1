@@ -5,7 +5,9 @@
 @tailwind components;
 @tailwind utilities;
 
+
 html, body{
+  font-size: calc(1vw / 3.2);
   background-color:  #fafafa;
   margin: 0;
   padding: 0;
@@ -14,4 +16,10 @@ html, body{
 ::-webkit-scrollbar {
   width: 0;
 }
+
+@media screen and (min-width: 1024px) {
+  :root {
+    font-size: calc(1vw / 19.2);
+  }
+};
 

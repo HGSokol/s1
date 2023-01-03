@@ -5,16 +5,12 @@ import { HiMail } from 'react-icons/hi'
 
 export const Footer = () => {
   return (
-  <div className='bg-black h-[203px] py-[32px] px-[56px] flex flex-col
-  lg:h-[71.55px] lg:py-[16px] lg:px-[40px] lg:justify-between lg:flex-row
-  2lg:h-[135px] 2lg:py-[32px] 2lg:px-[120px] 2lg:justify-between '>
-    <div className='my-auto mb-[24px] mx-auto 
-    lg:mx-0 lg:my-auto
-    2lg:mx-0 2lg:my-auto'>
-        <svg viewBox="0 0 126 56" fill="none" xmlns="http://www.w3.org/2000/svg" className='w-[82px] h-[36px] 
-        md:w-[126px] md:h-[56px]
-        lg:w-[67px] lg:h-[30px]
-        2lg:w-[126px] 2lg:h-[56px]'>
+  <div className='bg-black h-[203rem] py-[32rem] px-[56rem] flex flex-col
+  lg:justify-between lg:flex-row lg:h-[135rem] lg:py-[32rem] lg:px-[120rem]  '>
+    <div className='my-auto mb-[24rem] mx-auto 
+    lg:mx-0 lg:my-auto'>
+        <svg viewBox="0 0 126 56" fill="none" xmlns="http://www.w3.org/2000/svg" className='w-[82rem] h-[36rem] 
+        lg:w-[126rem] lg:h-[56rem]'>
           <path d="M6.68241 4.4514V51.5486H23.6529V56H2.19141V0H23.6529V4.4514H6.68241Z" fill="#FAB513"/>
           <path d="M32.7098 14.7234C33.4447 14.8231 34.1617 15.0252 34.8396 15.3237C35.4593 15.6001 36.0257 15.9812 36.5136 16.45C36.9789 16.907 37.3529 17.4471 37.6159 18.0417C38.1421 19.3029 38.1421 20.7194 37.6159 21.9805C37.3545 22.5761 36.9803 23.1164 36.5136 23.5723C36.0266 24.0474 35.4603 24.4354 34.8396 24.7188C34.1651 25.0265 33.4467 25.229 32.7098 25.3191V26.3105H30.3146V25.3191C29.5762 25.2298 28.8557 25.0297 28.178 24.7256C27.5539 24.447 26.983 24.0636 26.4905 23.5925C26.0192 23.1338 25.6425 22.5886 25.3813 21.9873C25.113 21.3604 24.9787 20.6853 24.9867 20.0044C24.9788 19.3405 25.1081 18.682 25.3668 18.0696C25.6254 17.4571 26.0078 16.9037 26.4905 16.4433C26.9851 15.9765 27.5556 15.5957 28.178 15.3169C28.8557 15.0128 29.5762 14.8127 30.3146 14.7234V13.8062H32.7098V14.7234ZM27.7289 20.0044C27.7289 20.7395 27.9398 21.3735 28.3685 21.9131C28.7972 22.4527 29.4504 22.8101 30.3146 22.9922V17.0368C29.9169 17.1158 29.5337 17.2546 29.1783 17.4482C28.8715 17.6199 28.5974 17.8436 28.3685 18.1092C28.1518 18.3627 27.9877 18.656 27.8854 18.9725C27.7773 19.3058 27.7244 19.6543 27.7289 20.0044ZM35.2683 20.0044C35.2683 19.285 35.0574 18.6577 34.6355 18.1227C34.2136 17.5898 33.5672 17.2256 32.7098 17.0368V22.972C33.5672 22.7966 34.2136 22.4392 34.6355 21.8996C35.058 21.3577 35.2812 20.6891 35.2683 20.0044Z" fill="white"/>
           <path d="M43.7605 21.7582L48.163 14.7573H51.0482V25.2586H48.5033V18.3454H48.4624L44.0463 25.2586H41.168V14.7573H43.7129V21.7582H43.7605Z" fill="white"/>
@@ -32,53 +28,41 @@ export const Footer = () => {
           <path d="M117.454 42.5921H114.671L119.114 32.0908H121.605L126 42.5921H123.156L122.333 40.5283H118.236L117.454 42.5921ZM118.965 38.4982H121.632L120.312 34.8898L118.965 38.4982Z" fill="white"/>
         </svg>
     </div>
-    <div className='grid grid-rows-2 w-[209px] h-[71px] mx-auto place-items-center gap-[12px]
-    md:w-[209px] md:h-[71px] md:gap-[20px]
-    lg:mx-0 lg:place-items-end lg:gap-[0px] lg:h-[37.63px]
-    2lg:mx-0 2lg:place-items-end 2lg:h-[71px]'>
-      <div className='flex flex-row gap-[16px] items-center items-self-start
-      lg:gap-[8px]
-      2lg:gap-[16px] '>
+    <div className='grid grid-rows-2 w-[209rem] h-[71rem] mx-auto place-items-center gap-[12rem]
+    lg:gap-[0rem] lg:mx-0 lg:place-items-end lg:h-[71rem]'>
+      <div className='flex flex-row gap-[16rem] items-center items-self-start
+      lg:gap-[16rem] '>
           <a href='https://www.facebook.com/' target="_blank" rel="noreferrer">
-            <div className='w-[28px] h-[28px] rounded-full border-[2px] grid place-items-center
-            lg:w-[14px] lg:h-[14px] lg:border-[1px]
-            2lg:w-[28px] 2lg:h-[28px]'>
-              <FaFacebookF className='w-[16px] h-[16px]
-              lg:w-[8px] lg:h-[8px]
-              2lg:w-[16px] 2lg:h-[16px]' color='white'/>
+            <div className='w-[28rem] h-[28rem] rounded-full border-[2rem] grid place-items-center
+            lg:border-[1rem] lg:w-[28rem] lg:h-[28rem]'>
+              <FaFacebookF className='w-[16rem] h-[16rem]
+              lg:w-[16rem] lg:h-[16rem]' color='white'/>
             </div>
           </a>
           <a href='https://www.instagram.com/' target="_blank" rel="noreferrer">
-            <div className='w-[28px] h-[28px] rounded-full border-[2px] grid place-items-center 
-            lg:w-[14px] lg:h-[14px] lg:border-[1px]
-            2lg:w-[28px] 2lg:h-[28px]'>
-              <AiFillInstagram className='w-[16px] h-[16px]
-              lg:w-[8px] lg:h-[8px]
-              2lg:w-[16px] 2lg:h-[16px]' color='white'/>
+            <div className='w-[28rem] h-[28rem] rounded-full border-[2rem] grid place-items-center 
+            lg:border-[1rem] lg:w-[28rem] lg:h-[28rem]'>
+              <AiFillInstagram className='w-[16rem] h-[16rem]
+              lg:w-[16rem] lg:h-[16rem]' color='white'/>
             </div>
           </a>
           <a href='https://web.telegram.org/z/' target="_blank" rel="noreferrer">
-            <div className='w-[28px] h-[28px] rounded-full border-[2px] grid place-items-center 
-            lg:w-[14px] lg:h-[14px] lg:border-[1px]
-            2lg:w-[28px] 2lg:h-[28px]'>
-              <FaTelegramPlane className='w-[16px] h-[16px]
-              lg:w-[8px] lg:h-[8px]
-              2lg:w-[16px] 2lg:h-[16px]' color='white'/>
+            <div className='w-[28rem] h-[28rem] rounded-full border-[2rem] grid place-items-center 
+            lg:border-[1rem] lg:w-[28rem] lg:h-[28rem]'>
+              <FaTelegramPlane className='w-[16rem] h-[16rem]
+              lg:w-[16rem] lg:h-[16rem]' color='white'/>
             </div>
           </a>
           <a href='#' target="_blank" rel="noreferrer">
-            <div className='w-[28px] h-[28px] rounded-full border-[2px] grid place-items-center 
-            lg:w-[14px] lg:h-[14px] lg:border-[1px]
-            2lg:w-[28px] 2lg:h-[28px]'>
-              <HiMail className='w-[16px] h-[16px]
-              lg:w-[8px] lg:h-[8px]
-              2lg:w-[16px] 2lg:h-[16px]' color='white'/>
+            <div className='w-[28rem] h-[28rem] rounded-full border-[2rem] grid place-items-center 
+            lg:border-[1rem] lg:w-[28rem] lg:h-[28rem]'>
+              <HiMail className='w-[16rem] h-[16rem]
+              lg:w-[16rem] lg:h-[16rem]' color='white'/>
             </div>
           </a>
       </div>
-      <div className='font-bodyalt font-[600] text-[16px] leading-[19.09px] text-white
-      lg:text-[8.5px] lg:leading-[10px]
-      2lg:text-[16px]'>© 2022 Фитнес как наука.</div>
+      <div className='font-bodyalt font-[600] text-[16rem] leading-[19.09rem] text-white
+      lg:leading-[10rem] lg:text-[16rem]'>© 2022 Фитнес как наука.</div>
     </div>
     </div>
   )
