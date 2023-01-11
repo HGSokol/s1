@@ -1,10 +1,11 @@
+import React from 'react'
 import { Link } from 'react-router-dom'
 
 
 const NotFound = () => {
   return(
     <div className=' h-screen flex'>
-      <div className='w-96 h-32 my-auto mx-auto text-center'>
+      <div className='w-[1536rem] h-[512rem] my-auto mx-auto text-center text-[16rem]'>
         <h1>
           <span className=''>:(</span>
           <br/>
@@ -12,7 +13,7 @@ const NotFound = () => {
         </h1>
         <p className=''>
           Sorry, this page is missing.</p>
-        <Link to='/' className='text-blue-400 font-medium'>go to login page</Link>
+        <Link to='/' className='text-blue-400 font-medium text-[16rem]'>go to login page</Link>
       </div>
     </div>
   )

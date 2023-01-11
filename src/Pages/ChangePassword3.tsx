@@ -16,19 +16,16 @@ interface IFormInputs {
 }
 
 const schema = yup.object({
-  password: yup
-    .string()
-    .min(8, 'Минимум 8 символов')
-    .matches(/[0-9]/, 'Пароль должен содержать 1 цифру')
-    .matches(/[a-z]/, 'Пароль должен содержать 1 букву нижнего регистра')
-    .matches(/[A-Z]/, 'Пароль должен содержать 1 заглавную букву'),
-    password2: yup
-    .string()
+  password: yup.string()
+    .required('Обязательное поле') 
+    .min(8, 'Пароль слишком короткий - минимум 8 знаков.')
+    .matches(/[a-zA-Z0-9]/, 'Пароль может содержать только латинские буквы'),
+  password2: yup.string()
     .oneOf([yup.ref('password'), null], 'Пароли должны совпадать'),
 }).required();
 
 const ChangePassword3 = () => {
-  const { user, countryId, deviceName } = useContext(Profile)
+  const { user, deviceName } = useContext(Profile)
   const [type, setType] = useState(true)
   const navigate = useNavigate()
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IFormInputs>({
@@ -38,7 +35,7 @@ const ChangePassword3 = () => {
 
   useEffect(() => {   
     if(!user || !user.token) {
-      navigate('/login/stage1')
+      navigate('/login/step1')
     }
   },[]) 
 
@@ -50,21 +47,13 @@ const ChangePassword3 = () => {
       deviceName,
     }
 
-    axios.put('https://stage.fitnesskaknauka.com/api/auth/reset-password', userInfo, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Timezone': `${countryId}`
-      }
-    })
+    axios.put('https://stage.fitnesskaknauka.com/api/auth/reset-password', userInfo)
     .then((res) => {
-      // console.log(res)
-      // console.log(res.data)
 
       reset()
       navigate('/login')
     })
     .catch((error) => {
-      // console.log(error)
       // console.log(error.response.data)
     })
   };
@@ -83,29 +72,37 @@ const ChangePassword3 = () => {
             <div className='absolute translate-x-[250rem] translate-y-[14rem] lg:translate-x-[400rem] lg:translate-y-[18rem] cursor-pointer' 
               onClick={onClickChangeType}>
                 {
-                  type ? (<BsEyeSlash size='20rem' color='#AAAAAA'/>) : (<AiOutlineEye size='20rem' color='#AAAAAA'/>)
+                  type ? (<BsEyeSlash color='#AAAAAA' className='w-[20rem] h-[20rem]'/>) : (<AiOutlineEye color='#AAAAAA' className='w-[20rem] h-[20rem]'/>)
                 }  
               </div>
             <input 
               placeholder='Ваш пароль' 
               type={`${type === true ? 'password' : 'text'}`}
               {...register("password")} 
-              className='outline-none w-full h-[48rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[12rem] placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56rem] lg:placeholder:text-[16rem]'/>
-              <p className='text-red-600 h-[24rem] text-[15rem]'>{errors.password?.message}</p>
+              className={`text-[12rem] hover:border-[#777872] outline-none w-full h-[48rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[12rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
+              lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
+              ${errors.password? ' hover:border-[#CB1D1D]': ' '}`}/>
+              {
+                errors.password? <p className='text-red-600 h-[24rem] text-[15rem]'>{errors.password?.message}</p> : null
+              }
         </div>
         <div className='relative mb-[32rem] lg:mb-[48rem]'>
           <div className='absolute translate-x-[250rem] translate-y-[14rem] lg:translate-x-[400rem] lg:translate-y-[18rem] cursor-pointer' 
             onClick={onClickChangeType}>
               {
-                type ? (<BsEyeSlash size='20rem' color='#AAAAAA'/>) : (<AiOutlineEye size='20rem' color='#AAAAAA'/>)
+                type ? (<BsEyeSlash color='#AAAAAA' className='w-[20rem] h-[20rem]'/>) : (<AiOutlineEye color='#AAAAAA' className='w-[20rem] h-[20rem]'/>)
               }  
             </div>
           <input 
             placeholder='Подтвердите пароль' 
             type={`${type === true ? 'password' : 'text'}`}
             {...register("password2")} 
-            className='outline-none w-full h-[48rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[12rem] placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56rem] lg:placeholder:text-[16rem]'/>
-            <p className='text-red-600 h-[24rem] text-[15rem]'>{errors.password2?.message}</p>
+            className={`text-[12rem] hover:border-[#777872] outline-none w-full h-[48rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[12rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
+            lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
+            ${errors.password2? ' hover:border-[#CB1D1D]': ' '}`}/>
+            {
+              errors.password2? <p className='text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]'>{errors.password2?.message}</p> : null
+            }
         </div>
         <div className='mb-[36rem]'>
           <button type="submit" disabled={!isValid} className={`${ isValid === true ? ' bg-[#FFB700]': ' bg-[#FFB700]/50'} mb-[20rem] lg:mb-[24rem] w-full h-[42rem] py-[14rem] rem-[18rem] text-[12rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem]`}>

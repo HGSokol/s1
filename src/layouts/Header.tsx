@@ -32,7 +32,7 @@ export const Header = () => {
       </div>
       {
         user ? (
-          <Link to='/account' >
+          <Link to='/cabinet' >
             <p>{`Привет ${user.name} ${user.lastName}`}</p>
           </Link>
         ) : (

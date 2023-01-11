@@ -3,7 +3,7 @@ import { BsApple } from 'react-icons/bs'
 // import { LoginSocialGoogle, IResolveParams } from 'reactjs-social-login'
 
 
-export const AppleLogin = () => {
+export const AppleAuth = () => {
   // const _appId = '1018011035779-9cva0vmc8e8a6nanr5url7uk2b8lj8do.apps.googleusercontent.com'
 
   // const [provider, setProvider] = useState('');
@@ -36,7 +36,7 @@ export const AppleLogin = () => {
     )} */}
     <div className='cursor-pointer'>
     {/* <LoginSocialApple
-      client_id={process.env.REACT_APP_APPLE_ID || ''}
+      client_id={_appId || ''}
       scope={'name email'}
       redirect_uri={'http://localhost:3000'}
       onLoginStart={onLoginStart}
@@ -48,10 +48,9 @@ export const AppleLogin = () => {
         // console.log(err);
       }}
     > */}
-        <div className='w-[50px] h-[50px] rounded-[10px] drop-shadow-md bg-black grid place-content-center lg:w-[64px] lg:h-[64px]'>
-          <BsApple className='w-[24px] h-[24px] lg:w-[34.5px] lg:h-[34.5px]' fill='white'/>
+        <div className='w-[40px] h-[40px] rounded-[4px] drop-shadow-md bg-black grid place-content-center '>
+          <BsApple className='w-[20px] h-[20px]' fill='white'/>
         </div>
-      {/* </LoginSocialGoogle> */}
     </div>
     </>
   )

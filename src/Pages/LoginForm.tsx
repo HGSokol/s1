@@ -25,12 +25,13 @@ const schema = yup.object({
 }).required();
 
 const LoginForm = () => {
-  const { countryId, deviceName, setUser, user } = useContext(Profile)
+  const [ errorMessage, setErrorMessage ] = useState<string | null>(null)
+  const { deviceName, setUser, setIsAuthenticated } = useContext(Profile)
   const [ type, setType ] = useState(true)
   const navigate = useNavigate()
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
-    mode:'onBlur'
+    mode:'onChange'
   });
 
 
@@ -39,21 +40,11 @@ const LoginForm = () => {
       ...data,
       deviceName: deviceName
     }
+    localStorage.setItem('password', JSON.stringify(data.password))
 
-    axios.post('https://stage.fitnesskaknauka.com/api/auth/login', userInfo, {
-      headers: {
-        'Content-type':'application/json',
-        'Timezone': `${countryId}`
-      }
-    })
+    axios.post('https://stage.fitnesskaknauka.com/api/auth/login', userInfo)
     .then((res) => {
-      // console.log(res)
-      // console.log(res.data)
-
       localStorage.setItem('user', JSON.stringify({
-        email: res.data.email,
-        name: res.data.name,
-        lastName: res.data.lastName,
         token: res.data.token,
       }))
       localStorage.setItem('authenticated', JSON.stringify(true))
@@ -64,11 +55,15 @@ const LoginForm = () => {
         lastName: res.data.lastName,
         token: res.data.token,
       })
+      setIsAuthenticated(true)
 
-      navigate('/account')
+      navigate('/cabinet')
     })
     .catch((error) => {
       console.log(error.response.data)
+      if(error.response.status === 401){
+        setErrorMessage(error.response.data.message)
+      }
     })
 
 
@@ -85,34 +80,46 @@ const LoginForm = () => {
     <h1 className='font-body font-[600] text-[22rem] leading-[26.25rem] text-center mb-[32rem] 
     lg:text-[40rem] lg:leading-[46.96rem] lg:mb-[48rem]'>Вход</h1>
     <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
-      <div className=''>
+      <div className='mb-[24rem]'>
         <input 
           placeholder='Ваш e-mail'
           type='text' 
           {...register("email")} 
-          className='outline-none w-full h-[48rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[12rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
-          lg:h-[56rem] lg:placeholder:text-[16rem]  '/>
-          <p className='text-red-600 h-[24rem] text-[15rem]'>{errors.email?.message}</p>
+          className={`text-[12rem] hover:border-[#777872] outline-none w-full h-[48rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[12rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
+          lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
+          ${errors.email? ' hover:border-[#CB1D1D]': ' '}`}/>
+          {
+            errors.email? <p className='text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]'>{errors.email?.message}</p> : null
+          }
       </div>
-      <div className='relative '>
-        <div className='absolute translate-x-[250rem] translate-y-[14rem] 
+      <div className='relative mb-[14rem]'>
+        <div className='absolute 
+        translate-x-[245rem] translate-y-[15rem]
         lg:translate-x-[400rem] lg:translate-y-[18rem] cursor-pointer' 
           onClick={onClickChangeType}>
             {
-              type ? (<BsEyeSlash className='h-[20rem] w-[20rem]' color='#AAAAAA'/>) : (<AiOutlineEye className='h-[20rem] w-[20rem]' color='#AAAAAA'/>)
+              type ? (<BsEyeSlash color='#AAAAAA' className='h-[20rem] w-[20rem]'/>) : (<AiOutlineEye color='#AAAAAA' className='h-[20rem] w-[20rem]'/>)
             }
           </div>
         <input 
           placeholder='Ваш пароль' 
           type={`${type === true ? 'password' : 'text'}`}
           {...register("password")} 
-          className='outline-none w-full h-[48rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[12rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
-          lg:h-[56rem] lg:placeholder:text-[16rem] lg:placeholder:text-start'/>
-          <p className='text-red-600 h-[24rem] text-[15rem]'>{errors.password?.message}</p>
+          className={`text-[12rem] hover:border-[#777872] outline-none w-full h-[48rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[12rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
+          lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
+          ${errors.password? ' hover:border-[#CB1D1D]': ' '}`}/>
+          {
+            errors.password? <p className='text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]'>{errors.password?.message}</p> : null
+          }
       </div> 
-      <Link to='/login/stage1' className='mb-[32rem] lg:mb-[48rem]'>
+      <Link to='/login/step1' className='mb-[17rem] lg:mb-[48rem]'>
         <p className='font-bodyalt text-[12rem] text-[#777872] font-[600] text-end lg:text-[16rem]'>Забыли пароль?</p>
       </Link>  
+      <p className='w-full flex justify-center h-[20rem] mb-[5rem]'>
+      {
+        errorMessage ? (<p className='text-[11px] text-[#CB1D1D] text-center h-[30rem] lg:h-[30rem] md:text-[15px] leading-[10rem] lg:text-[15rem]'>{errorMessage}</p>) : null
+      } 
+      </p>
       <div className='mb-[36rem]'>
         <button type="submit" disabled={!isValid} className={`${ isValid === true ? ' bg-[#FFB700]': ' bg-[#FFB700]/50'} mb-[20rem] lg:mb-[24rem] w-full h-[42rem] py-[14rem] rem-[18rem] text-[12rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem]`}>
           Войти

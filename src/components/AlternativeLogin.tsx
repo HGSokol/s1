@@ -1,4 +1,4 @@
-import { AppleLogin } from "./appleLogin"
+import { AppleAuth } from "./appleLogin"
 import { GoogleLogin1 } from "./googleLogin"
 
 interface AtlLogin {
@@ -11,7 +11,7 @@ export const AlternativeLogin = ({children}:AtlLogin) => {
       {children}
       <div className='flex flex-row gap-[30rem] justify-center lg:gap-[24rem]'>
         <GoogleLogin1 />
-        <AppleLogin />
+        <AppleAuth />
       </div>
     </>
   )

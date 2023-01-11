@@ -16,7 +16,7 @@ import { GoogleLogin } from '@react-oauth/google';
 // const _appId = '148113392760-243a1pc16e8vbu20eqogoalrvppil48v.apps.googleusercontent.com'
 
 export const GoogleLogin1 = () => {
-  const { setUser, countryId, user, deviceName } = useContext(Profile)
+  const { setUser, user, deviceName } = useContext(Profile)
   const navigate = useNavigate()  
   // console.log(user)
   const onLogout = useCallback(() => {}, []);

@@ -31,11 +31,10 @@ const Login = () => {
   const [type, setType] = useState(true)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const navigate = useNavigate()
-  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
 
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
-    mode:'onBlur'
+    mode:'onChange'
   });
 
   const onSubmit = (data: IFormInputs) => {
@@ -44,19 +43,12 @@ const Login = () => {
       deviceName: 'deckstop'
     }
 
-    axios.post('https://stage.fitnesskaknauka.com/api/auth/register', userInfo, {
-      headers: {
-        'Content-type':'application/json',
-        'Timezone': `${timezone}`
-      }
-    })
+    axios.post('https://stage.fitnesskaknauka.com/api/auth/register', userInfo)
     .then((res) => {
-      // console.log(res)
-      // console.log(res.data)
-
       navigate('/login')
     })
     .catch((error) => {
+      console.log(error.response)
       setErrorMessage(error.response.data.message)
     })
 
@@ -74,46 +66,59 @@ const Login = () => {
     <div className='w-[288rem] mt-[24rem] lg:w-[441rem] mx-auto lg:mt-[109rem]'>
       <h1 className='font-body font-[600] text-[22rem] leading-[26.25rem] text-center mb-[32rem] lg:text-[40rem] lg:leading-[46.96rem] lg:mb-[48rem]'>Регистрация</h1>
       <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
-      <div className=''>
-          <input 
-            placeholder='Ваше имя'
-            type='text' 
-            {...register("name")} 
-            className='outline-none w-full h-[48rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[12rem] placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56rem] lg:placeholder:text-[16rem]  '/>
-            <p className='text-red-600 h-[24rem] text-[15rem]'>{errors.name?.message}</p>
-        </div> <div className='first-line:'>
+      <div className='mb-[16rem] lg:mb-[24rem]'>
+        <input 
+          placeholder='Ваше имя'
+          type='text' 
+          {...register("name")} 
+          className='px-[16rem] text-[12rem] hover:border-[#777872] outline-none w-full h-[48rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[12rem] placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56rem] lg:placeholder:text-[16rem] lg:text-[16rem]'/>
+          {
+            errors.name? <p className='text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]'>{errors.name?.message}</p> : null
+          }
+      </div> 
+      <div className='mb-[16rem] lg:mb-[24rem]'>
           <input 
             placeholder='Ваша фамилия'
             type='text' 
             {...register("lastName")} 
-            className='outline-none w-full h-[48rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[12rem] placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56rem] lg:placeholder:text-[16rem]  '/>
-            <p className='text-red-600 h-[24rem] text-[15rem]'>{errors.lastName?.message}</p>
+            className='px-[16rem] outline-none w-full h-[48rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[12rem] placeholder:font-[400] placeholder:text-[#AAAAAA] text-[12rem] hover:border-[#777872] lg:text-[16rem]  lg:h-[56rem] lg:placeholder:text-[16rem]  '/>
+          {
+            errors.lastName? <p className='text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]'>{errors.lastName?.message}</p> : null
+          }
         </div>
-        <div className=''>
+        <div className='mb-[16rem] lg:mb-[24rem]'>
           <input 
             placeholder='Ваш e-mail'
             type='text' 
             {...register("email")} 
-            className='outline-none w-full h-[48rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[12rem] placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56rem] lg:placeholder:text-[16rem]  '/>
-            <p className='text-red-600 h-[24rem] text-[15rem]'>{errors.email?.message}</p>
+            className={`text-[12rem] hover:border-[#777872] outline-none w-full h-[48rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[12rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
+            lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
+            ${errors.email? ' hover:border-[#CB1D1D]': ' '}`}/>
+            {
+              errors.email? <p className='text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]'>{errors.email?.message}</p> : null
+            }
         </div>
-        <div className='relative mb-[24rem]'>
+        <div className='relative mb-[32rem] lg:mb-[24rem]'>
           <div className='absolute translate-x-[250rem] translate-y-[14rem] lg:translate-x-[400rem] lg:translate-y-[18rem] cursor-pointer' 
             onClick={onClickChangeType}>
             {
-              type ? (<BsEyeSlash size='20rem' color='#AAAAAA'/>) : (<AiOutlineEye size='20rem' color='#AAAAAA'/>)
+              type ? (<BsEyeSlash color='#AAAAAA' className='w-[20rem] h-[20rem]'/>) : (<AiOutlineEye color='#AAAAAA' className='w-[20rem] h-[20rem]'/>)
             }
           </div>
           <input 
             placeholder='Ваш пароль' 
             type={`${type === true ? 'password' : 'text'}`}
             {...register("password")} 
-            className='outline-none w-full h-[48rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[12rem] placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56rem] lg:placeholder:text-[16rem]'/>
-            <p className='text-red-600 h-[24rem] text-[15rem]'>{errors.password?.message}</p>
-        </div>
+            className={`text-[12rem] hover:border-[#777872] outline-none w-full h-[48rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[12rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
+            lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
+            ${errors.email? ' hover:border-[#CB1D1D]': ' '}`}/>
+            {
+              errors.password? <p className='text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]'>{errors.password?.message}</p> : null
+            }
+        </div> 
         {
-          errorMessage ? (<p className='text-[15rem] text-red-400 text-center'>{errorMessage}</p>) : null
-        }  
+          errorMessage ? (<p className='text-center text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]'>{errorMessage}</p>) : null
+        } 
         <div className='mb-[36rem]'>
           <button type="submit" disabled={!isValid} className={`${ isValid === true ? ' bg-[#FFB700]': ' bg-[#FFB700]/50'} mb-[20rem] lg:mb-[24rem] w-full h-[42rem] py-[14rem] rem-[18rem] text-[12rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem]`}>
             Зарегистрироваться

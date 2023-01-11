@@ -23,19 +23,18 @@ export const Training = () => {
 
   return (
   <div id='training' className='grid grid-rows-[auto_h-min] mb-[117rem] grid-cols-1 
-  lg:grid-cols-[auto_auto] lg:grid-rows-1 lg:mb-[169rem]'>
-    <div className='
-    lg:pt-[120rem] '>
-      <div className='flex flex-row gap-[8rem]
-      lg:gap-[18rem]'>
+  lg:grid-cols-[auto_auto] lg:grid-rows-1 lg:mb-[169rem] lg:pt-[20rem]'>
+    <div className='lg:pt-[120rem]'>
+      <div className='mb-[24rem] flex flex-row gap-[8rem] 
+      lg:w-[814rem] lg:mb-[32rem] lg:gap-[18rem]'>
         {
           data.map((item,i) => {
             return (
               <button 
                 key={i}
-                className={`bg-white font-bodyalt rem-[12rem] py-[8rem] w-max h-[30rem] font-[400] text-[12rem] leading-[14.32rem] rounded-[40rem] mb-[24rem] duration-[600ms] whitespace-nowrap
+                className={`hover:bg-[#FFB700] hover:text-[#FAFAFA] bg-white font-bodyalt h-[30rem] px-[12rem] py-[8rem] text-[12rem] rem-[12rem] leading-[14.32rem] rounded-[40rem] font-[400] duration-[600ms] whitespace-nowrap
                 lg:h-[43rem] lg:text-[16rem] lg:leading-[19rem] lg:rem-[24rem] lg:py-[12rem] lg:w-max lg:px-[24rem]
-                ${active === i? ' bg-[#FFB700] text-[#FAFAFA]': ' bg-[#FFFFFF] text-[#1F2117] drop-shadow-md'}`}
+                ${active === i? ' bg-[#FFB700] text-[#FAFAFA] drop-shadow-dropActive': ' bg-[#FFFFFF] text-[#1F2117] drop-shadow-drop'}`}
                 onClick={() => activeButton(i)}>{item}</button>
             )
           })

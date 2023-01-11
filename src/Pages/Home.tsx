@@ -1,5 +1,3 @@
-import {useEffect, useContext} from 'react'
-import { Profile } from '../App'
 import { Header } from '../layouts/Header';
 import { Preview } from '../layouts/Preview';
 import { About } from '../layouts/About';
@@ -14,26 +12,25 @@ import { Feedback } from '../layouts/Feedback';
 
 
 function HomePage() {
-  const { setUser } = useContext(Profile)
-
-
   return (
-    <div className='lg:w-[1920rem]'>
-      <div className='mx-[16rem] lg:mx-[120rem] overflow-hidden'>
-        <Header/>
-        <Preview/>
-        <About/>
-        <Article/>
-        <Training/>
-        <Food/>
-        <Progress/>
-        <Command/>
-        <Feedback/>
-        <Subscribe/>
+    <>
+      <div className='lg:w-[1920rem]'>
+        <div className='mx-[16rem] lg:mx-[120rem] overflow-hidden'>
+          <Header/>
+          <Preview/>
+          <About/>
+          <Article/>
+          <Training/>
+          <Food/>
+          <Progress/>
+          <Command/>
+          <Feedback/>
+          <Subscribe/>
+        </div>
+        <Footer/>
       </div>
-      <Footer/>
-    </div>
-  )  
+    </>
+  );
 }
 
 export default HomePage;
