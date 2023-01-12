@@ -42,7 +42,7 @@ const Payment = () => {
     <div className='hidden lg:flex lg:font-body lg:font-[600] lg:text-[40rem] lg:leading-[47rem] lg:text-[#1F2117] lg:mb-[32rem]'>Детали платежей</div>
     <p className='font-bodyalt font-[600] text-[22rem] leaing-[30rem] text-[#1F2117] mb-[32rem] lg:font-body lg:font-[600] lg:text-[26rem] lg:leaing-[30rem] lg:text-[#1F2117] lg:mb-[32rem]'>Способы оплаты</p>
     <div className='w-full lg:w-[441rem]'>
-      <div className='w-full px-[20rem] py-[20rem] mb-[32rem] flex justify-between shadow-lg rounded-[14rem] lg:px-[20rem] lg:py-[25rem] lg:mb-[32rem] lg:flex lg:justify-between lg:shadow-drop lg:rounded-[14rem]'>
+      <div className='w-full px-[20rem] py-[20rem] mb-[32rem] flex justify-between shadow-drop rounded-[14rem] lg:px-[20rem] lg:py-[25rem] lg:mb-[32rem] lg:flex lg:justify-between lg:shadow-drop lg:rounded-[14rem]'>
         <div className=''>
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M10.5 7.15545H17.5001V20.8443H10.5V7.15545Z" fill="#FF5F00"/>
@@ -55,7 +55,9 @@ const Payment = () => {
           <p className='font-bodyalt font-[400] text-[16rem] leading-[19rem] text-[#777872] lg:font-bodyalt lg:font-[600] lg:text-[16rem] lg:text-[#777872] lg:leading-[19rem]'>1234</p>
         </div>
       </div>
-      <div className='w-full py-[20rem] rounded-full bg-[#FFB700] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-[#FAFAFA] flex justify-center mb-[48rem] lg:py-[18.5rem] lg:rounded-full lg:bg-[#FFB700] lg:font-bodyalt lg:font-[600] lg:text-[16rem] lg:leading-[19rem] lg:text-[#FAFAFA] lg:flex lg:justify-center lg:mb-[48rem]'>Изменить данные карты</div>
+      <button  className={`bg-[#FFB700] mb-[30rem] lg:mb-[24rem] w-full h-[42rem] flex items-center justify-center rem-[18rem] text-[12rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem]`}>
+        Изменить данные карты
+      </button>
     </div>
     <div>
       <p className='font-bodyalt font-[600] text-[22rem] leaing-[30rem] text-[#1F2117] mb-[32rem] lg:font-body lg:font-[600] lg:text-[26rem] lg:leading-[30rem] lg:text-[#1F2117] lg:mb-[75rem]'>История платежей</p>

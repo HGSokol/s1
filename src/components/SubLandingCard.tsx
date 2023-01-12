@@ -45,7 +45,7 @@ export const SubCard = ({item, active, landing}: SubCard) => {
         <div className='lg:hidden'>
           {
             active && landing ? (
-              <div onClick={() => navigate('/cabinet/ordering')} className='mt-[16rem] py-[14rem] w-full rounded-full bg-[#FFB700] flex flex-row justify-center items-center'>
+              <div onClick={() => navigate('/cabinet/order')} className='mt-[16rem] py-[14rem] w-full rounded-full bg-[#FFB700] flex flex-row justify-center items-center'>
                 <p className='font-bodyalt font-[600] text-[12rem] leading-[14rem] text-[#FAFAFA] mr-[13rem]'>Оплатить подписку</p>
                 <div>
                   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
