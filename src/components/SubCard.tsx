@@ -14,14 +14,9 @@ export const SubCard = ({item, active, landing, setActiveResetPopup}: SubCard) =
   const navigate = useNavigate()
   const {text, price, top = ''} = item
 
-  const navigateToOrdering = () => {
-    if(landing && window.innerWidth >= 1024){
-      navigate('/cabinet/ordering')
-    }
-  }
 
   return (
-    <div /* onClick={() =>navigateToOrdering()} */ className='relative overflow-hidden rounded-[20rem] drop-shadow-drop duration-[400ms]' >
+    <div onClick={() =>landing && window.innerWidth >= 1024 ?navigate('/cabinet/ordering') : ''} className='relative overflow-hidden rounded-[20rem] drop-shadow-drop duration-[400ms]' >
       <div className={` bg-white  h-max w-full py-[24rem] px-[32rem] overflow-hidden border-[1px] border-transparent cursor-pointer flex flex-col justify-between rounded-[20rem] 
         lg:h-[505rem] lg:w-full lg:py-[36rem] lg:px-[32rem] duration-[400ms] hover:border-[1px] ${active === 'active'? ' border-[#FFB700]': 'hover:border-[#CBCBCB]'}`}>
           {
@@ -67,14 +62,14 @@ export const SubCard = ({item, active, landing, setActiveResetPopup}: SubCard) =
         <div className=''>
           {
             active && !landing ? (
-              <div onClick={() => setActiveResetPopup?.(true)} className='mt-[16rem] py-[14rem] w-full rounded-full bg-[#FFB700] flex flex-row justify-center items-center'>
+              <div onClick={() => setActiveResetPopup?.(true)} className='h-[51rem] mt-[16rem] w-full rounded-full bg-[#FFB700] flex flex-row justify-center items-center lg:h-[56rem]'>
                 <p className='font-bodyalt font-[600] text-[12rem] leading-[14rem] text-[#FAFAFA] mr-[13rem]
-                lg:text-[16rem] lg:leading-[19rem]'>Отменить подписку</p>
+                lg:text-[16rem] lg:leading-[19rem] '>Отменить подписку</p>
               </div>
             ) : !active && !landing ? (
-              <div onClick={() => navigate('/cabinet/order')} className='mt-[16rem] py-[14rem] border-[1px] border-[#1F2117] w-full rounded-full bg-white flex flex-row justify-center items-center'>
-              <p className='font-bodyalt font-[600] text-[12rem] leading-[14rem] text-[#1F2117] mr-[13rem]
-              lg:text-[16rem] lg:leading-[19rem]'>Обновить подписку</p>
+              <div onClick={() => navigate(`${window.innerWidth < 1024 ? '/cabinet/order' : '/cabinet/ordering'}`)} className='h-[51rem] mt-[16rem] border-[1px] border-[#1F2117] w-full rounded-full bg-white flex flex-row justify-center items-center lg:h-[56rem]'>
+                <p className='font-bodyalt font-[600] text-[12rem] leading-[14rem] text-[#1F2117] mr-[13rem]
+                lg:text-[16rem] lg:leading-[19rem] '>Обновить подписку</p>
             </div>
             ) : null
           }         

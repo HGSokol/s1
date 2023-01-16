@@ -107,8 +107,8 @@ const Ordering = () => {
         <div className=' mb-[16rem] font-bodyalt font-[600] text-[16rem] text-[#1F2117] leading-[19rem] lg:mb-[32rem] lg:font-body lg:text-[20rem] lg:leading-[23rem]'>Способ оплаты</div>
           <div className='mb-[16rem]'>
             <div className='relative'>
-              <p className='font-bodyalt font-[400] text-[12rem] leading-[14rem] text-[#AAAAAA] mb-[8rem] lg:text-[16rem] lg:leading-[19rem]'>Номер краты</p>
-              <div className={`absolute translate-x-[290rem] ${numberCard[0] === '2'? ' translate-y-[24rem]':' translate-y-[18rem]'} w-[20rem] h-[12rem] lg:translate-x-[390rem]`}>
+              <p className='font-bodyalt font-[400] text-[12rem] leading-[14rem] text-[#AAAAAA] mb-[8rem] lg:text-[16rem] lg:leading-[19rem]'>Номер карты</p>
+              <div className={`absolute translate-x-[295rem] ${numberCard[0] === '2'? ' translate-y-[21rem] lg:translate-y-[24rem]':'translate-y-[14rem] lg:translate-y-[18rem]'} w-[20rem] h-[12rem] lg:translate-x-[390rem]`}>
                 <CardIcon cardNumber={numberCard}/>
               </div>
             </div>
