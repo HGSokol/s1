@@ -7,11 +7,11 @@ import { Profile } from '../App'
 export const Header = () => {
   const { user } = useContext(Profile)
   return (
-    <div className='h-[66rem] flex flex-row justify-between items-center mb-[24rem]
+    <div className='h-[80rem] flex flex-row justify-between items-center mb-[52.5rem]
     lg:mb-[151rem] lg:h-[120rem]
     '>
       <div className=''>
-        <svg viewBox="0 0 126 56" fill="none" xmlns="http://www.w3.org/2000/svg" className='w-[82rem] h-[36rem] 
+        <svg viewBox="0 0 126 56" fill="none" xmlns="http://www.w3.org/2000/svg" className='w-[80rem] h-[36rem] 
         lg:w-[126rem] lg:h-[56rem]'>
           <path d="M6.68241 4.4514V51.5486H23.6529V56H2.19141V0H23.6529V4.4514H6.68241Z" fill="#FAB513"/>
           <path d="M32.7098 14.7234C33.4447 14.8231 34.1617 15.0252 34.8396 15.3237C35.4593 15.6001 36.0257 15.9812 36.5136 16.45C36.9789 16.907 37.3529 17.4471 37.6159 18.0417C38.1421 19.3029 38.1421 20.7194 37.6159 21.9805C37.3545 22.5761 36.9803 23.1164 36.5136 23.5723C36.0266 24.0474 35.4603 24.4354 34.8396 24.7188C34.1651 25.0265 33.4467 25.229 32.7098 25.3191V26.3105H30.3146V25.3191C29.5762 25.2298 28.8557 25.0297 28.178 24.7256C27.5539 24.447 26.983 24.0636 26.4905 23.5925C26.0192 23.1338 25.6425 22.5886 25.3813 21.9873C25.113 21.3604 24.9787 20.6853 24.9867 20.0044C24.9788 19.3405 25.1081 18.682 25.3668 18.0696C25.6254 17.4571 26.0078 16.9037 26.4905 16.4433C26.9851 15.9765 27.5556 15.5957 28.178 15.3169C28.8557 15.0128 29.5762 14.8127 30.3146 14.7234V13.8062H32.7098V14.7234ZM27.7289 20.0044C27.7289 20.7395 27.9398 21.3735 28.3685 21.9131C28.7972 22.4527 29.4504 22.8101 30.3146 22.9922V17.0368C29.9169 17.1158 29.5337 17.2546 29.1783 17.4482C28.8715 17.6199 28.5974 17.8436 28.3685 18.1092C28.1518 18.3627 27.9877 18.656 27.8854 18.9725C27.7773 19.3058 27.7244 19.6543 27.7289 20.0044ZM35.2683 20.0044C35.2683 19.285 35.0574 18.6577 34.6355 18.1227C34.2136 17.5898 33.5672 17.2256 32.7098 17.0368V22.972C33.5672 22.7966 34.2136 22.4392 34.6355 21.8996C35.058 21.3577 35.2812 20.6891 35.2683 20.0044Z" fill="#1F2117"/>
@@ -33,16 +33,17 @@ export const Header = () => {
       {
         user ? (
           <Link to='/cabinet' >
-            <p>{`Привет ${user.name} ${user.lastName}`}</p>
+            <p className='font-bodyalt font-[600] text-[#777872] hover:text-[#1F2117] leading-[19rem] p-[7rem] text-[16rem]
+              lg:text-[17rem]'>Личный кабинет</p>
           </Link>
         ) : (
           <div className='font-bodyalt'>
             <Link to='/login'>
-              <button className='p-auto w-[50rem] font-[600] text-[#777872] hover:text-[#1F2117] tracking-[0.04em] p-[7rem] text-[12rem]
+              <button className=' w-[70rem] font-[600] text-[#777872] hover:text-[#1F2117] tracking-[0.04em] p-[16rem] text-[16rem]
               lg:text-[17rem] lg:w-[151rem]'>Вход</button>
             </Link>
             <Link to='/login/registration'>
-              <button className='#FAFAFA p-auto rounded-full w-[110rem] h-[42rem] font-[600] tracking-[0.02em] border-[1rem] text-[black] border-[#1F2117] hover:text-[#FFB700] hover:border-[#FFB700] text-[12rem]
+              <button className='#FAFAFA p-auto rounded-full w-[139rem] h-[51rem] font-[600] tracking-[0.02em] border-[1px] text-[black] border-[#1F2117] hover:text-[#FFB700] hover:border-[#FFB700] text-[16rem]
               lg:text-[17rem] lg:w-[151rem] lg:h-[56rem]
               '>Регистрация</button>
             </Link>

@@ -26,11 +26,6 @@ const HeaderOrder = () => {
             <path d="M117.454 42.5921H114.671L119.114 32.0908H121.605L126 42.5921H123.156L122.333 40.5283H118.236L117.454 42.5921ZM118.965 38.4982H121.632L120.312 34.8898L118.965 38.4982Z" fill="#1F2117"/>
           </svg>
         </div>
-        <div className='w-[24rem] h-[24rem]'>
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 6H21M8 12H21M13 18H21" stroke="black" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </div>
       </div>
     </>
   )

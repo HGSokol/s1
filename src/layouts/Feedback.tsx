@@ -63,7 +63,7 @@ export const Feedback = () => {
     lg:overflow-hidden lg:gap-[15rem] lg:mb-[150rem]'>
       <div className='flex flex-row mb-[32rem] space-x-[200rem] justify-between 
       lg:mb-[64rem]'>
-        <div className='font-[600] text-[31rem] leading-[37.57rem] text-[#1F2117] 
+        <div className='font-[600] text-[36rem] leading-[42rem] text-[#1F2117] 
         lg:leading-[75.14rem] lg:text-[64rem]'>Нас любят и ценят</div>
         <div className='hidden lg:flex lg:flex-row lg:gap-[10rem]'>
           <button className='rounded-full border-[1px] border-[#1F2117] w-[56rem] h-[56rem] text-black grid place-content-center cursor-pointer group/arrow1 hover:bg-[#FFB700] hover:text-white hover:border-none duration-[200ms] 
@@ -75,7 +75,7 @@ export const Feedback = () => {
                 <path d="M10.5 19.25L3.75 12.5L10.5 5.75" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </button>
-          <button className='rounded-full border-[1px]w-[56rem] h-[56rem] text-black grid place-content-center mr-[120rem] cursor-pointer group/arrow2 bg-[#FFB700] hover:bg-[#F0AD04] hover:text-white border-none duration-[200ms] 
+          <button className='rounded-full border-[1px]w-[56rem] h-[56rem] text-black grid place-content-center mr-[120rem] cursor-pointer group/arrow2 bg-[#FFB700] hover:bg-[#F0AD04] text-white border-none duration-[200ms] 
           lg:w-[56rem] lg:h-[56rem] lg:mr-[120rem]'
             onClick={right}>
               <svg className='w-[18rem] h-[18rem] stroke-white group-hover/arrow2:stroke-white 
@@ -95,9 +95,9 @@ export const Feedback = () => {
           data.map((e,i) => {
             return(
               <div ref={ref} key={i} className='snap-center  drop-shadow-drop'>
-                <div key={i} className='w-[226rem] h-[256rem] rounded-[20rem] p-[16rem] bg-white
+                <div key={i} className='w-[300rem] h-[234rem] rounded-[20rem] p-[16rem] bg-white
                 lg:justify-between lg:w-[500rem] lg:h-[319rem] lg:p-[24rem] lg:flex lg:flex-col'>
-                  <div className='font-bodyalt tracking-[0.02em] font-[600] h-[140rem] text-[14rem] text-[#1F2117] leading-[16.71rem] mb-[17.4rem] 
+                  <div className='font-bodyalt tracking-[0.02em] font-[600] h-[114rem] text-[16rem] text-[#1F2117] leading-[16.71rem] mb-[17.4rem] 
                   lg:text-[22rem] lg:leading-[32rem]'>
                     {e.text}
                   </div>
@@ -119,10 +119,10 @@ export const Feedback = () => {
                     </div>
                     <div className='flex flex-row gap-[8rem] 
                     lg:order-1 lg:gap-[14rem]'>
-                      <img src={e.img} alt={e.name} className='rounded-full w-[36rem] h-[36rem] 
+                      <img src={e.img} alt={e.name} className='rounded-full w-[40rem] h-[40rem] 
                       lg:w-[64rem] lg:h-[64rem]'/>
                       <div className='flex flex-col justify-center'>
-                        <p className='w-max font-bodyalt font-[400] text-[12rem] leading-[14rem] text-[#1F2117] mb-[2rem] 
+                        <p className='w-max font-bodyalt font-[400] text-[16rem] leading-[19rem] text-[#1F2117] mb-[2rem] 
                         lg:font-[500] lg:text-[18rem] lg:leading-[21.48rem] lg:mb-[6rem]'>{e.name}</p>
                         <p className='font-bodyalt font-[400] text-[10rem] leading-[12rem] text-[#1F2117]/60 
                         lg:text-[14rem] lg:leading-[16.71rem]'>{e.prof}</p>

@@ -1,28 +1,39 @@
 import { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 
-import { SubCard } from '../components/SubLandingCard'
+import { SubCard } from '../components/SubCard'
 import { Profile } from '../App'
 
 
 
 export type Sub = {
-  text: string,
+  text?: string[],
   price: string,
   top?: string,
 }
 
 const subsData: Sub[] = [
   {
-    text: 'Подписка на 1 месяц',
+    text: [
+      'Подписка на 1 месяц',
+      'Доступ на один месяц ко всем тренировкам и планам питания, а так же более чем 1000 вкусных и полезных рецептов',
+    ],
     price: '1200 руб./ мес.',
   },
   {
-    text: `При подписке на 3 месяца.\n3000 руб. за 3 месяца`,
+    text: [
+      'Подписка на 3 месяца',
+      'Доступ на целый год ко всем тренировкам и планам питания, а так же более чем 1000 вкусных и полезных рецептов',
+      'Экономь 17% при оплате 3-х месячной подписки',
+    ],
     price: '1000 руб./ мес.',
   },
   {
-    text: `При подписке на год.\n9600 руб. в год`,
+    text: [
+      'Подписка на год',
+      'Доступ на целый год ко всем тренировкам и планам питания, а так же более чем 1000 вкусных и полезных рецептов',
+      'Экономь 34% при оплате годовой подписки',
+    ],
     price: '800 руб./ мес.',
     top: 'top'
   }
@@ -33,17 +44,17 @@ export const Subscribe = () => {
   const [ active, setActive ] = useState<number>(2)
 
   return (
-  <div className='flex flex-col mb-[120rem] 
+<div className='flex flex-col mb-[120rem] 
   lg:mb-[200rem]'>
     <p className='font-[600] text-[32rem] leading-[37.57rem] mb-[32rem] text-[#1F2117]  
     lg:text-[64rem] lg:leading-[75.14rem] lg:w-[842rem] lg:h-[75rem] lg:text-center lg:mx-auto lg:mb-[127rem]'>Подписки</p>
-    <div className='flex flex-col mx-auto gap-[16rem] mb-[32rem] whitespace-pre-line 
-    lg:gap-[40rem] lg:mb-[64rem] lg:grid  lg:grid-cols-3 lg:grid-rows-1 lg:h-[207rem] lg:w-[1679rem]'>
+    <div className='flex flex-col gap-[16rem] mb-[32rem] whitespace-pre-line 
+    lg:gap-[40rem] lg:mb-[64rem] lg:grid lg:grid-cols-3 lg:grid-rows-1 lg:h-[439rem]'>
       {
         subsData.map((item,i) => {
           return(
             <div key={i} onClick={() => setActive(i)}>
-              <SubCard item={item} active={active === i ? 'active': ''} landing={false}/>
+              <SubCard item={item} active={active === i ? 'active': ''} landing={true}/>
             </div>
           )
         })
@@ -51,10 +62,10 @@ export const Subscribe = () => {
     </div>
       <div className='font-bodyalt lg:flex lg:justify-center'>
         <Link to={isAuthenticated ? '/cabinet' : '/login'}>
-          <button className='bg-[#FFB700] text-[12rem] w-full leading-[14rem] h-[42rem] rounded-full text-center text-white tracking-[0.04em] flex flex-row items-center justify-center hover:bg-[#F0AD04]
+          <button className='bg-[#FFB700] text-[16rem] w-full leading-[14rem] h-[51rem] rounded-full text-center text-white tracking-[0.04em] flex flex-row items-center justify-center hover:bg-[#F0AD04]
           lg:w-[349rem] lg:h-[56rem] lg:text-[16rem]'>
-            <p className='font-[600] text-[14rem] leading-[14.32rem] text-[#FAFAFA] tracking-[0.04em] mr-[10rem]
-             lg:leading-[19.09rem] lg:text-[16rem] lg:mr-[14rem]'>Оплатить подписку</p>
+            <p className='font-[600] text-[16rem] leading-[19rem] text-[#FAFAFA] tracking-[0.04em] mr-[10rem]
+             lg:leading-[19.09rem] lg:text-[16rem] lg:mr-[14rem]'>Начать бесплатно</p>
             <svg className='w-[18rem] h-[18rem] 
             lg:w-[24rem] lg:h-[24rem]' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M3.75 12L20.25 12" stroke="#FAFAFA" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>

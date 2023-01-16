@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { SubCard } from "../components/SubLandingCard";
+import { SubCard } from "../components/SubCard";
 
 
 export type Sub = {
-  text: string,
+  text?: string[],
   price: string,
   top?: string,
   active?: string,
@@ -12,18 +12,28 @@ export type Sub = {
 
 const subsData: Sub[] = [
   {
-    text: 'Подписка на 1 месяц',
+    text: [
+      'Подписка на 1 месяц',
+      'Доступ на один месяц ко всем тренировкам и планам питания, а так же более чем 1000 вкусных и полезных рецептов',
+    ],
     price: '1200 руб./ мес.',
   },
   {
-    text: `При подписке на 3 месяца.\n3000 руб. за 3 месяца`,
+    text: [
+      'Подписка на 3 месяца',
+      'Доступ на целый год ко всем тренировкам и планам питания, а так же более чем 1000 вкусных и полезных рецептов',
+      'Экономь 17% при оплате 3-х месячной подписки',
+    ],
     price: '1000 руб./ мес.',
   },
   {
-    text: `При подписке на год.\n9600 руб. в год`,
+    text: [
+      'Подписка на год',
+      'Доступ на целый год ко всем тренировкам и планам питания, а так же более чем 1000 вкусных и полезных рецептов',
+      'Экономь 34% при оплате годовой подписки',
+    ],
     price: '800 руб./ мес.',
     top: 'top',
-    active: 'active'
   }
 ]
 
@@ -55,6 +65,9 @@ const Subs = () => {
           )
         })
       }
+    </div>
+    <div onClick={() => navigate('/cabinet/order')} className='mb-[20rem] w-full h-[50rem] flex justify-center items-center rounded-full bg-[#FFB700] text-[16rem] font-bodyalt font-[700] leading-[19rem] text-[#FFFFFF] lg:hidden'>
+      Оплатить
     </div>
   </div>
   )

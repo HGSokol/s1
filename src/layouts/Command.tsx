@@ -122,7 +122,7 @@ export const Command = () => {
     lg:gap-[15rem] lg:overflow-hidden duration-[400ms]'
     style={{marginBottom: `${active !== null ? '150px': '0px'}`}}>
       <div className='flex flex-row mb-[32rem] space-x-[200rem] justify-between lg:mb-[64rem]'>
-        <div className='font-[600] text-[32rem] leading-[37.57rem] text-[#1F2117]
+        <div className='font-[600] text-[36rem] leading-[42rem] text-[#1F2117]
         lg:text-[64rem] lg:leading-[75.14rem] lg:w-[800rem]'>Знакомство с командой</div>
         <div className='hidden
         lg:flex lg:flex-row lg:gap-[10rem]'>
@@ -146,19 +146,19 @@ export const Command = () => {
             </button>
         </div>
       </div>
-      <div className='overflow-hidden' style={{width: `${ window.innerWidth >= 1024 ? `${wrapper}`: ''}px`}}>
+      <div className='mb-[30rem] overflow-hidden' style={{width: `${ window.innerWidth >= 1024 ? `${wrapper}`: ''}px`}}>
         <div 
-          className='flex flex-row gap-[20rem] cursor-pointer duration-[600ms] snap-mandatory snap-x overflow-scroll -wekbit-scrollbar:w-[0rem] 
+          className='flex flex-row gap-[8rem] cursor-pointer duration-[600ms] snap-mandatory snap-x overflow-scroll -wekbit-scrollbar:w-[0rem] 
           lg:snap-none lg:overflow-visible lg:gap-[20rem] '
           style={{transform: `translateX(-${sizeCarousel})`}}>
         {
           data.map((e,i) => {
             return(
-              <div key={i} className='grid grid-rows-[300rem_130rem] 
-              lg:grid-rows-[420rem_150rem] snap-center'>
+              <div key={i} className='gap-[16rem] grid grid-rows-[340rem_140rem] 
+              lg:grid-rows-[420rem_150rem] snap-center lg:gap-[0rem'>
                 <div 
                   ref={ref}
-                  className={`relative h-[300rem] bg-cover bg-center delay-300 duration-[500ms] rounded-[20rem] z-0 w-[288rem]
+                  className={`relative h-[355rem] bg-cover bg-center delay-300 duration-[500ms] rounded-[20rem] z-0 w-[340rem]
                   lg:h-[420rem] lg:rounded-[20rem] 
                   ${active === i? ' lg:w-[530rem]': ' lg:w-[255rem]' }`}
                   style={{ backgroundImage:`url(${e.img})` }}
@@ -175,7 +175,7 @@ export const Command = () => {
                       <div className=''>
                         <p className='font-bodyalt text-[#D2D2D2] text-[14rem] font-[400] mb-[6rem]
                         lg:text-[22rem]'>{e.prof}</p>
-                        <p className='text-white text-[24rem] leading-[28.18rem] font-[600]
+                        <p className='text-white text-[28rem] leading-[32rem] font-[600]
                         lg:text-[40rem] lg:leading-[40rem]'>{e.name}</p>
                       </div>
                       <div className='flex flex-col gap-[12rem] items-end
@@ -188,7 +188,7 @@ export const Command = () => {
                           </div>
                         </a>
                         <a href={e.links.telegram} target='_blank' rel="noreferrer">
-                          <div className='w-[40rem] h-[40rem] flex justify-center items-center bg-white rounded-[10rem] p-[5rem] group/telega hover:bg-black delay-[100ms] duration-[400ms]
+                          <div className='w-[40rem] h-[40rem] flex justify-center items-center  bg-white rounded-[10rem] p-[5rem] group/telega hover:bg-black delay-[100ms] duration-[400ms]
                           lg:w-[48rem] lg:h-[48rem]'>
                             <FaTelegramPlane size='30px' className='w-[32rem] h-[32rem] fill-black group-hover/telega:fill-white delay-[100ms] duration-[400ms]
                             lg:w-[40rem] lg:h-[40rem]'/>
@@ -205,7 +205,7 @@ export const Command = () => {
                       </div>
                     </div>
                 </div>
-                  <div className={`font-bodyalt py-[14rem] text-[14rem] leading-[16.71rem] animate-wiggle text-[#777872]/80 font-[400]
+                  <div className={`font-bodyalt py-[14rem] text-[16rem] leading-[19rem] animate-wiggle text-[#777872]/80 font-[400]
                   lg:leading-[32.71rem] lg:pl-[20rem] lg:pt-[20rem] lg:text-[22rem] 
                   lg:${active === i? 'visible' : 'hidden'}`}>
                       {e.description}

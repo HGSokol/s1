@@ -12,7 +12,7 @@ const Login = () => {
           <Outlet />
         </div>
       </div>
-      <div className='hidden lg:block bg-[url("images/authorization.png")] bg-cover bg-no-repeat bg-center'></div>
+      <div className='hidden lg:block bg-[url("./images/authorization.png")] bg-cover bg-no-repeat bg-center'></div>
     </div>
   );
 }

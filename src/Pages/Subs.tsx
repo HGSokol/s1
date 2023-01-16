@@ -1,27 +1,39 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { SubCard } from "../components/SubLandingCard";
+import { SubCard } from "../components/SubCard";
 
 
 export type Sub = {
-  text: string,
+  text: string[],
   price: string,
   top?: string,
+  active?: string
 }
 
 const subsData: Sub[] = [
   {
-    text: 'Подписка на 1 месяц',
+    text: [
+      'Подписка на 1 месяц',
+      'Доступ на один месяц ко всем тренировкам и планам питания, а так же более чем 1000 вкусных и полезных рецептов',
+    ],
     price: '1200 руб./ мес.',
   },
   {
-    text: `При подписке на 3 месяца.\n3000 руб. за 3 месяца`,
+    text: [
+      'Подписка на 3 месяца',
+      'Доступ на целый год ко всем тренировкам и планам питания, а так же более чем 1000 вкусных и полезных рецептов',
+      'Экономь 17% при оплате 3-х месячной подписки',
+    ],
     price: '1000 руб./ мес.',
   },
   {
-    text: `При подписке на год.\n9600 руб. в год`,
+    text: [
+      'Подписка на год',
+      'Доступ на целый год ко всем тренировкам и планам питания, а так же более чем 1000 вкусных и полезных рецептов',
+      'Экономь 34% при оплате годовой подписки',
+    ],
     price: '800 руб./ мес.',
-    top: 'top',
+    active: 'active'
   }
 ]
 
@@ -42,35 +54,32 @@ const Subs = () => {
     </div>
     <div className='hidden lg:flex lg:font-body lg:font-[600] lg:text-[40rem] lg:leading-[47rem] lg:text-[#1F2117] lg:mb-[32rem]'>Подписки</div>
     <p className='mb-[32rem] font-bodyalt font-[600] text-[22rem] leading-[26rem] text-[#1F2117] lg:font-body lg:font-[600] lg:text-[26rem] lg:leaing-[30rem] lg:text-[#1F2117] lg:mb-[32rem]'>Текущая подписка</p>
-    <div className='mb-[32rem] flex flex-row lg:justify-between lg:w-[394rem] lg:mb-[48rem]'>
+    <div className=' mb-[24rem] flex flex-row lg:justify-between lg:mb-[48rem] lg:w-[472rem]'>
       <div className='w-full flex justify-between items-center lg:items-start flex-row lg:flex-col lg:justify-start'>
         <p className='font-bodyalt font-[600] text-[22rem] leading-[26rem] text-[#1F2117] lg:font-body lg:font-[600] lg:text-[20rem] lg:leading-[23rem] lg:text-[#1F2117] lg:mb-[12rem]'>Год</p>
         <p className='font-bodyalt font-[400] text-[14rem] leading-[17rem] text-[#777872] lg:font-bodyalt lg:font-[400] lg:text-[16rem] lg:leading-[19rem] lg:text-[#777872]'>30000 руб./год</p>
       </div>
       <div className='hidden lg:block'>
-        <button onClick={() => navigate('/cabinet/changeSubs')} className=' w-max lg:px-[24rem] lg:flex lg:items-center lg:h-[56rem] lg:bg-[#FFB700] lg:text-[16rem] lg:text-[#FAFAFA] lg:font-bodyalt lg:font-[600] lg:rounded-full'>
-          Изменить подписку
+        <button onClick={() => navigate('/cabinet/changeSubs')} className='bg-white border-[1px] border-[#1F2117] w-[286rem] py-[14rem] text-[16rem] font-bodyalt text-[#1F2117] font-[600] rounded-[40rem] lg:px-[24rem]'>
+          Изменить платежные данные
         </button>
       </div>
     </div>
-    <div className='hidden lg:grid lg:grid-cols-3 lg:w-[1370rem] lg:gap-[40rem]'>
+    <div className='mb-[24rem] lg:hidden'>
+      <button onClick={() => navigate('/cabinet/changeSubs1')} className='bg-white border-[1px] border-[#1F2117] w-full py-[14rem] text-[16rem] font-bodyalt text-[#1F2117] font-[600] rounded-[40rem] lg:px-[24rem] lg:flex lg:items-center lg:h-[56rem] lg:bg-[#FFB700] lg:text-[16rem] lg:text-[#FAFAFA] lg:font-bodyalt lg:font-[600] lg:rounded-full'>
+        Изменить платежные данные
+      </button>
+    </div>
+    <div className='mb-[30rem] flex flex-col lg:grid lg:grid-cols-3 gap-[24rem] lg:w-[1370rem] lg:gap-[40rem]'>
       {
         subsData.map((e,i) => {
           return (
             <div key={i}>
-              <SubCard item={e} active={''} landing={false}/>
+              <SubCard item={e} active={e.active} landing={false}/>
             </div>
           )
         })
       }
-    </div>
-    <div className='mb-[32rem] lg:hidden'>
-      <SubCard item={subsData[0]} active={''} landing={false}/>
-    </div>
-    <div className='lg:hidden'>
-      <button onClick={() => navigate('/cabinet/changeSubs1')} className='bg-[#FFB700] w-full py-[14rem] text-[14rem] font-bodyalt text-white font-[600] rounded-[40rem] lg:px-[24rem] lg:flex lg:items-center lg:h-[56rem] lg:bg-[#FFB700] lg:text-[16rem] lg:text-[#FAFAFA] lg:font-bodyalt lg:font-[600] lg:rounded-full'>
-        Изменить тарифный план
-      </button>
     </div>
   </div>
   )
