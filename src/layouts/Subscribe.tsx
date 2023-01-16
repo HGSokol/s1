@@ -60,20 +60,20 @@ export const Subscribe = () => {
         })
       }
     </div>
-      <div className='font-bodyalt lg:flex lg:justify-center'>
-        <Link to={isAuthenticated ? '/cabinet' : '/login'}>
-          <button className='bg-[#FFB700] text-[16rem] w-full leading-[14rem] h-[51rem] rounded-full text-center text-white tracking-[0.04em] flex flex-row items-center justify-center hover:bg-[#F0AD04]
-          lg:w-[349rem] lg:h-[56rem] lg:text-[16rem]'>
-            <p className='font-[600] text-[16rem] leading-[19rem] text-[#FAFAFA] tracking-[0.04em] mr-[10rem]
-             lg:leading-[19.09rem] lg:text-[16rem] lg:mr-[14rem]'>Начать бесплатно</p>
-            <svg className='w-[18rem] h-[18rem] 
-            lg:w-[24rem] lg:h-[24rem]' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M3.75 12L20.25 12" stroke="#FAFAFA" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M13.5 18.75L20.25 12L13.5 5.25" stroke="#FAFAFA" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>  
+    <div className='lg:mt-[64rem] font-bodyalt lg:flex lg:justify-center'>
+      <Link to={isAuthenticated ? '/cabinet' : '/login'}>
+        <button className='bg-[#FFB700] text-[16rem] w-full leading-[14rem] h-[51rem] rounded-full text-center text-white tracking-[0.04em] flex flex-row items-center justify-center hover:bg-[#F0AD04]
+        lg:w-[349rem] lg:h-[56rem] lg:text-[16rem]'>
+          <p className='font-[600] text-[16rem] leading-[19rem] text-[#FAFAFA] tracking-[0.04em] mr-[10rem]
+            lg:leading-[19.09rem] lg:text-[16rem] lg:mr-[14rem]'>Начать бесплатно</p>
+          <svg className='w-[18rem] h-[18rem] 
+          lg:w-[24rem] lg:h-[24rem]' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.75 12L20.25 12" stroke="#FAFAFA" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M13.5 18.75L20.25 12L13.5 5.25" stroke="#FAFAFA" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>  
       </Link>
-      </div>
+    </div>
   </div>
   )
 }

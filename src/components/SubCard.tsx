@@ -1,15 +1,16 @@
-import { useEffect, useState } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Sub } from '../layouts/Subscribe'
 
 
-interface SubCard {
+interface SubCard { 
   item: Sub
   active:string | undefined
   landing: boolean
+  setActiveResetPopup?: Dispatch<SetStateAction<boolean>>
 }
 
-export const SubCard = ({item, active, landing}: SubCard) => {
+export const SubCard = ({item, active, landing, setActiveResetPopup}: SubCard) => {
   const navigate = useNavigate()
   const {text, price, top = ''} = item
 
@@ -20,7 +21,7 @@ export const SubCard = ({item, active, landing}: SubCard) => {
   }
 
   return (
-    <div onClick={() =>navigateToOrdering()} className='relative overflow-hidden rounded-[20rem] drop-shadow-drop duration-[400ms]' >
+    <div /* onClick={() =>navigateToOrdering()} */ className='relative overflow-hidden rounded-[20rem] drop-shadow-drop duration-[400ms]' >
       <div className={` bg-white  h-max w-full py-[24rem] px-[32rem] overflow-hidden border-[1px] border-transparent cursor-pointer flex flex-col justify-between rounded-[20rem] 
         lg:h-[505rem] lg:w-full lg:py-[36rem] lg:px-[32rem] duration-[400ms] hover:border-[1px] ${active === 'active'? ' border-[#FFB700]': 'hover:border-[#CBCBCB]'}`}>
           {
@@ -66,7 +67,7 @@ export const SubCard = ({item, active, landing}: SubCard) => {
         <div className=''>
           {
             active && !landing ? (
-              <div onClick={() => navigate('/cabinet/order')} className='mt-[16rem] py-[14rem] w-full rounded-full bg-[#FFB700] flex flex-row justify-center items-center'>
+              <div onClick={() => setActiveResetPopup?.(true)} className='mt-[16rem] py-[14rem] w-full rounded-full bg-[#FFB700] flex flex-row justify-center items-center'>
                 <p className='font-bodyalt font-[600] text-[12rem] leading-[14rem] text-[#FAFAFA] mr-[13rem]
                 lg:text-[16rem] lg:leading-[19rem]'>Отменить подписку</p>
               </div>

@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ChangeCardPopup } from "../components/ChangeCardPopup";
+import { ResetSubPopup } from "../components/ResetSubPopup";
 import { SubCard } from "../components/SubCard";
 
 
@@ -39,9 +41,30 @@ const subsData: Sub[] = [
 
 const Subs = () => {
   const navigate = useNavigate()
+  const [activeChangeCardPopup, setActiveChangeCardPopup] = useState(false)
+  const [activeResetSubPopup, setActiveResetPopup] = useState(false)
+
 
   return (
   <div className='mx-[16rem] lg:mx-[0rem]'>
+    {
+    activeChangeCardPopup? (
+      <div className='absolute z-[1000] top-0 left-0 w-[100%] h-[100%] bg-gray-100/50'>
+        <div className='absolute z-[1000] left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]  '>
+          <ChangeCardPopup setActiveChangeCardPopup={setActiveChangeCardPopup}/>
+        </div>
+      </div>
+      ) : null
+    }
+    {
+    activeResetSubPopup? (
+      <div className='absolute z-[1000] top-0 left-0 w-[100%] h-[100%] bg-gray-100/50'>
+        <div className='absolute z-[1000] left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]  '>
+          <ResetSubPopup setActiveResetPopup={setActiveResetPopup}/>
+        </div>
+      </div>
+    ) : null
+    }
     <div className='w-full flex flex-row relative mb-[24rem] lg:hidden'>
       <div className='absolute translate-y-[20.5rem]'
       onClick={() => navigate('/cabinet')}>
@@ -60,13 +83,14 @@ const Subs = () => {
         <p className='font-bodyalt font-[400] text-[14rem] leading-[17rem] text-[#777872] lg:font-bodyalt lg:font-[400] lg:text-[16rem] lg:leading-[19rem] lg:text-[#777872]'>30000 руб./год</p>
       </div>
       <div className='hidden lg:block'>
-        <button onClick={() => navigate('/cabinet/changeSubs')} className='bg-white border-[1px] border-[#1F2117] w-[286rem] py-[14rem] text-[16rem] font-bodyalt text-[#1F2117] font-[600] rounded-[40rem] lg:px-[24rem]'>
+        <button onClick={() => setActiveChangeCardPopup(true)} className='bg-white border-[1px] border-[#1F2117] w-[286rem] py-[14rem] text-[16rem] font-bodyalt text-[#1F2117] font-[600] rounded-[40rem] lg:px-[24rem]'>
           Изменить платежные данные
         </button>
       </div>
     </div>
     <div className='mb-[24rem] lg:hidden'>
-      <button onClick={() => navigate('/cabinet/changeSubs1')} className='bg-white border-[1px] border-[#1F2117] w-full py-[14rem] text-[16rem] font-bodyalt text-[#1F2117] font-[600] rounded-[40rem] lg:px-[24rem] lg:flex lg:items-center lg:h-[56rem] lg:bg-[#FFB700] lg:text-[16rem] lg:text-[#FAFAFA] lg:font-bodyalt lg:font-[600] lg:rounded-full'>
+      <button 
+      onClick={() => setActiveChangeCardPopup(true)}  className='bg-white border-[1px] border-[#1F2117] w-full py-[14rem] text-[16rem] font-bodyalt text-[#1F2117] font-[600] rounded-[40rem] lg:px-[24rem] lg:flex lg:items-center lg:h-[56rem] lg:bg-[#FFB700] lg:text-[16rem] lg:text-[#FAFAFA] lg:font-bodyalt lg:font-[600] lg:rounded-full'>
         Изменить платежные данные
       </button>
     </div>
@@ -75,7 +99,7 @@ const Subs = () => {
         subsData.map((e,i) => {
           return (
             <div key={i}>
-              <SubCard item={e} active={e.active} landing={false}/>
+              <SubCard item={e} active={e.active} landing={false} setActiveResetPopup={setActiveResetPopup} />
             </div>
           )
         })

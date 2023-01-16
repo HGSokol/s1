@@ -18,20 +18,20 @@ const Ordering = () => {
     <p className='mb-[24rem] font-bodyalt font-[600] text-[22rem] leading-[26rem] text-[#1F2117] lg:font-body lg:font-[600] lg:text-[26rem] lg:leaing-[30rem] lg:text-[#1F2117] lg:mb-[32rem]'>Оформление заказа</p>
     <div className='lg:grid lg:grid-cols-[1fr_1fr] lg:w-full'>
       <div className='mb-[24rem] lg:order-2'>
-        <p className='mb-[16rem] font-bodyalt font-[600] text-[16rem] leading-[19rem] text-[#1F2117] lg:font-body lg:font-[600] lg:text-[26rem] lg:leaing-[30rem] lg:text-[#1F2117] lg:mb-[32rem]'>Информация о заказе</p>
-        <div className='w-full flex flex-row justify-between mb-[12rem]'>
-          <div className='font-bodyalt font-[400] text-[14rem] text-[#777872] leading-[17rem]'>Вид подписки:</div>
-          <div className='font-bodyalt font-[400] text-[14rem] text-[#1F2117] leading-[17rem]'>Подписка на год</div>
+        <p className='mb-[16rem] font-bodyalt font-[600] text-[16rem] leading-[19rem] text-[#1F2117] lg:font-body lg:font-[600] lg:text-[20rem] lg:leaing-[23rem] lg:text-[#1F2117] lg:mb-[28rem]'>Информация о заказе</p>
+        <div className='w-full flex flex-row justify-between mb-[12rem] lg:w-[357rem] lg:mb-[16rem]'>
+          <div className='font-bodyalt font-[400] text-[14rem] text-[#777872] leading-[17rem] lg:text-[16rem] lg:leading-[19rem]'>Вид подписки:</div>
+          <div className='font-bodyalt font-[400] text-[14rem] text-[#1F2117] leading-[17rem] lg:text-[20rem] lg:leading-[23rem]'>Подписка на год</div>
         </div>
-        <div className='w-full flex flex-row justify-between'>
-          <div className='font-bodyalt font-[400] text-[14rem] text-[#777872] leading-[17rem]'>Сумма:</div>
-          <div className='font-bodyalt font-[400] text-[14rem] text-[#1F2117] leading-[17rem]'>30 000 руб.</div>
+        <div className='w-full flex flex-row justify-between lg:w-[357rem] lg:mb-[16rem]'>
+          <div className='font-bodyalt font-[400] text-[14rem] text-[#777872] leading-[17rem] lg:text-[16rem] lg:leading-[19rem]'>Сумма:</div>
+          <div className='font-bodyalt font-[400] text-[14rem] text-[#1F2117] leading-[17rem] lg:text-[20rem] lg:leading-[23rem]'>30 000 руб.</div>
         </div>
       </div>
       <div className=' lg:order-1 lg:w-[600rem] lg:border-r-[1px] lg:border-[#E4E4E4]'>
-        <div className=' mb-[16rem] font-bodyalt font-[600] text-[16rem] text-[#1F2117] leading-[19rem]'>Способ оплаты</div>
+        <div className=' mb-[16rem] font-bodyalt font-[600] text-[16rem] text-[#1F2117] leading-[19rem] lg:mb-[32rem] lg:font-body lg:text-[20rem] lg:leading-[23rem]'>Способ оплаты</div>
         <div className='w-full lg:w-[441rem] '>
-          <div className='w-full px-[20rem] py-[20rem] mb-[16rem] flex justify-between shadow-drop rounded-[14rem] lg:px-[20rem] lg:py-[25rem] lg:mb-[16rem] lg:flex lg:justify-between lg:shadow-drop lg:rounded-[14rem]'>
+          <div className='w-full px-[20rem] py-[20rem] mb-[16rem] flex justify-between shadow-drop rounded-[14rem] lg:px-[20rem] lg:py-[25rem] lg:mb-[24rem] lg:flex lg:justify-between lg:shadow-drop lg:rounded-[14rem]'>
             <div className=''>
               <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.5 7.15545H17.5001V20.8443H10.5V7.15545Z" fill="#FF5F00"/>
@@ -44,7 +44,7 @@ const Ordering = () => {
               <p className='font-bodyalt font-[400] text-[16rem] leading-[19rem] text-[#777872] lg:font-bodyalt lg:font-[600] lg:text-[16rem] lg:text-[#777872] lg:leading-[19rem]'>1234</p>
             </div>
           </div>
-          <p onClick={() => window.innerWidth >=1024 ? navigate('/cabinet/ordering') : navigate('/cabinet/order')} className=' mb-[26rem] text-end font-bodyalt font-[600] text-[12rem] text-[#FFB700] leading-[14rem] cursor-pointer'>Изменить данные карты</p>
+          <p onClick={() => window.innerWidth >=1024 ? navigate('/cabinet/ordering') : navigate('/cabinet/order')} className=' mb-[26rem] text-start font-bodyalt font-[600] text-[12rem] text-[#FFB700] leading-[14rem] cursor-pointer lg:text-[16rem] lg:leading-[19rem] lg:mb-[32rem]'>Ввести данные другой карты</p>
           <div >
             <button onClick={() => window.innerWidth >=1024 ? navigate('/cabinet/ordering3') : navigate('/cabinet/order3')} className={`bg-[#FFB700] mb-[30rem] lg:mb-[24rem] w-full h-[42rem] flex items-center justify-center rem-[18rem] text-[12rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem]`}>
               Оплатить
