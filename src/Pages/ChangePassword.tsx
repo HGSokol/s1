@@ -55,10 +55,10 @@ const ChangePassword = () => {
 
 
   return (
-    <div className='w-[288rem] mx-auto mt-[24rem] lg:w-[492rem] lg:mt-[223rem]'>
+    <div className='w-[343rem] mx-auto mt-[24rem] lg:w-[492rem] lg:mt-[223rem]'>
       <h1 className='font-body font-[600] text-[22rem] leading-[26.25rem] text-center mb-[14rem] lg:text-[40rem] lg:leading-[46.96rem] lg:mb-[24rem]'>Восстановление пароля</h1>
       <h3 className='font-body text-[#777872] font-[600] text-[14rem] leading-[26.25rem] text-center mb-[32rem] lg:text-[22rem] lg:leading-[32rem] lg:mb-[48rem]'>На указанный Email  будет отправлен код для восстановления пароля</h3>
-      <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col w-[288rem] mx-auto lg:w-[441rem]'>
+      <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col w-[343rem] mx-auto lg:w-[441rem]'>
         <div className='mb-[33rem]'>
           <input 
             placeholder='Ваш e-mail'

@@ -63,7 +63,7 @@ const Login = () => {
 
 
   return (
-    <div className='w-[288rem] mt-[24rem] lg:w-[441rem] mx-auto lg:mt-[109rem]'>
+    <div className='w-[343rem] mt-[24rem] lg:w-[441rem] mx-auto lg:mt-[109rem]'>
       <h1 className='font-body font-[600] text-[22rem] leading-[26.25rem] text-center mb-[32rem] lg:text-[40rem] lg:leading-[46.96rem] lg:mb-[48rem]'>Регистрация</h1>
       <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
       <div className='mb-[16rem] lg:mb-[24rem]'>
@@ -99,7 +99,7 @@ const Login = () => {
             }
         </div>
         <div className='relative mb-[32rem] lg:mb-[24rem]'>
-          <div className='absolute translate-x-[250rem] translate-y-[14rem] lg:translate-x-[400rem] lg:translate-y-[18rem] cursor-pointer' 
+          <div className='absolute translate-x-[305rem] translate-y-[14rem] lg:translate-x-[400rem] lg:translate-y-[18rem] cursor-pointer' 
             onClick={onClickChangeType}>
             {
               type ? (<BsEyeSlash color='#AAAAAA' className='w-[20rem] h-[20rem]'/>) : (<AiOutlineEye color='#AAAAAA' className='w-[20rem] h-[20rem]'/>)
