@@ -101,11 +101,14 @@ const CabinetInfo = () => {
         {!user?.avatar ? (<img src={UnknownUser} alt='avatar' className='rounded-full w-[60rem] h-[60rem] lg:w-[60rem] lg:h-[60rem]'/>): user?.avatar}
       </div>
       <div className='mr-[14rem] lg:mr-[16rem]'>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M8.0625 10.3125L12 14.25L15.9375 10.3125" stroke="#FFB700" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M12 3.75V14.25" stroke="#FFB700" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M20.25 14.25V19.5C20.25 19.6989 20.171 19.8897 20.0303 20.0303C19.8897 20.171 19.6989 20.25 19.5 20.25H4.5C4.30109 20.25 4.11032 20.171 3.96967 20.0303C3.82902 19.8897 3.75 19.6989 3.75 19.5V14.25" stroke="#FFB700" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
+        <label>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <input type='file' className='hidden' accept=".jpg, .jpeg, .png"/>
+            <path d="M8.0625 10.3125L12 14.25L15.9375 10.3125" stroke="#FFB700" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M12 3.75V14.25" stroke="#FFB700" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M20.25 14.25V19.5C20.25 19.6989 20.171 19.8897 20.0303 20.0303C19.8897 20.171 19.6989 20.25 19.5 20.25H4.5C4.30109 20.25 4.11032 20.171 3.96967 20.0303C3.82902 19.8897 3.75 19.6989 3.75 19.5V14.25" stroke="#FFB700" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </label>
       </div>
       <div className='w-[189rem] font-bodyalt font-[400] text-[16rem] text-[#1F2117]/60 leading-[19rem] lg:w-max lg:font-bodyalt lg:font-[400] lg:text-[16rem] lg:text-[#1F2117]/60 lg:leading-[19rem]'>Загрузить другое изображение</div>
     </div>
@@ -178,11 +181,11 @@ const CabinetInfo = () => {
               {
                 errors.password2? <p className='text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]'>{errors.password2?.message}</p> : null
               }
-            <div className='mb-[26rem]'>
+            <div className='mb-[15rem] lg:mb-[26rem]'>
               {
                 oldPassError? <p className='lg:text-red-600 lg:h-[24rem] lg:text-[15rem]'>{oldPassError}</p> : null
               }
-              <button type="submit" disabled={!isValid} className={`${ isValid === true ? ' bg-[#FFB700]': ' bg-[#FFB700]/50'} font-bodyalt  lg:mb-[24rem] w-full py-[14rem] rem-[18rem] text-[14rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem]`}>
+              <button type="submit" disabled={!isValid} className={`${ isValid === true ? ' bg-[#FFB700]': ' bg-[#FFB700]/50'} font-bodyalt  lg:mb-[24rem] w-full h-[51rem] rem-[18rem] text-[16rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem]`}>
                 Изменить пароль
               </button>
             </div>

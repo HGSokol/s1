@@ -3,8 +3,8 @@ import { Link } from "react-router-dom"
 export const HeaderForm = () => {
 
   return (
-   <div className='mt-[18rem] grid place-content-center 
-   lg:place-content-start lg:mx-[120rem] lg:mt-[32rem] '>
+   <div className='pt-[25rem] grid place-content-center 
+   lg:place-content-start lg:mx-[120rem] lg:pt-[32rem] '>
      <Link to='/' className=''>
        <svg viewBox="0 0 126 56" fill="none" xmlns="http://www.w3.org/2000/svg" className='w-[102rem] h-[46rem] lg:w-[126rem] lg:h-[56rem]'>
          <path d="M6.68241 4.4514V51.5486H23.6529V56H2.19141V0H23.6529V4.4514H6.68241Z" fill="#FAB513"/>

@@ -7,8 +7,8 @@ import { Profile } from '../App'
 export const Header = () => {
   const { user } = useContext(Profile)
   return (
-    <div className='h-[80rem] flex flex-row justify-between items-center mb-[52.5rem]
-    lg:mb-[151rem] lg:h-[120rem]
+    <div className='pt-[25rem] flex flex-row justify-between items-center mb-[60rem]
+    lg:mb-[183rem]  lg:pt-[32rem]
     '>
       <div className=''>
         <svg viewBox="0 0 126 56" fill="none" xmlns="http://www.w3.org/2000/svg" className='w-[80rem] h-[36rem] 

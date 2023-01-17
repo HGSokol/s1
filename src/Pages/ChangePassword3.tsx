@@ -64,12 +64,12 @@ const ChangePassword3 = () => {
 
 
   return (
-    <div className='w-[288rem] mx-auto mt-[24rem] lg:w-[492rem] lg:mt-[223rem]'>
-      <h1 className='font-body font-[600] text-[22rem] leading-[26.25rem] text-center mb-[14rem] lg:text-[40rem] lg:leading-[46.96rem] lg:mb-[24rem]'>Восстановление пароля</h1>
-      <h3 className='font-body text-[#777872] font-[600] text-[14rem] leading-[26.25rem] text-center mb-[32rem] lg:text-[22rem] lg:leading-[32rem] lg:mb-[48rem]'>Введите новый пароль</h3>
-      <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col w-[288rem] lg:w-[441rem] mx-auto'>
+    <div className='w-[343rem] mx-auto mt-[24rem] lg:w-[492rem] lg:mt-[223rem]'>
+      <h1 className='font-body font-[600] text-[24rem] leading-[26.25rem] text-center mb-[24rem] lg:text-[40rem] lg:leading-[46.96rem] '>Восстановление пароля</h1>
+      <h3 className='font-body text-[#777872] font-[600] text-[16rem] leading-[26.25rem] text-center mb-[32rem] lg:text-[22rem] lg:leading-[32rem] lg:mb-[48rem]'>Введите новый пароль</h3>
+      <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col w-[343rem] lg:w-[441rem] mx-auto'>
         <div className='relative mb-[16rem] lg:mb-[20rem]'>
-            <div className='absolute translate-x-[250rem] translate-y-[14rem] lg:translate-x-[400rem] lg:translate-y-[18rem] cursor-pointer' 
+            <div className='absolute translate-x-[305rem] translate-y-[14rem] lg:translate-x-[400rem] lg:translate-y-[18rem] cursor-pointer' 
               onClick={onClickChangeType}>
                 {
                   type ? (<BsEyeSlash color='#AAAAAA' className='w-[20rem] h-[20rem]'/>) : (<AiOutlineEye color='#AAAAAA' className='w-[20rem] h-[20rem]'/>)
@@ -79,7 +79,7 @@ const ChangePassword3 = () => {
               placeholder='Ваш пароль' 
               type={`${type === true ? 'password' : 'text'}`}
               {...register("password")} 
-              className={`text-[12rem] hover:border-[#777872] outline-none w-full h-[48rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[12rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
+              className={`text-[14rem] hover:border-[#777872] outline-none w-full h-[48rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
               lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
               ${errors.password? ' hover:border-[#CB1D1D]': ' '}`}/>
               {
@@ -87,7 +87,7 @@ const ChangePassword3 = () => {
               }
         </div>
         <div className='relative mb-[32rem] lg:mb-[48rem]'>
-          <div className='absolute translate-x-[250rem] translate-y-[14rem] lg:translate-x-[400rem] lg:translate-y-[18rem] cursor-pointer' 
+          <div className='absolute translate-x-[305rem] translate-y-[14rem] lg:translate-x-[400rem] lg:translate-y-[18rem] cursor-pointer' 
             onClick={onClickChangeType}>
               {
                 type ? (<BsEyeSlash color='#AAAAAA' className='w-[20rem] h-[20rem]'/>) : (<AiOutlineEye color='#AAAAAA' className='w-[20rem] h-[20rem]'/>)
@@ -97,7 +97,7 @@ const ChangePassword3 = () => {
             placeholder='Подтвердите пароль' 
             type={`${type === true ? 'password' : 'text'}`}
             {...register("password2")} 
-            className={`text-[12rem] hover:border-[#777872] outline-none w-full h-[48rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[12rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
+            className={`text-[14rem] hover:border-[#777872] outline-none w-full h-[48rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
             lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
             ${errors.password2? ' hover:border-[#CB1D1D]': ' '}`}/>
             {
@@ -105,7 +105,7 @@ const ChangePassword3 = () => {
             }
         </div>
         <div className='mb-[36rem]'>
-          <button type="submit" disabled={!isValid} className={`${ isValid === true ? ' bg-[#FFB700]': ' bg-[#FFB700]/50'} mb-[20rem] lg:mb-[24rem] w-full h-[42rem] py-[14rem] rem-[18rem] text-[12rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem]`}>
+          <button type="submit" disabled={!isValid} className={`${ isValid === true ? ' bg-[#FFB700]': ' bg-[#FFB700]/50'} mb-[20rem] lg:mb-[24rem] w-full h-[51rem] rem-[18rem] text-[16rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem]`}>
             Сохранить
           </button>
         </div>

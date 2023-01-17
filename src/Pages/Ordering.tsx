@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 import HeaderOrder from "../components/HeaderOrder";
-import { ChangePaymentData } from "../layouts/ChangePaymentData";
+import { ChangePaymentData } from "../components/ChangePaymentData";
 
 
 

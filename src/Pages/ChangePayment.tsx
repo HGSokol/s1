@@ -1,5 +1,5 @@
 import HeaderOrder from "../components/HeaderOrder"
-import { ChangePaymentData } from "../layouts/ChangePaymentData"
+import { ChangePaymentData } from "../components/ChangePaymentData"
 
 
 const ChangePayment = () => {

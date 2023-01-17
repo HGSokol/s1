@@ -71,7 +71,7 @@ const Login = () => {
           placeholder='Ваше имя'
           type='text' 
           {...register("name")} 
-          className='px-[16rem] text-[12rem] hover:border-[#777872] outline-none w-full h-[48rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[12rem] placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56rem] lg:placeholder:text-[16rem] lg:text-[16rem]'/>
+          className='px-[16rem] font-bodyalt font-[400] text-[14rem] hover:border-[#777872] outline-none w-full h-[48rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56rem] lg:placeholder:text-[16rem] lg:text-[16rem]'/>
           {
             errors.name? <p className='text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]'>{errors.name?.message}</p> : null
           }
@@ -81,7 +81,7 @@ const Login = () => {
             placeholder='Ваша фамилия'
             type='text' 
             {...register("lastName")} 
-            className='px-[16rem] outline-none w-full h-[48rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[12rem] placeholder:font-[400] placeholder:text-[#AAAAAA] text-[12rem] hover:border-[#777872] lg:text-[16rem]  lg:h-[56rem] lg:placeholder:text-[16rem]  '/>
+            className='px-[16rem] font-bodyalt font-[400] text-[14rem] outline-none w-full h-[48rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] hover:border-[#777872] lg:text-[16rem]  lg:h-[56rem] lg:placeholder:text-[16rem]  '/>
           {
             errors.lastName? <p className='text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]'>{errors.lastName?.message}</p> : null
           }
@@ -91,7 +91,7 @@ const Login = () => {
             placeholder='Ваш e-mail'
             type='text' 
             {...register("email")} 
-            className={`text-[12rem] hover:border-[#777872] outline-none w-full h-[48rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[12rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
+            className={`font-bodyalt font-[400] text-[14rem]  hover:border-[#777872] outline-none w-full h-[48rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
             lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
             ${errors.email? ' hover:border-[#CB1D1D]': ' '}`}/>
             {
@@ -109,7 +109,7 @@ const Login = () => {
             placeholder='Ваш пароль' 
             type={`${type === true ? 'password' : 'text'}`}
             {...register("password")} 
-            className={`text-[12rem] hover:border-[#777872] outline-none w-full h-[48rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[12rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
+            className={`font-bodyalt font-[400] text-[14rem] hover:border-[#777872] outline-none w-full h-[48rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
             lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
             ${errors.email? ' hover:border-[#CB1D1D]': ' '}`}/>
             {
@@ -120,19 +120,19 @@ const Login = () => {
           errorMessage ? (<p className='text-center text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]'>{errorMessage}</p>) : null
         } 
         <div className='mb-[36rem]'>
-          <button type="submit" disabled={!isValid} className={`${ isValid === true ? ' bg-[#FFB700]': ' bg-[#FFB700]/50'} mb-[20rem] lg:mb-[24rem] w-full h-[42rem] py-[14rem] rem-[18rem] text-[12rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem]`}>
+          <button type="submit" disabled={!isValid} className={`${ isValid === true ? ' bg-[#FFB700]': ' bg-[#FFB700]/50'} font-bodyalt mb-[20rem] lg:mb-[24rem] w-full h-[51rem] py-[14rem] rem-[18rem] text-[16rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem]`}>
             Зарегистрироваться
           </button>
           <div className='flex flex-row justify-center rem-[8.5rem] gap-[8rem] lg:mb-[20rem]'>
-            <p className='text-[12rem] text-[#777872] font-[400] lg:text-[16rem]'>У вас уже есть аккаунт? </p>
+            <p className='font-bodyalt text-[14rem] text-[#777872] font-[400] lg:text-[16rem]'>У вас уже есть аккаунт? </p>
             <Link to='/login'>
-              <p className='text-[12rem] text-[#000000] font-[600] lg:text-[16rem]'>Войти</p>
+              <p className='font-bodyalt text-[14rem] text-[#000000] font-[600] lg:text-[16rem]'>Войти</p>
             </Link>
           </div>
         </div>
         <div className='mb-[20rem]'>
           <AlternativeLogin>
-            <h4 className='text-center text-[12rem] text-[#777872] font-[400] mb-[14rem] lg:mb-[24rem] lg:text-[16rem]'>Зарегистрироваться с помощь</h4>
+            <h4 className='text-center text-[14rem] text-[#777872] font-[400] mb-[14rem] lg:mb-[24rem lg:text-[16rem]'>Зарегистрироваться с помощь</h4>
           </AlternativeLogin>
         </div>
       </form>

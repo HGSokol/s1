@@ -102,12 +102,12 @@ const ChangePassword2 = () => {
 
   return (
     <>
-    <div className='w-[288rem] mx-auto mt-[24rem] lg:w-[492rem] lg:mt-[223rem]'>
-      <h1 className='font-body font-[600] text-[22rem] leading-[26.25rem] text-center mb-[14rem] 
+    <div className='w-[343rem] mx-auto mt-[24rem] lg:w-[492rem] lg:mt-[223rem]'>
+      <h1 className='font-bodyalt font-[600] text-[24rem] leading-[26.25rem] text-center mb-[14rem] 
       lg:text-[40rem] lg:leading-[46.96rem] lg:mb-[24rem]'>Восстановление пароля</h1>
-      <h3 className='font-body text-[#777872] font-[600] text-[14rem] leading-[26.25rem] text-center mb-[32rem] 
+      <h3 className='font-bodyalt text-[#777872] font-[600] text-[16rem] leading-[26.25rem] text-center mb-[32rem] 
         lg:text-[22rem] lg:leading-[32rem] lg:mb-[48rem]'>Введите код подтверждения, который мы отправили Вам на указанный Email </h3>
-      <form onSubmit={handleSubmit(onSubmit)} className='grid grid-rows-[1fr_56rem] w-[288rem] lg:w-[441rem] mx-auto place-items-center lg:grid-rows-[1fr_65rem] lg:mb-[24rem]'>
+      <form onSubmit={handleSubmit(onSubmit)} className='grid grid-rows-[1fr_56rem] w-[343rem] lg:w-[441rem] mx-auto place-items-center lg:grid-rows-[1fr_65rem] lg:mb-[24rem]'>
         <div className='flex flex-row gap-[5rem] lg:gap-[20rem] w-min mb-[32rem] lg:mb-[48rem]'>
           <div className='h-[48rem] w-[40rem] lg:h-[56rem] lg:w-[54rem]'>
             <input 
@@ -116,7 +116,7 @@ const ChangePassword2 = () => {
               maxLength={1}
               {...register("n1")}   
               onKeyUp={(e) => e.code !== 'Backspace' ?setFocus('n2'): setFocus('n1')}            
-              className='outline-none w-full text-center h-[56rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[12rem] placeholder:text-center placeholder:font-[400] placeholder:text-[#AAAAAA] text-[12rem]  lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem]'/>
+              className='outline-none w-full text-center h-[56rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[14rem] placeholder:text-center placeholder:font-[400] placeholder:text-[#AAAAAA] text-[14rem]  lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem]'/>
           </div>
           <div className='h-[48rem] w-[40rem] lg:h-[56rem] lg:w-[54rem]'>
             <input 
@@ -125,7 +125,7 @@ const ChangePassword2 = () => {
               maxLength={1}
               {...register("n2")} 
               onKeyUp={(e) => e.code !== 'Backspace' ?setFocus('n3'): setFocus('n1')} 
-              className='outline-none w-full text-center h-[56rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[12rem] placeholder:text-center placeholder:font-[400] placeholder:text-[#AAAAAA] text-[12rem]  lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] '/>
+              className='outline-none w-full text-center h-[56rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[14rem] placeholder:text-center placeholder:font-[400] placeholder:text-[#AAAAAA] text-[14rem]  lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] '/>
           </div>
           <div className='h-[48rem] w-[40rem] lg:h-[56rem] lg:w-[54rem]'>
             <input 
@@ -134,7 +134,7 @@ const ChangePassword2 = () => {
               maxLength={1}
               {...register("n3")} 
               onKeyUp={(e) => e.code !== 'Backspace' ?setFocus('n4'): setFocus('n2')} 
-              className='outline-none w-full text-center h-[56rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[12rem] placeholder:text-center placeholder:font-[400] placeholder:text-[#AAAAAA] text-[12rem]  lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem]'/>
+              className='outline-none w-full text-center h-[56rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[14rem] placeholder:text-center placeholder:font-[400] placeholder:text-[#AAAAAA] text-[14rem]  lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem]'/>
           </div>
           <div className='h-[48rem] w-[40rem] lg:h-[56rem] lg:w-[54rem]'>
             <input 
@@ -143,7 +143,7 @@ const ChangePassword2 = () => {
               maxLength={1}
               {...register("n4")} 
               onKeyUp={(e) => e.code !== 'Backspace' ?setFocus('n5'): setFocus('n3')} 
-              className='outline-none w-full text-center h-[56rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[12rem] placeholder:text-center placeholder:font-[400] placeholder:text-[#AAAAAA] text-[12rem]  lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem]'/>
+              className='outline-none w-full text-center h-[56rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[14rem] placeholder:text-center placeholder:font-[400] placeholder:text-[#AAAAAA] text-[14rem]  lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem]'/>
           </div>
           <div className='h-[48rem] w-[40rem] lg:h-[56rem] lg:w-[54rem]'>
             <input 
@@ -152,7 +152,7 @@ const ChangePassword2 = () => {
               maxLength={1}
               {...register("n5")} 
               onKeyUp={(e) => e.code !== 'Backspace' ?setFocus('n6'): setFocus('n4')} 
-              className='outline-none w-full text-center h-[56rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[12rem] placeholder:text-center placeholder:font-[400] placeholder:text-[#AAAAAA] text-[12rem]  lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem]'/>
+              className='outline-none w-full text-center h-[56rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[14rem] placeholder:text-center placeholder:font-[400] placeholder:text-[#AAAAAA] text-[14rem]  lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem]'/>
           </div>
           <div className='h-[48rem] w-[40rem] lg:h-[56rem] lg:w-[54rem]'>
             <input 
@@ -161,21 +161,21 @@ const ChangePassword2 = () => {
               maxLength={1}
               {...register("n6")} 
               onKeyUp={(e) => e.code !== 'Backspace' ?setFocus('n6'): setFocus('n5')} 
-              className='outline-none w-full text-center h-[56rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[12rem] placeholder:text-center placeholder:font-[400] placeholder:text-[#AAAAAA] text-[12rem]  lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem]'/>
+              className='outline-none w-full text-center h-[56rem] rem-[16rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[14rem] placeholder:text-center placeholder:font-[400] placeholder:text-[#AAAAAA] text-[14rem]  lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem]'/>
           </div>
         </div>
         {
           errorMessage ? (<p className='text-center text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]'>{errorMessage}</p>) : null
         }
         <div className='w-full'>
-          <button type="submit" disabled={!isValid} className={`${ isValid === true ? ' bg-[#FFB700]': ' bg-[#FFB700]/50'} w-full h-[42rem] py-[14rem] rem-[18rem] text-[12rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem]`}>
+          <button type="submit" disabled={!isValid} className={`${ isValid === true ? ' bg-[#FFB700]': ' bg-[#FFB700]/50'} w-full h-[51rem] rem-[18rem] text-[16rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem]`}>
             Подтвердить
           </button>
         </div>
       </form>
       <div className='flex flex-row justify-center rem-[8.5rem] gap-[8rem] mt-[10rem]'>
-        <p className='text-[12rem] text-[#777872] font-[400] lg:text-[16rem]'>Не пришел код?</p>
-        <p className='text-[12rem] text-[#000000] font-[600] lg:text-[16rem] cursor-pointer'
+        <p className='text-[14rem] text-[#777872] font-[400] lg:text-[16rem]'>Не пришел код?</p>
+        <p className='text-[14rem] text-[#000000] font-[600] lg:text-[16rem] cursor-pointer'
         onClick={sendCode}>Отправить код снова</p>
       </div>
     </div>

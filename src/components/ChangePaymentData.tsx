@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import axios from 'axios'
 
-import CardIcon from '../components/CardIcon'
+import CardIcon from './CardIcon'
 
 
 const schema = yup.object({
@@ -86,7 +86,7 @@ export const ChangePaymentData = () => {
       <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col w-full lg:mx-[0rem]  lg:w-[441rem]'>
           <div className='mb-[16rem]'>
             <div className='relative'>
-              <p className='font-bodyalt font-[400] text-[12rem] leading-[14rem] text-[#AAAAAA] mb-[8rem] lg:text-[16rem] lg:leading-[19rem]'>Номер карты</p>
+              <p className='font-bodyalt font-[400] text-[14rem] leading-[14rem] text-[#AAAAAA] mb-[8rem] lg:text-[16rem] lg:leading-[19rem]'>Номер карты</p>
               <div className={`absolute translate-x-[295rem] ${numberCard[0] === '2'? ' translate-y-[21rem] lg:translate-y-[24rem]':'translate-y-[14rem] lg:translate-y-[18rem]'} w-[20rem] h-[12rem] lg:translate-x-[390rem]`}>
                 <CardIcon cardNumber={numberCard}/>
               </div>
@@ -100,7 +100,7 @@ export const ChangePaymentData = () => {
                 minLength={19}
                 placeholder='XXXX XXXX XXXX XXXX'
                 type='text' 
-                className={`font-bodyalt font-[400] leading-[14rem] text-[#1F2117] text-[12rem] hover:border-[#777872] outline-none w-full h-[48rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[12rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
+                className={`font-bodyalt font-[400] leading-[14rem] text-[#1F2117] text-[14rem] hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
                 lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
                 `}/>
                 {/* {
@@ -109,13 +109,13 @@ export const ChangePaymentData = () => {
             </div>
           </div>
           <div className='mb-[16rem]'>
-            <p className='font-bodyalt font-[400] text-[12rem] leading-[14rem] text-[#AAAAAA] mb-[8rem] lg:text-[16rem] lg:leading-[19rem]'>Имя держателя карты</p>
+            <p className='font-bodyalt font-[400] text-[14rem] leading-[14rem] text-[#AAAAAA] mb-[8rem] lg:text-[16rem] lg:leading-[19rem]'>Имя держателя карты</p>
             <div>
               <input 
-                placeholder='ИМЯ ФАМИЛИЯ'
+                placeholder='Имя Фамилия'
                 type='text' 
                 {...register('name')}
-                className={`font-bodyalt font-[400] leading-[14rem] text-[#1F2117] text-[12rem] hover:border-[#777872] outline-none w-full h-[48rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[12rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
+                className={`font-bodyalt font-[400] leading-[14rem] text-[#1F2117] text-[14rem] hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
                 lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
                 `}/>
                 {/* {
@@ -125,7 +125,7 @@ export const ChangePaymentData = () => {
           </div>
           <div className='w-full grid grid-cols-2 gap-[16rem] mb-[20rem]'>
             <div>
-              <p className='font-bodyalt font-[400] text-[12rem] leading-[14rem] text-[#AAAAAA] mb-[8rem] lg:text-[16rem] lg:leading-[19rem]'>Дата окончания</p>
+              <p className='font-bodyalt font-[400] text-[14rem] leading-[14rem] text-[#AAAAAA] mb-[8rem] lg:text-[16rem] lg:leading-[19rem]'>Дата окончания</p>
               <div>
                 <input 
                   ref={refDateCard}
@@ -134,7 +134,7 @@ export const ChangePaymentData = () => {
                   placeholder='ММ/ГГ'
                   type='text' 
                   maxLength={5}
-                  className={`font-bodyalt font-[400] leading-[14rem] text-[#1F2117] text-[12rem] hover:border-[#777872] outline-none w-full h-[48rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[12rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
+                  className={`font-bodyalt font-[400] leading-[14rem] text-[#1F2117] text-[14rem] hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
                   lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
                   `}/>
                   {/* {
@@ -143,14 +143,14 @@ export const ChangePaymentData = () => {
               </div>
             </div>
             <div>
-              <p className='font-bodyalt font-[400] text-[12rem] leading-[14rem] text-[#AAAAAA] mb-[8rem] lg:text-[16rem] lg:leading-[19rem]'>CVV</p>
+              <p className='font-bodyalt font-[400] text-[14rem] leading-[14rem] text-[#AAAAAA] mb-[8rem] lg:text-[16rem] lg:leading-[19rem]'>CVV</p>
               <div>
                 <input 
                   placeholder='CVV'
                   type='text' 
                   maxLength={3}
                   {...register('cvv')}
-                  className={`font-bodyalt font-[400] leading-[14rem] text-[#1F2117] text-[12rem] hover:border-[#777872] outline-none w-full h-[48rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[12rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
+                  className={`font-bodyalt font-[400] leading-[14rem] text-[#1F2117] text-[14rem] hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
                   lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
                   `}/>
                   {/* {
@@ -160,13 +160,13 @@ export const ChangePaymentData = () => {
             </div>
           </div>
           <div className='mb-[32rem]'>
-            <p className='font-bodyalt font-[400] text-[12rem] leading-[14rem] text-[#AAAAAA] lg:text-[16rem] lg:leading-[19rem]'>Для привязки вашей карты с нее будут списаны средства в размере 1 рубля и возвращены обратно</p>
+            <p className='font-bodyalt font-[400] text-[14rem] leading-[14rem] text-[#AAAAAA] lg:text-[16rem] lg:leading-[19rem]'>Для привязки вашей карты с нее будут списаны средства в размере 1 рубля и возвращены обратно</p>
           </div>
           {/* {
             errorMessage ? (<p className='text-center text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]'>{errorMessage}</p>) : null
           } */}
           <div >
-            <button type="submit" disabled={!isValid} className={`${ isValid === true ? ' bg-[#FFB700]': ' bg-[#FFB700]/50'} mb-[30rem] lg:mb-[24rem] w-full h-[42rem] flex items-center justify-center rem-[18rem] text-[12rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem]`}>
+            <button type="submit" disabled={!isValid} className={`${ isValid === true ? ' bg-[#FFB700]': ' bg-[#FFB700]/50'} mb-[30rem] lg:mb-[24rem] w-full h-[51rem] flex items-center justify-center rem-[18rem] text-[16rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem]`}>
               Оплатить
             </button>
           </div>
