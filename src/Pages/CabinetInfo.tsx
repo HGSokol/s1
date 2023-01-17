@@ -29,7 +29,7 @@ const schema = yup.object({
 
 
 const CabinetInfo = () => {
-  const { user, deviceName } = useContext(Profile)
+  const { user, setUser, deviceName } = useContext(Profile)
 
   const dataInfo = [
     {label: 'Имя', data: user?.name},
@@ -50,6 +50,7 @@ const CabinetInfo = () => {
 
   
   const onSubmit = (data: IFormInputs) => {
+    console.log(data)
     reset()
     if(oldPass&& token && data.oldpassword === JSON.parse(oldPass) && data.password !== JSON.parse(oldPass)) {
 
@@ -82,7 +83,25 @@ const CabinetInfo = () => {
   const onClickChangeType = () => {
     setType(prev => !prev)
   }
+  
 
+  // const [state, setState] = useState({
+  //   photo: ""
+  // });
+  // const { photo } = state;
+  const getPhoto = (data:any) => {
+    const target = data.target as HTMLInputElement;
+    const files = target.files;
+    console.log(files?.[0])
+
+    setUser({
+      ...user,
+      avatar: files?.[0].name
+    })
+  }
+
+
+  console.log(user)
   return (
   <div className='mx-[16rem] lg:mx-[0rem]'>
     <div className='w-full flex flex-row relative mb-[24rem] lg:hidden'>
@@ -98,17 +117,24 @@ const CabinetInfo = () => {
     <div className='hidden lg:flex font-body font-[600] text-[40rem] leading-[47rem] text-[#1F2117] mb-[32rem]'>Общая информация</div>
     <div className='mb-[20rem] w-full p-[16rem] flex flex-row items-center bg-[#FFFFFF] border-[1px] border-[rgba(31_33_23_0.08)] rounded-[8rem] lg:mb-[20rem] lg:w-[441rem] lg:p-[16rem] lg:flex lg:flex-row lg:items-center lg:bg-[#FFFFFF] lg:border-[1px] lg:border-[rgba(31_33_23_0.08)] lg:rounded-[8rem]'>
       <div className='w-[60rem] h-[60rem] mr-[20rem] lg:mr-[28rem]'>
-        {!user?.avatar ? (<img src={UnknownUser} alt='avatar' className='rounded-full w-[60rem] h-[60rem] lg:w-[60rem] lg:h-[60rem]'/>): user?.avatar}
+        {!user?.avatar ? (<img src={UnknownUser} alt='avatar' className='rounded-full w-[60rem] h-[60rem] lg:w-[60rem] lg:h-[60rem]'/>): <img src={user.avatar} alt='avatar'/>}
       </div>
       <div className='mr-[14rem] lg:mr-[16rem]'>
-        <label>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <input type='file' className='hidden' accept=".jpg, .jpeg, .png"/>
-            <path d="M8.0625 10.3125L12 14.25L15.9375 10.3125" stroke="#FFB700" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M12 3.75V14.25" stroke="#FFB700" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M20.25 14.25V19.5C20.25 19.6989 20.171 19.8897 20.0303 20.0303C19.8897 20.171 19.6989 20.25 19.5 20.25H4.5C4.30109 20.25 4.11032 20.171 3.96967 20.0303C3.82902 19.8897 3.75 19.6989 3.75 19.5V14.25" stroke="#FFB700" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </label>
+  {/* СДЕЛАННАЯ ФОРМА ИНПУТ, ОСТАЛОСЬ ЛИШЬ ВСТАВЛЯТЬ КАРТИНКИ */}
+<form >
+  <label className="relative" >
+    <input 
+      type='file' 
+      className='absolute hidden' 
+      accept=".jpg, .jpeg, .png" 
+      onChange={ (e) => getPhoto(e) }/>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8.0625 10.3125L12 14.25L15.9375 10.3125" stroke="#FFB700" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M12 3.75V14.25" stroke="#FFB700" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M20.25 14.25V19.5C20.25 19.6989 20.171 19.8897 20.0303 20.0303C19.8897 20.171 19.6989 20.25 19.5 20.25H4.5C4.30109 20.25 4.11032 20.171 3.96967 20.0303C3.82902 19.8897 3.75 19.6989 3.75 19.5V14.25" stroke="#FFB700" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  </label>
+</form>
       </div>
       <div className='w-[189rem] font-bodyalt font-[400] text-[16rem] text-[#1F2117]/60 leading-[19rem] lg:w-max lg:font-bodyalt lg:font-[400] lg:text-[16rem] lg:text-[#1F2117]/60 lg:leading-[19rem]'>Загрузить другое изображение</div>
     </div>
