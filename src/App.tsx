@@ -132,7 +132,7 @@ function App() {
 
   document.title = 'Фитнес как наука'
 
-  console.log(activeSub)
+
   return (
       <div className='font-body'>
         <GoogleOAuthProvider clientId={"148113392760-243a1pc16e8vbu20eqogoalrvppil48v.apps.googleusercontent.com"}>
@@ -159,18 +159,17 @@ function App() {
                       {
                         window.innerWidth >= 1024 ? (
                         <Route path='/cabinet' element={<MyProfile/>} >
-                          {
+                          {/* {
                             activeSub ? (
                               <>
-                                <Route index element={<Subs/>} />
                               </>
                             ) : (
                               <>
                                 <Route index element={<ChangeSubs/>} />
                               </>
                             )
-                          }
-                          {/* <Route index element={<Subs/>} /> */}
+                          } */}
+                          <Route index element={<Subs/>} />
                           <Route path='/cabinet/changeSubs' element={<ChangeSubs/>} />
                           <Route path='/cabinet/payment' element={<Payment/>} />
                           <Route path='/cabinet/changePayment' element={<ChangePayment/>} />

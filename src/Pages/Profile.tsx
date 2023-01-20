@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useRef } from "react";
 import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import { Profile } from '../App'
 
@@ -15,35 +15,46 @@ type dataLink = {
 
 
 const MyProfile = () => {
+  // const [data,setData] = useState<dataLink[] | null>(null)
+  // let data:dataLink[]; 
   const { activeSub, user } = useContext(Profile)
-
-  let data:dataLink[]; 
-  window.innerWidth >= 1024? data = [
+  const dataRef = useRef<dataLink[]>( window.innerWidth >= 1024? [
     {name:'Подписки', link: `${activeSub? '' : '/changeSubs'}`},
     {name:'Общая информация', link: '/cabinetInfo'},
     {name:'Детали платежей', link: '/payment'},
-  ]: data = [
+  ]: [
     {name:'Подписки', link: `${activeSub? '/subs' : '/changeSubs'}`},
     {name:'Общая информация', link: '/cabinetInfo'},
     {name:'Детали платежей', link: '/payment'},
-  ]
-  const [active, setActive] = useState(data[0].link)
+  ])
+
+
+  useEffect(() => {
+      window.innerWidth >= 1024? dataRef.current = [
+        {name:'Подписки', link: `${activeSub? '' : '/changeSubs'}`},
+        {name:'Общая информация', link: '/cabinetInfo'},
+        {name:'Детали платежей', link: '/payment'},
+      ]: dataRef.current = [
+        {name:'Подписки', link: `${activeSub? '/subs' : '/changeSubs'}`},
+        {name:'Общая информация', link: '/cabinetInfo'},
+        {name:'Детали платежей', link: '/payment'},
+      ]
+
+      setActive(dataRef.current[0].link)
+    
+  },[activeSub])
+
+  const [active, setActive] = useState(`${activeSub? '' : '/changeSubs'}`)
 
   const navigate = useNavigate()
   const location = useLocation()
   const [ activePopup, setActivePopup] = useState(false)
-  
-  
-  
+
   
   if(window.innerWidth <1024){
     document.title = 'Профиль'
   }
 
-  useEffect(() => {
-    const currentLink = data.map((e,i) => location.pathname.includes(e.link)? e.link: '').filter(e => e !== '').join('')
-    setActive(currentLink)
-  })
 
 
   return (
@@ -76,7 +87,7 @@ const MyProfile = () => {
     <div className='flex flex-col lg:w-[487rem] lg:h-[47rem] lg:p-[2rem] lg:rounded-[10rem] lg:bg-[#F4F4F4] lg:mb-[32rem] lg:flex-row lg:cursor-pointer'>
       <div className='flex flex-col gap-[35rem] lg:h-full lg:gap-[0rem] lg:flex-row'>
         {
-          data.map((e,i)=> {
+          dataRef?.current.map((e,i)=> {
             return (
               <Link to={`/cabinet${e.link}`} key={i} >
                 <div className={` flex flex-row justify-between items-center font-bodyalt font-[400] text-[16rem] text-[#1F2117] lg:flex lg:h-full lg:justify-center lg:items-center lg:px-[24rem] lg:font-bodyalt lg:font-[400] lg:text-[16rem] lg:leading-[19rem] lg:rounded-[8rem]

@@ -57,7 +57,7 @@ const Ordering = () => {
     setCheckbox(false)
     reset()
 
-   navigate('/cabinet/ordering2')
+    navigate('/cabinet/ordering2')
 
     // axios.post('https://stage.fitnesskaknauka.com/api/auth/send-reset-code', userInfo)
     // .then((res) => {

@@ -25,19 +25,28 @@ type NavType = {
 
 
 const Cabinet = () => {
+  const { user, setUser, setIsAuthenticated, activeSub } = useContext(Profile)
   const ref = useRef<HTMLDivElement | null>(null)
+  const refNav = useRef<NavType[]>([
+    {name: 'Полезное', img: <UsefulIcon />, link: '/usefull'},
+    {name: 'Активность', img: <ActivityIcon />, link: '/activity'},
+    {name: 'Статистика', img: <StatisticIcon />, link: '/statistic'},
+    {name: 'Питание', img: <NutritionIcon />, link: '/nutrition'},
+    {name: 'Профиль', img: <ProfileIcon />, link: `${activeSub? '' : '/changeSubs'}`},
+  ])
   const location = useLocation()
   const [ active, setActive ] = useState('')
-  const { user, setUser, setIsAuthenticated } = useContext(Profile)
   const [ activePopup, setActivePopup] = useState(false)
   // const [visibleBlock, setVisibleBlock] = useState<number | null>(null)
-  const nav: NavType[] = [
+
+  refNav.current = [
     {name: 'Полезное', img: <UsefulIcon />, link: '/usefull'},
     {name: 'Активность', img: <ActivityIcon />, link: '/activity'},
     {name: 'Статистика', img: <StatisticIcon />, link: '/statistic'},
     {name: 'Питание', img: <NutritionIcon />, link: '/nutrition'},
     {name: 'Профиль', img: <ProfileIcon />, link: ''},
   ]
+
   const navigate = useNavigate()
 
   const logout = () => {
@@ -51,19 +60,19 @@ const Cabinet = () => {
       })
   }
 
-  if(ref.current){
-  }
   useEffect(() => {
-    const currentLink = nav.map((e,i) => location.pathname.includes(e.link)? e.link: '').filter(e => e !== '').join('')
-    setActive(currentLink)
+    const currentLink = refNav?.current?.map((e,i) => location.pathname.includes(e.link)? e.link: '').filter(e => e !== '').join('')
+    if(currentLink){
+      setActive(currentLink)
+    }
 
     if(ref.current){
       // const heightVisibleBlock = window.innerHeight - ref.current?.clientHeight
       // setVisibleBlock(ref.current?.offsetHeight)
     }
-  })
+  },[activeSub])
   
-  // style={window.innerWidth >= 1024 ?{}: {height: `${visibleBlock}rem`}}
+
   return (
     <div className='relative'>
       <div className={`z-0 grid grid-rows-[calc(100vh-80rem)_80rem] lg:grid lg:grid-rows-1 lg:grid-cols-[360rem_auto] lg:w-[1920rem]`}>
@@ -74,7 +83,7 @@ const Cabinet = () => {
           <div className=' lg:mt-[39rem] lg:ml-[120rem] lg:flex lg:flex-col lg:justify-between'>
             <div className='my-[13rem] flex flex-row gap-[10rem]  justify-center lg:my-[0rem] lg:flex lg:flex-col'>
             {
-              nav.map((e,i) => {
+              refNav?.current?.map((e,i) => {
                 return (
                   <Link to={`/cabinet${e.link}`}  key={i}>
                     <div className={`h-full w-[59rem] gap-[6rem] flex flex-col justify-center items-center lg:flex-row lg:justify-start lg:items-center lg:gap-[24rem] lg:mb-[47rem] lg:group/link`}
@@ -106,9 +115,9 @@ const Cabinet = () => {
         </div>
         <div className='order-1 h-full lg:order-2 lg:grid lg:grid-rows-[121rem_calc(100vh-121rem)] lg:mr-[120rem]'>
           <div className='hidden lg:mt-[32rem] lg:flex lg:flex-row lg:justify-end lg:h-[60rem] '>
-            <Link to='/cabinet'>
+            <Link to={`${activeSub? '/cabinet' : '/cabinet/changeSubs'}`}>
               <div className='lg:flex lg:flex-row lg:gap-[12rem]'
-              onClick={() => setActive('')}>
+              onClick={() => setActive(`${activeSub? '' : '/changeSubs'}`)}>
                 <div className='lg:py-[5rem]'>
                   <p className='lg:font-bodyalt lg:font-[500] lg:text-[#1F2117] lg:text-[18rem] lg:text-end' >{`${user?.name} ${user?.lastName}`}</p>
                   <p className='lg:font-bodyalt lg:font-[400] lg:text-[#1F2117]/60 lg:text-[14rem]  lg:text-end'>{user?.email}</p>

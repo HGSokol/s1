@@ -33,7 +33,7 @@ export const Header = () => {
       </div>
       {
         user ? (
-          <Link to={`${activeSub? '' : '/cabinet/changeSubs'}`} >
+          <Link to={`${activeSub? '/cabinet' : '/cabinet/changeSubs'}`} >
             <p className='font-bodyalt font-[600] text-[#777872] hover:text-[#1F2117] leading-[19rem] p-[7rem] text-[16rem]
               lg:text-[17rem]'>Личный кабинет</p>
           </Link>

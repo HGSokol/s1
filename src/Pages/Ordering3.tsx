@@ -5,7 +5,7 @@ import { Profile } from "../App";
 
 const Ordering = () => {
   const navigate = useNavigate()
-  const { orderCard, setActiveSub } = useContext(Profile)
+  const { orderCard, setActiveSub, activeSub } = useContext(Profile)
 
   document.title = 'Оформление заказа'
 
@@ -40,8 +40,8 @@ const Ordering = () => {
       <div className='mb-[32rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-center text-[#777872] whitespace-pre-wrap
       lg:font-bodyalt lg:font-[400] lg:text-[22rem] lg:leading-[32rem] ' >{`Вы успешно оплатили подписку "${orderCard?.duration}"\nна сумму ${orderCard?.price}`}</div>
       <div className='w-full h-[50rem] bg-[#FFB700] rounded-full flex flex-row items-center justify-center
-      lg:w-[272rem]'>
-        <div className='mr-[12rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-white'>Вернуться к подпискам</div>
+      lg:w-[272rem] cursor-pointer'>
+        <div className='mr-[12rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-white '>Вернуться к подпискам</div>
         <div>
           <svg className='w-[18rem] h-[18rem]' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M3.75 12L20.25 12" stroke="#FAFAFA" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
@@ -63,8 +63,8 @@ const Ordering = () => {
       <div className='mb-[32rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-center text-[#777872] whitespace-pre-wrap
       lg:font-bodyalt lg:font-[400] lg:text-[22rem] lg:leading-[32rem] ' >{`Какой-то текст`}</div>
       <div className='w-full h-[50rem] bg-[#FFB700] rounded-full flex flex-row items-center justify-center
-      lg:w-[272rem]'>
-        <div className='mr-[12rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-white'>Вернуться к подпискам</div>
+      lg:w-[272rem] cursor-pointer'>
+        <div className='mr-[12rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-white '>Вернуться к подпискам</div>
         <div>
           <svg className='w-[18rem] h-[18rem]' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M3.75 12L20.25 12" stroke="#FAFAFA" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
@@ -86,8 +86,8 @@ const Ordering = () => {
       <div className='mb-[32rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-center text-[#777872] whitespace-pre-wrap
       lg:font-bodyalt lg:font-[400] lg:text-[22rem] lg:leading-[32rem] ' >{`Оплата не прошла. И еще какой-нибудь\nтекст ошибки.`}</div>
       <div className='w-full h-[50rem] bg-[#FFB700] rounded-full flex flex-row items-center justify-center
-      lg:w-[272rem]'>
-        <div className='mr-[12rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-white'>Вернуться к подпискам</div>
+      lg:w-[272rem] cursor-pointer'>
+        <div className='mr-[12rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-white '>Вернуться к подпискам</div>
         <div>
           <svg className='w-[18rem] h-[18rem]' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M3.75 12L20.25 12" stroke="#FAFAFA" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
