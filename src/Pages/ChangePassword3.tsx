@@ -28,6 +28,8 @@ const ChangePassword3 = () => {
   const { user, deviceName } = useContext(Profile)
   const [type, setType] = useState(true)
   const navigate = useNavigate()
+  document.title = 'Восстановление пароля'
+
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
     mode:'onChange'
@@ -47,7 +49,7 @@ const ChangePassword3 = () => {
       deviceName,
     }
 
-    axios.put('https://stage.fitnesskaknauka.com/api/auth/reset-password', userInfo)
+    axios.put('/api/auth/reset-password', userInfo)
     .then((res) => {
 
       reset()

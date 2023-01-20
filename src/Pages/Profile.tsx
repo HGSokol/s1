@@ -1,11 +1,10 @@
-import React, { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import { Profile } from '../App'
 
 import UnknownUser from '../images/unknownUser.png'
-import axios from "axios";
 import HeaderOrder from "../components/HeaderOrder";
-import { ExitPopup } from "../components/ExitPopup";
+import { LogoutPopup } from "../components/LogoutPopup";
 
 
 type dataLink = {
@@ -13,52 +12,51 @@ type dataLink = {
   link: string
 }
 
-let data:dataLink[]; 
 
-window.innerWidth >= 1024? data = [
-  {name:'Подписки', link: ''},
-  {name:'Общая информация', link: '/cabinetInfo'},
-  {name:'Детали платежей', link: '/payment'},
-]: data = [
-  {name:'Подписки', link: '/subs1'},
-  {name:'Общая информация', link: '/cabinetInfo1'},
-  {name:'Детали платежей', link: '/payment1'},
-]
 
 const MyProfile = () => {
-  const navigate = useNavigate()
-  const { user, setUser, setIsAuthenticated } = useContext(Profile)
-  const location = useLocation()
+  const { activeSub, user } = useContext(Profile)
+
+  let data:dataLink[]; 
+  window.innerWidth >= 1024? data = [
+    {name:'Подписки', link: `${activeSub? '' : '/changeSubs'}`},
+    {name:'Общая информация', link: '/cabinetInfo'},
+    {name:'Детали платежей', link: '/payment'},
+  ]: data = [
+    {name:'Подписки', link: `${activeSub? '/subs' : '/changeSubs'}`},
+    {name:'Общая информация', link: '/cabinetInfo'},
+    {name:'Детали платежей', link: '/payment'},
+  ]
   const [active, setActive] = useState(data[0].link)
+
+  const navigate = useNavigate()
+  const location = useLocation()
   const [ activePopup, setActivePopup] = useState(false)
+  
+  
+  
+  
+  if(window.innerWidth <1024){
+    document.title = 'Профиль'
+  }
 
   useEffect(() => {
     const currentLink = data.map((e,i) => location.pathname.includes(e.link)? e.link: '').filter(e => e !== '').join('')
     setActive(currentLink)
   })
 
-  const logout = () => {
-    axios.post('https://stage.fitnesskaknauka.com/api/auth/logout')
-    .then((res) => {
-      setUser(null)
-      setIsAuthenticated(false)
-      localStorage.clear()
-      
-      navigate('/login')
-    })
-}
 
   return (
-  <div className='h-full mx-[16rem] lg:mx-[0rem]'>
-    {
-    activePopup? (
-      <div className='absolute z-[1000] top-0 left-0 w-[100%] h-[100%] bg-gray-100/50'>
-        <div className='absolute z-[1000] left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]  '>
-          <ExitPopup setActivePopup={setActivePopup}/>
+    <div className='h-full mx-[16rem] lg:mx-[0rem]'>
+      {
+      activePopup? (
+        <div className='absolute z-[1000] top-0 left-0 w-[100%] h-[100%] bg-gray-100/50'>
+          <div className='absolute z-[1000] left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]  '>
+            <LogoutPopup setActivePopup={setActivePopup}/>
+          </div>
         </div>
-      </div>
-      ) : null
-    }
+        ) : null
+     }
     <div className='w-full flex flex-row relative lg:hidden'
     onClick={() => navigate('/')}>
       <HeaderOrder/>
@@ -67,7 +65,7 @@ const MyProfile = () => {
       <div className='flex flex-row gap-[12rem]'
       onClick={() => setActive('')}>
         <div>
-          {!user?.avatar ? (<img src={UnknownUser} alt='avatar' className='rounded-full w-[60rem] h-[60rem]'/>): user?.avatar}
+        {!user?.avatar ? (<img src={UnknownUser} alt='avatar' className='rounded-full w-[60rem] h-[60rem] lg:w-[60rem] lg:h-[60rem]'/>): (<img src={user.avatar} alt='avatar' className='rounded-full w-[60rem] h-[60rem] lg:w-[60rem] lg:h-[60rem]'/>)}
         </div>
         <div className='py-[5rem]'>
           <p className='font-bodyalt font-[500] text-[#1F2117] text-[18rem] lg:text-end' >{`${user?.name} ${user?.lastName}`}</p>
@@ -103,7 +101,7 @@ const MyProfile = () => {
       <div onClick={() =>setActivePopup(true)} className='absolute bottom-[150rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-[#CB1D1D] lg:hidden'>
         Выход
       </div>
-      <div onClick={logout} className='absolute bottom-[110rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-[#1F2117] lg:hidden'>
+      <div className='absolute bottom-[110rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-[#1F2117] lg:hidden'>
         Удалить аккаунт
       </div>
     </div>

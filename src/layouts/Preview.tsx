@@ -8,7 +8,7 @@ import IMG2 from '../images/preview2.svg'
 
 
 export const Preview = () => {
-  const { user } = useContext(Profile)
+  const { user, activeSub } = useContext(Profile)
 
   return (
     <div className='w-full h-min relative mb-[72rem] 
@@ -40,7 +40,7 @@ export const Preview = () => {
         </div>
         <div className='font-bodyalt flex flex-col mb-[48rem] 
         lg:mb-[96rem] lg:flex-row'>
-        <Link to={user ? '/cabinet' : '/login'}>
+        <Link to={user ? `${activeSub? '/cabinet' : '/cabinet/changeSubs'}` : '/login'}>
           <button className='bg-[#FFB700] text-[16rem] mb-[14rem] w-full leading-[19rem] h-[51rem] rounded-full 
           text-center text-[#FAFAFA] tracking-[0.04em] flex flex-row items-center justify-center hover:bg-[#F0AD04]
           lg:w-max lg:h-[56rem] lg:text-[16rem] lg:mr-[32rem] '>

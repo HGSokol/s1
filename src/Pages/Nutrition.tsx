@@ -3,7 +3,7 @@ import { Develop } from '../components/Develop'
 
 
 const Nutrition = () => {
-
+  document.title = 'Питание'
 
   return (
     <>

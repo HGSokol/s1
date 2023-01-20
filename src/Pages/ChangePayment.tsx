@@ -1,8 +1,11 @@
+import React from "react"
 import HeaderOrder from "../components/HeaderOrder"
 import { ChangePaymentData } from "../components/ChangePaymentData"
 
 
 const ChangePayment = () => {
+  document.title = 'Изменение платежных данных'
+  
   return (
     <div className='mx-[16rem] lg:mx-[0rem] lg:w-full'>
     <HeaderOrder />

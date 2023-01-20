@@ -23,13 +23,6 @@ type NavType = {
   link:string
 }
 
-const nav: NavType[] = [
-  {name: 'Полезное', img: <UsefulIcon />, link: '/usefull'},
-  {name: 'Активность', img: <ActivityIcon />, link: '/activity'},
-  {name: 'Статистика', img: <StatisticIcon />, link: '/statistic'},
-  {name: 'Питание', img: <NutritionIcon />, link: '/nutrition'},
-  {name: 'Профиль', img: <ProfileIcon />, link: ''},
-]
 
 const Cabinet = () => {
   const ref = useRef<HTMLDivElement | null>(null)
@@ -38,6 +31,13 @@ const Cabinet = () => {
   const { user, setUser, setIsAuthenticated } = useContext(Profile)
   const [ activePopup, setActivePopup] = useState(false)
   // const [visibleBlock, setVisibleBlock] = useState<number | null>(null)
+  const nav: NavType[] = [
+    {name: 'Полезное', img: <UsefulIcon />, link: '/usefull'},
+    {name: 'Активность', img: <ActivityIcon />, link: '/activity'},
+    {name: 'Статистика', img: <StatisticIcon />, link: '/statistic'},
+    {name: 'Питание', img: <NutritionIcon />, link: '/nutrition'},
+    {name: 'Профиль', img: <ProfileIcon />, link: ''},
+  ]
   const navigate = useNavigate()
 
   const logout = () => {
@@ -114,7 +114,7 @@ const Cabinet = () => {
                   <p className='lg:font-bodyalt lg:font-[400] lg:text-[#1F2117]/60 lg:text-[14rem]  lg:text-end'>{user?.email}</p>
                 </div>
                 <div>
-                  {isNull(user?.avatar) ? (<img src={UnknownUser} alt='avatar' className='rounded-full lg:w-[60rem] lg:h-[60rem]'/>): user?.avatar}
+                {!user?.avatar ? (<img src={UnknownUser} alt='avatar' className='rounded-full w-[60rem] h-[60rem] lg:w-[60rem] lg:h-[60rem]'/>): (<img src={user.avatar} alt='avatar' className='rounded-full w-[60rem] h-[60rem] lg:w-[60rem] lg:h-[60rem]'/>)}
                 </div>
               </div>
             </Link>

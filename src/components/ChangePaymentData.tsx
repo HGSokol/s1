@@ -1,35 +1,35 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import axios from 'axios'
+import { Profile } from '../App'
 
 import CardIcon from './CardIcon'
 
 
 const schema = yup.object({
   cardNumber: yup.string(),
-  name: yup.string().uppercase().required(),
+  nameCard: yup.string().uppercase().required(),
   date: yup.string(),
   cvv: yup.number(),
 }).required();
 
 interface IFormInputs {
   cardNumber: string
-  name: string
+  nameCard: string
   date: string,
   cvv: string,
 }
 
 export const ChangePaymentData = () => {
+  const { setCardInfo } = useContext(Profile)
   const navigate = useNavigate()
   const refNumberCard = useRef<HTMLInputElement | null>(null)
   const refDateCard = useRef<HTMLInputElement | null>(null)
 
   const [numberCard, setNumberCard] = useState('');
   const [dateCard, setDateCard] = useState('');
-  const [checkbox, setCheckbox] = useState(true);
 
 
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IFormInputs>({
@@ -38,18 +38,19 @@ export const ChangePaymentData = () => {
   });
 
   const onSubmit = (data: IFormInputs) => {
-    console.log({
-      'numberCard': numberCard,
-      'dateCard': dateCard,
-      'checkbox': checkbox,
-      ...data
-    })
+    const { nameCard, cvv} = data
+    const cardInfo = {
+      numberCard,
+      nameCard,
+      dateCard,
+      cvv
+    }
+    setCardInfo(cardInfo)
     setNumberCard('')
     setDateCard('')
-    setCheckbox(false)
     reset()
 
-    window.innerWidth >=1024 ? navigate('/cabinet/ordering2') : navigate('/cabinet/order2')
+    navigate('/cabinet/ordering2')
 
     // axios.post('https://stage.fitnesskaknauka.com/api/auth/send-reset-code', userInfo)
     // .then((res) => {
@@ -114,7 +115,7 @@ export const ChangePaymentData = () => {
               <input 
                 placeholder='Имя Фамилия'
                 type='text' 
-                {...register('name')}
+                {...register('nameCard')}
                 className={`font-bodyalt font-[400] leading-[14rem] text-[#1F2117] text-[14rem] hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
                 lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
                 `}/>

@@ -5,7 +5,8 @@ import { Profile } from '../App'
 
 
 export const Header = () => {
-  const { user } = useContext(Profile)
+  const { activeSub, user } = useContext(Profile)
+
   return (
     <div className='pt-[25rem] flex flex-row justify-between items-center mb-[60rem]
     lg:mb-[183rem]  lg:pt-[32rem]
@@ -32,7 +33,7 @@ export const Header = () => {
       </div>
       {
         user ? (
-          <Link to='/cabinet' >
+          <Link to={`${activeSub? '' : '/cabinet/changeSubs'}`} >
             <p className='font-bodyalt font-[600] text-[#777872] hover:text-[#1F2117] leading-[19rem] p-[7rem] text-[16rem]
               lg:text-[17rem]'>Личный кабинет</p>
           </Link>

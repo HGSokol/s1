@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChangeCardPopup } from "../components/ChangeCardPopup";
 import { ResetSubPopup } from "../components/ResetSubPopup";
 import { SubCard } from "../components/SubCard";
+import { ActiveSub, Profile } from '../App'
 
 
 export type Sub = {
@@ -10,6 +11,7 @@ export type Sub = {
   price: string,
   top?: string,
   active?: string
+  info?: ActiveSub
 }
 
 const subsData: Sub[] = [
@@ -19,6 +21,10 @@ const subsData: Sub[] = [
       'Доступ на один месяц ко всем тренировкам и планам питания, а так же более чем 1000 вкусных и полезных рецептов',
     ],
     price: '1200 руб./ мес.',
+    info: {
+      duration: '1 месяц',
+      price: '1200 руб.'
+    }
   },
   {
     text: [
@@ -27,6 +33,10 @@ const subsData: Sub[] = [
       'Экономь 17% при оплате 3-х месячной подписки',
     ],
     price: '1000 руб./ мес.',
+    info: {
+      duration: '3 месяца',
+      price: '3000 руб.'
+    }
   },
   {
     text: [
@@ -35,11 +45,16 @@ const subsData: Sub[] = [
       'Экономь 34% при оплате годовой подписки',
     ],
     price: '800 руб./ мес.',
-    active: 'active'
+    top: 'top',
+    info: {
+      duration: '1 год',
+      price: '9600 руб.'
+    }
   }
 ]
 
 const Subs = () => {
+  const { activeSub } = useContext(Profile)
   const navigate = useNavigate()
   const [activeChangeCardPopup, setActiveChangeCardPopup] = useState(false)
   const [activeResetSubPopup, setActiveResetPopup] = useState(false)
@@ -79,8 +94,8 @@ const Subs = () => {
     <p className='mb-[24rem] font-bodyalt font-[600] text-[22rem] leading-[26rem] text-[#1F2117] lg:font-body lg:font-[600] lg:text-[26rem] lg:leaing-[30rem] lg:text-[#1F2117] lg:mb-[32rem]'>Текущая подписка</p>
     <div className=' mb-[24rem] flex flex-col gap-[24rem] lg:flex-row lg:justify-between lg:mb-[48rem] lg:w-[472rem]'>
       <div className='w-full flex justify-between items-center lg:items-start flex-row lg:flex-col lg:justify-start'>
-        <p className='font-bodyalt font-[600] text-[22rem] leading-[26rem] text-[#1F2117] lg:font-body lg:font-[600] lg:text-[20rem] lg:leading-[23rem] lg:text-[#1F2117] lg:mb-[12rem]'>Год</p>
-        <p className='font-bodyalt font-[400] text-[14rem] leading-[17rem] text-[#777872] lg:font-bodyalt lg:font-[400] lg:text-[16rem] lg:leading-[19rem] lg:text-[#777872]'>30000 руб./год</p>
+        <p className='font-bodyalt font-[600] text-[22rem] leading-[26rem] text-[#1F2117] lg:font-body lg:font-[600] lg:text-[20rem] lg:leading-[23rem] lg:text-[#1F2117] lg:mb-[12rem]'>{activeSub?.duration}</p>
+        <p className='font-bodyalt font-[400] text-[14rem] leading-[17rem] text-[#777872] lg:font-bodyalt lg:font-[400] lg:text-[16rem] lg:leading-[19rem] lg:text-[#777872]'>{`${activeSub?.price}/${activeSub?.duration}`}</p>
       </div>
       <div className=''>
         <button onClick={() => setActiveChangeCardPopup(true)} className='bg-white border-[1px] border-[#1F2117] w-full lg:w-[286rem] py-[14rem] text-[16rem] font-bodyalt text-[#1F2117] font-[600] rounded-[40rem] lg:px-[24rem]'>
@@ -104,7 +119,7 @@ const Subs = () => {
         subsData.map((e,i) => {
           return (
             <div key={i}>
-              <SubCard item={e} active={e.active} landing={false} setActiveResetPopup={setActiveResetPopup} />
+              <SubCard item={e} active={e.info?.duration === activeSub?.duration? 'active' : undefined} landing={false} setActiveResetPopup={setActiveResetPopup} />
             </div>
           )
         })

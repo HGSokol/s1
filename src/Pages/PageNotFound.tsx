@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 
 
 const NotFound = () => {
+  document.title = 'Страница не найдена'
+
   return(
     <div className=' h-screen flex'>
       <div className='w-[1536rem] h-[512rem] my-auto mx-auto text-center text-[16rem]'>

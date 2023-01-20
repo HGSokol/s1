@@ -30,6 +30,8 @@ const ChangePassword2 = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const { setUser, user, timezone } = useContext(Profile)
   const navigate = useNavigate()
+  document.title = 'Восстановление пароля'
+  
   const { register, handleSubmit, formState: { errors, isValid }, reset, setFocus } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
     mode:'onChange'
@@ -82,7 +84,7 @@ const ChangePassword2 = () => {
       email: 'g.w.sokolov98@mail.ru'
     }
 
-    axios.post('https://stage.fitnesskaknauka.com/api/auth/send-reset-code', userInfo, {
+    axios.post('/api/auth/send-reset-code', userInfo, {
       headers: {
         'Content-type':'application/json',
         'Timezone': `${timezone}`

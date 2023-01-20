@@ -43,6 +43,18 @@ export interface User {
   avatar?:string | null
 }
 
+interface CardInfo {
+  numberCard: string,
+  nameCard: string,
+  dateCard:string,
+  cvv: string
+}
+
+export interface ActiveSub {
+  duration: string,
+  price: string,
+}
+
 interface ProfileContext {
   isAuthenticated: boolean;
   user: User | null;
@@ -50,6 +62,12 @@ interface ProfileContext {
   setUser: (user: User | null) => void,
   timezone: string,
   deviceName: string,
+  cardInfo: CardInfo | null
+  setCardInfo: (cardInfo: CardInfo) => void
+  activeSub: ActiveSub | null,
+  setActiveSub: (activeSub: ActiveSub | null) => void
+  orderCard: ActiveSub | null,
+  setOrderCard: (activeSub: ActiveSub | null) => void
 }
 
 const ProfileUser: ProfileContext = {
@@ -59,6 +77,12 @@ const ProfileUser: ProfileContext = {
   setUser: () => {},
   timezone: '',
   deviceName: '',
+  cardInfo: null,
+  setCardInfo: () => {},
+  activeSub: null,
+  setActiveSub: () => {},
+  orderCard: null,
+  setOrderCard: () => {},
 }
 
 export const Profile = createContext<ProfileContext>(ProfileUser);
@@ -66,6 +90,9 @@ export const Profile = createContext<ProfileContext>(ProfileUser);
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
   const [user, setUser] = useState<User | null>(null)
+  const [cardInfo, setCardInfo] = useState<CardInfo | null>(null)
+  const [activeSub, setActiveSub] = useState<ActiveSub | null>(null)
+  const [orderCard, setOrderCard] = useState<ActiveSub | null>(null)
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
   const deviceName = deviceType
   const navigate = useNavigate()
@@ -103,7 +130,10 @@ function App() {
     }
   },[])
 
-    return (
+  document.title = 'Фитнес как наука'
+
+  console.log(activeSub)
+  return (
       <div className='font-body'>
         <GoogleOAuthProvider clientId={"148113392760-243a1pc16e8vbu20eqogoalrvppil48v.apps.googleusercontent.com"}>
           <Suspense fallback={<Spinner/>}>
@@ -113,31 +143,56 @@ function App() {
               user,
               setUser,
               timezone,
-              deviceName
+              deviceName,
+              cardInfo,
+              setCardInfo,
+              activeSub,
+              setActiveSub,  
+              orderCard,
+              setOrderCard,
             }}>
               <Routes>
                 <Route path='/' element={<HomePage/>} />
                 {
                   isAuthenticated ? (
                     <Route path='/cabinet' element={<Cabinet/>} >
-                      <Route path='/cabinet' element={<MyProfile/>} >
-                        <Route index element={<Subs/>} />
-                        <Route path='/cabinet/changeSubs' element={<ChangeSubs/>} />
-                        <Route path='/cabinet/payment' element={<Payment/>} />
-                        <Route path='/cabinet/changePayment' element={<ChangePayment/>} />
-                        <Route path='/cabinet/cabinetInfo' element={<CabinetInfo/>} />
-                        <Route path='/cabinet/ordering' element={<Ordering/>} />
-                        <Route path='/cabinet/ordering2' element={<Ordering2/>} />
-                        <Route path='/cabinet/ordering3' element={<Ordering3/>} />
-                      </Route>
-                      <Route path='/cabinet/subs1' element={<Subs/>} />
-                      <Route path='/cabinet/order' element={<Ordering/>} />
-                      <Route path='/cabinet/order2' element={<Ordering2/>} />
-                      <Route path='/cabinet/order3' element={<Ordering3/>} />
-                      <Route path='/cabinet/changeSubs1' element={<ChangeSubs/>} />
-                      <Route path='/cabinet/changePayment1' element={<ChangePayment/>} />
-                      <Route path='/cabinet/payment1' element={<Payment/>} />
-                      <Route path='/cabinet/cabinetInfo1' element={<CabinetInfo/>} />
+                      {
+                        window.innerWidth >= 1024 ? (
+                        <Route path='/cabinet' element={<MyProfile/>} >
+                          {
+                            activeSub ? (
+                              <>
+                                <Route index element={<Subs/>} />
+                              </>
+                            ) : (
+                              <>
+                                <Route index element={<ChangeSubs/>} />
+                              </>
+                            )
+                          }
+                          {/* <Route index element={<Subs/>} /> */}
+                          <Route path='/cabinet/changeSubs' element={<ChangeSubs/>} />
+                          <Route path='/cabinet/payment' element={<Payment/>} />
+                          <Route path='/cabinet/changePayment' element={<ChangePayment/>} />
+                          <Route path='/cabinet/cabinetInfo' element={<CabinetInfo/>} />
+                          <Route path='/cabinet/ordering' element={<Ordering/>} />
+                          <Route path='/cabinet/ordering2' element={<Ordering2/>} />
+                          <Route path='/cabinet/ordering3' element={<Ordering3/>} />
+                        </Route>
+                        ) : (
+                          <>
+                            <Route path='/cabinet' element={<MyProfile/>} />
+                            <Route path='/cabinet/subs' element={<Subs/>} />
+                            <Route path='/cabinet/ordering' element={<Ordering/>} />
+                            <Route path='/cabinet/ordering2' element={<Ordering2/>} />
+                            <Route path='/cabinet/ordering3' element={<Ordering3/>} />
+                            <Route path='/cabinet/changeSubs' element={<ChangeSubs/>} />
+                            <Route path='/cabinet/changePayment' element={<ChangePayment/>} />
+                            <Route path='/cabinet/payment' element={<Payment/>} />
+                            <Route path='/cabinet/cabinetInfo' element={<CabinetInfo/>} />
+                          </>
+                        )
+                      }
                       <Route path='/cabinet/activity' element={<Activity/>} />
                       <Route path='/cabinet/statistic' element={<Statistics/>} />
                       <Route path='/cabinet/nutrition' element={<Nutrition/>} />

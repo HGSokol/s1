@@ -1,6 +1,7 @@
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Sub } from '../layouts/Subscribe'
+import { Profile } from '../App'
 
 
 interface SubCard { 
@@ -11,14 +12,24 @@ interface SubCard {
 }
 
 export const SubCard = ({item, active, landing, setActiveResetPopup}: SubCard) => {
+  const { cardInfo, setOrderCard } = useContext(Profile)
   const navigate = useNavigate()
-  const {text, price, top = ''} = item
+  const {text, price, top = '', info} = item
+
 
 
   return (
-    <div onClick={() =>landing && window.innerWidth >= 1024 ?navigate('/cabinet/ordering') : ''} className='relative overflow-hidden rounded-[20rem] drop-shadow-drop duration-[400ms]' >
+    <div onClick={() =>{
+      setOrderCard({
+        duration: info?.duration as string,
+        price: info?.price as string
+      })
+      if(landing && window.innerWidth >= 1024){
+        navigate(`${cardInfo ? '/cabinet/ordering2' : '/cabinet/ordering'}`)
+      }
+    }} className='relative overflow-hidden rounded-[20rem] drop-shadow-drop duration-[400ms]' >
       <div className={` bg-white  h-max w-full py-[24rem] px-[32rem] overflow-hidden border-[1px] border-transparent cursor-pointer flex flex-col justify-between rounded-[20rem] 
-        lg:h-[505rem] lg:w-full lg:py-[36rem] lg:px-[32rem] duration-[400ms] hover:border-[1px] ${active === 'active'? ' border-[#FFB700]': 'hover:border-[#CBCBCB]'}`}>
+        ${landing ? ' lg:h-[419rem]' : ' lg:h-[505rem]'} lg:w-full lg:py-[36rem] lg:px-[32rem] duration-[400ms] hover:border-[1px] ${active === 'active'? ' border-[#FFB700]': 'hover:border-[#CBCBCB]'}`}>
           {
             top === 'top' ? (
               <div className='
@@ -67,7 +78,7 @@ export const SubCard = ({item, active, landing, setActiveResetPopup}: SubCard) =
                 lg:text-[16rem] lg:leading-[19rem] '>Отменить подписку</p>
               </div>
             ) : !active && !landing ? (
-              <div onClick={() => navigate(`${window.innerWidth < 1024 ? '/cabinet/order' : '/cabinet/ordering'}`)} className='h-[51rem] mt-[16rem] border-[1px] border-[#1F2117] w-full rounded-full bg-white flex flex-row justify-center items-center lg:h-[56rem]'>
+              <div onClick={() => navigate(`${cardInfo ? '/cabinet/ordering2' : '/cabinet/ordering'}`)} className='h-[51rem] mt-[16rem] border-[1px] border-[#1F2117] w-full rounded-full bg-white flex flex-row justify-center items-center lg:h-[56rem]'>
                 <p className='font-bodyalt font-[600] text-[12rem] leading-[14rem] text-[#1F2117] mr-[13rem]
                 lg:text-[16rem] lg:leading-[19rem] '>Обновить подписку</p>
             </div>

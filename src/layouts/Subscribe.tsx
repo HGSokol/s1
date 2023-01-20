@@ -2,7 +2,7 @@ import { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 
 import { SubCard } from '../components/SubCard'
-import { Profile } from '../App'
+import { Profile, ActiveSub } from '../App'
 
 
 
@@ -10,6 +10,7 @@ export type Sub = {
   text?: string[],
   price: string,
   top?: string,
+  info?: ActiveSub
 }
 
 const subsData: Sub[] = [
@@ -19,6 +20,10 @@ const subsData: Sub[] = [
       'Доступ на один месяц ко всем тренировкам и планам питания, а так же более чем 1000 вкусных и полезных рецептов',
     ],
     price: '1200 руб./ мес.',
+    info: {
+      duration: '1 месяц',
+      price: '1200 руб.'
+    }
   },
   {
     text: [
@@ -27,6 +32,10 @@ const subsData: Sub[] = [
       'Экономь 17% при оплате 3-х месячной подписки',
     ],
     price: '1000 руб./ мес.',
+    info: {
+      duration: '3 месяца',
+      price: '3000 руб.'
+    }
   },
   {
     text: [
@@ -35,12 +44,16 @@ const subsData: Sub[] = [
       'Экономь 34% при оплате годовой подписки',
     ],
     price: '800 руб./ мес.',
-    top: 'top'
+    top: 'top',
+    info: {
+      duration: '1 год',
+      price: '9600 руб.'
+    }
   }
 ]
 
 export const Subscribe = () => {
-  const { isAuthenticated } = useContext(Profile)
+  const { isAuthenticated, activeSub } = useContext(Profile)
   const [ active, setActive ] = useState<number>(2)
 
   return (
@@ -49,7 +62,7 @@ export const Subscribe = () => {
     <p className='font-[600] text-[32rem] leading-[37.57rem] mb-[32rem] text-[#1F2117]  
     lg:text-[64rem] lg:leading-[75.14rem] lg:w-[842rem] lg:h-[75rem] lg:text-center lg:mx-auto lg:mb-[127rem]'>Подписки</p>
     <div className='flex flex-col gap-[16rem] mb-[32rem] whitespace-pre-line 
-    lg:gap-[40rem] lg:mb-[64rem] lg:grid lg:grid-cols-3 lg:grid-rows-1 lg:h-[439rem]'>
+    lg:gap-[40rem] lg:mb-[0rem] lg:grid lg:grid-cols-3 lg:grid-rows-1 lg:h-[419rem]'>
       {
         subsData.map((item,i) => {
           return(
@@ -61,7 +74,7 @@ export const Subscribe = () => {
       }
     </div>
     <div className='lg:mt-[64rem] font-bodyalt lg:flex lg:justify-center'>
-      <Link to={isAuthenticated ? '/cabinet' : '/login'}>
+      <Link to={isAuthenticated ? `${activeSub? '/cabinet' : '/cabinet/changeSubs'}` : '/login'}>
         <button className='bg-[#FFB700] text-[16rem] w-full leading-[14rem] h-[51rem] rounded-full text-center text-white tracking-[0.04em] flex flex-row items-center justify-center hover:bg-[#F0AD04]
         lg:w-[349rem] lg:h-[56rem] lg:text-[16rem]'>
           <p className='font-[600] text-[16rem] leading-[19rem] text-[#FAFAFA] tracking-[0.04em] mr-[10rem]

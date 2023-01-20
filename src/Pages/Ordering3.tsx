@@ -1,17 +1,33 @@
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
-import CardIcon from '../components/CardIcon'
-import HeaderOrder from "../components/HeaderOrder";
+import { Profile } from "../App";
 
 
 const Ordering = () => {
   const navigate = useNavigate()
+  const { orderCard, setActiveSub } = useContext(Profile)
 
+  document.title = 'Оформление заказа'
+
+  useEffect(() => {
+    if(orderCard) {
+      setActiveSub(orderCard)
+    }
+  },[])
 
   return (
-  <div className='mx-[16rem] lg:mx-[0rem] lg:w-full'>
-    <HeaderOrder />
-    <div onClick={() => navigate('/')} className='mt-[70rem] font-bodyalt font-[600] text-[22rem] text-[#1F2117] leading-[26rem] flex flex-col justify-center items-center
+    <div className='mx-[16rem] lg:mx-[0rem] lg:w-full'>
+    <div className='pt-[15rem] w-full flex flex-row relative mb-[24rem] lg:hidden'>
+      <div className='absolute translate-y-[23rem]'
+      onClick={() => navigate('/cabinet')}>
+        <svg width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fillRule="evenodd" clipRule="evenodd" d="M0 7.49151C0 7.10275 0.315151 6.7876 0.703911 6.7876H17.2961C17.6848 6.7876 18 7.10275 18 7.49151C18 7.88027 17.6848 8.19542 17.2961 8.19542H0.703911C0.315151 8.19542 0 7.88027 0 7.49151Z" fill="#1F2117"/>
+          <path fillRule="evenodd" clipRule="evenodd" d="M7.98936 0.206171C8.26425 0.481065 8.26425 0.926756 7.98936 1.20165L1.69939 7.49162L7.98936 13.7816C8.26425 14.0565 8.26425 14.5022 7.98936 14.7771C7.71447 15.052 7.26877 15.052 6.99388 14.7771L0.206171 7.98936C-0.0687235 7.71447 -0.0687235 7.26877 0.206171 6.99388L6.99388 0.206171C7.26877 -0.0687235 7.71447 -0.0687235 7.98936 0.206171Z" fill="#1F2117"/>
+        </svg>
+      </div>
+      <div className='my-[20.5rem] w-full text-center font-bodyalt font-[600] text-[18rem] leading-[19rem] text-[#1F2117]'>Подписки</div>
+    </div>
+    <div onClick={() => navigate('/cabinet')} className='mt-[70rem] font-bodyalt font-[600] text-[22rem] text-[#1F2117] leading-[26rem] flex flex-col justify-center items-center
     lg:mt-[171rem]'>
       <div className='mb-[32rem]'>
         <svg className='w-[60rem] h-[60rem] lg:w-[78rem] lg:h-[78rem]' viewBox="0 0 61 60" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -22,7 +38,7 @@ const Ordering = () => {
       <div className='mb-[24rem] font-body font-[600] text-[20rem] leading-[23rem] text-center text-[#1F2117]
       lg:font-body lg:font-[600] lg:text-[26rem] lg:leading-[30rem]'>Оплата прошла успешно</div>
       <div className='mb-[32rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-center text-[#777872] whitespace-pre-wrap
-      lg:font-bodyalt lg:font-[400] lg:text-[22rem] lg:leading-[32rem] ' >{`Вы успешно оплатили подписку “Год”\nна сумму 30 000 руб.`}</div>
+      lg:font-bodyalt lg:font-[400] lg:text-[22rem] lg:leading-[32rem] ' >{`Вы успешно оплатили подписку "${orderCard?.duration}"\nна сумму ${orderCard?.price}`}</div>
       <div className='w-full h-[50rem] bg-[#FFB700] rounded-full flex flex-row items-center justify-center
       lg:w-[272rem]'>
         <div className='mr-[12rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-white'>Вернуться к подпискам</div>
@@ -34,7 +50,7 @@ const Ordering = () => {
         </div>
         </div>
     </div>
-    <div onClick={() => navigate('/')} className='mt-[70rem] font-bodyalt font-[600] text-[22rem] text-[#1F2117] leading-[26rem] flex flex-col justify-center items-center
+    {/* <div onClick={() => navigate('/cabinet')} className='mt-[70rem] font-bodyalt font-[600] text-[22rem] text-[#1F2117] leading-[26rem] flex flex-col justify-center items-center
     lg:mt-[171rem]'>
       <div className='mb-[32rem]'>
         <svg className='w-[60rem] h-[60rem] lg:w-[78rem] lg:h-[78rem]' viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -56,8 +72,8 @@ const Ordering = () => {
           </svg>
         </div>
         </div>
-    </div>
-    <div onClick={() => navigate('/')} className='mt-[70rem] font-bodyalt font-[600] text-[22rem] text-[#1F2117] leading-[26rem] flex flex-col justify-center items-center
+    </div> */}
+    {/* <div onClick={() => navigate('/cabinet')} className='mt-[70rem] font-bodyalt font-[600] text-[22rem] text-[#1F2117] leading-[26rem] flex flex-col justify-center items-center
     lg:mt-[171rem]'>
       <div className='mb-[32rem]'>
         <svg className='w-[60rem] h-[60rem] lg:w-[78rem] lg:h-[78rem]' viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -79,7 +95,7 @@ const Ordering = () => {
           </svg>
         </div>
         </div>
-    </div>
+    </div> */}
   </div>
   )
 }
