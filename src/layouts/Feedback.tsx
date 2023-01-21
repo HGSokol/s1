@@ -75,7 +75,7 @@ export const Feedback = () => {
                 <path d="M10.5 19.25L3.75 12.5L10.5 5.75" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </button>
-          <button className='rounded-full border-[1px]w-[56rem] h-[56rem] text-black grid place-content-center mr-[120rem] cursor-pointer group/arrow2 bg-[#FFB700] hover:bg-[#F0AD04] text-white border-none duration-[200ms] 
+          <button className='rounded-full border-[1px]w-[56rem] h-[56rem] grid place-content-center mr-[120rem] cursor-pointer group/arrow2 bg-[#FFB700] hover:bg-[#F0AD04] text-black border-none duration-[200ms] 
           lg:w-[56rem] lg:h-[56rem] lg:mr-[120rem]'
             onClick={right}>
               <svg className='w-[18rem] h-[18rem] stroke-white group-hover/arrow2:stroke-white 
