@@ -14,7 +14,6 @@ export const ExitPopup = (props: Props) => {
   const navigate = useNavigate()
   const { setActivePopup } = props
 
-
   const logout = () => {
     axios.post('https://stage.fitnesskaknauka.com/api/auth/logout')
     .then((res) => {
@@ -24,7 +23,7 @@ export const ExitPopup = (props: Props) => {
       
       navigate('/login')
     })
-}
+  }
 
   return (
     <div className='flex flex-col w-[343rem] h-[193rem] px-[20rem] pt-[32rem] lg:w-[604rem] lg:h-[309rem] rounded-[20rem] lg:px-[80rem] lg:py-[70rem] shadow-drop bg-white'>

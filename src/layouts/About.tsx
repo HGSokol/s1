@@ -11,13 +11,13 @@ export interface dataAboutCard {
 
 const data: dataAboutCard[] = [
   {text: `Статьи\n и лекции`, img: require("../images/about1.png"), idName: 'article'},
-  // {text: 'Тренировки', img: IMG1},
   {text: 'Тренировки', img: require("../images/about2.png"), idName: 'training'},
   {text: 'Планы питания', img: require("../images/about3.png"), idName: 'food'},
   {text: 'Статистика', img: require("../images/about4.png"), idName: 'progress'},
 ]
 
 export const About = () => {
+  
   return (
     <div id='about' className='mb-[72rem] 
     lg:mb-[195rem]'>

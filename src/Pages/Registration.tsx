@@ -6,7 +6,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { BsEyeSlash } from "react-icons/bs";
 import axios from 'axios'
-
 import { AlternativeLogin } from "../components/AlternativeLogin";
 
 
@@ -54,15 +53,12 @@ const Login = () => {
       setErrorMessage(error.response.data.message)
     })
 
-
     reset()
   };
 
   const onClickChangeType = () => {
     setType(prev => !prev)
   }
-
-
 
   return (
     <div className='w-[343rem] mt-[24rem] lg:w-[441rem] mx-auto lg:mt-[109rem]'>

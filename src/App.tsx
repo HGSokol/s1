@@ -159,16 +159,6 @@ function App() {
                       {
                         window.innerWidth >= 1024 ? (
                         <Route path='/cabinet' element={<MyProfile/>} >
-                          {/* {
-                            activeSub ? (
-                              <>
-                              </>
-                            ) : (
-                              <>
-                                <Route index element={<ChangeSubs/>} />
-                              </>
-                            )
-                          } */}
                           <Route index element={<Subs/>} />
                           <Route path='/cabinet/changeSubs' element={<ChangeSubs/>} />
                           <Route path='/cabinet/payment' element={<Payment/>} />

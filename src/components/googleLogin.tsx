@@ -5,10 +5,7 @@ import { LoginSocialGoogle, IResolveParams } from 'reactjs-social-login'
 import axios from 'axios'
 import { hasGrantedAllScopesGoogle } from '@react-oauth/google';
 
-
-
 import { Profile, User } from '../App'
-
 
 import { GoogleLogin } from '@react-oauth/google';
 

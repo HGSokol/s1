@@ -1,15 +1,12 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import axios from 'axios'
-
 import HeaderOrder from "../components/HeaderOrder";
 import { ChangePaymentData } from "../components/ChangePaymentData";
 import { Profile } from "../App";
-
-
 
 
 const schema = yup.object({

@@ -22,7 +22,11 @@ interface IFormInputs {
   cvv: string,
 }
 
-export const ChangePaymentData = () => {
+interface ChangeCard {
+  ChangeCard?: boolean
+}
+
+export const ChangePaymentData = (props?: ChangeCard) => {
   const { setCardInfo } = useContext(Profile)
   const navigate = useNavigate()
   const refNumberCard = useRef<HTMLInputElement | null>(null)
@@ -50,7 +54,8 @@ export const ChangePaymentData = () => {
     setDateCard('')
     reset()
 
-    navigate('/cabinet/ordering2')
+    props && props.ChangeCard ? navigate('/cabinet') : navigate('/cabinet/ordering2')
+    
 
     // axios.post('https://stage.fitnesskaknauka.com/api/auth/send-reset-code', userInfo)
     // .then((res) => {

@@ -1,6 +1,7 @@
 
 
 const Spinner = () => {
+  
   return (
     <div className='flex justify-center items-center '>
       <div className='w-[500px] h-[500px] flex justify-center items-center'>

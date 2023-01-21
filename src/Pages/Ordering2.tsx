@@ -1,21 +1,15 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext} from "react";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios'
-
 import HeaderOrder from "../components/HeaderOrder";
 import { CardInfo } from "../components/CardInfo";
 import { Profile } from "../App";
 
 
-
 const Ordering = () => {
   document.title = 'Оформление заказа'
-  const { setActiveSub, orderCard } = useContext(Profile)
+  const { orderCard } = useContext(Profile)
   const navigate = useNavigate()
-
-  // setActiveSub()
-  
-  
+ 
   return (
     <div className='mx-[16rem] lg:mx-[0rem] lg:w-full'>
     <HeaderOrder/>

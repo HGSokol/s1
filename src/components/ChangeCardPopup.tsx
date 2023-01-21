@@ -6,12 +6,9 @@ interface Props {
   setActiveChangeCardPopup: Dispatch<SetStateAction<boolean>>
 }
 
-
 export const ChangeCardPopup = (props: Props) => {
   const navigate = useNavigate()
   const { setActiveChangeCardPopup } = props
-
-
 
   return (
     <div className='flex flex-col w-[343rem] h-[251rem] px-[16rem] pt-[32rem] lg:w-[604rem] lg:h-[338rem] rounded-[20rem] lg:px-[70rem] lg:py-[50rem] shadow-drop bg-white'>

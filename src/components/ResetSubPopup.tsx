@@ -2,10 +2,10 @@ import React, { Dispatch, SetStateAction, useContext } from 'react'
 import { useNavigate } from "react-router-dom"
 import { Profile } from '../App'
 
+
 interface Props {
   setActiveResetPopup: Dispatch<SetStateAction<boolean>>
 }
-
 
 export const ResetSubPopup = (props: Props) => {
   const { cardInfo, setActiveSub } = useContext(Profile)
@@ -13,7 +13,6 @@ export const ResetSubPopup = (props: Props) => {
   const { setActiveResetPopup } = props
 
   const resetSub = () => {
-
     setActiveSub(null)
     navigate('/cabinet/changeSubs')
   }

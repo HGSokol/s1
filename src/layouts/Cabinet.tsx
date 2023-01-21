@@ -1,7 +1,6 @@
 import React,{ useState, useContext, useEffect, useRef } from 'react'
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom"
 import axios from 'axios'
-import { isNull } from "lodash";
 
 import { Profile } from '../App'
 import { HeaderForm } from '../components/HeaderForm'
@@ -13,7 +12,6 @@ import {ReactComponent as NutritionIcon} from '../images/nutrition.svg';
 import {ReactComponent as ProfileIcon} from '../images/profile.svg';
 import {ReactComponent as Logout} from '../images/logout.svg';
 import UnknownUser from '../images/unknownUser.png'
-import { AiOutlineConsoleSql } from 'react-icons/ai';
 import { ExitPopup } from '../components/ExitPopup';
 
 
@@ -23,8 +21,8 @@ type NavType = {
   link:string
 }
 
-
 const Cabinet = () => {
+  document.title = 'Подписки'
   const { user, setUser, setIsAuthenticated, activeSub } = useContext(Profile)
   const ref = useRef<HTMLDivElement | null>(null)
   const refNav = useRef<NavType[]>([
@@ -34,43 +32,47 @@ const Cabinet = () => {
     {name: 'Питание', img: <NutritionIcon />, link: '/nutrition'},
     {name: 'Профиль', img: <ProfileIcon />, link: `${activeSub? '' : '/changeSubs'}`},
   ])
-  const location = useLocation()
-  const [ active, setActive ] = useState('')
+  const [ active, setActive ] = useState(`${activeSub? '' : '/changeSubs'}`)
   const [ activePopup, setActivePopup] = useState(false)
-  // const [visibleBlock, setVisibleBlock] = useState<number | null>(null)
-
-  refNav.current = [
-    {name: 'Полезное', img: <UsefulIcon />, link: '/usefull'},
-    {name: 'Активность', img: <ActivityIcon />, link: '/activity'},
-    {name: 'Статистика', img: <StatisticIcon />, link: '/statistic'},
-    {name: 'Питание', img: <NutritionIcon />, link: '/nutrition'},
-    {name: 'Профиль', img: <ProfileIcon />, link: ''},
-  ]
-
   const navigate = useNavigate()
 
-  const logout = () => {
-      axios.post('https://stage.fitnesskaknauka.com/api/auth/logout')
-      .then((res) => {
-        setUser(null)
-        setIsAuthenticated(false)
-        localStorage.clear()
-        
-        navigate('/login')
-      })
-  }
-
   useEffect(() => {
-    const currentLink = refNav?.current?.map((e,i) => location.pathname.includes(e.link)? e.link: '').filter(e => e !== '').join('')
-    if(currentLink){
-      setActive(currentLink)
-    }
+    refNav.current = [
+      {name: 'Полезное', img: <UsefulIcon />, link: '/usefull'},
+      {name: 'Активность', img: <ActivityIcon />, link: '/activity'},
+      {name: 'Статистика', img: <StatisticIcon />, link: '/statistic'},
+      {name: 'Питание', img: <NutritionIcon />, link: '/nutrition'},
+      {name: 'Профиль', img: <ProfileIcon />, link: `${activeSub? '' : '/changeSubs'}`},
+    ]
 
-    if(ref.current){
-      // const heightVisibleBlock = window.innerHeight - ref.current?.clientHeight
-      // setVisibleBlock(ref.current?.offsetHeight)
-    }
-  },[activeSub])
+    setActive(refNav.current[4].link)
+  
+},[activeSub])
+
+
+
+  // const logout = () => {
+  //     axios.post('https://stage.fitnesskaknauka.com/api/auth/logout')
+  //     .then((res) => {
+  //       setUser(null)
+  //       setIsAuthenticated(false)
+  //       localStorage.clear()
+        
+  //       navigate('/login')
+  //     })
+  // }
+
+  // useEffect(() => {
+  //   const currentLink = refNav?.current?.map((e,i) => location.pathname.includes(e.link)? e.link: '').filter(e => e !== '').join('')
+  //   if(currentLink){
+  //     setActive(currentLink)
+  //   }
+
+  //   if(ref.current){
+  //     // const heightVisibleBlock = window.innerHeight - ref.current?.clientHeight
+  //     // setVisibleBlock(ref.current?.offsetHeight)
+  //   }
+  // },[activeSub])
   
 
   return (
@@ -134,13 +136,13 @@ const Cabinet = () => {
         </div>
       </div>
       {
-          activePopup? (
-            <div className='absolute z-[1000] top-0 left-0 w-[100%] h-[100%] bg-gray-100/50'>
-              <div className='absolute z-[1000] left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]  '>
-                <ExitPopup setActivePopup={setActivePopup}/>
-              </div>
+        activePopup? (
+          <div className='absolute z-[1000] top-0 left-0 w-[100%] h-[100%] bg-gray-100/50'>
+            <div className='absolute z-[1000] left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]  '>
+              <ExitPopup setActivePopup={setActivePopup}/>
             </div>
-            ) : null
+          </div>
+          ) : null
         }
     </div>
   )

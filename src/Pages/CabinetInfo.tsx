@@ -111,7 +111,6 @@ const CabinetInfo = () => {
         avatar: base64 as any
       })
 
-      // cделать отправку картинки на сервер
       const userInfo = {
         ...user,
         avatar: base64,
@@ -183,7 +182,7 @@ const CabinetInfo = () => {
       <div>
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-[20rem] w-full lg:flex-row lg:flex-wrap lg:gap-[20rem] lg:w-[1000rem]'>
           <div className='relative lg:w-[441rem]'>
-            <div className='absolute translate-x-[305rem] translate-y-[47rem] lg:translate-x-[40rem] lg:translate-y-[50rem] cursor-pointer' 
+            <div className='absolute translate-x-[305rem] translate-y-[47rem] lg:translate-x-[400rem] lg:translate-y-[50rem] cursor-pointer' 
               onClick={onClickChangeType}>
                 {
                   type ? (<BsEyeSlash color='#AAAAAA' className='w-[20rem] h-[20rem]'/>) : (<AiOutlineEye color='#AAAAAA' className='w-[20rem] h-[20rem]'/>)

@@ -5,7 +5,7 @@ import { Profile } from "../App";
 
 const Ordering = () => {
   const navigate = useNavigate()
-  const { orderCard, setActiveSub, activeSub } = useContext(Profile)
+  const { orderCard, setActiveSub } = useContext(Profile)
 
   document.title = 'Оформление заказа'
 

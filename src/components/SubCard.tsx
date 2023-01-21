@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Sub } from '../layouts/Subscribe'
 import { Profile } from '../App'
 
@@ -12,11 +12,11 @@ interface SubCard {
 }
 
 export const SubCard = ({item, active, landing, setActiveResetPopup}: SubCard) => {
-  const { cardInfo, setOrderCard } = useContext(Profile)
+  const { cardInfo, setOrderCard, activeSub } = useContext(Profile)
   const navigate = useNavigate()
+  const location = useLocation()
+
   const {text, price, top = '', info} = item
-
-
 
   return (
     <div onClick={() =>{
@@ -24,14 +24,20 @@ export const SubCard = ({item, active, landing, setActiveResetPopup}: SubCard) =
         duration: info?.duration as string,
         price: info?.price as string
       })
-      if(landing && window.innerWidth >= 1024){
+      if(landing && window.innerWidth >= 1024 && location.pathname !== '/'){
         navigate(`${cardInfo ? '/cabinet/ordering2' : '/cabinet/ordering'}`)
       }
     }} className='relative overflow-hidden rounded-[20rem] drop-shadow-drop duration-[400ms]' >
       <div className={` bg-white  h-max w-full py-[24rem] px-[32rem] overflow-hidden border-[1px] border-transparent cursor-pointer flex flex-col justify-between rounded-[20rem] 
         ${landing ? ' lg:h-[419rem]' : ' lg:h-[505rem]'} lg:w-full lg:py-[36rem] lg:px-[32rem] duration-[400ms] hover:border-[1px] ${active === 'active'? ' border-[#FFB700]': 'hover:border-[#CBCBCB]'}`}>
           {
-            top === 'top' ? (
+          top === 'top' && landing? (
+            <div className='
+              flex justify-center items-center font-bodyalt absolute bg-[#FFB700] w-[150rem] h-[22rem] translate-x-[197rem] -translate-y-[7rem] font-[400] text-[12rem] text-center text-[#FAFAFA] rotate-[38deg]  group-hover/card:bg-white group-hover/card:text-[#1F2117] 
+              lg:text-[16rem] lg:h-[42rem] lg:w-[220rem] lg:top-0 lg:right-0  lg:translate-x-[60rem] lg:translate-y-[20rem] '>
+              лучший выбор
+            </div>) :
+            top === 'top' && !activeSub? (
               <div className='
                 flex justify-center items-center font-bodyalt absolute bg-[#FFB700] w-[150rem] h-[22rem] translate-x-[197rem] -translate-y-[7rem] font-[400] text-[12rem] text-center text-[#FAFAFA] rotate-[38deg]  group-hover/card:bg-white group-hover/card:text-[#1F2117] 
                 lg:text-[16rem] lg:h-[42rem] lg:w-[220rem] lg:top-0 lg:right-0  lg:translate-x-[60rem] lg:translate-y-[20rem] '>
