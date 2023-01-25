@@ -1,149 +1,81 @@
-import { useState, useCallback, useContext } from 'react'
+  import axios from "axios";
+import React, { useContext } from "react";
 import { useNavigate } from 'react-router-dom'
-import { FcGoogle } from 'react-icons/fc'
-import { LoginSocialGoogle, IResolveParams } from 'reactjs-social-login'
-import axios from 'axios'
-import { hasGrantedAllScopesGoogle } from '@react-oauth/google';
+  import { GoogleLogin, GoogleLogout } from "react-google-login";
+  import { FcGoogle } from 'react-icons/fc'
+  import { Profile } from '../App'
 
-import { Profile, User } from '../App'
+// const metaTag = document.querySelector(`meta[name="google-signin-client_id"]`) as HTMLMetaElement
+// const MetaContent = metaTag.content
 
-import { GoogleLogin } from '@react-oauth/google';
-
-
-// const _appId = '148113392760-243a1pc16e8vbu20eqogoalrvppil48v.apps.googleusercontent.com'
-
-export const GoogleLogin1 = () => {
-  const { setUser, user, deviceName } = useContext(Profile)
-  const navigate = useNavigate()  
-  // console.log(user)
-  const onLogout = useCallback(() => {}, []);
   
-
-  // const login = useGoogleLogin({
-  //   onSuccess: (tokenResponse ) => {
-  //     console.log(tokenResponse )
-  //     // const hasAccess = hasGrantedAllScopesGoogle(
-  //     //   tokenResponse,
-  //     //   'google-scope-1',
-  //     //   'google-scope-2',
-  //     // );
-
-  //     const token = tokenResponse.code
-  //     // console.log(`${token}`)
-
-  //     axios.post('https://stage.fitnesskaknauka.com/api/auth/google', {
-  //       idToken: `${token}`,
-  //       deviceName,
-  //     }, {
-  //       headers: {
-  //         'Content-Type': 'application/x-www-form-urlencoded',
-  //         'Timezone': `${countryId}`
-  //       }
-  //     })
-  //     .then((res) => {
-  //       // console.log(res)
-  //       // console.log(res.data, 'jndtn')
-
-  //       localStorage.setItem('authenticated', JSON.stringify(true))
-  //       setIsAuthenticated(true)
-  //       navigate('/account')
-  //     })
-  //     .catch((error) => {
-  //       // console.log(error.response.data)
-  //     })
+  export function GoogleLogin1() {
+    const { setUser, setIsAuthenticated, deviceName } = useContext(Profile)
+    const navigate = useNavigate() 
+  
+    const responseGoogle = (response:any) => {
+      console.log(response.tokenId);
 
 
 
+        axios.post('https://stage.fitnesskaknauka.com/api/auth/google', {
+          idToken:`${response.tokenId}`,
+          deviceName,
+        })
+        .then((res) => {
+          localStorage.setItem('user', JSON.stringify({
+            token: res.data.token,
+          }))
+          localStorage.setItem('authenticated', JSON.stringify(true))
+          setUser({
+            email: res.data.email,
+            name: res.data.name,
+            lastName: res.data.lastName,
+            avatar: res.data.avatar,
+            uuid: res.data.uuid,
+          })
+          navigate('/cabinet')
+        })
+        .catch((error) => {
+          console.log(error.response.data)
+        }) 
+    };
 
 
+    const logout = () => {
+      console.log("logout");
 
-
-  //   },
-  //   flow: 'auth-code',
-  // });
-
-  return ( 
-    <>
-       {/* <button 
-       onClick={() =>login()}
-       className=' w-[50px] h-[50px] rounded-[10px] bg-white grid place-content-center drop-shadow-md cursor-pointer lg:w-[64px] lg:h-[64px]'>
-         <FcGoogle className='w-[24px] h-[24px] lg:w-[34.5px] lg:h-[34.5px]' />
-       </button> */}
-       <GoogleLogin
-          onSuccess={credentialResponse => {
-            console.log(credentialResponse);
-          }}
-          onError={() => {
-            console.log('Login Failed');
-          }}
-          type='icon'
-          size='large'
-        />
-    </>
-    
-
-
-
-  // <>
-  //   <div className='cursor-pointer'>
-  //     <LoginSocialGoogle
-  //       isOnlyGetToken={false}
-  //       access_type = 'online'
-  //       client_id={_appId || ''}
-  //       redirect_uri={'https://localhost:3000/'}
-  //       // discoveryDocs="claims_supported"
-  //       // access_type="online"
-  //       onResolve={({ data }: IResolveParams) => {
-  //         if(data){
-  //           console.log(data, 'дата')
-  //           // localStorage.setItem('user', JSON.stringify({
-  //           //   token: `${data.access_token}`,
-  //           //   email: data.email,
-  //           //   name: data.family_name,
-  //           //   lastName: data.given_name,
-  //           // }))
-
-  //           // setUser({
-  //           //   token: `${data.access_token}`,
-  //           //   email: data.email,
-  //           //   name: data.family_name,
-  //           //   lastName: data.given_name,
-  //           // })  
-            
-            
-  //           axios.post('https://stage.fitnesskaknauka.com/api/auth/google', {
-  //             idToken:`${data.sub}`,
-  //             deviceName,
-  //           }, {
-  //             headers: {
-  //               // 'Authorization': `Bearer ${data.access_token}`,
-  //               // 'Accept': 'application/json',
-  //               // 'Content-Type': 'application/x-www-form-urlencoded',
-  //               'Timezone': `${countryId}`
-  //             }
-  //           })
-  //           .then((res) => {
-  //             console.log(res)
-  //             console.log(res.data, 'jndtn')
-
-  //             localStorage.setItem('authenticated', JSON.stringify(true))
-  //             setIsAuthenticated(true)
-  //             navigate('/account')
-  //           })
-  //           .catch((error) => {
-  //             console.log(error.response.data)
-  //           })
-  //           }
-  //       }}
-  //       onReject={err => {
-  //         console.log(err);
-  //       }}
-  //     >
-  //       <button className=' w-[50px] h-[50px] rounded-[10px] bg-white grid place-content-center drop-shadow-md cursor-pointer lg:w-[64px] lg:h-[64px]'>
-  //         <FcGoogle className='w-[24px] h-[24px] lg:w-[34.5px] lg:h-[34.5px]' />
-  //       </button>
-  //     </LoginSocialGoogle>
-  //   </div>
-  //   </>
-  )
-}
+    };
+    return (
+      <div className="App">
+          <GoogleLogin
+            // clientId={MetaContent}
+            clientId="690913230835-7gqha5d9kt9seh5imsdgaht12rpj3sj9.apps.googleusercontent.com"
+            render={renderProps => (
+              <button 
+              onClick={renderProps.onClick}
+              disabled={renderProps.disabled}
+              className=' w-[50px] h-[50px] rounded-[10px] bg-white grid place-content-center drop-shadow-md cursor-pointer lg:w-[64px] lg:h-[64px]'>
+                <FcGoogle className='w-[24px] h-[24px] lg:w-[34.5px] lg:h-[34.5px]' />
+              </button>      
+            )}
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+          />
+          {/* <GoogleLogin
+            clientId="690913230835-7gqha5d9kt9seh5imsdgaht12rpj3sj9.apps.googleusercontent.com"
+            buttonText="Login"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            cookiePolicy={"single_host_origin"}
+          /> */}
+          {/* <div>
+            <GoogleLogout
+              clientId="690913230835-7gqha5d9kt9seh5imsdgaht12rpj3sj9.apps.googleusercontent.com"
+              buttonText="Logout"
+              onLogoutSuccess={logout}
+            />
+          </div> */}
+      </div>
+    );
+  }

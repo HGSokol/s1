@@ -16,7 +16,7 @@ export const LogoutPopup = (props: Props) => {
   const { setActivePopup } = props
 
   const logout = () => {
-    axios.post('/api/auth/logout')
+    axios.post('https://stage.fitnesskaknauka.com/api/auth/logout')
     .then((res) => {
       setUser(null)
       setIsAuthenticated(false)

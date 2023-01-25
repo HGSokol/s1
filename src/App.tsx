@@ -1,13 +1,14 @@
 import { lazy, Suspense, createContext, useState, useEffect } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import { deviceType } from 'react-device-detect'
-import { GoogleOAuthProvider } from '@react-oauth/google';
+// import { GoogleOAuthProvider } from '@react-oauth/google';
 import { Helmet } from "react-helmet"
 
 
 import axios from 'axios'
 import HomePage from './Pages/Home'
 import Spinner from './components/Spinner'
+import { gapi } from "gapi-script";
 
 const Login = lazy(() => import('./layouts/Login'))
 const Cabinet = lazy(() => import('./layouts/Cabinet'))
@@ -162,6 +163,14 @@ function App() {
           }
         })
       }
+
+      gapi.load("client:auth2", () => {
+        gapi.client.init({
+          clientId:
+          "148113392760-243a1pc16e8vbu20eqogoalrvppil48v.apps.googleusercontent.com",
+          plugin_name: "chat",
+        });
+      });
     },[])
     
     document.title = 'Фитнес как наука'
@@ -170,9 +179,10 @@ function App() {
         <div>
           <Helmet>
             <script src="https://static.yoomoney.ru/checkout-js/v1/checkout.js" type="text/javascript" />
+            {/* <script src="https://account.google.com/gsi/client" async defer></script> */}
           </Helmet>
         </div>
-        <GoogleOAuthProvider clientId={"148113392760-243a1pc16e8vbu20eqogoalrvppil48v.apps.googleusercontent.com"}>
+        {/* <GoogleOAuthProvider clientId={"148113392760-243a1pc16e8vbu20eqogoalrvppil48v.apps.googleusercontent.com"}> */}
           <Suspense fallback={<Spinner/>}>
             <Profile.Provider value={{ 
               isAuthenticated,
@@ -240,7 +250,7 @@ function App() {
               </Routes>
             </Profile.Provider>
           </Suspense>
-        </GoogleOAuthProvider>
+        {/* </GoogleOAuthProvider> */}
       </div>
   );
 }
