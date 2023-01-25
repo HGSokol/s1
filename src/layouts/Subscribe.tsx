@@ -13,43 +13,57 @@ export type Sub = {
   info?: ActiveSub
 }
 
-const subsData: Sub[] = [
+interface Subscribe {
+  currency?: string,
+  description?: string,
+  id?: number,
+  invoicePeriod?: number,
+  isBestChoice?: boolean,
+  name?: string,
+  price?: number,
+  productId?: string,
+  properties?: {
+    card?: string[], 
+    pricePerMonth?: number,
+  },
+  tier?: number,
+  trialPeriod?: number,
+}
+
+const subsData: Subscribe[] = [
   {
-    text: [
+    properties: {
+    card: [
       'Подписка на 1 месяц',
       'Доступ на один месяц ко всем тренировкам и планам питания, а так же более чем 1000 вкусных и полезных рецептов',
-    ],
-    price: '1200 руб./ мес.',
-    info: {
-      duration: '1 месяц',
-      price: '1200 руб.'
-    }
+    ]},
+    price: 1200,
+    name: '1 месяц',
+    id:1
+    },
+    {
+      properties: {
+      card: [
+        'Подписка на 3 месяца',
+        'Доступ на целый год ко всем тренировкам и планам питания, а так же более чем 1000 вкусных и полезных рецептов',
+        'Экономь 17% при оплате 3-х месячной подписки',
+      ]},
+      price: 3000,
+      name: '1 месяц',
+      id:2
   },
   {
-    text: [
-      'Подписка на 3 месяца',
-      'Доступ на целый год ко всем тренировкам и планам питания, а так же более чем 1000 вкусных и полезных рецептов',
-      'Экономь 17% при оплате 3-х месячной подписки',
-    ],
-    price: '1000 руб./ мес.',
-    info: {
-      duration: '3 месяца',
-      price: '3000 руб.'
-    }
-  },
-  {
-    text: [
+    properties: {
+    card: [
       'Подписка на год',
       'Доступ на целый год ко всем тренировкам и планам питания, а так же более чем 1000 вкусных и полезных рецептов',
       'Экономь 34% при оплате годовой подписки',
-    ],
-    price: '800 руб./ мес.',
-    top: 'top',
-    info: {
-      duration: '1 год',
-      price: '9600 руб.'
-    }
-  }
+    ]},
+    price: 9600,
+    name: '1 месяц',
+    id:3,
+    isBestChoice: true
+    },
 ]
 
 export const Subscribe = () => {
@@ -67,14 +81,14 @@ export const Subscribe = () => {
         subsData.map((item,i) => {
           return(
             <div key={i} onClick={() => setActive(i)}>
-              <SubCard item={item} active={active === i ? 'active': ''} landing={true}/>
+              <SubCard items={item} active={item.isBestChoice === true ? 'active': ''} landing={true}/>
             </div>
           )
         })
       }
     </div>
     <div className='lg:mt-[64rem] font-bodyalt lg:flex lg:justify-center'>
-      <Link to={isAuthenticated ? `${activeSub? '/cabinet' : '/cabinet/changeSubs'}` : '/login'}>
+      <Link to={isAuthenticated ? '/cabinet' : '/login'}>
         <button className='bg-[#FFB700] text-[16rem] w-full leading-[14rem] h-[51rem] rounded-full text-center text-white tracking-[0.04em] flex flex-row items-center justify-center hover:bg-[#F0AD04]
         lg:w-[349rem] lg:h-[56rem] lg:text-[16rem]'>
           <p className='font-[600] text-[16rem] leading-[19rem] text-[#FAFAFA] tracking-[0.04em] mr-[10rem]

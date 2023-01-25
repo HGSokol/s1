@@ -2,6 +2,8 @@ import { lazy, Suspense, createContext, useState, useEffect } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import { deviceType } from 'react-device-detect'
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { Helmet } from "react-helmet"
+
 
 import axios from 'axios'
 import HomePage from './Pages/Home'
@@ -33,26 +35,41 @@ const NotFound = lazy(() => import('./Pages/PageNotFound'))
 // const MetaContent = metaTag.content
 
 export interface User {
+  avatar?:string | null,
+  country?:string | null,
+  countryId?:string | null,
+  dateOfBirth?:Date,
+  difficultyLevel?:string | null,  
+  email?: string | null,
+  gender?: string | null,
+  height?: string | null,
+  id?: number | null,
   name?: string | null,
   lastName?: string | null,
-  email?: string | null,
-  password?: string,
-  gender?: string | null,
-  dateOfBirth?: Date,
+  subscription?: string | null,
+  target?: string | null,
+  uuid?: string | null,
+  weight?: string | null,
+  password?: string | null,
   token?: string | null,
-  avatar?:string | null
 }
 
 interface CardInfo {
   numberCard: string,
   nameCard: string,
-  dateCard:string,
+  dateCard:{
+    month: string,
+    year:string,
+  },
   cvv: string
 }
 
 export interface ActiveSub {
-  duration: string,
+  name?: string
+  duration: number,
   price: string,
+  id: number
+  isFromApple?: boolean
 }
 
 interface ProfileContext {
@@ -68,6 +85,8 @@ interface ProfileContext {
   setActiveSub: (activeSub: ActiveSub | null) => void
   orderCard: ActiveSub | null,
   setOrderCard: (activeSub: ActiveSub | null) => void
+  yandexToken: string | null,
+  setYandexToken: (token: string | null) => void
 }
 
 const ProfileUser: ProfileContext = {
@@ -83,6 +102,8 @@ const ProfileUser: ProfileContext = {
   setActiveSub: () => {},
   orderCard: null,
   setOrderCard: () => {},
+  yandexToken: null,
+  setYandexToken: () => {}
 }
 
 export const Profile = createContext<ProfileContext>(ProfileUser);
@@ -93,6 +114,7 @@ function App() {
   const [cardInfo, setCardInfo] = useState<CardInfo | null>(null)
   const [activeSub, setActiveSub] = useState<ActiveSub | null>(null)
   const [orderCard, setOrderCard] = useState<ActiveSub | null>(null)
+  const [yandexToken, setYandexToken] = useState<string | null>(null)
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
   const deviceName = deviceType
   const navigate = useNavigate()
@@ -103,6 +125,7 @@ function App() {
   if(localUser){
     const token = JSON.parse(localUser).token
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+    // axios.defaults.headers.common['Authorization'] = `Bearer 82|NSRa2iG9bYGwrMRGtQr0raK2MyRAHOTJd64mDLel`
   }
   axios.defaults.headers.common['Content-Type'] = 'application/json'
   axios.defaults.headers.common['Timezone'] = `${timezone}` 
@@ -112,12 +135,23 @@ function App() {
     if(localUser && JSON.parse(localUser).token){
         axios.get('https://stage.fitnesskaknauka.com/api/customer')
         .then((res) => {
+          console.log(res)
           setUser({
             email: res.data.email,
             name: res.data.name,
             lastName: res.data.lastName,
             avatar: res.data.avatar,
+            uuid: res.data.uuid,
           })
+          if(res.data.subscription){
+            setActiveSub({
+              name: res.data.subscription.plan.name,
+              duration: res.data.subscription.plan.invoicePeriod,
+              price: res.data.subscription.plan.price,
+              id: res.data.subscription.plan.id,
+              isFromApple: res.data.subscription.isFromApple
+            })
+          }
           setIsAuthenticated(true)
           localStorage.setItem('authenticated', JSON.stringify(true))
         })
@@ -127,14 +161,17 @@ function App() {
             navigate('/login')
           }
         })
-    }
-  },[])
-
-  document.title = 'Фитнес как наука'
-
-
+      }
+    },[])
+    
+    document.title = 'Фитнес как наука'
   return (
       <div className='font-body'>
+        <div>
+          <Helmet>
+            <script src="https://static.yoomoney.ru/checkout-js/v1/checkout.js" type="text/javascript" />
+          </Helmet>
+        </div>
         <GoogleOAuthProvider clientId={"148113392760-243a1pc16e8vbu20eqogoalrvppil48v.apps.googleusercontent.com"}>
           <Suspense fallback={<Spinner/>}>
             <Profile.Provider value={{ 
@@ -150,6 +187,8 @@ function App() {
               setActiveSub,  
               orderCard,
               setOrderCard,
+              yandexToken,
+              setYandexToken,
             }}>
               <Routes>
                 <Route path='/' element={<HomePage/>} />
@@ -206,4 +245,4 @@ function App() {
   );
 }
 
-export default App;
+export default App

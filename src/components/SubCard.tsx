@@ -4,25 +4,46 @@ import { Sub } from '../layouts/Subscribe'
 import { Profile } from '../App'
 
 
+interface Subscribe {
+  currency?: string,
+  description?: string,
+  id?: number,
+  invoicePeriod?: number,
+  isBestChoice?: boolean,
+  name?: string,
+  price?: number,
+  productId?: string,
+  properties?: {
+    card?: string[], 
+    pricePerMonth?: number,
+  },
+  tier?: number,
+  trialPeriod?: number,
+}
+
 interface SubCard { 
-  item: Sub
+  items: Subscribe
   active:string | undefined
   landing: boolean
   setActiveResetPopup?: Dispatch<SetStateAction<boolean>>
 }
 
-export const SubCard = ({item, active, landing, setActiveResetPopup}: SubCard) => {
+export const SubCard = ({items, active, landing, setActiveResetPopup}: SubCard) => {
   const { cardInfo, setOrderCard, activeSub } = useContext(Profile)
   const navigate = useNavigate()
   const location = useLocation()
 
-  const {text, price, top = '', info} = item
+ 
+  const { isBestChoice, name, price, properties, invoicePeriod, id } = items
 
+ 
   return (
     <div onClick={() =>{
       setOrderCard({
-        duration: info?.duration as string,
-        price: info?.price as string
+        name,
+        duration: invoicePeriod!,
+        price: price?.toString() as string,
+        id: id!
       })
       if(landing && window.innerWidth >= 1024 && location.pathname !== '/'){
         navigate(`${cardInfo ? '/cabinet/ordering2' : '/cabinet/ordering'}`)
@@ -31,13 +52,13 @@ export const SubCard = ({item, active, landing, setActiveResetPopup}: SubCard) =
       <div className={` bg-white  h-max w-full py-[24rem] px-[32rem] overflow-hidden border-[1px] border-transparent cursor-pointer flex flex-col justify-between rounded-[20rem] 
         ${landing ? ' lg:h-[419rem]' : ' lg:h-[505rem]'} lg:w-full lg:py-[36rem] lg:px-[32rem] duration-[400ms] hover:border-[1px] ${active === 'active'? ' border-[#FFB700]': 'hover:border-[#CBCBCB]'}`}>
           {
-          top === 'top' && landing? (
+          isBestChoice === true && landing? (
             <div className='
               flex justify-center items-center font-bodyalt absolute bg-[#FFB700] w-[150rem] h-[22rem] translate-x-[197rem] -translate-y-[7rem] font-[400] text-[12rem] text-center text-[#FAFAFA] rotate-[38deg]  group-hover/card:bg-white group-hover/card:text-[#1F2117] 
               lg:text-[16rem] lg:h-[42rem] lg:w-[220rem] lg:top-0 lg:right-0  lg:translate-x-[60rem] lg:translate-y-[20rem] '>
               лучший выбор
             </div>) :
-            top === 'top' && !activeSub? (
+            isBestChoice === true && !activeSub? (
               <div className='
                 flex justify-center items-center font-bodyalt absolute bg-[#FFB700] w-[150rem] h-[22rem] translate-x-[197rem] -translate-y-[7rem] font-[400] text-[12rem] text-center text-[#FAFAFA] rotate-[38deg]  group-hover/card:bg-white group-hover/card:text-[#1F2117] 
                 lg:text-[16rem] lg:h-[42rem] lg:w-[220rem] lg:top-0 lg:right-0  lg:translate-x-[60rem] lg:translate-y-[20rem] '>
@@ -55,10 +76,10 @@ export const SubCard = ({item, active, landing, setActiveResetPopup}: SubCard) =
         lg:gap-[24rem]'>
           <p className='font-body font-[600] text-[24rem] leading-[28.18rem] text-[#1F2117] text-start 
           lg:text-[40rem] lg:leading-[46.96rem] lg:text-center'>
-          {price} 
+          {`${price} руб./${invoicePeriod === 1? 'мес.': invoicePeriod === 3? '3 мес.': 'год'}`} 
           </p>
           <div className='flex flex-col gap-[15rem] lg:gap-[24rem]'>
-          { text?.map((e,i) => {
+          { properties?.card?.map((e,i) => {
               return (
                 <div key={i} className='flex flex-row items-start'>
                   <div className=''>

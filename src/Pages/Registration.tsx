@@ -44,7 +44,7 @@ const Login = () => {
       deviceName: 'deckstop'
     }
 
-    axios.post('/api/auth/register', userInfo)
+    axios.post('https://stage.fitnesskaknauka.com/api/auth/register', userInfo)
     .then((res) => {
       navigate('/login')
     })

@@ -23,6 +23,7 @@ type NavType = {
 
 const Cabinet = () => {
   document.title = 'Подписки'
+  const location = useLocation()
   const { user, setUser, setIsAuthenticated, activeSub } = useContext(Profile)
   const ref = useRef<HTMLDivElement | null>(null)
   const refNav = useRef<NavType[]>([
@@ -45,22 +46,10 @@ const Cabinet = () => {
       {name: 'Профиль', img: <ProfileIcon />, link: `${activeSub? '' : '/changeSubs'}`},
     ]
 
-    setActive(refNav.current[4].link)
+    // setActive(refNav.current[4].link)
   
 },[activeSub])
 
-
-
-  // const logout = () => {
-  //     axios.post('https://stage.fitnesskaknauka.com/api/auth/logout')
-  //     .then((res) => {
-  //       setUser(null)
-  //       setIsAuthenticated(false)
-  //       localStorage.clear()
-        
-  //       navigate('/login')
-  //     })
-  // }
 
   // useEffect(() => {
   //   const currentLink = refNav?.current?.map((e,i) => location.pathname.includes(e.link)? e.link: '').filter(e => e !== '').join('')
@@ -73,6 +62,12 @@ const Cabinet = () => {
   //     // setVisibleBlock(ref.current?.offsetHeight)
   //   }
   // },[activeSub])
+
+  // сохранение ссылки путей
+  useEffect(() => {
+    const f = refNav.current.map(e => e.link.includes(location.pathname.replace('/cabinet', '')) === true? true : null).filter(e => e !== null)
+    setActive(f.length >= 1? location.pathname.replace('/cabinet', ''): `${activeSub? '' : '/changeSubs'}`)
+  },[])
   
 
   return (

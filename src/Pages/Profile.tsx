@@ -55,6 +55,10 @@ const MyProfile = () => {
     document.title = 'Профиль'
   }
 
+    // сохранение ссылки путей
+  useEffect(() => {
+    setActive(location.pathname.replace('/cabinet', ''))
+  },[])
 
 
   return (

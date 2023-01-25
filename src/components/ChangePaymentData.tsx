@@ -44,9 +44,12 @@ export const ChangePaymentData = (props?: ChangeCard) => {
   const onSubmit = (data: IFormInputs) => {
     const { nameCard, cvv} = data
     const cardInfo = {
-      numberCard,
+      numberCard: numberCard.replace(/\s+/g,''),
       nameCard,
-      dateCard,
+      dateCard: {
+        month: dateCard.slice(0,2),
+        year: dateCard.slice(3,5),
+      },
       cvv
     }
     setCardInfo(cardInfo)

@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, ChangeEvent, useRef  } from "react";
 import { useState, useContext } from 'react'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -30,7 +30,7 @@ const schema = yup.object({
 
 
 const CabinetInfo = () => {
-  const { user, setUser, deviceName } = useContext(Profile)
+  const { user, deviceName } = useContext(Profile)
 
   document.title = 'Общая информация'
 
@@ -42,6 +42,9 @@ const CabinetInfo = () => {
 
   const [oldPassError, setOldPassError] = useState<string | null>(null)
   const [type, setType] = useState(true)
+  const filePicker = useRef<HTMLInputElement|null>(null)
+  const [selectFile, setSelectFile] = useState<File>()
+
   const navigate = useNavigate()
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
@@ -51,10 +54,9 @@ const CabinetInfo = () => {
   const token = localStorage.getItem('user')
   const oldPass = localStorage.getItem('password')
 
-// change password
+// reset password
   const onSubmit = (data: IFormInputs) => {
 
-    console.log(data)
     reset()
     if(oldPass&& token && data.oldpassword === JSON.parse(oldPass) && data.password !== JSON.parse(oldPass)) {
 
@@ -66,19 +68,18 @@ const CabinetInfo = () => {
         deviceName,
       }
   
-      axios.put('/api/auth/reset-password', userInfo)
+      axios.put('https://stage.fitnesskaknauka.com/api/auth/reset-password', userInfo)
       .then((res) => {
         console.log(res)
         reset()
       })
       .catch((error) => {
-        // console.log(error.response.data)
+        console.log(error.response.data)
       })
     }
     if(oldPass && data.password === JSON.parse(oldPass)) {
       setOldPassError('Старый и новый пароль должны быть различны')
     } 
-
 
   };
 
@@ -86,48 +87,35 @@ const CabinetInfo = () => {
     setType(prev => !prev)
   }
   
+
 // update img
-  const getBase64 = (file:any) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader()
+const getPhoto = async(data: ChangeEvent<HTMLInputElement>) => {
 
-      reader.readAsDataURL(file)
-      reader.onload = () => resolve(reader.result)
-      reader.onerror = (error) => reject(error)
-    })
-  }
+  let fromData = new FormData();
+  if(data.target && data.target.files && data.target.files[0]){
+    fromData.append('avatar', data.target.files[0]);
 
-  const getPhoto = useCallback(async(data:any) => {
-    const target = data.target as HTMLInputElement;
-    const files = target.files;
-    const formData = new FormData();
-
-    if(files) {
-      const base64 = await getBase64(files?.[0])
-
-
-      setUser({
-        ...user,
-        avatar: base64 as any
-      })
-
-      const userInfo = {
-        ...user,
-        avatar: base64,
+    axios.put("https://stage.fitnesskaknauka.com/api/customer", fromData, {
+      headers: {
+        'content-type': selectFile?.type!,
+        'content-length': `${selectFile?.size}`,
       }
-
-      
-      axios.put('/api/customer', userInfo)
-        .then((res) => {
-          console.log(res)
-        })
-        .catch((error) => {
-          console.log(error.response.data)
-        })
+    })
+      .then((res) => {
+        console.log(res);
+        window.location.reload()
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });  
     }
 
+  }
 
-  },[])
+  const getPhotoTest = () => {
+    filePicker?.current?.click()
+  }
+
 
   return (
   <div className='mx-[16rem] lg:mx-[0rem]'>
@@ -147,19 +135,21 @@ const CabinetInfo = () => {
         {!user?.avatar ? (<img src={UnknownUser} alt='avatar' className='rounded-full w-[60rem] h-[60rem] lg:w-[60rem] lg:h-[60rem]'/>): <img src={user.avatar} alt='avatar' className='rounded-full w-[60rem] h-[60rem] lg:w-[60rem] lg:h-[60rem]'/>}
       </div>
       <div className='mr-[14rem] lg:mr-[16rem]'>
-        <form >
-          <label className="relative" >
+        <form className='upload' >
             <input 
               type='file' 
-              className='absolute hidden' 
-              accept=".jpg, .jpeg, .png" 
-              onChange={ (e) => getPhoto(e) }/>
-            <svg className='w-[24rem] h-[24rem] cursor-pointer'  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              className='overflow-hidden opacity-0 h-[0rem] w-[0rem] leading-[0rem] p-[0rem] m-[0rem]' 
+              name='uploadFile'
+              accept=".jpg,.jpeg,.png" 
+              
+              ref={filePicker}
+              onChange={getPhoto} 
+              />
+            <svg onClick={getPhotoTest}  className='w-[24rem] h-[24rem] cursor-pointer'  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M8.0625 10.3125L12 14.25L15.9375 10.3125" stroke="#FFB700" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M12 3.75V14.25" stroke="#FFB700" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M20.25 14.25V19.5C20.25 19.6989 20.171 19.8897 20.0303 20.0303C19.8897 20.171 19.6989 20.25 19.5 20.25H4.5C4.30109 20.25 4.11032 20.171 3.96967 20.0303C3.82902 19.8897 3.75 19.6989 3.75 19.5V14.25" stroke="#FFB700" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-          </label>
         </form>
       </div>
       <div className='w-[189rem] font-bodyalt font-[400] text-[16rem] text-[#1F2117]/60 leading-[19rem] lg:w-max lg:font-bodyalt lg:font-[400] lg:text-[16rem] lg:text-[#1F2117]/60 lg:leading-[19rem]'>Загрузить другое изображение</div>
