@@ -1,6 +1,7 @@
 import axios from 'axios'
-import React,{ Dispatch, SetStateAction } from 'react'
+import React,{ Dispatch, SetStateAction, useContext } from 'react'
 import { useNavigate } from "react-router-dom"
+import { Profile } from '../App'
 
 
 interface Props {
@@ -8,14 +9,16 @@ interface Props {
 }
 
 export const ChangeCardPopup = (props: Props) => {
+  const { activeSub } = useContext(Profile)
   const navigate = useNavigate()
   const { setActiveChangeCardPopup } = props
 
 
   const resetSub = () => {
-    axios.get(`https://stage.fitnesskaknauka.com/api/customer/payments/status/53108fd5-402f-4af0-a2e9-6150c88e822f`)
+    // сменяем подписку на другую
+    axios.put(`https://stage.fitnesskaknauka.com/api/customer/subscriptions/internal/${activeSub?.id2}/plan/3`)
     .then((res) => {
-      console.log(res,'токен')
+      console.log(res,'ыы')
       // window.location.reload()
       navigate('/cabinet')
 

@@ -185,10 +185,8 @@ function App() {
         <div>
           <Helmet>
             <script src="https://static.yoomoney.ru/checkout-js/v1/checkout.js" type="text/javascript" />
-            {/* <script src="https://account.google.com/gsi/client" async defer></script> */}
           </Helmet>
         </div>
-        {/* <GoogleOAuthProvider clientId={"148113392760-243a1pc16e8vbu20eqogoalrvppil48v.apps.googleusercontent.com"}> */}
           <Suspense fallback={<Spinner/>}>
             <Profile.Provider value={{ 
               isAuthenticated,
@@ -262,7 +260,6 @@ function App() {
               </Routes>
             </Profile.Provider>
           </Suspense>
-        {/* </GoogleOAuthProvider> */}
       </div>
   );
 }
