@@ -25,11 +25,12 @@ interface SubCard {
   items: Subscribe
   active:string | undefined
   landing: boolean
-  setActiveResetPopup?: Dispatch<SetStateAction<boolean>>
+  setActiveClearPopup?: Dispatch<SetStateAction<boolean>>
+  setActiveResumePopup?: Dispatch<SetStateAction<boolean>>
   setActiveUpdatePopup?: Dispatch<SetStateAction<boolean>>
 }
 
-export const SubCard = ({items, active, landing, setActiveResetPopup, setActiveUpdatePopup}: SubCard) => {
+export const SubCard = ({items, active, landing, setActiveClearPopup, setActiveResumePopup, setActiveUpdatePopup}: SubCard) => {
   const { cardInfo, setOrderCard, activeSub } = useContext(Profile)
   const navigate = useNavigate()
   const location = useLocation()
@@ -101,14 +102,19 @@ export const SubCard = ({items, active, landing, setActiveResetPopup, setActiveU
         <div className=''>
           {
             active && !landing && activeSub && activeSub.endsAt === null ? (
-              <div onClick={() => setActiveResetPopup?.(true)} className='h-[51rem] mt-[16rem] w-full rounded-full bg-[#FFB700] flex flex-row justify-center items-center lg:h-[56rem]'>
+              <div onClick={() => setActiveClearPopup?.(true)} className='h-[51rem] mt-[16rem] w-full rounded-full bg-[#FFB700] flex flex-row justify-center items-center lg:h-[56rem]'>
                 <p className='font-bodyalt font-[600] text-[12rem] leading-[14rem] text-[#FAFAFA] mr-[13rem]
                 lg:text-[16rem] lg:leading-[19rem] '>Отменить подписку</p>
               </div>
             ) : activeSub && activeSub.endsAt && active && !landing ? (
+              <div onClick={() => setActiveResumePopup?.(true)} className='h-[51rem] mt-[16rem] border-[1px] border-[#1F2117] w-full rounded-full bg-white flex flex-row justify-center items-center lg:h-[56rem]'>
+                <p className='font-bodyalt font-[600] text-[12rem] leading-[14rem] text-[#1F2117] mr-[13rem]
+                lg:text-[16rem] lg:leading-[19rem] '>Обновить подписку</p>
+              </div>
+            ) : !landing && activeSub ? (
               <div onClick={() => setActiveUpdatePopup?.(true)} className='h-[51rem] mt-[16rem] border-[1px] border-[#1F2117] w-full rounded-full bg-white flex flex-row justify-center items-center lg:h-[56rem]'>
                 <p className='font-bodyalt font-[600] text-[12rem] leading-[14rem] text-[#1F2117] mr-[13rem]
-                lg:text-[16rem] lg:leading-[19rem] '>Обновит подписку</p>
+                lg:text-[16rem] lg:leading-[19rem] '>Сменить подписку</p>
               </div>
             ) : null
           }         

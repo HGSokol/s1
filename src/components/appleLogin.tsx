@@ -48,8 +48,8 @@ export const AppleAuth = () => {
         // console.log(err);
       }}
     > */}
-        <div className='w-[40px] h-[40px] rounded-[4px] drop-shadow-md bg-black grid place-content-center '>
-          <BsApple className='w-[20px] h-[20px]' fill='white'/>
+        <div className='w-[50px] h-[50px] rounded-[10px]  bg-black grid place-content-center drop-shadow-md cursor-pointer lg:w-[64px] lg:h-[64px]'>
+          <BsApple className='w-[24px] h-[24px] lg:w-[34.5px] lg:h-[34.5px]' fill='white'/>
         </div>
     </div>
     </>

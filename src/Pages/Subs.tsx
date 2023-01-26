@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChangeCardPopup } from "../components/ChangeCardPopup";
-import { ResetSubPopup } from "../components/ResetSubPopup";
+import { ClearSubPopup } from "../components/ClearSubPopup";
+import { ResumeSubPopup } from "../components/ResumeSubPopup";
 import { UpdateSubPopup } from "../components/UpdateSubPopup";
 import { SubCard } from "../components/SubCard";
 import { ActiveSub, Profile } from '../App'
@@ -37,7 +38,8 @@ const Subs = () => {
   const { activeSub } = useContext(Profile)
   const navigate = useNavigate()
   const [activeChangeCardPopup, setActiveChangeCardPopup] = useState(false)
-  const [activeResetSubPopup, setActiveResetPopup] = useState(false)
+  const [activeClearSubPopup, setActiveClearPopup] = useState(false)
+  const [activeResumeSubPopup, setActiveResumePopup] = useState(false)
   const [activeUpdateSubPopup, setActiveUpdatePopup] = useState(false)
   const [sub, setSub] = useState<Subscribe[] |null>(null)
 
@@ -115,10 +117,19 @@ const Subs = () => {
         ) : null
       }
       {
-      activeResetSubPopup? (
+      activeClearSubPopup? (
         <div className='absolute z-[1000] top-0 left-0 w-[100%] h-[100%] bg-gray-100/50'>
           <div className='absolute z-[1000] left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]  '>
-            <ResetSubPopup setActiveResetPopup={setActiveResetPopup}/>
+            <ClearSubPopup setActiveClearPopup={setActiveClearPopup}/>
+          </div>
+        </div>
+      ) : null
+      }
+      {
+      activeResumeSubPopup? (
+        <div className='absolute z-[1000] top-0 left-0 w-[100%] h-[100%] bg-gray-100/50'>
+          <div className='absolute z-[1000] left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]  '>
+            <ResumeSubPopup setActiveResumePopup={setActiveResumePopup}/>
           </div>
         </div>
       ) : null
@@ -160,7 +171,7 @@ const Subs = () => {
           sub?.map((e,i) => {
             return (
               <div key={i}>
-                <SubCard items={e} active={activeSub?.price === e.price? 'active': undefined} landing={false} setActiveResetPopup={setActiveResetPopup} setActiveUpdatePopup={setActiveUpdatePopup} />
+                <SubCard items={e} active={activeSub?.price === e.price? 'active': undefined} landing={false} setActiveClearPopup={setActiveClearPopup} setActiveResumePopup={setActiveResumePopup} setActiveUpdatePopup={setActiveUpdatePopup} />
               </div>
             )
           })
