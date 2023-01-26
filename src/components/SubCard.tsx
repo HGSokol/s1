@@ -26,9 +26,10 @@ interface SubCard {
   active:string | undefined
   landing: boolean
   setActiveResetPopup?: Dispatch<SetStateAction<boolean>>
+  setActiveUpdatePopup?: Dispatch<SetStateAction<boolean>>
 }
 
-export const SubCard = ({items, active, landing, setActiveResetPopup}: SubCard) => {
+export const SubCard = ({items, active, landing, setActiveResetPopup, setActiveUpdatePopup}: SubCard) => {
   const { cardInfo, setOrderCard, activeSub } = useContext(Profile)
   const navigate = useNavigate()
   const location = useLocation()
@@ -99,16 +100,16 @@ export const SubCard = ({items, active, landing, setActiveResetPopup}: SubCard) 
         </div>
         <div className=''>
           {
-            active && !landing ? (
+            active && !landing && activeSub && activeSub.endsAt === null ? (
               <div onClick={() => setActiveResetPopup?.(true)} className='h-[51rem] mt-[16rem] w-full rounded-full bg-[#FFB700] flex flex-row justify-center items-center lg:h-[56rem]'>
                 <p className='font-bodyalt font-[600] text-[12rem] leading-[14rem] text-[#FAFAFA] mr-[13rem]
                 lg:text-[16rem] lg:leading-[19rem] '>Отменить подписку</p>
               </div>
-            ) : !active && !landing ? (
-              <div onClick={() => navigate(`${cardInfo ? '/cabinet/ordering2' : '/cabinet/ordering'}`)} className='h-[51rem] mt-[16rem] border-[1px] border-[#1F2117] w-full rounded-full bg-white flex flex-row justify-center items-center lg:h-[56rem]'>
+            ) : activeSub && activeSub.endsAt && active && !landing ? (
+              <div onClick={() => setActiveUpdatePopup?.(true)} className='h-[51rem] mt-[16rem] border-[1px] border-[#1F2117] w-full rounded-full bg-white flex flex-row justify-center items-center lg:h-[56rem]'>
                 <p className='font-bodyalt font-[600] text-[12rem] leading-[14rem] text-[#1F2117] mr-[13rem]
-                lg:text-[16rem] lg:leading-[19rem] '>Обновить подписку</p>
-            </div>
+                lg:text-[16rem] lg:leading-[19rem] '>Обновит подписку</p>
+              </div>
             ) : null
           }         
         </div>

@@ -67,6 +67,7 @@ const Cabinet = () => {
   useEffect(() => {
     const f = refNav.current.map(e => e.link.includes(location.pathname.replace('/cabinet', '')) === true? true : null).filter(e => e !== null)
     setActive(f.length >= 1? location.pathname.replace('/cabinet', ''): `${activeSub? '' : '/changeSubs'}`)
+    // window.location.reload()
   },[])
   
 

@@ -25,6 +25,7 @@ const Ordering2 = lazy(() => import('./Pages/Ordering2'))
 const Ordering3 = lazy(() => import('./Pages/Ordering3'))
 const CabinetInfo = lazy(() => import('./Pages/CabinetInfo'))
 const Payment = lazy(() => import('./Pages/Payment'))
+const PaymentsStatus = lazy(() => import('./Pages/PaymentsStatus'))
 const LoginForm = lazy(() => import('./Pages/LoginForm'))
 const Register = lazy(() => import('./Pages/Registration'))
 const ChangePassword = lazy(() => import('./Pages/ChangePassword'))
@@ -66,11 +67,13 @@ interface CardInfo {
 }
 
 export interface ActiveSub {
-  name?: string
-  duration: number,
-  price: string,
-  id: number
-  isFromApple?: boolean
+  name?: string,
+  duration?: number,
+  price?: string,
+  id?: number,
+  id2?: number,
+  isFromApple?: boolean,
+  endsAt?: string | null
 }
 
 interface ProfileContext {
@@ -134,8 +137,8 @@ function App() {
   
   useEffect(() => {
     if(localUser && JSON.parse(localUser).token){
-        axios.get('https://stage.fitnesskaknauka.com/api/customer')
-        .then((res) => {
+      axios.get('https://stage.fitnesskaknauka.com/api/customer')
+      .then((res) => {
           console.log(res)
           setUser({
             email: res.data.email,
@@ -150,7 +153,9 @@ function App() {
               duration: res.data.subscription.plan.invoicePeriod,
               price: res.data.subscription.plan.price,
               id: res.data.subscription.plan.id,
-              isFromApple: res.data.subscription.isFromApple
+              id2: res.data.subscription.id,
+              isFromApple: res.data.subscription.isFromApple,
+              endsAt: res.data.subscription.endsAt
             })
           }
           setIsAuthenticated(true)
@@ -167,13 +172,14 @@ function App() {
       gapi.load("client:auth2", () => {
         gapi.client.init({
           clientId:
-          "148113392760-243a1pc16e8vbu20eqogoalrvppil48v.apps.googleusercontent.com",
+          "690913230835-7gqha5d9kt9seh5imsdgaht12rpj3sj9.apps.googleusercontent.com",
           plugin_name: "chat",
         });
       });
     },[])
     
     document.title = 'Фитнес как наука'
+    
   return (
       <div className='font-body'>
         <div>
@@ -235,7 +241,13 @@ function App() {
                       <Route path='/cabinet/statistic' element={<Statistics/>} />
                       <Route path='/cabinet/nutrition' element={<Nutrition/>} />
                       <Route path='/cabinet/usefull' element={<Usefull/>} />
+                      <Route path='/cabinet/payments/status' element={<PaymentsStatus/>}>
+                        <Route index element={<PaymentsStatus/>} />
+                        <Route path='/cabinet/payments/status?paymentId=:paymentId' element={<PaymentsStatus/>} />
+                      </Route>
+                      
                     </Route>
+
                   ) : (
                     <Route path='/login' element={<Login/>} >
                       <Route index element={<LoginForm/>} />

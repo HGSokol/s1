@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { Dispatch, SetStateAction, useContext } from 'react'
 import { useNavigate } from "react-router-dom"
 import { Profile } from '../App'
@@ -8,13 +9,22 @@ interface Props {
 }
 
 export const ResetSubPopup = (props: Props) => {
-  const { cardInfo, setActiveSub } = useContext(Profile)
+  const { cardInfo, activeSub, setActiveSub } = useContext(Profile)
   const navigate = useNavigate()
   const { setActiveResetPopup } = props
-
+  
   const resetSub = () => {
-    setActiveSub(null)
-    navigate('/cabinet/changeSubs')
+    axios.delete(`https://stage.fitnesskaknauka.com/api/customer/subscriptions/internal/${activeSub?.id2}`)
+    .then((res) => {
+      console.log(res,'успешная отмена подписки')
+      window.location.reload()
+      navigate('/cabinet')
+
+    })
+    .catch((error) => {
+      console.log(error.response.data)
+      navigate('/cabinet')
+    })
   }
 
   return (

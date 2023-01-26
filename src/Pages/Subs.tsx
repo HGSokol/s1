@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChangeCardPopup } from "../components/ChangeCardPopup";
 import { ResetSubPopup } from "../components/ResetSubPopup";
+import { UpdateSubPopup } from "../components/UpdateSubPopup";
 import { SubCard } from "../components/SubCard";
 import { ActiveSub, Profile } from '../App'
 import axios from "axios";
@@ -32,50 +33,12 @@ interface Subscribe {
   trialPeriod?: number,
 }
 
-// const subsData: Sub[] = [
-//   {
-//     text: [
-//       'Подписка на 1 месяц',
-//       'Доступ на один месяц ко всем тренировкам и планам питания, а так же более чем 1000 вкусных и полезных рецептов',
-//     ],
-//     price: '1200 руб./ мес.',
-//     info: {
-//       duration: '1 месяц',
-//       price: '1200 руб.'
-//     }
-//   },
-//   {
-//     text: [
-//       'Подписка на 3 месяца',
-//       'Доступ на целый год ко всем тренировкам и планам питания, а так же более чем 1000 вкусных и полезных рецептов',
-//       'Экономь 17% при оплате 3-х месячной подписки',
-//     ],
-//     price: '1000 руб./ мес.',
-//     info: {
-//       duration: '3 месяца',
-//       price: '3000 руб.'
-//     }
-//   },
-//   {
-//     text: [
-//       'Подписка на год',
-//       'Доступ на целый год ко всем тренировкам и планам питания, а так же более чем 1000 вкусных и полезных рецептов',
-//       'Экономь 34% при оплате годовой подписки',
-//     ],
-//     price: '800 руб./ мес.',
-//     top: 'top',
-//     info: {
-//       duration: '1 год',
-//       price: '9600 руб.'
-//     }
-//   }
-// ]
-
 const Subs = () => {
   const { activeSub } = useContext(Profile)
   const navigate = useNavigate()
   const [activeChangeCardPopup, setActiveChangeCardPopup] = useState(false)
   const [activeResetSubPopup, setActiveResetPopup] = useState(false)
+  const [activeUpdateSubPopup, setActiveUpdatePopup] = useState(false)
   const [sub, setSub] = useState<Subscribe[] |null>(null)
 
   useEffect(() => {
@@ -95,8 +58,6 @@ const Subs = () => {
     })
   },[])
 
-
-  
   return (
   <div className='mx-[16rem] lg:mx-[0rem]'>
     {
@@ -162,6 +123,15 @@ const Subs = () => {
         </div>
       ) : null
       }
+      {
+      activeUpdateSubPopup? (
+        <div className='absolute z-[1000] top-0 left-0 w-[100%] h-[100%] bg-gray-100/50'>
+          <div className='absolute z-[1000] left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]  '>
+            <UpdateSubPopup setActiveUpdatePopup={setActiveUpdatePopup}/>
+          </div>
+        </div>
+      ) : null
+      }
       <div className='w-full flex flex-row relative mb-[24rem] lg:hidden'>
         <div className='absolute translate-y-[20.5rem]'
         onClick={() => navigate('/cabinet')}>
@@ -190,7 +160,7 @@ const Subs = () => {
           sub?.map((e,i) => {
             return (
               <div key={i}>
-                <SubCard items={e} active={activeSub?.price === e.price? 'active': undefined} landing={false} setActiveResetPopup={setActiveResetPopup} />
+                <SubCard items={e} active={activeSub?.price === e.price? 'active': undefined} landing={false} setActiveResetPopup={setActiveResetPopup} setActiveUpdatePopup={setActiveUpdatePopup} />
               </div>
             )
           })

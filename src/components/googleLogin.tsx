@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom'
     const navigate = useNavigate() 
   
     const responseGoogle = (response:any) => {
+      console.log(response);
       console.log(response.tokenId);
 
 

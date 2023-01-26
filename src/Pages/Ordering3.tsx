@@ -9,40 +9,45 @@ import {v4 as uuidv4} from 'uuid';
 
 const Ordering = () => {
   const navigate = useNavigate()
-  const { setOrderCard, orderCard, setActiveSub, yandexToken, user, cardInfo, setYandexToken } = useContext(Profile)
+  const { setOrderCard, orderCard, setActiveSub, activeSub , yandexToken, user, cardInfo, setYandexToken } = useContext(Profile)
   const [status, setStatus] = useState<string | null>(null)
   const [error, setErrorMessage] = useState<string>('')
   document.title = 'Оформление заказа'
   
   useEffect(() => {
-    if(!orderCard || !cardInfo){
+    if(!orderCard || !cardInfo || user?.subscription){
       navigate('/cabinet')
     }
   },[])
   
   useEffect(() => {
-    let myuuid = uuidv4();
     // запрос
     if( orderCard && yandexToken && !user?.subscription) {
+      let myuuid = uuidv4();
+
       const data = {
         paymentToken: yandexToken,
         idempotencyKey: myuuid,
       }
       
-      console.log(data)
       axios.post(`https://stage.fitnesskaknauka.com/api/customer/subscriptions/internal/${orderCard?.id}`,data)
       .then((res) => {
-        console.log(res,'ответ сервера')
-        setStatus('ok')
+        console.log(res.data, 'оплата прошла')
+        if(res.data && !res.data.confirmationUrl){
+          setStatus('ok')
+        } else {
+          window.open(res.data.confirmationUrl)
+        }
       })
       .catch((error) => {
-        console.log(error.response.data)
+        console.log(error.response.data, 'ошибка оплаты')
         setErrorMessage(error.response.data.message)
         setStatus('reject')
       })
+
     }
 
-  },[])
+  },[orderCard])
 
   const moveToCabinet = () => {
     setOrderCard(null)
