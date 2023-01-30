@@ -30,64 +30,31 @@ interface Subscribe {
   trialPeriod?: 7,
 }
 
-// const subsData: Sub[] = [
-//   {
-//     text: [
-//       'Подписка на 1 месяц',
-//       'Доступ на один месяц ко всем тренировкам и планам питания, а так же более чем 1000 вкусных и полезных рецептов',
-//     ],
-//     price: '1200 руб./ мес.',
-//     info: {
-//       duration: '1 месяц',
-//       price: '1200 руб.'
-//     }
-//   },
-//   {
-//     text: [
-//       'Подписка на 3 месяца',
-//       'Доступ на целый год ко всем тренировкам и планам питания, а так же более чем 1000 вкусных и полезных рецептов',
-//       'Экономь 17% при оплате 3-х месячной подписки',
-//     ],
-//     price: '1000 руб./ мес.',
-//     info: {
-//       duration: '3 месяца',
-//       price: '3000 руб.'
-//     }
-//   },
-//   {
-//     text: [
-//       'Подписка на год',
-//       'Доступ на целый год ко всем тренировкам и планам питания, а так же более чем 1000 вкусных и полезных рецептов',
-//       'Экономь 34% при оплате годовой подписки',
-//     ],
-//     price: '800 руб./ мес.',
-//     top: 'top',
-//     info: {
-//       duration: '1 год',
-//       price: '9600 руб.'
-//     }
-//   }
-// ]
-
 const Subs = () => {
-  const { cardInfo, setOrderCard, user } = useContext(Profile)
+  const { activeSub ,cardInfo, setReload } = useContext(Profile)
   const [active, setActive] = useState<number | null>(null)
   const [sub, setSub] = useState<Subscribe[] |null>(null)
 
   const navigate = useNavigate()
   document.title = 'Подписки'
-
+  
   useEffect(() => {
+    setReload(true)
     axios.get('https://stage.fitnesskaknauka.com/api/plans')
     .then((res) => {
       setSub(res.data)
-      
     })
     .catch((error) => {
       console.log(error.response.data)
     })
-
+    .finally(() => {
+      // if(activeSub){
+      //   navigate('/cabinet')
+      // }
+    })
+    
   },[])
+
 
   return (
     <div className='mx-[16rem] lg:mx-[0rem]'>

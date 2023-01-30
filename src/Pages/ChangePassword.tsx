@@ -1,10 +1,9 @@
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
-import { useContext, useState } from "react";
-
 import { Profile } from '../App'
 
 
@@ -53,8 +52,6 @@ const ChangePassword = () => {
 
     })
   };
-
-
 
   return (
     <div className='w-[343rem] mx-auto mt-[24rem] lg:w-[492rem] lg:mt-[223rem]'>

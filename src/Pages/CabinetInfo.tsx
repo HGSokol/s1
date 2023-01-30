@@ -1,4 +1,4 @@
-import React, { useCallback, ChangeEvent, useRef  } from "react";
+import React, { useRef, ChangeEvent } from "react";
 import { useState, useContext } from 'react'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -6,11 +6,9 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineEye } from 'react-icons/ai'
 import { BsEyeSlash } from 'react-icons/bs';
-
-import { Profile } from '../App'
-
-import UnknownUser from '../images/unknownUser.png'
 import axios from "axios";
+import { Profile } from '../App'
+import UnknownUser from '../images/unknownUser.png'
 
 
 interface IFormInputs {
@@ -43,7 +41,6 @@ const CabinetInfo = () => {
   const [oldPassError, setOldPassError] = useState<string | null>(null)
   const [type, setType] = useState(true)
   const filePicker = useRef<HTMLInputElement|null>(null)
-  const [selectFile, setSelectFile] = useState<File>()
 
   const navigate = useNavigate()
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IFormInputs>({
@@ -59,8 +56,6 @@ const CabinetInfo = () => {
 
     reset()
     if(oldPass&& token && data.oldpassword === JSON.parse(oldPass) && data.password !== JSON.parse(oldPass)) {
-
-
       const userInfo = {
         password: data.password,
         email: `${user?.email}`,
@@ -68,7 +63,7 @@ const CabinetInfo = () => {
         deviceName,
       }
   
-      axios.put('https://stage.fitnesskaknauka.com/api/auth/reset-password', userInfo)
+      axios.put('/api/auth/reset-password', userInfo)
       .then((res) => {
         console.log(res)
         reset()
@@ -87,7 +82,6 @@ const CabinetInfo = () => {
     setType(prev => !prev)
   }
   
-
 // update img
 const getPhoto = async(data: ChangeEvent<HTMLInputElement>) => {
 
@@ -95,12 +89,7 @@ const getPhoto = async(data: ChangeEvent<HTMLInputElement>) => {
   if(data.target && data.target.files && data.target.files[0]){
     fromData.append('avatar', data.target.files[0]);
 
-    axios.put("https://stage.fitnesskaknauka.com/api/customer", fromData, {
-      headers: {
-        'content-type': selectFile?.type!,
-        'content-length': `${selectFile?.size}`,
-      }
-    })
+    axios.put("https://stage.fitnesskaknauka.com/api/customer", fromData)
       .then((res) => {
         console.log(res);
         window.location.reload()
@@ -109,13 +98,11 @@ const getPhoto = async(data: ChangeEvent<HTMLInputElement>) => {
         console.log(err.response.data);
       });  
     }
-
   }
 
   const getPhotoTest = () => {
     filePicker?.current?.click()
   }
-
 
   return (
   <div className='mx-[16rem] lg:mx-[0rem]'>

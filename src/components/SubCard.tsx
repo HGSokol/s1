@@ -1,6 +1,5 @@
 import { Dispatch, SetStateAction, useContext } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { Sub } from '../layouts/Subscribe'
 import { Profile } from '../App'
 
 
@@ -25,34 +24,33 @@ interface SubCard {
   items: Subscribe
   active:string | undefined
   landing: boolean
-  setActiveClearPopup?: Dispatch<SetStateAction<boolean>>
+  setActiveCancelPopup?: Dispatch<SetStateAction<boolean>>
   setActiveResumePopup?: Dispatch<SetStateAction<boolean>>
   setActiveUpdatePopup?: Dispatch<SetStateAction<boolean>>
 }
 
-export const SubCard = ({items, active, landing, setActiveClearPopup, setActiveResumePopup, setActiveUpdatePopup}: SubCard) => {
-  const { cardInfo, setOrderCard, activeSub } = useContext(Profile)
+export const SubCard = ({items, active, landing, setActiveCancelPopup, setActiveResumePopup, setActiveUpdatePopup}: SubCard) => {
+  const { cardInfo, setSelectedPlan, activeSub, setReload } = useContext(Profile)
+  const { isBestChoice, name, price, properties, invoicePeriod, id } = items
   const navigate = useNavigate()
   const location = useLocation()
-
- 
-  const { isBestChoice, name, price, properties, invoicePeriod, id } = items
-
  
   return (
     <div onClick={() =>{
-      setOrderCard({
+      //@ts-ignore
+      setSelectedPlan(prev =>({
+        ...prev,
         name,
         duration: invoicePeriod!,
         price: price?.toString() as string,
         id: id!
-      })
+      }))
       if(landing && window.innerWidth >= 1024 && location.pathname !== '/'){
         navigate(`${cardInfo ? '/cabinet/ordering2' : '/cabinet/ordering'}`)
       }
     }} className='relative overflow-hidden rounded-[20rem] drop-shadow-drop duration-[400ms]' >
-      <div className={` bg-white  h-max w-full py-[24rem] px-[32rem] overflow-hidden border-[1px] border-transparent cursor-pointer flex flex-col justify-between rounded-[20rem] 
-        ${landing ? ' lg:h-[419rem]' : ' lg:h-[505rem]'} lg:w-full lg:py-[36rem] lg:px-[32rem] duration-[400ms] hover:border-[1px] ${active === 'active'? ' border-[#FFB700]': 'hover:border-[#CBCBCB]'}`}>
+      <div className={` bg-white  h-max w-full py-[20rem] px-[20rem] overflow-hidden border-[1px] border-transparent cursor-pointer flex flex-col justify-between rounded-[20rem] 
+        ${landing ? ' lg:h-[452rem]' : ' lg:h-[535rem]'} lg:w-full lg:py-[40rem] lg:px-[40rem] duration-[400ms] hover:border-[1px] ${active === 'active'? ' border-[#FFB700]': 'hover:border-[#CBCBCB]'}`}>
           {
           isBestChoice === true && landing? (
             <div className='
@@ -102,17 +100,26 @@ export const SubCard = ({items, active, landing, setActiveClearPopup, setActiveR
         <div className=''>
           {
             active && !landing && activeSub && activeSub.endsAt === null ? (
-              <div onClick={() => setActiveClearPopup?.(true)} className='h-[51rem] mt-[16rem] w-full rounded-full bg-[#FFB700] flex flex-row justify-center items-center lg:h-[56rem]'>
-                <p className='font-bodyalt font-[600] text-[12rem] leading-[14rem] text-[#FAFAFA] mr-[13rem]
-                lg:text-[16rem] lg:leading-[19rem] '>Отменить подписку</p>
+              <div onClick={() => {
+                setActiveCancelPopup?.(true)
+                setReload(true)
+                }} className='h-[51rem] mt-[16rem] border-[1px] border-[#1F2117] w-full rounded-full bg-white flex flex-row justify-center items-center lg:h-[56rem]'>
+                <p className='font-bodyalt font-[600] text-[12rem] leading-[14rem] text-[#1F2117] mr-[13rem]
+                lg:text-[16rem] lg:leading-[19rem] '>Отключить автопродление</p>
               </div>
             ) : activeSub && activeSub.endsAt && active && !landing ? (
-              <div onClick={() => setActiveResumePopup?.(true)} className='h-[51rem] mt-[16rem] border-[1px] border-[#1F2117] w-full rounded-full bg-white flex flex-row justify-center items-center lg:h-[56rem]'>
-                <p className='font-bodyalt font-[600] text-[12rem] leading-[14rem] text-[#1F2117] mr-[13rem]
-                lg:text-[16rem] lg:leading-[19rem] '>Обновить подписку</p>
+              <div onClick={() => {
+                setActiveResumePopup?.(true)
+                setReload(true)
+              }} className='h-[51rem] mt-[16rem] w-full rounded-full bg-[#FFB700] flex flex-row justify-center items-center lg:h-[56rem]'>
+                <p className='font-bodyalt font-[600] text-[12rem] leading-[14rem] text-[#FAFAFA] mr-[13rem]
+                lg:text-[16rem] lg:leading-[19rem] '>Включить автопродление</p>
               </div>
             ) : !landing && activeSub ? (
-              <div onClick={() => setActiveUpdatePopup?.(true)} className='h-[51rem] mt-[16rem] border-[1px] border-[#1F2117] w-full rounded-full bg-white flex flex-row justify-center items-center lg:h-[56rem]'>
+              <div onClick={() => {
+                setActiveUpdatePopup?.(true)
+                setReload(true)
+              }} className='h-[51rem] mt-[16rem] border-[1px] border-[#1F2117] w-full rounded-full bg-white flex flex-row justify-center items-center lg:h-[56rem]'>
                 <p className='font-bodyalt font-[600] text-[12rem] leading-[14rem] text-[#1F2117] mr-[13rem]
                 lg:text-[16rem] lg:leading-[19rem] '>Сменить подписку</p>
               </div>

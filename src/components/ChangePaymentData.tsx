@@ -4,13 +4,12 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { Profile } from '../App'
-
 import CardIcon from './CardIcon'
 
 
 const schema = yup.object({
   cardNumber: yup.string(),
-  nameCard: yup.string().uppercase().required(),
+  nameCard: yup.string().uppercase().matches(/[A-Z]+/, "Введите имя держателя заглавными буквами").required('Поле Имя держателя карты обязательно'),
   date: yup.string(),
   cvv: yup.number(),
 }).required();
@@ -27,14 +26,13 @@ interface ChangeCard {
 }
 
 export const ChangePaymentData = (props?: ChangeCard) => {
-  const { setCardInfo } = useContext(Profile)
+  const { setCardInfo, activeSub } = useContext(Profile)
   const navigate = useNavigate()
   const refNumberCard = useRef<HTMLInputElement | null>(null)
   const refDateCard = useRef<HTMLInputElement | null>(null)
 
   const [numberCard, setNumberCard] = useState('');
   const [dateCard, setDateCard] = useState('');
-
 
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
@@ -57,8 +55,7 @@ export const ChangePaymentData = (props?: ChangeCard) => {
     setDateCard('')
     reset()
 
-    props && props.ChangeCard ? navigate('/cabinet') : navigate('/cabinet/ordering2')
-    
+    props && props.ChangeCard ? navigate('/cabinet/ordering2') : navigate('/cabinet/ordering2')
 
     // axios.post('https://stage.fitnesskaknauka.com/api/auth/send-reset-code', userInfo)
     // .then((res) => {
@@ -127,9 +124,9 @@ export const ChangePaymentData = (props?: ChangeCard) => {
                 className={`font-bodyalt font-[400] leading-[14rem] text-[#1F2117] text-[14rem] hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
                 lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
                 `}/>
-                {/* {
-                  errors.name? <p className='text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]'>{errors.name?.message}</p> : null
-                } */}
+                {
+                  errors.nameCard? <p className='text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]'>{errors.nameCard?.message}</p> : null
+                }
             </div>
           </div>
           <div className='w-full grid grid-cols-2 gap-[16rem] mb-[20rem]'>
@@ -143,6 +140,7 @@ export const ChangePaymentData = (props?: ChangeCard) => {
                   placeholder='ММ/ГГ'
                   type='text' 
                   maxLength={5}
+                  minLength={5}
                   className={`font-bodyalt font-[400] leading-[14rem] text-[#1F2117] text-[14rem] hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
                   lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
                   `}/>
@@ -158,6 +156,7 @@ export const ChangePaymentData = (props?: ChangeCard) => {
                   placeholder='CVV'
                   type='text' 
                   maxLength={3}
+                  minLength={3}
                   {...register('cvv')}
                   className={`font-bodyalt font-[400] leading-[14rem] text-[#1F2117] text-[14rem] hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
                   lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
@@ -176,7 +175,9 @@ export const ChangePaymentData = (props?: ChangeCard) => {
           } */}
           <div >
             <button type="submit" disabled={!isValid} className={`${ isValid === true ? ' bg-[#FFB700]': ' bg-[#FFB700]/50'} mb-[30rem] lg:mb-[24rem] w-full h-[51rem] flex items-center justify-center rem-[18rem] text-[16rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem] cursor-pointer`}>
-              Оплатить
+            {
+              activeSub? (<p>Изменить карту</p>): (<p>Оплатить</p>)
+            }
             </button>
           </div>
         </form>

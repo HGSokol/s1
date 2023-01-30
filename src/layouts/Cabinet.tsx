@@ -1,10 +1,8 @@
 import React,{ useState, useContext, useEffect, useRef } from 'react'
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom"
-import axios from 'axios'
-
 import { Profile } from '../App'
 import { HeaderForm } from '../components/HeaderForm'
-
+import { LogoutPopup } from "../components/LogoutPopup";
 import {ReactComponent as UsefulIcon} from '../images/useful.svg';
 import {ReactComponent as ActivityIcon} from '../images/activity.svg';
 import {ReactComponent as StatisticIcon} from '../images/statistic.svg';
@@ -12,7 +10,7 @@ import {ReactComponent as NutritionIcon} from '../images/nutrition.svg';
 import {ReactComponent as ProfileIcon} from '../images/profile.svg';
 import {ReactComponent as Logout} from '../images/logout.svg';
 import UnknownUser from '../images/unknownUser.png'
-import { ExitPopup } from '../components/ExitPopup';
+import axios from 'axios';
 
 
 type NavType = {
@@ -24,52 +22,96 @@ type NavType = {
 const Cabinet = () => {
   document.title = 'Подписки'
   const location = useLocation()
-  const { user, setUser, setIsAuthenticated, activeSub } = useContext(Profile)
+  const navigate = useNavigate()
+  const { user, activeSub, reload, setReload, setActiveSub, setUser } = useContext(Profile)
   const ref = useRef<HTMLDivElement | null>(null)
-  const refNav = useRef<NavType[]>([
+  const refNav = useRef<NavType[]>(window.innerWidth >= 1024? [
     {name: 'Полезное', img: <UsefulIcon />, link: '/usefull'},
     {name: 'Активность', img: <ActivityIcon />, link: '/activity'},
     {name: 'Статистика', img: <StatisticIcon />, link: '/statistic'},
     {name: 'Питание', img: <NutritionIcon />, link: '/nutrition'},
     {name: 'Профиль', img: <ProfileIcon />, link: `${activeSub? '' : '/changeSubs'}`},
+  ] : [
+    {name: 'Полезное', img: <UsefulIcon />, link: '/usefull'},
+    {name: 'Активность', img: <ActivityIcon />, link: '/activity'},
+    {name: 'Статистика', img: <StatisticIcon />, link: '/statistic'},
+    {name: 'Питание', img: <NutritionIcon />, link: '/nutrition'},
+    {name: 'Профиль', img: <ProfileIcon />, link: ''},
   ])
-  const [ active, setActive ] = useState(`${activeSub? '' : '/changeSubs'}`)
   const [ activePopup, setActivePopup] = useState(false)
-  const navigate = useNavigate()
+  const [ active, setActive ] = useState(refNav.current[4].link)
+
+  const localUser = localStorage.getItem('user')
 
   useEffect(() => {
-    refNav.current = [
+    if(reload === true && localUser && JSON.parse(localUser).token) {
+      axios.get('https://stage.fitnesskaknauka.com/api/customer')
+      .then((res) => {
+        //@ts-ignore
+        setUser(prev => ({
+          ...prev,
+          email: res.data.email,
+          name: res.data.name,
+          lastName: res.data.lastName,
+          avatar: res.data.avatar,
+          uuid: res.data.uuid,
+        }))
+        if(res.data && res.data.subscription){
+          //@ts-ignore
+          setActiveSub(prev => ({
+            ...prev,
+            name: res.data.subscription.plan.name,
+            duration: res.data.subscription.plan.invoicePeriod,
+            price: res.data.subscription.plan.price,
+            id: res.data.subscription.plan.id,
+            id2: res.data.subscription.id,
+            isFromApple: res.data.subscription.isFromApple,
+            endsAt: res.data.subscription.endsAt
+          }))
+        }else{
+          setActiveSub(null)
+        }
+      })
+      .catch((error) => {
+        console.log(error.response.data)
+      })
+    }
+    setReload(false)
+  }, [reload])
+  
+  useEffect(() => {
+    window.innerWidth >= 1024? refNav.current = [
       {name: 'Полезное', img: <UsefulIcon />, link: '/usefull'},
       {name: 'Активность', img: <ActivityIcon />, link: '/activity'},
       {name: 'Статистика', img: <StatisticIcon />, link: '/statistic'},
       {name: 'Питание', img: <NutritionIcon />, link: '/nutrition'},
       {name: 'Профиль', img: <ProfileIcon />, link: `${activeSub? '' : '/changeSubs'}`},
+    ] : refNav.current = [
+      {name: 'Полезное', img: <UsefulIcon />, link: '/usefull'},
+      {name: 'Активность', img: <ActivityIcon />, link: '/activity'},
+      {name: 'Статистика', img: <StatisticIcon />, link: '/statistic'},
+      {name: 'Питание', img: <NutritionIcon />, link: '/nutrition'},
+      {name: 'Профиль', img: <ProfileIcon />, link: ''},
     ]
-
-    // setActive(refNav.current[4].link)
+  },[activeSub, reload])
   
-},[activeSub])
-
-
   // useEffect(() => {
-  //   const currentLink = refNav?.current?.map((e,i) => location.pathname.includes(e.link)? e.link: '').filter(e => e !== '').join('')
-  //   if(currentLink){
-  //     setActive(currentLink)
-  //   }
+  //   setReload(true)
+  // },[active])
 
-  //   if(ref.current){
-  //     // const heightVisibleBlock = window.innerHeight - ref.current?.clientHeight
-  //     // setVisibleBlock(ref.current?.offsetHeight)
-  //   }
-  // },[activeSub])
+  useEffect(() => {
+    if(!activeSub && location.pathname.replace('/cabinet','') === ''){
+      navigate('/cabinet/changeSubs')
+    }
+    if(activeSub && location.pathname.replace('/cabinet','') === '/changeSubs'){
+      navigate('/cabinet')
+    }
+  },[activeSub])
 
-  // сохранение ссылки путей
   useEffect(() => {
     const f = refNav.current.map(e => e.link.includes(location.pathname.replace('/cabinet', '')) === true? true : null).filter(e => e !== null)
-    setActive(f.length >= 1? location.pathname.replace('/cabinet', ''): `${activeSub? '' : '/changeSubs'}`)
-    // window.location.reload()
-  },[])
-  
+    setActive(prev =>f.length >= 1? location.pathname.replace('/cabinet', ''): `${activeSub? '' : '/changeSubs'}`)
+  },[ activeSub, reload])
 
   return (
     <div className='relative'>
@@ -83,19 +125,20 @@ const Cabinet = () => {
             {
               refNav?.current?.map((e,i) => {
                 return (
-                  <Link to={`/cabinet${e.link}`}  key={i}>
-                    <div className={`h-full w-[59rem] gap-[6rem] flex flex-col justify-center items-center lg:flex-row lg:justify-start lg:items-center lg:gap-[24rem] lg:mb-[47rem] lg:group/link`}
-                    onClick={() => setActive(e.link)}>
-                      <div className={`flex flex-col justify-center items-center  lg:mt-[0rem]`}>
-                        <svg className={`h-[20rem] w-[20rem] lg:w-[23rem] lg:h-[22rem] lg:group-hover/link:fill-[#1F2117] 
-                        ${active === e.link? ' fill-[#1F2117] ': 'fill-[#AAAAAA]'}`}>
-                          {e.img}
-                        </svg>
-                      </div>
-                      <p className={`font-bodyalt font-[500] lg:mt-[0rem] text-[10rem] leading-[12rem] text-[#1F2117] lg:font-bodyalt lg:font-[400] lg:leading-[21px] lg:group-hover/link:text-[#1F2117]
-                      ${active === e.link? '  lg:text-[20rem] text-[#1F2117] lg:leading-[24px]': 'lg:flex lg:text-[18rem] text-[#AAAAAA] lg:leading-[21px]'}`}>{e.name}</p>
+                <div key={i} onClick={() => setActive(prev => e.link)}>
+                  <Link to={`/cabinet${e.link}`} >
+                    <div className={`h-full w-[59rem] gap-[6rem] flex flex-col justify-center items-center lg:flex-row lg:justify-start lg:items-center lg:gap-[24rem] lg:mb-[47rem] lg:group/link`}>
+                          <div className={`flex flex-col justify-center items-center  lg:mt-[0rem]`}>
+                            <svg className={`h-[20rem] w-[20rem] lg:w-[23rem] lg:h-[22rem] lg:group-hover/link:fill-[#1F2117] 
+                            ${active === e.link? ' fill-[#1F2117] ': 'fill-[#AAAAAA]'}`}>
+                              {e.img}
+                            </svg>
+                          </div>
+                          <p className={`font-bodyalt font-[500] lg:mt-[0rem] text-[10rem] leading-[12rem] text-[#1F2117] lg:font-bodyalt lg:font-[400] lg:leading-[21px] lg:group-hover/link:text-[#1F2117]
+                          ${active === e.link? '  lg:text-[20rem] text-[#1F2117] lg:leading-[24px]': 'lg:flex lg:text-[18rem] text-[#AAAAAA] lg:leading-[21px]'}`}>{e.name}</p>
                     </div>
                   </Link>
+                </div>
                 )
                 })
               }
@@ -113,9 +156,7 @@ const Cabinet = () => {
         </div>
         <div className='order-1 h-full lg:order-2 lg:grid lg:grid-rows-[121rem_calc(100vh-121rem)] lg:mr-[120rem]'>
           <div className='hidden lg:mt-[32rem] lg:flex lg:flex-row lg:justify-end lg:h-[60rem] '>
-            <Link to={`${activeSub? '/cabinet' : '/cabinet/changeSubs'}`}>
-              <div className='lg:flex lg:flex-row lg:gap-[12rem]'
-              onClick={() => setActive(`${activeSub? '' : '/changeSubs'}`)}>
+              <div className='lg:flex lg:flex-row lg:gap-[12rem]'>
                 <div className='lg:py-[5rem]'>
                   <p className='lg:font-bodyalt lg:font-[500] lg:text-[#1F2117] lg:text-[18rem] lg:text-end' >{`${user?.name} ${user?.lastName}`}</p>
                   <p className='lg:font-bodyalt lg:font-[400] lg:text-[#1F2117]/60 lg:text-[14rem]  lg:text-end'>{user?.email}</p>
@@ -124,7 +165,6 @@ const Cabinet = () => {
                 {!user?.avatar ? (<img src={UnknownUser} alt='avatar' className='rounded-full w-[60rem] h-[60rem] lg:w-[60rem] lg:h-[60rem]'/>): (<img src={user.avatar} alt='avatar' className='rounded-full w-[60rem] h-[60rem] lg:w-[60rem] lg:h-[60rem]'/>)}
                 </div>
               </div>
-            </Link>
           </div>
           <div className='overflow-y-scroll h-full lg:ml-[32rem] lg:overflow-y-scroll'>
             <Outlet/>
@@ -135,7 +175,7 @@ const Cabinet = () => {
         activePopup? (
           <div className='absolute z-[1000] top-0 left-0 w-[100%] h-[100%] bg-gray-100/50'>
             <div className='absolute z-[1000] left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]  '>
-              <ExitPopup setActivePopup={setActivePopup}/>
+              <LogoutPopup setActivePopup={setActivePopup}/>
             </div>
           </div>
           ) : null

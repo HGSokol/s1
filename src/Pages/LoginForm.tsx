@@ -6,7 +6,6 @@ import * as yup from "yup";
 import { AiOutlineEye } from 'react-icons/ai'
 import { BsEyeSlash } from 'react-icons/bs'
 import axios from "axios";
-
 import { AlternativeLogin } from "../components/AlternativeLogin";
 import { Profile } from '../App'
 
@@ -26,7 +25,7 @@ const schema = yup.object({
 
 const LoginForm = () => {
   const [ errorMessage, setErrorMessage ] = useState<string | null>(null)
-  const { deviceName, setUser, setIsAuthenticated } = useContext(Profile)
+  const { deviceName, setUser, setReload, activeSub, setActiveSub } = useContext(Profile)
   const [ type, setType ] = useState(true)
   const navigate = useNavigate()
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IFormInputs>({
@@ -48,17 +47,42 @@ const LoginForm = () => {
       localStorage.setItem('user', JSON.stringify({
         token: res.data.token,
       }))
-      localStorage.setItem('authenticated', JSON.stringify(true))
-      
-      setUser({
-        email: res.data.email,
-        name: res.data.name,
-        lastName: res.data.lastName,
-        token: res.data.token,
-      })
-      setIsAuthenticated(true)
 
-      navigate('/cabinet')
+      axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`
+
+      axios.get('https://stage.fitnesskaknauka.com/api/customer')
+      .then((res) => {
+        console.log(res)
+        //@ts-ignore
+        setUser(prev => ({
+          ...prev,
+          email: res.data.email,
+          name: res.data.name,
+          lastName: res.data.lastName,
+          avatar: res.data.avatar,
+          uuid: res.data.uuid,
+        }))
+        if(res.data && res.data.subscription){
+          //@ts-ignore
+          setActiveSub(prev => ({
+            ...prev,
+            name: res.data.subscription.plan.name,
+            duration: res.data.subscription.plan.invoicePeriod,
+            price: res.data.subscription.plan.price,
+            id: res.data.subscription.plan.id,
+            id2: res.data.subscription.id,
+            isFromApple: res.data.subscription.isFromApple,
+            endsAt: res.data.subscription.endsAt
+          }))
+        }
+        navigate(window.innerWidth >= 1024? `${activeSub? '/cabinet' : '/cabinet/changeSubs'}`: '/cabinet')
+      })
+      .catch((error) => {
+        console.log(error.response.data)
+        if(error.response.status === 401){
+          navigate('/login')
+        }
+      })
     })
     .catch((error) => {
       console.log(error.response.data)
@@ -107,7 +131,7 @@ const LoginForm = () => {
             errors.password? <p className='text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]'>{errors.password?.message}</p> : null
           }
       </div> 
-      <Link to='/login/step1' className='lg:mb-[48rem]'>
+      <Link to='/login/step1' className='lg:mb-[28rem]'>
         <p className='font-bodyalt text-[14rem] text-[#777872] font-[600] text-end lg:text-[16rem]'>Забыли пароль?</p>
       </Link>  
       <p className='w-full flex justify-center h-[20rem] mb-[5rem]'>

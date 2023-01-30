@@ -9,9 +9,8 @@ interface Props {
   setActivePopup: Dispatch<SetStateAction<boolean>>
 }
 
-
 export const LogoutPopup = (props: Props) => {
-  const { setUser, setIsAuthenticated } = useContext(Profile)
+  const { setUser, setActiveSub, setSelectedPlan, setCardInfo } = useContext(Profile)
   const navigate = useNavigate()
   const { setActivePopup } = props
 
@@ -19,14 +18,13 @@ export const LogoutPopup = (props: Props) => {
     axios.post('https://stage.fitnesskaknauka.com/api/auth/logout')
     .then((res) => {
       setUser(null)
-      setIsAuthenticated(false)
+      setActiveSub(null)
+      setSelectedPlan(null)
+      setCardInfo(null)
       localStorage.clear()
-      
       navigate('/login')
     })
-}
-
-
+  }
 
   return (
     <div className='flex flex-col w-[343rem] h-[193rem] px-[20rem] pt-[32rem] lg:w-[604rem] lg:h-[309rem] rounded-[20rem] lg:px-[80rem] lg:py-[70rem] shadow-drop bg-white'>

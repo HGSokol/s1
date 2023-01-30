@@ -1,10 +1,9 @@
-import { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
-
 import { Profile } from '../App'
 
 
@@ -40,7 +39,6 @@ const ChangePassword2 = () => {
 
   
   useEffect(() => {  
-    
     if(!localUser) {
       navigate('/login/step1')
     }
@@ -48,7 +46,6 @@ const ChangePassword2 = () => {
   
   const onSubmit = (data: IFormInputs) => {
     const key = [data.n1, data.n2, data.n3, data.n4, data.n5, data.n6].join('')
-    
     
     if(localUser && JSON.parse(localUser).email) {
       const localUserEmail = JSON.parse(localUser).email
@@ -75,7 +72,6 @@ const ChangePassword2 = () => {
         setErrorMessage(error.response.data.message)
       })
     }
-
     reset()
   };
 

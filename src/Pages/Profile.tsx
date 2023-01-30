@@ -1,7 +1,6 @@
 import { useEffect, useState, useContext, useRef } from "react";
 import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import { Profile } from '../App'
-
 import UnknownUser from '../images/unknownUser.png'
 import HeaderOrder from "../components/HeaderOrder";
 import { LogoutPopup } from "../components/LogoutPopup";
@@ -12,12 +11,11 @@ type dataLink = {
   link: string
 }
 
-
-
-const MyProfile = () => {
-  // const [data,setData] = useState<dataLink[] | null>(null)
-  // let data:dataLink[]; 
-  const { activeSub, user } = useContext(Profile)
+const MyProfile = () => { 
+  const navigate = useNavigate()
+  const location = useLocation()
+  const [ activePopup, setActivePopup] = useState(false)
+  const { activeSub, user, reload, setReload } = useContext(Profile)
   const dataRef = useRef<dataLink[]>( window.innerWidth >= 1024? [
     {name:'Подписки', link: `${activeSub? '' : '/changeSubs'}`},
     {name:'Общая информация', link: '/cabinetInfo'},
@@ -27,6 +25,7 @@ const MyProfile = () => {
     {name:'Общая информация', link: '/cabinetInfo'},
     {name:'Детали платежей', link: '/payment'},
   ])
+  const [active, setActive] = useState(dataRef.current[0].link)
 
 
   useEffect(() => {
@@ -39,27 +38,21 @@ const MyProfile = () => {
         {name:'Общая информация', link: '/cabinetInfo'},
         {name:'Детали платежей', link: '/payment'},
       ]
-
-      setActive(dataRef.current[0].link)
+    },[activeSub, reload])
     
-  },[activeSub])
+    useEffect(() => {
+    setReload(true)
+  },[active])
 
-  const [active, setActive] = useState(`${activeSub? '' : '/changeSubs'}`)
-
-  const navigate = useNavigate()
-  const location = useLocation()
-  const [ activePopup, setActivePopup] = useState(false)
-
-  
-  if(window.innerWidth <1024){
+  // сделать переход как в кабинете
+  if(window.innerWidth < 1024){
     document.title = 'Профиль'
   }
 
-    // сохранение ссылки путей
   useEffect(() => {
-    setActive(location.pathname.replace('/cabinet', ''))
-  },[])
-
+    const f = dataRef.current.map(e => e.link.includes(location.pathname.replace('/cabinet', '')) === true? true : null).filter(e => e !== null)
+    setActive(prev =>f.length >= 1? location.pathname.replace('/cabinet', ''): `${activeSub? '' : '/changeSubs'}`)
+  },[activeSub,reload])
 
   return (
     <div className='h-full mx-[16rem] lg:mx-[0rem]'>
@@ -97,7 +90,7 @@ const MyProfile = () => {
                 <div className={` flex flex-row justify-between items-center font-bodyalt font-[400] text-[16rem] text-[#1F2117] lg:flex lg:h-full lg:justify-center lg:items-center lg:px-[24rem] lg:font-bodyalt lg:font-[400] lg:text-[16rem] lg:leading-[19rem] lg:rounded-[8rem]
                 ${active === e.link ? ' lg:bg-[#FFFFFF] ': ' '}`}
                   onClick={() => {
-                    setActive(e.link)
+                    setActive(prev =>e.link)
                   }}>
                       {e.name}
                   <div className='mr-[5rem] lg:hidden'>

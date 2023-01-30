@@ -1,10 +1,7 @@
 import { lazy, Suspense, createContext, useState, useEffect } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import { deviceType } from 'react-device-detect'
-// import { GoogleOAuthProvider } from '@react-oauth/google';
 import { Helmet } from "react-helmet"
-
-
 import axios from 'axios'
 import HomePage from './Pages/Home'
 import Spinner from './components/Spinner'
@@ -56,7 +53,7 @@ export interface User {
   token?: string | null,
 }
 
-interface CardInfo {
+export interface CardInfo {
   numberCard: string,
   nameCard: string,
   dateCard:{
@@ -76,36 +73,36 @@ export interface ActiveSub {
   endsAt?: string | null
 }
 
-interface ProfileContext {
-  isAuthenticated: boolean;
+export interface ProfileContext {
   user: User | null;
-  setIsAuthenticated: (isAuthenticated: boolean) => void,
   setUser: (user: User | null) => void,
   timezone: string,
   deviceName: string,
+  reload:boolean,
+  setReload: (reload:boolean) => void,
   cardInfo: CardInfo | null
-  setCardInfo: (cardInfo: CardInfo) => void
+  setCardInfo: (cardInfo: CardInfo | null) => void
   activeSub: ActiveSub | null,
   setActiveSub: (activeSub: ActiveSub | null) => void
-  orderCard: ActiveSub | null,
-  setOrderCard: (activeSub: ActiveSub | null) => void
+  selectedPlan: ActiveSub | null,
+  setSelectedPlan: (activeSub: ActiveSub | null) => void
   yandexToken: string | null,
   setYandexToken: (token: string | null) => void
 }
 
 const ProfileUser: ProfileContext = {
-  isAuthenticated: false,
   user: null,
-  setIsAuthenticated: () => {},
   setUser: () => {},
   timezone: '',
   deviceName: '',
+  reload: false,
+  setReload: () => {},
   cardInfo: null,
   setCardInfo: () => {},
   activeSub: null,
   setActiveSub: () => {},
-  orderCard: null,
-  setOrderCard: () => {},
+  selectedPlan: null,
+  setSelectedPlan: () => {},
   yandexToken: null,
   setYandexToken: () => {}
 }
@@ -113,72 +110,71 @@ const ProfileUser: ProfileContext = {
 export const Profile = createContext<ProfileContext>(ProfileUser);
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
+  document.title = 'Фитнес как наука'
   const [user, setUser] = useState<User | null>(null)
   const [cardInfo, setCardInfo] = useState<CardInfo | null>(null)
+  const [reload, setReload] = useState(true)
   const [activeSub, setActiveSub] = useState<ActiveSub | null>(null)
-  const [orderCard, setOrderCard] = useState<ActiveSub | null>(null)
+  const [selectedPlan, setSelectedPlan] = useState<ActiveSub | null>(null)
   const [yandexToken, setYandexToken] = useState<string | null>(null)
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
   const deviceName = deviceType
   const navigate = useNavigate()
-
   
   const localUser = localStorage.getItem('user')
 
   if(localUser){
     const token = JSON.parse(localUser).token
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-    // axios.defaults.headers.common['Authorization'] = `Bearer 82|NSRa2iG9bYGwrMRGtQr0raK2MyRAHOTJd64mDLel`
   }
   axios.defaults.headers.common['Content-Type'] = 'application/json'
   axios.defaults.headers.common['Timezone'] = `${timezone}` 
   axios.defaults.headers.common['Client-Platform'] = 'web'
   
   useEffect(() => {
-    if(localUser && JSON.parse(localUser).token){
+    if(reload === true && localUser && JSON.parse(localUser).token) {
       axios.get('https://stage.fitnesskaknauka.com/api/customer')
       .then((res) => {
-          console.log(res)
-          setUser({
-            email: res.data.email,
-            name: res.data.name,
-            lastName: res.data.lastName,
-            avatar: res.data.avatar,
-            uuid: res.data.uuid,
-          })
-          if(res.data.subscription){
-            setActiveSub({
-              name: res.data.subscription.plan.name,
-              duration: res.data.subscription.plan.invoicePeriod,
-              price: res.data.subscription.plan.price,
-              id: res.data.subscription.plan.id,
-              id2: res.data.subscription.id,
-              isFromApple: res.data.subscription.isFromApple,
-              endsAt: res.data.subscription.endsAt
-            })
-          }
-          setIsAuthenticated(true)
-          localStorage.setItem('authenticated', JSON.stringify(true))
-        })
-        .catch((error) => {
-          console.log(error.response.data)
-          if(error.response.status === 401){
-            navigate('/login')
-          }
-        })
-      }
+        console.log(res)
+        setUser(prev => ({
+          ...prev,
+          email: res.data.email,
+          name: res.data.name,
+          lastName: res.data.lastName,
+          avatar: res.data.avatar,
+          uuid: res.data.uuid,
+        }))
+        if(res.data && res.data.subscription){
+          setActiveSub(prev => ({
+            ...prev,
+            name: res.data.subscription.plan.name,
+            duration: res.data.subscription.plan.invoicePeriod,
+            price: res.data.subscription.plan.price,
+            id: res.data.subscription.plan.id,
+            id2: res.data.subscription.id,
+            isFromApple: res.data.subscription.isFromApple,
+            endsAt: res.data.subscription.endsAt
+          }))
+        }
+      })
+      .catch((error) => {
+        console.log(error.response.data)
+        if(error.response.status === 401){
+          navigate('/login')
+        }
+      })
 
-      gapi.load("client:auth2", () => {
-        gapi.client.init({
-          clientId:
-          "690913230835-7gqha5d9kt9seh5imsdgaht12rpj3sj9.apps.googleusercontent.com",
-          plugin_name: "chat",
-        });
+    gapi.load("client:auth2", () => {
+      //@ts-ignore
+      gapi.auth2.init({
+        clientId:
+        "690913230835-7gqha5d9kt9seh5imsdgaht12rpj3sj9.apps.googleusercontent.com",
+        plugin_name: "chat",
       });
-    },[])
-    
-    document.title = 'Фитнес как наука'
+      });
+      setReload(false)
+    }
+  },[])
     
   return (
       <div className='font-body'>
@@ -189,25 +185,25 @@ function App() {
         </div>
           <Suspense fallback={<Spinner/>}>
             <Profile.Provider value={{ 
-              isAuthenticated,
-              setIsAuthenticated,
               user,
               setUser,
               timezone,
               deviceName,
+              reload,
+              setReload,
               cardInfo,
               setCardInfo,
               activeSub,
               setActiveSub,  
-              orderCard,
-              setOrderCard,
+              selectedPlan,
+              setSelectedPlan,
               yandexToken,
               setYandexToken,
             }}>
               <Routes>
                 <Route path='/' element={<HomePage/>} />
                 {
-                  isAuthenticated ? (
+                  user ? (
                     <Route path='/cabinet' element={<Cabinet/>} >
                       {
                         window.innerWidth >= 1024 ? (
@@ -220,6 +216,10 @@ function App() {
                           <Route path='/cabinet/ordering' element={<Ordering/>} />
                           <Route path='/cabinet/ordering2' element={<Ordering2/>} />
                           <Route path='/cabinet/ordering3' element={<Ordering3/>} />
+                          <Route path='/cabinet/payments/status' element={<PaymentsStatus/>}>
+                            <Route index element={<PaymentsStatus/>} />
+                            <Route path='/cabinet/payments/status?paymentId=:paymentId' element={<PaymentsStatus/>} />
+                          </Route>
                         </Route>
                         ) : (
                           <>
@@ -232,18 +232,17 @@ function App() {
                             <Route path='/cabinet/changePayment' element={<ChangePayment/>} />
                             <Route path='/cabinet/payment' element={<Payment/>} />
                             <Route path='/cabinet/cabinetInfo' element={<CabinetInfo/>} />
+                            <Route path='/cabinet/payments/status' element={<PaymentsStatus/>}>
+                              <Route index element={<PaymentsStatus/>} />
+                              <Route path='/cabinet/payments/status?paymentId=:paymentId' element={<PaymentsStatus/>} />
+                            </Route>
                           </>
                         )
                       }
                       <Route path='/cabinet/activity' element={<Activity/>} />
                       <Route path='/cabinet/statistic' element={<Statistics/>} />
                       <Route path='/cabinet/nutrition' element={<Nutrition/>} />
-                      <Route path='/cabinet/usefull' element={<Usefull/>} />
-                      <Route path='/cabinet/payments/status' element={<PaymentsStatus/>}>
-                        <Route index element={<PaymentsStatus/>} />
-                        <Route path='/cabinet/payments/status?paymentId=:paymentId' element={<PaymentsStatus/>} />
-                      </Route>
-                      
+                      <Route path='/cabinet/usefull' element={<Usefull/>} />                     
                     </Route>
 
                   ) : (

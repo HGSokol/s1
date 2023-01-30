@@ -1,9 +1,7 @@
 import { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
-
 import { SubCard } from '../components/SubCard'
 import { Profile, ActiveSub } from '../App'
-
 
 
 export type Sub = {
@@ -67,7 +65,7 @@ const subsData: Subscribe[] = [
 ]
 
 export const Subscribe = () => {
-  const { isAuthenticated, activeSub } = useContext(Profile)
+  const { user } = useContext(Profile)
   const [ active, setActive ] = useState<number>(2)
 
   return (
@@ -81,14 +79,14 @@ export const Subscribe = () => {
         subsData.map((item,i) => {
           return(
             <div key={i} onClick={() => setActive(i)}>
-              <SubCard items={item} active={item.isBestChoice === true ? 'active': ''} landing={true}/>
+              <SubCard items={item} active={item.id! - 1  === active? 'active': ''} landing={true}/>
             </div>
           )
         })
       }
     </div>
     <div className='lg:mt-[64rem] font-bodyalt lg:flex lg:justify-center'>
-      <Link to={isAuthenticated ? '/cabinet' : '/login'}>
+      <Link to={user ? '/cabinet' : '/login'}>
         <button className='bg-[#FFB700] text-[16rem] w-full leading-[14rem] h-[51rem] rounded-full text-center text-white tracking-[0.04em] flex flex-row items-center justify-center hover:bg-[#F0AD04]
         lg:w-[349rem] lg:h-[56rem] lg:text-[16rem]'>
           <p className='font-[600] text-[16rem] leading-[19rem] text-[#FAFAFA] tracking-[0.04em] mr-[10rem]

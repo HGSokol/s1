@@ -1,62 +1,104 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Profile } from "../App";
 import {v4 as uuidv4} from 'uuid';
-
-
+import { Profile } from "../App";
+import {ReactComponent as Loader} from '../images/loader.svg';
 
 
 const Ordering = () => {
   const navigate = useNavigate()
-  const { setOrderCard, orderCard, setActiveSub, activeSub , yandexToken, user, cardInfo, setYandexToken } = useContext(Profile)
+  const { setSelectedPlan, selectedPlan, setActiveSub, activeSub , yandexToken, user, cardInfo, setYandexToken, setReload } = useContext(Profile)
   const [status, setStatus] = useState<string | null>(null)
   const [error, setErrorMessage] = useState<string>('')
+  const [link, setLink] = useState(false)
   document.title = 'Оформление заказа'
   
   useEffect(() => {
-    if(!orderCard || !cardInfo || user?.subscription){
+    if(activeSub){
+      setLink(true)
+    }
+    if(!selectedPlan || !yandexToken ){
       navigate('/cabinet')
     }
   },[])
   
+  let fix = true
   useEffect(() => {
-    // запрос
-    if( orderCard && yandexToken && !user?.subscription) {
+    if(fix){
       let myuuid = uuidv4();
-
+  
       const data = {
         paymentToken: yandexToken,
         idempotencyKey: myuuid,
       }
-      
-      axios.post(`https://stage.fitnesskaknauka.com/api/customer/subscriptions/internal/${orderCard?.id}`,data)
-      .then((res) => {
-        console.log(res.data, 'оплата прошла')
-        if(res.data && !res.data.confirmationUrl){
-          setStatus('ok')
-        } else {
-          window.open(res.data.confirmationUrl)
-        }
-      })
-      .catch((error) => {
-        console.log(error.response.data, 'ошибка оплаты')
-        setErrorMessage(error.response.data.message)
-        setStatus('reject')
-      })
-
+      if( !activeSub && selectedPlan && yandexToken && !user?.subscription ) {
+        axios.post(`https://stage.fitnesskaknauka.com/api/customer/subscriptions/internal/${selectedPlan?.id}`,data)
+        .then((res) => {
+          console.log(res.data, 'оплата прошла')
+          // setReload(true)
+          if(res.data && !res.data.confirmationUrl){
+            //@ts-ignore
+            setActiveSub(prev => ({
+              ...prev,
+              name: res.data.plan.name,
+              duration: res.data.plan.invoicePeriod,
+              price: res.data.plan.price,
+              id: res.data.plan.id,
+              id2: res.data.id,
+              isFromApple: res.data.isFromApple,
+              endsAt: res.data.endsAt
+            }))
+            setStatus('ok')
+          } else {
+            window.location.replace(res.data.confirmationUrl)
+          }
+        })
+        .catch((error) => {
+          console.log(error.response.data, 'ошибка оплаты')
+          setErrorMessage(error.response.data.message)
+          setStatus('reject')
+        })
+        .finally(() => {
+          setYandexToken(null)
+          myuuid = ''
+        })
+      }
+      if(activeSub && yandexToken){
+        axios.put(`https://stage.fitnesskaknauka.com/api/customer/subscriptions/internal/${activeSub.id2}/payment-method`,data)
+        .then((res) => {
+          console.log(res, 'изменение карты прошло')
+            setStatus('ok')
+        })
+        .catch((error) => {
+          console.log(error.response.data, 'изменение карты ошибка')
+          setErrorMessage(error.response.data.message)
+          setStatus('reject')
+        })
+        .finally(() => {
+          setYandexToken(null)
+          myuuid = ''
+          setReload(true)
+        })
+      }
     }
-
-  },[orderCard])
+    fix = !fix
+  },[])
 
   const moveToCabinet = () => {
-    setOrderCard(null)
     setYandexToken(null)
-    window.location.reload()
+    setSelectedPlan(null)
+    setReload(true)
+    if(status === 'ok' || (activeSub && status === 'reject')){
+      navigate('/cabinet')
+    }
+    if(status === 'reject'){
+      navigate('/cabinet/changeSubs')
+    }
   }
 
   return (
-    <div className='mx-[16rem] lg:mx-[0rem] lg:w-[586rem]'>
+    <div className='mx-[16rem] lg:mx-[0rem] lg:w-[700rem]'>
     <div className='pt-[15rem] w-full flex flex-row relative mb-[24rem] lg:hidden'>
       <div className='absolute translate-y-[23rem] cursor-pointer'
       onClick={moveToCabinet}>
@@ -70,7 +112,7 @@ const Ordering = () => {
     <div className='relative'>
     {
       status === 'ok'? (
-      <div onClick={moveToCabinet} className='mt-[70rem] font-bodyalt font-[600] text-[22rem] text-[#1F2117] leading-[26rem] flex flex-col justify-center items-center
+      <div className='mt-[70rem] font-bodyalt font-[600] text-[22rem] text-[#1F2117] leading-[26rem] flex flex-col justify-center items-center
       lg:mt-[171rem] lg:absolute lg:translate-x-[300rem]'>
         <div className='mb-[32rem]'>
           <svg className='w-[60rem] h-[60rem] lg:w-[78rem] lg:h-[78rem]' viewBox="0 0 61 60" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -79,10 +121,10 @@ const Ordering = () => {
           </svg>
         </div>
         <div className='mb-[24rem] font-body font-[600] text-[20rem] leading-[23rem] text-center text-[#1F2117]
-        lg:font-body lg:font-[600] lg:text-[26rem] lg:leading-[30rem]'>Оплата прошла успешно</div>
+        lg:font-body lg:font-[600] lg:text-[26rem] lg:leading-[30rem]'>{link?'Изменение карты прошло успешло':'Оплата прошла успешно'}</div>
         <div className='mb-[32rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-center text-[#777872] whitespace-pre-wrap
-        lg:font-bodyalt lg:font-[400] lg:text-[22rem] lg:leading-[32rem] ' >{`Вы успешно оплатили подписку "${orderCard?.duration}"\nна сумму ${orderCard?.price}`}</div>
-        <div className='w-full h-[50rem] bg-[#FFB700] rounded-full flex flex-row items-center justify-center
+        lg:font-bodyalt lg:font-[400] lg:text-[22rem] lg:leading-[32rem] ' >{link? 'Вы успешно изменили платежный метод' :`Вы успешно оплатили подписку "${selectedPlan?.duration}"\nна сумму ${selectedPlan?.price}`}</div>
+        <div onClick={moveToCabinet}   className='w-full h-[50rem] bg-[#FFB700] rounded-full flex flex-row items-center justify-center
         lg:w-[272rem] cursor-pointer'>
           <div className='mr-[12rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-white '>Вернуться к подпискам</div>
           <div>
@@ -94,7 +136,7 @@ const Ordering = () => {
           </div>
       </div>) :
       error? (
-      <div onClick={moveToCabinet} className='mt-[70rem] font-bodyalt font-[600] text-[22rem] text-[#1F2117] leading-[26rem] flex flex-col justify-center items-center
+      <div className='mt-[70rem] font-bodyalt font-[600] text-[22rem] text-[#1F2117] leading-[26rem] flex flex-col justify-center items-center
       lg:mt-[171rem] lg:absolute lg:translate-x-[300rem]'>
         <div className='mb-[32rem]'>
           <svg className='w-[60rem] h-[60rem] lg:w-[78rem] lg:h-[78rem]' viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -105,10 +147,10 @@ const Ordering = () => {
         <div className='mb-[24rem] font-body font-[600] text-[20rem] leading-[23rem] text-center text-[#1F2117]
         lg:font-body lg:font-[600] lg:text-[26rem] lg:leading-[30rem]'>Ошибка</div>
         <div className='mb-[32rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-center text-[#777872] whitespace-pre-wrap
-        lg:font-bodyalt lg:font-[400] lg:text-[22rem] lg:leading-[32rem] ' >{`Оплата не прошла. \n${error}`}</div>
-        <div className='w-full h-[50rem] bg-[#FFB700] rounded-full flex flex-row items-center justify-center
+        lg:font-bodyalt lg:font-[400] lg:text-[22rem] lg:leading-[32rem] ' >{link? error :`Оплата не прошла. \n${error}`}</div>
+        <div onClick={moveToCabinet} className='w-full h-[50rem] bg-[#FFB700] rounded-full flex flex-row items-center justify-center
         lg:w-[272rem] cursor-pointer'>
-          <div className='mr-[12rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-white '>Вернуться к подпискам</div>
+          <div   className='mr-[12rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-white '>Вернуться к подпискам</div>
           <div>
             <svg className='w-[18rem] h-[18rem]' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M3.75 12L20.25 12" stroke="#FAFAFA" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
@@ -117,7 +159,7 @@ const Ordering = () => {
           </div>
           </div>
       </div>) : (
-      <div onClick={moveToCabinet} className='mt-[70rem] font-bodyalt font-[600] text-[22rem] text-[#1F2117] leading-[26rem] flex flex-col justify-center items-center
+      <div className='mt-[70rem] font-bodyalt font-[600] text-[22rem] text-[#1F2117] leading-[26rem] flex flex-col justify-center items-center
       lg:mt-[171rem] lg:absolute lg:translate-x-[300rem]'>
         <div className='mb-[32rem]'>
           <svg className='w-[60rem] h-[60rem] lg:w-[78rem] lg:h-[78rem]' viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -126,19 +168,11 @@ const Ordering = () => {
           </svg>
         </div>
         <div className='mb-[24rem] font-body font-[600] text-[20rem] leading-[23rem] text-center text-[#1F2117]
-        lg:font-body lg:font-[600] lg:text-[26rem] lg:leading-[30rem]'>Ожидание оплаты</div>
-        <div className='mb-[32rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-center text-[#777872] whitespace-pre-wrap
-        lg:font-bodyalt lg:font-[400] lg:text-[22rem] lg:leading-[32rem] ' >{`Какой-то текст`}</div>
-        <div className='w-full h-[50rem] bg-[#FFB700] rounded-full flex flex-row items-center justify-center
+        lg:font-body lg:font-[600] lg:text-[26rem] lg:leading-[30rem]'>{link? 'Ожидание изменения карты':'Ожидание оплаты'}</div>
+        <div className='w-full h-[50rem] bg-[#FFB700]/50 rounded-full flex flex-row items-center justify-center
         lg:w-[272rem] cursor-pointer'>
-          <div className='mr-[12rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-white '>Вернуться к подпискам</div>
-          <div>
-            <svg className='w-[18rem] h-[18rem]' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M3.75 12L20.25 12" stroke="#FAFAFA" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M13.5 18.75L20.25 12L13.5 5.25" stroke="#FAFAFA" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
-          </div>
+          <button disabled={status === null}  className='mr-[12rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-white '><div className='w-[32rem] h-[32rem]'><Loader/></div></button>
+        </div>
       </div>) 
     }
 

@@ -1,4 +1,4 @@
-import { useState,useEffect , useContext } from 'react'
+import React, { useState, useEffect , useContext } from 'react'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { AiOutlineEye } from 'react-icons/ai'
 import { BsEyeSlash } from 'react-icons/bs';
 import axios from 'axios'
-
 import { Profile } from '../App'
 
 
