@@ -5,10 +5,10 @@ import { HiMail } from 'react-icons/hi'
 
 export const Footer = () => {
   return (
-    <div className='bg-black h-[203rem] py-[32rem] px-[56rem] flex flex-col
-    lg:justify-between lg:flex-row lg:h-[135rem] lg:py-[32rem] lg:px-[120rem]'>
-      <div className='my-auto mb-[24rem] mx-auto 
-      lg:mx-0 lg:my-auto'>
+    <div className='bg-black h-[454rem] py-[32rem] flex flex-col
+    lg:flex-row lg:h-[206rem] lg:py-[48rem] lg:px-[120rem]'>
+        <div className='order-1 mx-auto mb-[40rem]
+      lg:mx-0 lg:my-auto lg:flex lg:flex-row lg:mr-[100rem] lg:mb-[24rem]'>
           <svg viewBox="0 0 126 56" fill="none" xmlns="http://www.w3.org/2000/svg" className='w-[126rem] h-[56rem] 
           lg:w-[126rem] lg:h-[56rem]'>
             <path d="M6.68241 4.4514V51.5486H23.6529V56H2.19141V0H23.6529V4.4514H6.68241Z" fill="#FAB513"/>
@@ -27,43 +27,62 @@ export const Footer = () => {
             <path d="M103.831 42.592V32.0907H106.376V35.9014H106.791L107.186 35.9216L110.431 32.084H113.221L109.669 36.5152C110.122 36.7377 110.541 37.0215 110.915 37.3582C111.318 37.7253 111.666 38.1477 111.949 38.6127C112.282 39.1562 112.551 39.7354 112.752 40.3393C113.004 41.0722 113.2 41.823 113.337 42.5853H110.554C110.431 41.8778 110.244 41.1826 109.996 40.508C109.771 39.9279 109.492 39.4491 109.159 39.0781C108.84 38.7144 108.436 38.4341 107.982 38.262C107.519 38.0867 106.988 38.0125 106.376 38.0327V42.5853L103.831 42.592Z" fill="white"/>
             <path d="M117.454 42.5921H114.671L119.114 32.0908H121.605L126 42.5921H123.156L122.333 40.5283H118.236L117.454 42.5921ZM118.965 38.4982H121.632L120.312 34.8898L118.965 38.4982Z" fill="white"/>
           </svg>
-      </div>
-      <div className='grid grid-rows-2 w-[209rem] h-[71rem] mx-auto place-items-center gap-[12rem]
-      lg:gap-[0rem] lg:mx-0 lg:place-items-end lg:h-[71rem]'>
-        <div className='flex flex-row gap-[16rem] items-center items-self-start
-        lg:gap-[16rem]'>
+        </div>
+        <div className='mx-auto order-3 lg:order-2 lg:mr-[740rem] flex flex-col gap-[24rem] lg:items-start lg:justify-center lg:mx-0 lg:my-auto lg:gap-[16rem]'>
+          <div className='text-white flex flex-col lg:flex-row gap-[16rem] items-center'>
+            <div className='flex flex-row gap-[8rem]'>
+              <div className='font-[600] font-bodyalt text-[16rem] text-[#CBCBCB] leading-[19rem]'>ИНН</div>
+              <div className='font-[300] font-bodyalt text-[16rem] text-[#CBCBCB] leading-[19rem]'>6141058830</div>
+            </div>
+            <div className='flex flex-row gap-[8rem]'>
+              <div className='font-[600] font-bodyalt text-[16rem] text-[#CBCBCB] leading-[19rem]'>ОГРН</div>
+              <div className='font-[300] font-bodyalt text-[16rem] text-[#CBCBCB] leading-[19rem]'>1226100004800</div>
+            </div>
+            <div className='flex flex-row gap-[8rem]'>
+              <div className='font-[600] font-bodyalt text-[16rem] text-[#CBCBCB] leading-[19rem]'>КПП</div>
+              <div className='font-[300] font-bodyalt text-[16rem] text-[#CBCBCB] leading-[19rem]'>614101001</div>
+            </div>
+          </div>
+          <div className='font-[400] font-bodyalt text-[16rem] text-[#CBCBCB] leading-[19rem]'>© 2022 Фитнес как наука.</div>
+        </div>
+      <div className='order-2 lg:order-3 flex flex-col items-center w-[256rem] h-[122rem] mb-[40rem] mx-auto
+       lg:mx-0  lg:h-[110rem] lg:mb-[0rem] lg:items-end'>
+        <div className='mb-[32rem] flex flex-row gap-[16rem] items-center items-self-start
+        lg:gap-[16rem] lg:mb-[24rem]'>
             <a href='https://www.facebook.com/' target="_blank" rel="noreferrer">
-              <div className='w-[28rem] h-[28rem] rounded-full border-[2px] grid place-items-center
-              lg:border-[1px] lg:w-[28rem] lg:h-[28rem]'>
-                <FaFacebookF className='w-[16rem] h-[16rem]
-                lg:w-[16rem] lg:h-[16rem]' color='white'/>
+              <div className='w-[36rem] h-[36rem] rounded-full grid place-items-center
+              lg:w-[36rem] lg:h-[36rem] bg-white'>
+                <FaFacebookF className='w-[18rem] h-[18rem]
+                lg:w-[18rem] lg:h-[18rem] bg-white'/>
               </div>
             </a>
             <a href='https://www.instagram.com/' target="_blank" rel="noreferrer">
-              <div className='w-[28rem] h-[28rem] rounded-full border-[2px] grid place-items-center 
-              lg:border-[1px] lg:w-[28rem] lg:h-[28rem]'>
-                <AiFillInstagram className='w-[16rem] h-[16rem]
-                lg:w-[16rem] lg:h-[16rem]' color='white'/>
+              <div className='w-[36rem] h-[36rem] rounded-full grid place-items-center 
+               lg:w-[36rem] lg:h-[36rem] bg-white'>
+                <AiFillInstagram className='w-[18rem] h-[18rem]
+                lg:w-[18rem] lg:h-[18rem] bg-white' />
               </div>
             </a>
             <a href='https://web.telegram.org/z/' target="_blank" rel="noreferrer">
-              <div className='w-[28rem] h-[28rem] rounded-full border-[2px] grid place-items-center 
-              lg:border-[1px] lg:w-[28rem] lg:h-[28rem]'>
-                <FaTelegramPlane className='w-[16rem] h-[16rem]
-                lg:w-[16rem] lg:h-[16rem]' color='white'/>
+              <div className='w-[36rem] h-[36rem] rounded-full grid place-items-center 
+               lg:w-[36rem] lg:h-[36rem] bg-white'>
+                <FaTelegramPlane className='w-[18rem] h-[18rem]
+                lg:w-[18rem] lg:h-[18rem] bg-white' />
               </div>
             </a>
             <a href='#' target="_blank" rel="noreferrer">
-              <div className='w-[28rem] h-[28rem] rounded-full border-[2px] grid place-items-center 
-              lg:border-[1px] lg:w-[28rem] lg:h-[28rem]'>
-                <HiMail className='w-[16rem] h-[16rem]
-                lg:w-[16rem] lg:h-[16rem]' color='white'/>
+              <div className='w-[36rem] h-[36rem] rounded-full  grid place-items-center 
+               lg:w-[36rem] lg:h-[36rem] bg-white'>
+                <HiMail className='w-[18rem] h-[18rem]
+                lg:w-[18rem] lg:h-[18rem] bg-white'/>
               </div>
             </a>
         </div>
-        <div className='font-bodyalt font-[600] text-[16rem] leading-[19.09rem] text-white
-        lg:leading-[10rem] lg:text-[16rem]'>© 2022 Фитнес как наука.</div>
-      </div>
+        <div className='font-bodyalt font-[500] text-[16rem] leading-[19.09rem] text-white
+        lg:leading-[19rem] lg:text-[16rem] mb-[16rem] lg:mb-[12rem]'>Пользовательское соглашение</div>
+        <div className='font-bodyalt font-[500] text-[16rem] leading-[19.09rem] text-white
+        lg:leading-[19rem] lg:text-[16rem]'>Политика конфиденциальности</div>
+        </div>
       </div>
   )
 }

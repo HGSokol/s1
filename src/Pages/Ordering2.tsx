@@ -13,6 +13,12 @@ const Ordering = () => {
   const [load, setLoad] = useState(false)
   const navigate = useNavigate()
 
+  useEffect(() => {
+    if(selectedPlan === null && !activeSub){
+      navigate('/cabinet')
+    }
+  },[])
+
   const CreateYandexToken = () => {
     if(selectedPlan || activeSub){
       setLoad(true)

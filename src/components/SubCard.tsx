@@ -82,7 +82,7 @@ export const SubCard = ({items, active, landing, setActiveCancelPopup, setActive
           { properties?.card?.map((e,i) => {
               return (
                 <div key={i} className='flex flex-row items-start'>
-                  <div className=''>
+                  <div className='pt-[3rem]'>
                     <svg className='w-[20rem] h-[20rem] mr-[12rem] lg:w-[24rem] lg:h-[24rem] lg:mr-[24rem]' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path fillRule="evenodd" clipRule="evenodd" d="M19.6711 6.34571C20.1096 6.80666 20.1096 7.554 19.6711 8.01494L10.5015 17.6543C10.0631 18.1152 9.35214 18.1152 8.91366 17.6543L4.32886 12.8346C3.89038 12.3737 3.89038 11.6263 4.32886 11.1654C4.76735 10.7044 5.47827 10.7044 5.91675 11.1654L9.7076 15.1504L18.0832 6.34571C18.5217 5.88476 19.2327 5.88476 19.6711 6.34571Z" fill="#FFB700"/>
                     </svg>
