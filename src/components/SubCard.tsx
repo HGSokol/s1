@@ -114,7 +114,7 @@ export const SubCard = ({items, active, landing, setActiveCancelPopup, setActive
                     <div onClick={() => {
                       setActiveResumePopup?.(true)
                       setReload(true)
-                    }} className='h-[51rem] mt-[16rem] w-full rounded-full bg-[#FFB700] flex flex-row justify-center items-center lg:h-[56rem]'>
+                    }} className='h-[51rem] mt-[16rem] w-full rounded-full bg-[#FFB700] flex flex-row justify-center items-center lg:h-[56rem] hover:bg-[#F0AD04]'>
                       <p className='font-bodyalt font-[600] text-[12rem] leading-[14rem] text-[#FAFAFA] mr-[13rem]
                       lg:text-[16rem] lg:leading-[19rem] '>Включить автопродление</p>
                     </div>

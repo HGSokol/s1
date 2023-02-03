@@ -36,7 +36,7 @@ export const ResumeSubPopup = (props: Props) => {
       <div className='text-[14rem] leading-[17rem] mb-[32rem] lg:mb-[32rem] font-bodyalt font-[400] lg:text-[22rem] lg:leading-[32rem] text-center text-[#777872]'>Автопродление будет возобновлено</div>
       <div className='w-full grid grid-cols-2 gap-[16rem] lg:gap-[24rem]'>
         <div onClick={() => setActiveResumePopup(false)} className='flex justify-center items-center h-[51rem] text-[16rem] leading-[19rem] lg:h-[56rem] lg:px-[24rem] lg:text-[16rem] lg:leading-[19rem] font-bodyalt font-[400] border-[1px] border-[#1F2117] rounded-full cursor-pointer hover:duration-[200ms] hover:border-[#FFB700] hover:text-[#FFB700]'>Нет</div>
-        <button onClick={() => resumeSub()} disabled={load} className={`flex justify-center items-center text-[16rem] leading-[19rem] lg:h-[56rem] lg:px-[24rem] lg:text-[16rem] text-[#FAFAFA] lg:leading-[19rem] font-bodyalt font-[400] ${load? ' bg-[#FFB700]/50': ' bg-[#FFB700]'} rounded-full cursor-pointer`}>
+        <button onClick={() => resumeSub()} disabled={load} className={`flex justify-center items-center text-[16rem] leading-[19rem] lg:h-[56rem] lg:px-[24rem] lg:text-[16rem] text-[#FAFAFA] lg:leading-[19rem] font-bodyalt font-[400] ${load? ' bg-[#FFB700]/50': ' bg-[#FFB700]'} rounded-full cursor-pointer hover:duration-[200ms] hover:bg-[#F0AD04]`}>
         {!load? 'Да': (<div className='w-[32rem] h-[32rem]'><Loader/></div>)}
         </button>
       </div>

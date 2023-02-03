@@ -124,22 +124,22 @@ const Cabinet = () => {
           <div className='hidden lg:block'>
             <HeaderForm/>
           </div>
-          <div className=' lg:mt-[39rem] lg:ml-[120rem] lg:flex lg:flex-col lg:justify-between'>
+          <div className=' lg:mt-[39rem] lg:ml-[100rem] lg:flex lg:flex-col lg:justify-between'>
             <div className='my-[13rem] flex flex-row gap-[10rem]  justify-center lg:my-[0rem] lg:flex lg:flex-col'>
             {
               refNav?.current?.map((e,i) => {
                 return (
                 <div key={i} onClick={() => setActive(prev => e.link)}>
                   <Link to={`/cabinet${e.link}`} >
-                    <div className={`h-full w-[59rem] gap-[6rem] flex flex-col justify-center items-center lg:flex-row lg:justify-start lg:items-center lg:gap-[24rem] lg:mb-[47rem] lg:group/link`}>
-                          <div className={`flex flex-col justify-center items-center  lg:mt-[0rem]`}>
-                            <svg className={`h-[20rem] w-[20rem] lg:w-[23rem] lg:h-[22rem] lg:group-hover/link:fill-[#1F2117] 
-                            ${active === e.link? ' fill-[#1F2117] ': 'fill-[#AAAAAA]'}`}>
-                              {e.img}
-                            </svg>
-                          </div>
-                          <p className={`font-bodyalt font-[500] lg:mt-[0rem] text-[10rem] leading-[12rem] text-[#1F2117] lg:font-bodyalt lg:font-[400] lg:leading-[21px] lg:group-hover/link:text-[#1F2117]
-                          ${active === e.link? '  lg:text-[20rem] text-[#1F2117] lg:leading-[24px]': 'lg:flex lg:text-[18rem] text-[#AAAAAA] lg:leading-[21px]'}`}>{e.name}</p>
+                    <div className={`hover:bg-gray-200 hover:duration-[200ms] lg:pl-[20rem] lg:w-[200rem] h-full gap-[6rem] flex flex-col justify-center items-center lg:flex-row lg:justify-start lg:items-center lg:gap-[24rem] lg:mb-[47rem] lg:group/link lg:rounded-[15rem]`}>
+                      <div className={`flex flex-col justify-center items-center  lg:mt-[0rem]`}>
+                        <svg className={`h-[20rem] w-[20rem] lg:w-[23rem] lg:h-[22rem] lg:group-hover/link:fill-[#1F2117] 
+                        ${active === e.link? ' fill-[#1F2117] ': 'fill-[#AAAAAA]'}`}>
+                          {e.img}
+                        </svg>
+                      </div>
+                      <p className={`font-bodyalt font-[500] lg:mt-[0rem] text-[10rem] leading-[12rem] text-[#1F2117] lg:font-bodyalt lg:font-[400] lg:leading-[21px] lg:group-hover/link:text-[#1F2117]
+                      ${active === e.link? '  lg:text-[20rem] text-[#1F2117] lg:leading-[24px]': 'lg:flex lg:text-[18rem] text-[#AAAAAA] lg:leading-[21px]'}`}>{e.name}</p>
                     </div>
                   </Link>
                 </div>
@@ -147,11 +147,11 @@ const Cabinet = () => {
                 })
               }
             </div>
-            <button  onClick={() => setActivePopup(prev => !prev)} className='hidden lg:flex lg:flex-row lg:items-center lg:gap-[24rem] lg:mb-[84rem] lg:group/logout'>
+            <button  onClick={() => setActivePopup(prev => !prev)} className='hover:bg-gray-200 hover:duration-[200ms] lg:pl-[20rem] lg:w-[200rem] h-[70rem] hidden lg:flex lg:flex-row lg:items-center lg:gap-[24rem] lg:mb-[84rem] lg:group/logout lg:rounded-[15rem]'>
               <div className='flex items-center lg:w-[20rem] lg:h-[20rem] lg:fill-[#AAAAAA] lg:group-hover/logout:fill-[#1F2117]'>
                 <Logout />
               </div>
-              <p className='lg:font-bodyalt lg:font-[400] lg:text-[#AAAAAA] lg:text-[18rem] lg:leading-[21px] lg:group-hover/logout:text-[#1F2117]'>Выход</p>
+              <p className=' lg:font-bodyalt lg:font-[400] lg:text-[#AAAAAA] lg:text-[18rem] lg:leading-[21px] lg:group-hover/logout:text-[#1F2117]'>Выход</p>
             </button>
           </div>
         </div>
