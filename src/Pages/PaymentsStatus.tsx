@@ -10,9 +10,21 @@ const PaymentsStatus = () => {
   const [searchParams] = useSearchParams();
   const [statusCode, setStatusCode] = useState<number | null>(null)
   const [statusMessage, setStatusMessage] = useState('Ожидание оплаты')
+  const [status, setStatus] = useState('Ожидание подтверждения оплаты')
   const [stateButton, setStateButton] = useState(false)
+  const [link, setLink] = useState(false)
 
   const navigate = useNavigate()
+
+  useEffect(() => {
+    console.log(activeSub,'activeSub')
+    if(activeSub){
+      setLink(true)
+    }
+    // if(!selectedPlan || !yandexToken ){
+    //   navigate('/cabinet')
+    // }
+  },[])
   
   function payment () {
     setTimeout(() => {
@@ -60,6 +72,24 @@ const PaymentsStatus = () => {
     // navigate(`${activeSub? '/cabinet' : '/cabinet/changeSubs'}`)
   }
 
+  useEffect(() => {
+    if(!link && statusCode === 402){
+      setStatus('Платеж отклонен')
+    }
+    if(link && statusCode === 402){
+      setStatus('Изменение карты отклонено')
+    }
+    if(statusCode === 404){
+      setStatus('Платеж не найден')
+    }
+    if(!link && statusCode === 202){
+      setStatus('Оплата прошла успешно')
+    }
+    if(link && statusCode === 202){
+      setStatus('Изменение карты прошло успешно')
+    }
+  },[statusCode])
+
   return (
   <div className='mx-[16rem] lg:mx-[0rem] lg:w-[700rem]'>
     <div className='pt-[15rem] w-full flex flex-row relative mb-[24rem] lg:hidden'>
@@ -96,12 +126,7 @@ const PaymentsStatus = () => {
       <div className='mb-[24rem] font-body font-[600] text-[20rem] leading-[23rem] text-center text-[#1F2117]
       lg:font-body lg:font-[600] lg:text-[26rem] lg:leading-[30rem]'>{statusMessage}</div>
       <div className='mb-[32rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-center text-[#777872] whitespace-pre-wrap
-      lg:font-bodyalt lg:font-[400] lg:text-[22rem] lg:leading-[32rem] ' >{
-        statusCode === 402? 'Платеж отклонен' :
-        statusCode === 404? 'Платеж не найден' :
-        statusCode === 202? 'Оплата прошла успешно': 
-        'Ожидание подтверждения оплаты'
-      }</div>
+      lg:font-bodyalt lg:font-[400] lg:text-[22rem] lg:leading-[32rem] ' >{status}</div>
       {
         stateButton? (        
         <div onClick={moveToCabinet} className='w-full h-[50rem] bg-[#FFB700] rounded-full flex flex-row items-center justify-center

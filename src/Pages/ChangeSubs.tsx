@@ -84,7 +84,7 @@ const Subs = () => {
         })
       }
     </div>
-    <div onClick={() => navigate(`${cardInfo ? '/cabinet/ordering2' : '/cabinet/ordering'}`)} className='mb-[20rem] w-full h-[50rem] flex justify-center items-center rounded-full bg-[#FFB700] text-[16rem] font-bodyalt font-[700] leading-[19rem] text-[#FFFFFF] lg:hidden cursor-pointer'>
+    <div onClick={() => navigate('/cabinet/ordering')} className='mb-[20rem] w-full h-[50rem] flex justify-center items-center rounded-full bg-[#FFB700] text-[16rem] font-bodyalt font-[700] leading-[19rem] text-[#FFFFFF] lg:hidden cursor-pointer'>
       Оплатить
     </div>
   </div>

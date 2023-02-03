@@ -131,7 +131,7 @@ const Cabinet = () => {
                 return (
                 <div key={i} onClick={() => setActive(prev => e.link)}>
                   <Link to={`/cabinet${e.link}`} >
-                    <div className={`hover:bg-gray-200 hover:duration-[200ms] lg:pl-[20rem] lg:w-[200rem] h-full gap-[6rem] flex flex-col justify-center items-center lg:flex-row lg:justify-start lg:items-center lg:gap-[24rem] lg:mb-[47rem] lg:group/link lg:rounded-[15rem]`}>
+                    <div className={`lg:hover:bg-gray-200 hover:duration-[200ms] lg:pl-[20rem] lg:w-[200rem] h-full gap-[6rem] flex flex-col justify-center items-center lg:flex-row lg:justify-start lg:items-center lg:gap-[24rem] lg:mb-[47rem] lg:group/link lg:rounded-[15rem]`}>
                       <div className={`flex flex-col justify-center items-center  lg:mt-[0rem]`}>
                         <svg className={`h-[20rem] w-[20rem] lg:w-[23rem] lg:h-[22rem] lg:group-hover/link:fill-[#1F2117] 
                         ${active === e.link? ' fill-[#1F2117] ': 'fill-[#AAAAAA]'}`}>
@@ -185,4 +185,4 @@ const Cabinet = () => {
   )
 }
 
-export default Cabinet
+export default React.memo(Cabinet)

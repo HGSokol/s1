@@ -151,7 +151,7 @@ const Payment = () => {
                 </div>
                 <div className='flex flex-row justify-between'>
                   <div className='font-bodyalt font-[400] text-[14rem] leading-[19rem] text-[#AAAAAA] lg:hidden'>Тип подписки</div>
-                  <div className='font-bodyalt font-[400] text-[14rem] leaiding-[17rem] text-[#1F2117] lg:text-[18rem] whitespace-pre'>{`${typeSub}\n${trial}`}</div>
+                  <div className='font-bodyalt font-[400] text-[14rem] leaiding-[17rem] text-[#1F2117] lg:text-[18rem] whitespace-pre text-end'>{`${typeSub}\n${trial}`}</div>
                 </div>
                 <div className='flex flex-row justify-between'>
                   <div className='font-bodyalt font-[400] text-[14rem] leading-[19rem] text-[#AAAAAA] lg:hidden'>Описание</div>
@@ -167,11 +167,11 @@ const Payment = () => {
                 </div>
                 <div className='flex flex-row justify-between'>
                   <div className='font-bodyalt font-[400] text-[14rem] leading-[19rem] text-[#AAAAAA] lg:hidden'>Начало</div>
-                  <div className='font-bodyalt font-[400] text-[14rem] leaiding-[17rem] text-[#1F2117] lg:text-[18rem] whitespace-pre'>{e && e.paidPeriodStart? `${new Date(e.paidPeriodStart).toLocaleDateString()}\n${new Date(e.paidPeriodStart).toLocaleTimeString()}`: ''}</div>
+                  <div className='font-bodyalt font-[400] text-[14rem] leaiding-[17rem] text-[#1F2117] lg:text-[18rem] whitespace-pre text-end'>{e && e.paidPeriodStart ? `${new Date(e.paidPeriodStart).toLocaleDateString()}\n${new Date(e.paidPeriodStart).toLocaleTimeString()}` : ''}</div>
                 </div>
                 <div className='flex flex-row justify-between'>
                   <div className='font-bodyalt font-[400] text-[14rem] leading-[19rem] text-[#AAAAAA] lg:hidden'>Конец</div>
-                  <div className='font-bodyalt font-[400] text-[14rem] leaiding-[17rem] text-[#1F2117] lg:text-[18rem]'>{e && e.paidPeriodEnd? `${new Date(e.paidPeriodEnd).toLocaleDateString()}\n${new Date(e.paidPeriodEnd).toLocaleTimeString()}`: ''}</div>
+                  <div className='font-bodyalt font-[400] text-[14rem] leaiding-[17rem] text-[#1F2117] lg:text-[18rem] whitespace-pre text-end'>{e && e.paidPeriodEnd? `${new Date(e.paidPeriodEnd).toLocaleDateString()}\n${new Date(e.paidPeriodEnd).toLocaleTimeString()}`: ''}</div>
                 </div>
               </div>
             )

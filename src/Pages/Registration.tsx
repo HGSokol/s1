@@ -53,7 +53,7 @@ const Login = () => {
       setErrorMessage(error.response.data.message)
     })
 
-    reset()
+    // reset()
   };
 
   const onClickChangeType = () => {

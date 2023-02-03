@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext, useRef } from "react";
+import React, { useEffect, useState, useContext, useRef, useLayoutEffect } from "react";
 import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import { Profile } from '../App'
 import UnknownUser from '../images/unknownUser.png'
@@ -27,7 +27,7 @@ const MyProfile = () => {
   ])
   const [active, setActive] = useState(dataRef.current[0].link)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     window.innerWidth >= 1024? dataRef.current = [
       {name:'Подписки', link: `${activeSub? '' : '/changeSubs'}`},
       {name:'Общая информация', link: '/profile'},
@@ -39,17 +39,17 @@ const MyProfile = () => {
     ]
   },[activeSub, reload])
   
-  useEffect(() => {
+  useLayoutEffect(() => {
     if(location.pathname !== '/cabinet/payments' && location.pathname !== '/cabinet/profile'){
       setReload(true)
     }
   },[active])
 
-if(window.innerWidth < 1024){
-  document.title = 'Профиль'
-}
+  if(window.innerWidth < 1024){
+    document.title = 'Профиль'
+  }
 
-useEffect(() => {
+useLayoutEffect(() => {
   const f = dataRef.current.map(e => e.link.includes(location.pathname.replace('/cabinet', '')) === true? true : null).filter(e => e !== null)
   setActive(prev =>f.length >= 1? location.pathname.replace('/cabinet', ''): `${activeSub? '' : '/changeSubs'}`)
 },[activeSub,reload])
@@ -117,4 +117,4 @@ useEffect(() => {
   )
 }
 
-export default MyProfile
+export default React.memo(MyProfile)

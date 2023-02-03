@@ -102,7 +102,7 @@ const CabinetInfo = () => {
   }
   
 // update img
-const getPhoto = async(data: ChangeEvent<HTMLInputElement>) => {
+  const getPhoto = async(data: ChangeEvent<HTMLInputElement>) => {
 
   let fromData = new FormData();
   if(data.target && data.target.files && data.target.files[0]){
@@ -111,7 +111,7 @@ const getPhoto = async(data: ChangeEvent<HTMLInputElement>) => {
     axios.put("https://stage.fitnesskaknauka.com/api/customer", fromData)
       .then((res) => {
         console.log(res);
-        window.location.reload()
+        setReload(true)
       })
       .catch((err) => {
         console.log(err.response.data);
@@ -136,7 +136,7 @@ const getPhoto = async(data: ChangeEvent<HTMLInputElement>) => {
       <div className='my-[20.5rem] w-full text-center font-bodyalt font-[600] text-[18rem] leading-[19rem] text-[#1F2117]'>Общая информация</div>
     </div>
     <div className='hidden lg:flex font-body font-[600] text-[40rem] leading-[47rem] text-[#1F2117] mb-[32rem]'>Общая информация</div>
-    <div className='mb-[20rem] w-full p-[16rem] flex flex-row items-center bg-[#FFFFFF] border-[1px] border-[rgba(31_33_23_0.08)] rounded-[8rem] lg:mb-[20rem] lg:w-[441rem] lg:p-[16rem] lg:flex lg:flex-row lg:items-center lg:bg-[#FFFFFF] lg:border-[1px] lg:border-[rgba(31_33_23_0.08)] lg:rounded-[8rem]'>
+    <div onClick={getPhotoTest} className='cursor-pointer mb-[20rem] w-full p-[16rem] flex flex-row items-center bg-[#FFFFFF] border-[1px] border-[rgba(31_33_23_0.08)] rounded-[8rem] lg:mb-[20rem] lg:w-[441rem] lg:p-[16rem] lg:flex lg:flex-row lg:items-center lg:bg-[#FFFFFF] lg:border-[1px] lg:border-[rgba(31_33_23_0.08)] lg:rounded-[8rem]'>
       <div className='w-[60rem] h-[60rem] mr-[20rem] lg:mr-[28rem]'>
         {!user?.avatar ? (<img src={UnknownUser} alt='avatar' className='rounded-full w-[60rem] h-[60rem] lg:w-[60rem] lg:h-[60rem]'/>): <img src={user.avatar} alt='avatar' className='rounded-full w-[60rem] h-[60rem] lg:w-[60rem] lg:h-[60rem]'/>}
       </div>
@@ -151,7 +151,7 @@ const getPhoto = async(data: ChangeEvent<HTMLInputElement>) => {
               ref={filePicker}
               onChange={getPhoto} 
               />
-            <svg onClick={getPhotoTest}  className='w-[24rem] h-[24rem] cursor-pointer'  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg   className='w-[24rem] h-[24rem] '  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M8.0625 10.3125L12 14.25L15.9375 10.3125" stroke="#FFB700" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M12 3.75V14.25" stroke="#FFB700" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M20.25 14.25V19.5C20.25 19.6989 20.171 19.8897 20.0303 20.0303C19.8897 20.171 19.6989 20.25 19.5 20.25H4.5C4.30109 20.25 4.11032 20.171 3.96967 20.0303C3.82902 19.8897 3.75 19.6989 3.75 19.5V14.25" stroke="#FFB700" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>

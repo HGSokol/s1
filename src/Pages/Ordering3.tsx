@@ -15,13 +15,15 @@ const Ordering = () => {
   document.title = 'Оформление заказа'
   
   useEffect(() => {
+    console.log(activeSub,'activeSub')
     if(activeSub){
       setLink(true)
     }
-    if(!selectedPlan || !yandexToken ){
-      navigate('/cabinet')
-    }
+    // if(!selectedPlan || !yandexToken ){
+    //   navigate('/cabinet')
+    // }
   },[])
+
   
   let fix = true
   useEffect(() => {

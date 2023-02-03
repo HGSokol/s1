@@ -30,7 +30,7 @@ const LoginForm = () => {
   const navigate = useNavigate()
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
-    mode:'onChange'
+    mode:'onSubmit'
   });
 
   document.title = 'Вход'

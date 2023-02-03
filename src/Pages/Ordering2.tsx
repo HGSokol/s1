@@ -19,6 +19,7 @@ const Ordering = () => {
     }
   },[])  
 
+  console.log('2')
   const CreateYandexToken = () => {
     if(selectedPlan || activeSub){
       setLoad(true)

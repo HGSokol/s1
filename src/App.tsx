@@ -18,7 +18,6 @@ const Subs = lazy(() => import('./Pages/Subs'))
 const ChangeSubs = lazy(() => import('./Pages/ChangeSubs'))
 const ChangePayment = lazy(() => import('./Pages/ChangePayment'))
 const Ordering = lazy(() => import('./Pages/Ordering'))
-const Ordering2 = lazy(() => import('./Pages/Ordering2'))
 const Ordering3 = lazy(() => import('./Pages/Ordering3'))
 const CabinetInfo = lazy(() => import('./Pages/CabinetInfo'))
 const Payment = lazy(() => import('./Pages/Payment'))
@@ -263,7 +262,6 @@ function App() {
                           <Route path='/cabinet/changePayment' element={<ChangePayment/>} />
                           <Route path='/cabinet/profile' element={<CabinetInfo/>} />
                           <Route path='/cabinet/ordering' element={<Ordering/>} />
-                          <Route path='/cabinet/ordering2' element={<Ordering2/>} />
                           <Route path='/cabinet/ordering3' element={<Ordering3/>} />
                           <Route path='/cabinet/payments/status' element={<PaymentsStatus/>}>
                             <Route index element={<PaymentsStatus/>} />
@@ -275,7 +273,6 @@ function App() {
                             <Route path='/cabinet' element={<MyProfile/>} />
                             <Route path='/cabinet/subs' element={<Subs/>} />
                             <Route path='/cabinet/ordering' element={<Ordering/>} />
-                            <Route path='/cabinet/ordering2' element={<Ordering2/>} />
                             <Route path='/cabinet/ordering3' element={<Ordering3/>} />
                             <Route path='/cabinet/changeSubs' element={<ChangeSubs/>} />
                             <Route path='/cabinet/changePayment' element={<ChangePayment/>} />

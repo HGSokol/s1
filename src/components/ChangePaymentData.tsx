@@ -4,7 +4,9 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { Profile } from '../App'
+import { Checkout } from '../util/Checkout'
 import CardIcon from './CardIcon'
+import {ReactComponent as Loader} from '../images/loader.svg';
 
 
 const schema = yup.object({
@@ -24,10 +26,14 @@ interface ChangeCard {
 }
 
 export const ChangePaymentData = (props?: ChangeCard) => {
-  const { setCardInfo, activeSub } = useContext(Profile)
+  const { setCardInfo, activeSub, selectedPlan, setYandexToken } = useContext(Profile)
   const navigate = useNavigate()
   const refNumberCard = useRef<HTMLInputElement | null>(null)
   const refDateCard = useRef<HTMLInputElement | null>(null)
+  const [load, setLoad] = useState(false)
+  const errorNumber = useRef<string | null>(null)
+  const errorMonth = useRef<string | null>(null)
+  const errorCVC = useRef<string | null>(null)
 
   const [numberCard, setNumberCard] = useState('');
   const [dateCard, setDateCard] = useState('');
@@ -48,11 +54,40 @@ export const ChangePaymentData = (props?: ChangeCard) => {
       cvv
     }
     setCardInfo(cardInfo)
-    setNumberCard('')
-    setDateCard('')
-    reset()
+    errorNumber.current = null
+    errorMonth.current = null
+    errorCVC.current = null
+    // setDateCard('')
+    // reset()
 
-    navigate('/cabinet/ordering2')
+    if(selectedPlan || activeSub){
+      setLoad(true)
+      Checkout(cardInfo).then((res) => {
+        console.log(res)
+        if(res.status === 'success') {
+          console.log(res.data, 'ответ яндекса')
+          setYandexToken(res.data.response.paymentToken)
+          navigate('/cabinet/ordering3')
+        }
+        if(res.status === 'error') {
+          console.log(res.status)
+          res.error.params.forEach((e:any) => {
+            if( e.code === "invalid_number" ){
+              errorNumber.current = e.message
+            }
+            if( e.code === 'invalid_expiry_month' ){
+              errorMonth.current = e.message
+            }
+            if( e.code === 'invalid_cvc' ){
+              errorCVC.current = e.message
+            }
+          })
+        }
+      }).finally(()=> {
+        setLoad(false)
+      })  
+    }
+    
 
     // axios.post('https://stage.fitnesskaknauka.com/api/auth/send-reset-code', userInfo)
     // .then((res) => {
@@ -87,7 +122,7 @@ export const ChangePaymentData = (props?: ChangeCard) => {
   return(
     <>
       <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col w-full lg:mx-[0rem]  lg:w-[441rem]'>
-          <div className='mb-[16rem]'>
+          <div className=''>
             <div className='relative'>
               <p className='font-bodyalt font-[400] text-[14rem] leading-[14rem] text-[#AAAAAA] mb-[8rem] lg:text-[16rem] lg:leading-[19rem]'>Номер карты</p>
               <div className={`absolute translate-x-[295rem] ${numberCard[0] === '2'? ' translate-y-[21rem] lg:translate-y-[24rem]':'translate-y-[14rem] lg:translate-y-[18rem]'} w-[20rem] h-[12rem] lg:translate-x-[390rem]`}>
@@ -106,12 +141,12 @@ export const ChangePaymentData = (props?: ChangeCard) => {
                 className={`font-bodyalt font-[400] leading-[14rem] text-[#1F2117] text-[14rem] hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
                 lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
                 `}/>
-                {/* {
-                  errors.cardNumber? <p className='text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]'>{errors.cardNumber?.message}</p> : null
-                } */}
+                {
+                  errorNumber? <p className='text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]'>{errorNumber.current}</p> : null
+                }
             </div>
           </div>
-          <div className='w-full grid grid-cols-2 gap-[16rem] mb-[20rem]'>
+          <div className='w-full grid grid-cols-2 gap-[16rem] mb-[4rem]'>
             <div>
               <p className='font-bodyalt font-[400] text-[14rem] leading-[14rem] text-[#AAAAAA] mb-[8rem] lg:text-[16rem] lg:leading-[19rem]'>Дата окончания</p>
               <div>
@@ -126,9 +161,9 @@ export const ChangePaymentData = (props?: ChangeCard) => {
                   className={`font-bodyalt font-[400] leading-[14rem] text-[#1F2117] text-[14rem] hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
                   lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
                   `}/>
-                  {/* {
-                    errors.date? <p className='text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]'>{errors.name?.message}</p> : null
-                  } */}
+                  {
+                    errorMonth? <p className='text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]'>{errorMonth.current}</p> : null
+                  }
               </div>
             </div>
             <div>
@@ -143,9 +178,9 @@ export const ChangePaymentData = (props?: ChangeCard) => {
                   className={`font-bodyalt font-[400] leading-[14rem] text-[#1F2117] text-[14rem] hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
                   lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
                   `}/>
-                  {/* {
-                    errors.cvv? <p className='text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]'>{errors.name?.message}</p> : null
-                  } */}
+                  {
+                    errorCVC? <p className='text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]'>{errorCVC.current}</p> : null
+                  }
               </div>
             </div>
           </div>
@@ -156,11 +191,11 @@ export const ChangePaymentData = (props?: ChangeCard) => {
             errorMessage ? (<p className='text-center text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]'>{errorMessage}</p>) : null
           } */}
           <div >
-            <button type="submit" disabled={!isValid} className={`${ isValid === true ? ' bg-[#FFB700]': ' bg-[#FFB700]/50'} mb-[30rem] lg:mb-[24rem] w-full h-[51rem] flex items-center justify-center rem-[18rem] text-[16rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem] cursor-pointer`}>
-            {
-              activeSub? (<p>Изменить карту</p>): (<p>Оплатить</p>)
-            }
-            </button>
+            <button type="submit" disabled={load} className={`${load? ' bg-[#FFB700]/50': ' bg-[#FFB700]'} mb-[30rem] lg:mb-[24rem] w-full h-[51rem] flex items-center justify-center rem-[18rem] text-[16rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem]`}>
+            {!load? (activeSub? (<p>Изменить карту</p>): (<p>Оплатить</p>)): (
+              <div className='w-[32rem] h-[32rem]'><Loader/></div>
+            )}
+          </button>
           </div>
         </form>
       </>
