@@ -1,15 +1,14 @@
-import React from "react";
-import { Develop } from '../components/Develop'
-
+import React from 'react';
+import { Develop } from '../components/Develop';
 
 const Usefull = () => {
-  document.title = 'Полезное'
+	document.title = 'Полезное';
 
-  return (
-  <>
-    <Develop/>
-  </>
-  )
-}
+	return (
+		<>
+			<Develop />
+		</>
+	);
+};
 
-export default Usefull
+export default Usefull;

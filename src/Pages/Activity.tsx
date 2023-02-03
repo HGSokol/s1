@@ -1,14 +1,14 @@
-import React from "react";
-import { Develop } from '../components/Develop'
+import React from 'react';
+import { Develop } from '../components/Develop';
 
 const Activity = () => {
-  document.title = 'Активность'
+	document.title = 'Активность';
 
-  return (
-    <>
-      <Develop />1
-    </>
-  )
-}
+	return (
+		<>
+			<Develop />
+		</>
+	);
+};
 
-export default Activity
+export default Activity;

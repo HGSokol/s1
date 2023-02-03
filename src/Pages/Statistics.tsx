@@ -1,15 +1,14 @@
-import React from "react";
-import { Develop } from '../components/Develop'
-
+import React from 'react';
+import { Develop } from '../components/Develop';
 
 const Statistics = () => {
-  document.title = 'Статистика'
+	document.title = 'Статистика';
 
-  return (
-    <>
-      <Develop />
-    </>
-  )
-}
+	return (
+		<>
+			<Develop />
+		</>
+	);
+};
 
-export default Statistics
+export default Statistics;

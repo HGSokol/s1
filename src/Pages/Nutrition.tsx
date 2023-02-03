@@ -1,15 +1,14 @@
-import React from "react";
-import { Develop } from '../components/Develop'
-
+import React from 'react';
+import { Develop } from '../components/Develop';
 
 const Nutrition = () => {
-  document.title = 'Питание'
+	document.title = 'Питание';
 
-  return (
-    <>
-      <Develop />
-    </>
-  )
-}
+	return (
+		<>
+			<Develop />
+		</>
+	);
+};
 
-export default Nutrition
+export default Nutrition;

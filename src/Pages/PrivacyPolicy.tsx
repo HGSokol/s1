@@ -1,125 +1,530 @@
-import React, { useLayoutEffect } from 'react'
+import React, { useLayoutEffect } from 'react';
 import { Header } from '../layouts/Header';
-import { Footer } from '../layouts/Footer'
+import { Footer } from '../layouts/Footer';
 
 function PrivacyPolicy() {
-  useLayoutEffect(() => {
-    window.scrollTo(0, 0)
-  },[])
-  return (
-    <>
-      <div className='lg:w-[1920rem]'>
-        <div className='mx-[16rem] lg:mx-[120rem] overflow-hidden'>
-          <Header/>
-          <div className='lg:mr-[450rem]'>
-            <div className='font-body font-[600] text-[35rem] mb-[15rem] lg:text-[64rem] lg:leading-[75rem] text-[#1F2117] lg:mb-[64rem]'>
-              Политика конфиденциальности
-            </div>
-            <div className='font-bodyalt font-[400] mb-[15rem] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] lg:mb-[21rem] lg:tracking-[0.03em]'>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tenetur placeat nihil minus neque mollitia eveniet aut temporibus cumque, quo, aperiam doloribus voluptatum debitis atque vero! Atque excepturi facilis mollitia eveniet!
-            </div>
-            <div className='font-bodyalt font-[600] text-[18rem] mb-[4rem] lg:text-[22rem] lg:leading-[32rem] text-[#1F2117] lg:mb-[4rem] lg:tracking-[0.05em]'>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsam dolor minima excepturi aliquam sequi, quae nihil adipisci autem, sint iusto assumenda. Blanditiis non enim fuga voluptatibus ipsum. Necessitatibus, aliquam repellendus!
-            </div>
-            <div className='font-bodyalt font-[600] text-[18rem] mb-[40rem] lg:text-[22rem] lg:leading-[32rem] text-[#1F2117] lg:mb-[64rem] lg:tracking-[0.05em]'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis autem totam mollitia consequatur exercitationem quia? Recusandae modi in rem ducimus eum enim dolorum, id consectetur officia culpa! Minus, impedit id?
-            </div>
-            <div className='font-body font-[600] text-[24rem] lg:text-[40rem] lg:leading-[47rem] text-[#1F2117] mb-[24rem] lg:mb-[48rem]'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus cum amet provident sunt modi earum animi totam? Eum temporibus animi, possimus exercitationem nam nobis ad, commodi, consequatur excepturi porro unde?
-            </div>
-            <div className='mb-[24rem] lg:mb-[48rem]'>
-              <div className='font-body font-[600] text-[20rem] lg:text-[32rem] lg:leading-[37rem] text-[#1F2117] mb-[8rem] lg:mb-[24rem]'>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad quidem pariatur enim itaque molestias aliquid deleniti suscipit voluptas quis, libero excepturi distinctio magni dolores, repudiandae, soluta perferendis quod illum! Neque!
-              </div>
-              <ol type='1' className='font-bodyalt font-[400] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]'>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit ametLorem ipsum dolor sit amet consectetur adipisicing elit. Ad consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet consectetur adipisicing elit. Adconsectetur adipisicing elit. AdLorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adv</li>
-                <li>Lorem ipsum dolor sit ametLorem ipsum dolor sit amet consectetur adipisicing elit. Ad consectetur adipisicing elit. ALorem ipsum dolor sit amet consectetur adipisicing elit. Add</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. AdLorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-              </ol>
-            </div>
-            <div className='mb-[24rem] lg:mb-[48rem]'>
-              <div className='font-body font-[600] text-[20rem] lg:text-[32rem] lg:leading-[37rem] text-[#1F2117] mb-[8rem] lg:mb-[24rem]'>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum impedit nobis eligendi dignissimos, pariatur tempora, iure molestiae qui quidem expedita obcaecati. Tenetur corporis error in repellendus odit animi dolor ea!
-              </div>
-              <ol type='1' className='font-bodyalt font-[400] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]'>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. AdLorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sitLorem ipsum dolor sit amet consectetur adipisicing elit. Ad amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-              </ol>
-            </div>
-            <div className='mb-[24rem] lg:mb-[48rem]'>
-              <div className='font-body font-[600] text-[20rem] lg:text-[32rem] lg:leading-[37rem] text-[#1F2117] mb-[8rem] lg:mb-[24rem]'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad
-              </div>
-              <ol type='1' className='font-bodyalt font-[400] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]'>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. AdLorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed ipsum ex rem quidem qui optio est consequatur commodi quasi, quod veniam repudiandae culpa facere iusto quisquam aperiam pariatur sunt quos?</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. AdLorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. AdLorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-              </ol>
-            </div>
-            <div className='mb-[24rem] lg:mb-[48rem]'>
-              <div className='font-body font-[600] text-[20rem] lg:text-[32rem] lg:leading-[37rem] text-[#1F2117] mb-[8rem] lg:mb-[24rem]'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad
-              </div>
-              <ol type='1' className='font-bodyalt font-[400] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]'>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. AdLorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-              </ol>
-            </div>
-            <div className='mb-[24rem] lg:mb-[48rem]'>
-              <div className='font-body font-[600] text-[20rem] lg:text-[32rem] lg:leading-[37rem] text-[#1F2117] mb-[8rem] lg:mb-[24rem]'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad
-              </div>
-              <ol type='1' className='font-bodyalt font-[400] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]'>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. AdLorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. AdLorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-              </ol>
-            </div>
-            <div className='mb-[24rem] lg:mb-[48rem]'>
-              <div className='font-body font-[600] text-[20rem] lg:text-[32rem] lg:leading-[37rem] text-[#1F2117] mb-[8rem] lg:mb-[24rem]'>
-             Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis similique iusto necessitatibus quod? Soluta rerum laboriosam a, ad commodi mollitia nemo harum sint distinctio recusandae nam sit corporis labore porro!
-              </div>
-              <ol className='font-bodyalt font-[400] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]'>
-              <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. AdLorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad</li>
-              </ol>
-            </div>
-            <div className='flex flex-row justify-between mb-[50rem] lg:mb-[150rem] font-bodyalt font-[400] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#1F2117] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]'>
-              <div>29.01.2029</div>
-              <div>Lorem ipsum dolor</div>
-            </div>
-          </div>
-        </div>
-        <Footer/>
-      </div>
-    </>
-  );
+	useLayoutEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
+	return (
+		<>
+			<div className="lg:w-[1920rem]">
+				<div className="mx-[16rem] lg:mx-[120rem] overflow-hidden">
+					<Header />
+					<div className="lg:mr-[450rem]">
+						<div className="font-body font-[600] text-[35rem] mb-[15rem] lg:text-[64rem] lg:leading-[75rem] text-[#1F2117] lg:mb-[64rem]">
+							Политика в отношении обработки персональных данных
+						</div>
+						<div>
+							<ol type="1" className="list-decimal list-inside text-[20rem]">
+								<li className="font-body font-[600] text-[20rem] lg:text-[32rem] lg:leading-[37rem] text-[#1F2117] mb-[8rem] lg:mb-[5rem]">
+									Общие положения
+									<div className="mt-[14rem] font-bodyalt font-[400] text-[16rem] lg:text-[24rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[15rem] lg:tracking-[0.05em]">
+										Настоящая политика обработки персональных данных составлена в соответствии с
+										требованиями Федерального закона от 27.07.2006. № 152-ФЗ «О персональных данных»
+										(далее — Закон о персональных данных) и определяет порядок обработки
+										персональных данных и меры по обеспечению безопасности персональных данных,
+										предпринимаемые ООО "МИДО" ИНН 6141058830 КПП 614101001 в лице Генерального
+										директора Лапшина Владислава Владимировича (далее — Оператор).
+									</div>
+									<ol className="list-decimal list-outside className='font-bodyalt font-[400] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]'">
+										<li>
+											1.1. Оператор ставит своей важнейшей целью и условием осуществления своей
+											деятельности соблюдение прав и свобод человека и гражданина при обработке его
+											персональных данных, в том числе защиты прав на неприкосновенность частной
+											жизни, личную и семейную тайну.
+										</li>
+										<li>
+											1.2. Настоящая политика Оператора в отношении обработки персональных данных
+											(далее — Политика) применяется ко всей информации, которую Оператор может
+											получить о пользователях мобильного приложения Фитнес Как Наука.
+										</li>
+									</ol>
+								</li>
+								<li className="font-body font-[600] text-[20rem] lg:text-[32rem] lg:leading-[37rem] text-[#1F2117] mb-[8rem] lg:mb-[20rem]">
+									Основные понятия, используемые в Политике
+									<ol className="mt-[14rem] list-decimal list-outside className='font-bodyalt font-[400] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]'">
+										<li>
+											2.1. Автоматизированная обработка персональных данных — обработка персональных
+											данных с помощью средств вычислительной техники.
+										</li>
+										<li>
+											2.2. Блокирование персональных данных — временное прекращение обработки
+											персональных данных (за исключением случаев, если обработка необходима для
+											уточнения персональных данных).
+										</li>
+										<li>
+											2.3. Мобильное приложение — совокупность графических и информационных
+											материалов, а также программ для ЭВМ и баз данных, доступных для скачивания в
+											магазинах приложений.
+										</li>
+										<li>
+											2.4. Информационная система персональных данных — совокупность содержащихся в
+											базах данных персональных данных и обеспечивающих их обработку информационных
+											технологий и технических средств.
+										</li>
+										<li>
+											2.5. Обезличивание персональных данных — действия, в результате которых
+											невозможно определить без использования дополнительной информации
+											принадлежность персональных данных конкретному Пользователю или иному субъекту
+											персональных данных.
+										</li>
+										<li>
+											2.6. Обработка персональных данных — любое действие (операция) или
+											совокупность действий (операций), совершаемых с использованием средств
+											автоматизации или без использования таких средств с персональными данными,
+											включая сбор, запись, систематизацию, накопление, хранение, уточнение
+											(обновление, изменение), извлечение, использование, передачу (распространение,
+											предоставление, доступ), обезличивание, блокирование, удаление, уничтожение
+											персональных данных.
+										</li>
+										<li>
+											2.7. Оператор — государственный орган, муниципальный орган, юридическое или
+											физическое лицо, самостоятельно или совместно с другими лицами организующие
+											и/или осуществляющие обработку персональных данных, а также определяющие цели
+											обработки персональных данных, состав персональных данных, подлежащих
+											обработке, действия (операции), совершаемые с персональными данными.
+										</li>
+										<li>
+											2.8. Персональные данные — любая информация, относящаяся прямо или косвенно к
+											определенному или определяемому Пользователю мобильного приложения Фитнес Как
+											Наука.
+										</li>
+										<li>
+											2.9. Персональные данные, разрешенные субъектом персональных данных для
+											распространения, — персональные данные, доступ неограниченного круга лиц к
+											которым предоставлен субъектом персональных данных путем дачи согласия на
+											обработку персональных данных, разрешенных субъектом персональных данных для
+											распространения в порядке, предусмотренном Законом о персональных данных
+											(далее — персональные данные, разрешенные для распространения).
+										</li>
+										<li>
+											2.10. Пользователь — любой пользователь мобильного устройства, который скачал
+											мобильное приложение Фитнес Как Наука на свой телефон.
+										</li>
+										<li>
+											2.11. Предоставление персональных данных — действия, направленные на раскрытие
+											персональных данных определенному лицу или определенному кругу лиц.
+										</li>
+										<li>
+											2.12. Распространение персональных данных — любые действия, направленные на
+											раскрытие персональных данных неопределенному кругу лиц (передача персональных
+											данных) или на ознакомление с персональными данными неограниченного круга лиц,
+											в том числе обнародование персональных данных в средствах массовой информации,
+											размещение в информационно-телекоммуникационных сетях или предоставление
+											доступа к персональным данным каким-либо иным способом.
+										</li>
+										<li>
+											2.13. Трансграничная передача персональных данных — передача персональных
+											данных на территорию иностранного государства органу власти иностранного
+											государства, иностранному физическому или иностранному юридическому лицу
+										</li>
+										<li>
+											2.14. Уничтожение персональных данных — любые действия, в результате которых
+											персональные данные уничтожаются безвозвратно с невозможностью дальнейшего
+											восстановления содержания персональных данных в информационной системе
+											персональных данных и/или уничтожаются материальные носители персональных
+											данных.
+										</li>
+									</ol>
+								</li>
+								<li className="font-body font-[600] text-[20rem] lg:text-[32rem] lg:leading-[37rem] text-[#1F2117] mb-[8rem] lg:mb-[20rem]">
+									Основные права и обязанности Оператора
+									<ol className="mt-[14rem] list-decimal list-outside text-[16rem]">
+										<li>
+											3.1. Оператор имеет право:
+											<ol className="font-bodyalt font-[400] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]">
+												<li>
+													— получать от субъекта персональных данных достоверные информацию и/или
+													документы, содержащие персональные данные;
+												</li>
+												<li>
+													— в случае отзыва субъектом персональных данных согласия на обработку
+													персональных данных, а также, направления обращения с требованием о
+													прекращении обработки персональных данных, Оператор вправе продолжить
+													обработку персональных данных без согласия субъекта персональных данных
+													при наличии оснований, указанных в Законе о персональных данных;
+												</li>
+												<li>
+													— самостоятельно определять состав и перечень мер, необходимых и
+													достаточных для обеспечения выполнения обязанностей, предусмотренных
+													Законом о персональных данных и принятыми в соответствии с ним
+													нормативными правовыми актами, если иное не предусмотрено Законом о
+													персональных данных или другими федеральными законами.
+												</li>
+											</ol>
+										</li>
+										<li>
+											3.2. Оператор обязан:
+											<ol className="font-bodyalt font-[400] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]">
+												<li>
+													— предоставлять субъекту персональных данных по его просьбе информацию,
+													касающуюся обработки его персональных данных;
+												</li>
+												<li>
+													— организовывать обработку персональных данных в порядке, установленном
+													действующим законодательством РФ;
+												</li>
+												<li>
+													— отвечать на обращения и запросы субъектов персональных данных и их
+													законных представителей в соответствии с требованиями Закона о
+													персональных данных;
+												</li>
+												<li>
+													— сообщать в уполномоченный орган по защите прав субъектов персональных
+													данных по запросу этого органа необходимую информацию в течение 30 дней с
+													даты получения такого запроса;
+												</li>
+												<li>
+													— публиковать или иным образом обеспечивать неограниченный доступ к
+													настоящей Политике в отношении обработки персональных данных;
+												</li>
+												<li>
+													— принимать правовые, организационные и технические меры для защиты
+													персональных данных от неправомерного или случайного доступа к ним,
+													уничтожения, изменения, блокирования, копирования, предоставления,
+													распространения персональных данных, а также от иных неправомерных
+													действий в отношении персональных данных;
+												</li>
+												<li>
+													— прекратить передачу (распространение, предоставление, доступ)
+													персональных данных, прекратить обработку и уничтожить персональные данные
+													в порядке и случаях, предусмотренных Законом о персональных данных;
+												</li>
+												<li>
+													— исполнять иные обязанности, предусмотренные Законом о персональных
+													данных.
+												</li>
+											</ol>
+										</li>
+									</ol>
+								</li>
+								<li className="font-body font-[600] text-[20rem] lg:text-[32rem] lg:leading-[37rem] text-[#1F2117] mb-[8rem] lg:mb-[20rem]">
+									Основные права и обязанности субъектов персональных данных
+									<ol className="mt-[14rem] list-decimal list-outside text-[16rem]">
+										<li>
+											4.1. Субъекты персональных данных имеют право:
+											<ol className="font-bodyalt font-[400] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]">
+												<li>
+													— получать информацию, касающуюся обработки его персональных данных, за
+													исключением случаев, предусмотренных федеральными законами. Сведения
+													предоставляются субъекту персональных данных Оператором в доступной форме,
+													и в них не должны содержаться персональные данные, относящиеся к другим
+													субъектам персональных данных, за исключением случаев, когда имеются
+													законные основания для раскрытия таких персональных данных. Перечень
+													информации и порядок ее получения установлен Законом о персональных
+													данных;
+												</li>
+												<li>
+													— требовать от оператора уточнения его персональных данных, их
+													блокирования или уничтожения в случае, если персональные данные являются
+													неполными, устаревшими, неточными, незаконно полученными или не являются
+													необходимыми для заявленной цели обработки, а также принимать
+													предусмотренные законом меры по защите своих прав;
+												</li>
+												<li>
+													— выдвигать условие предварительного согласия при обработке персональных
+													данных в целях продвижения на рынке товаров, работ и услуг;
+												</li>
+												<li>
+													— на отзыв согласия на обработку персональных данных, а также, на
+													направление требования о прекращении обработки персональных данных;
+												</li>
+												<li>
+													— обжаловать в уполномоченный орган по защите прав субъектов персональных
+													данных или в судебном порядке неправомерные действия или бездействие
+													Оператора при обработке его персональных данных;
+												</li>
+												<li>— на осуществление иных прав, предусмотренных законодательством РФ.</li>
+											</ol>
+										</li>
+										<li>
+											4.2. Субъекты персональных данных обязаны:
+											<ol className="font-bodyalt font-[400] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]">
+												<li>— предоставлять Оператору достоверные данные о себе;</li>
+												<li>
+													— сообщать Оператору об уточнении (обновлении, изменении) своих
+													персональных данных.
+												</li>
+											</ol>
+										</li>
+										<li>
+											4.3. Лица, передавшие Оператору недостоверные сведения о себе, либо сведения о
+											другом субъекте персональных данных без согласия последнего, несут
+											ответственность в соответствии с законодательством РФ.
+										</li>
+									</ol>
+								</li>
+								<li className="font-body font-[600] text-[20rem] lg:text-[32rem] lg:leading-[37rem] text-[#1F2117] mb-[8rem] lg:mb-[20rem]">
+									Принципы обработки персональных данных
+									<ol className="mt-[14rem] list-decimal list-outside className='font-bodyalt font-[400] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]'">
+										<li>
+											5.1. Обработка персональных данных осуществляется на законной и справедливой
+											основе.
+										</li>
+										<li>
+											5.2. Обработка персональных данных ограничивается достижением конкретных,
+											заранее определенных и законных целей. Не допускается обработка персональных
+											данных, несовместимая с целями сбора персональных данных.
+										</li>
+										<li>
+											5.3. Не допускается объединение баз данных, содержащих персональные данные,
+											обработка которых осуществляется в целях, несовместимых между собой.
+										</li>
+										<li>
+											5.4. Обработке подлежат только персональные данные, которые отвечают целям их
+											обработки.
+										</li>
+										<li>
+											5.5. Содержание и объем обрабатываемых персональных данных соответствуют
+											заявленным целям обработки. Не допускается избыточность обрабатываемых
+											персональных данных по отношению к заявленным целям их обработки.
+										</li>
+										<li>
+											5.6. При обработке персональных данных обеспечивается точность персональных
+											данных, их достаточность, а в необходимых случаях и актуальность по отношению
+											к целям обработки персональных данных. Оператор принимает необходимые меры
+											и/или обеспечивает их принятие по удалению или уточнению неполных или неточных
+											данных.
+										</li>
+										<li>
+											5.7. Хранение персональных данных осуществляется в форме, позволяющей
+											определить субъекта персональных данных, не дольше, чем этого требуют цели
+											обработки персональных данных, если срок хранения персональных данных не
+											установлен федеральным законом, договором, стороной которого,
+											выгодоприобретателем или поручителем по которому является субъект персональных
+											данных. Обрабатываемые персональные данные уничтожаются либо обезличиваются по
+											достижении целей обработки или в случае утраты необходимости в достижении этих
+											целей, если иное не предусмотрено федеральным законом.
+										</li>
+									</ol>
+								</li>
+								<li className="font-body font-[600] text-[20rem] lg:text-[32rem] lg:leading-[37rem] text-[#1F2117] mb-[8rem] lg:mb-[20rem]">
+									Цели обработки персональных данных
+									<div className="">
+										<table className="mt-[14rem] font-bodyalt font-[400] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em] border-collapse border">
+											<tbody>
+												<tr>
+													<th className="border align-top">Цель обработки</th>
+													<th className="border align-top">
+														предоставление доступа Пользователю к сервисам информации и/или
+														материалам, содержащимся на веб-сайте
+													</th>
+												</tr>
+												<tr>
+													<th className="border align-top">Персональные данные</th>
+													<th className="border align-top">
+														фамилия, имя, отчество год, месяц, дата и место рождения рост, вес,
+														параметры тела пользователя
+													</th>
+												</tr>
+												<tr>
+													<th className="border align-top">Правовые основания</th>
+													<th className="border align-top">
+														уставные (учредительные) документы Оператора
+													</th>
+												</tr>
+												<tr>
+													<th className="border align-top">Виды обработки персональных данных</th>
+													<th className="border align-top ">
+														Сбор, запись, систематизация, накопление, хранение, уничтожение и
+														обезличивание персональных данных Отправка информационных писем на адрес
+														электронной почты Анализ использования мобильного приложения в целях
+														улучшения качества и создания нового функционала
+													</th>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</li>
+								<li className="font-body font-[600] text-[20rem] lg:text-[32rem] lg:leading-[37rem] text-[#1F2117] mb-[8rem] lg:mb-[20rem]">
+									Условия обработки персональных данных
+									<ol className="mt-[14rem] list-decimal list-outside className='font-bodyalt font-[400] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]'">
+										<li>
+											7.1. Обработка персональных данных осуществляется с согласия субъекта
+											персональных данных на обработку его персональных данных.
+										</li>
+										<li>
+											7.2. Обработка персональных данных необходима для достижения целей,
+											предусмотренных международным договором Российской Федерации или законом, для
+											осуществления возложенных законодательством Российской Федерации на оператора
+											функций, полномочий и обязанностей.
+										</li>
+										<li>
+											7.3. Обработка персональных данных необходима для осуществления правосудия,
+											исполнения судебного акта, акта другого органа или должностного лица,
+											подлежащих исполнению в соответствии с законодательством Российской Федерации
+											об исполнительном производстве.
+										</li>
+										<li>
+											7.4. Обработка персональных данных необходима для исполнения договора,
+											стороной которого либо выгодоприобретателем или поручителем по которому
+											является субъект персональных данных, а также для заключения договора по
+											инициативе субъекта персональных данных или договора, по которому субъект
+											персональных данных будет являться выгодоприобретателем или поручителем.
+										</li>
+										<li>
+											7.5. Обработка персональных данных необходима для осуществления прав и
+											законных интересов оператора или третьих лиц либо для достижения общественно
+											значимых целей при условии, что при этом не нарушаются права и свободы
+											субъекта персональных данных.
+										</li>
+										<li>
+											7.6. Осуществляется обработка персональных данных, доступ неограниченного
+											круга лиц к которым предоставлен субъектом персональных данных либо по его
+											просьбе (далее — общедоступные персональные данные).
+										</li>
+										<li>
+											7.7. Осуществляется обработка персональных данных, подлежащих опубликованию
+											или обязательному раскрытию в соответствии с федеральным законом.
+										</li>
+									</ol>
+								</li>
+								<li className="font-body font-[600] text-[20rem] lg:text-[32rem] lg:leading-[37rem] text-[#1F2117] mb-[8rem] lg:mb-[20rem]">
+									Порядок сбора, хранения, передачи и других видов обработки персональных данных
+									<div className="mt-[14rem] font-bodyalt font-[400] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]">
+										Безопасность персональных данных, которые обрабатываются Оператором,
+										обеспечивается путем реализации правовых, организационных и технических мер,
+										необходимых для выполнения в полном объеме требований действующего
+										законодательства в области защиты персональных данных.
+									</div>
+									<ol className="list-decimal list-outside className='font-bodyalt font-[400] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]'">
+										<li>
+											8.1. Оператор обеспечивает сохранность персональных данных и принимает все
+											возможные меры, исключающие доступ к персональным данным неуполномоченных лиц.
+										</li>
+										<li>
+											8.2. Персональные данные Пользователя никогда, ни при каких условиях не будут
+											переданы третьим лицам, за исключением случаев, связанных с исполнением
+											действующего законодательства либо в случае, если субъектом персональных
+											данных дано согласие Оператору на передачу данных третьему лицу для исполнения
+											обязательств по гражданско-правовому договору.
+										</li>
+										<li>
+											8.3. В случае выявления неточностей в персональных данных, Пользователь может
+											актуализировать их самостоятельно, путем направления Оператору уведомление на
+											адрес электронной почты Оператора privacy@fitnesskaknauka.ru с пометкой
+											«Актуализация персональных данных».
+										</li>
+										<li>
+											8.4. Срок обработки персональных данных определяется достижением целей, для
+											которых были собраны персональные данные, если иной срок не предусмотрен
+											договором или действующим законодательством. Пользователь может в любой момент
+											отозвать свое согласие на обработку персональных данных, направив Оператору
+											уведомление посредством электронной почты на электронный адрес Оператора
+											privacy@fitnesskaknauka.ru с пометкой «Отзыв согласия на обработку
+											персональных данных».
+										</li>
+										<li>
+											8.5. Вся информация, которая собирается сторонними сервисами, в том числе
+											платежными системами, средствами связи и другими поставщиками услуг, хранится
+											и обрабатывается указанными лицами (Операторами) в соответствии с их
+											Пользовательским соглашением и Политикой конфиденциальности. Субъект
+											персональных данных и/или с указанными документами. Оператор не несет
+											ответственность за действия третьих лиц, в том числе указанных в настоящем
+											пункте поставщиков услуг
+										</li>
+										<li>
+											8.6. Установленные субъектом персональных данных запреты на передачу (кроме
+											предоставления доступа), а также на обработку или условия обработки (кроме
+											получения доступа) персональных данных, разрешенных для распространения, не
+											действуют в случаях обработки персональных данных в государственных,
+											общественных и иных публичных интересах, определенных законодательством РФ.
+										</li>
+										<li>
+											8.7. Оператор при обработке персональных данных обеспечивает
+											конфиденциальность персональных данных.
+										</li>
+										<li>
+											8.8. Оператор осуществляет хранение персональных данных в форме, позволяющей
+											определить субъекта персональных данных, не дольше, чем этого требуют цели
+											обработки персональных данных, если срок хранения персональных данных не
+											установлен федеральным законом, договором, стороной которого,
+											выгодоприобретателем или поручителем по которому является субъект персональных
+											данных.
+										</li>
+										<li>
+											8.9. Условием прекращения обработки персональных данных может являться
+											достижение целей обработки персональных данных, истечение срока действия
+											согласия субъекта персональных данных, отзыв согласия субъектом персональных
+											данных или требование о прекращении обработки персональных данных, а также
+											выявление неправомерной обработки персональных данных.
+										</li>
+									</ol>
+								</li>
+								<li className="font-body font-[600] text-[20rem] lg:text-[32rem] lg:leading-[37rem] text-[#1F2117] mb-[8rem] lg:mb-[20rem]">
+									Перечень действий, производимых Оператором с полученными персональными данными
+									<ol className="mt-[14rem] list-decimal list-outside className='font-bodyalt font-[400] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]'">
+										<li>
+											9.1. Оператор осуществляет сбор, запись, систематизацию, накопление, хранение,
+											уточнение (обновление, изменение), извлечение, использование, передачу
+											(распространение, предоставление, доступ), обезличивание, блокирование,
+											удаление и уничтожение персональных данных.
+										</li>
+										<li>
+											9.2. Оператор осуществляет автоматизированную обработку персональных данных с
+											получением и/или передачей полученной информации по
+											информационно-телекоммуникационным сетям или без таковой.
+										</li>
+									</ol>
+								</li>
+								<li className="font-body font-[600] text-[20rem] lg:text-[32rem] lg:leading-[37rem] text-[#1F2117] mb-[8rem] lg:mb-[20rem]">
+									Трансграничная передача персональных данных
+									<ol className="mt-[14rem] list-decimal list-outside className='font-bodyalt font-[400] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]'">
+										<li>
+											10.1. Оператор до начала осуществления деятельности по трансграничной передаче
+											персональных данных обязан уведомить уполномоченный орган по защите прав
+											субъектов персональных данных о своем намерении осуществлять трансграничную
+											передачу персональных данных (такое уведомление направляется отдельно от
+											уведомления о намерении осуществлять обработку персональных данных).
+										</li>
+										<li>
+											10.2. Оператор до подачи вышеуказанного уведомления, обязан получить от
+											органов власти иностранного государства, иностранных физических лиц,
+											иностранных юридических лиц, которым планируется трансграничная передача
+											персональных данных, соответствующие сведения.
+										</li>
+									</ol>
+								</li>
+								<li className="font-body font-[600] text-[20rem] lg:text-[32rem] lg:leading-[37rem] text-[#1F2117] mb-[8rem] lg:mb-[20rem]">
+									Конфиденциальность персональных данных
+									<div className="font-bodyalt font-[400] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]">
+										Оператор и иные лица, получившие доступ к персональным данным, обязаны не
+										раскрывать третьим лицам и не распространять персональные данные без согласия
+										субъекта персональных данных, если иное не предусмотрено федеральным законом
+									</div>
+								</li>
+								<li className="font-body font-[600] text-[20rem] lg:text-[32rem] lg:leading-[37rem] text-[#1F2117] mb-[8rem] lg:mb-[20rem]">
+									Заключительные положения
+									<ol className="mt-[14rem] list-decimal list-outside className='font-bodyalt font-[400] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]'">
+										<li>
+											12.1. Пользователь может получить любые разъяснения по интересующим вопросам,
+											касающимся обработки его персональных данных, обратившись к Оператору с
+											помощью электронной почты privacy@fitnesskaknauka.ru.
+										</li>
+										<li>
+											12.2. В данном документе будут отражены любые изменения политики обработки
+											персональных данных Оператором. Политика действует бессрочно до замены ее
+											новой версией.
+										</li>
+										<li>
+											12.3. Актуальная версия Политики в свободном доступе расположена в сети
+											Интернет по адресу https://fitnesskaknauka.ru.
+										</li>
+									</ol>
+								</li>
+							</ol>
+						</div>
+						<div className="flex flex-row justify-between font-bodyalt font-[400] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#1F2117] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]">
+							<div>29.01.2029</div>
+							<div>Lorem ipsum dolor</div>
+						</div>
+					</div>
+				</div>
+				<Footer />
+			</div>
+		</>
+	);
 }
 
 export default PrivacyPolicy;
