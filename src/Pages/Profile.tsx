@@ -18,41 +18,41 @@ const MyProfile = () => {
   const { activeSub, user, reload, setReload } = useContext(Profile)
   const dataRef = useRef<dataLink[]>( window.innerWidth >= 1024? [
     {name:'Подписки', link: `${activeSub? '' : '/changeSubs'}`},
-    {name:'Общая информация', link: '/cabinetInfo'},
-    {name:'Детали платежей', link: '/payment'},
+    {name:'Общая информация', link: '/profile'},
+    {name:'Детали платежей', link: '/payments'},
   ]: [
     {name:'Подписки', link: `${activeSub? '/subs' : '/changeSubs'}`},
-    {name:'Общая информация', link: '/cabinetInfo'},
-    {name:'Детали платежей', link: '/payment'},
+    {name:'Общая информация', link: '/profile'},
+    {name:'Детали платежей', link: '/payments'},
   ])
   const [active, setActive] = useState(dataRef.current[0].link)
 
-
   useEffect(() => {
-      window.innerWidth >= 1024? dataRef.current = [
-        {name:'Подписки', link: `${activeSub? '' : '/changeSubs'}`},
-        {name:'Общая информация', link: '/cabinetInfo'},
-        {name:'Детали платежей', link: '/payment'},
-      ]: dataRef.current = [
-        {name:'Подписки', link: `${activeSub? '/subs' : '/changeSubs'}`},
-        {name:'Общая информация', link: '/cabinetInfo'},
-        {name:'Детали платежей', link: '/payment'},
-      ]
-    },[activeSub, reload])
-    
-    useEffect(() => {
-    setReload(true)
+    window.innerWidth >= 1024? dataRef.current = [
+      {name:'Подписки', link: `${activeSub? '' : '/changeSubs'}`},
+      {name:'Общая информация', link: '/profile'},
+      {name:'Детали платежей', link: '/payments'},
+    ]: dataRef.current = [
+      {name:'Подписки', link: `${activeSub? '/subs' : '/changeSubs'}`},
+      {name:'Общая информация', link: '/profile'},
+      {name:'Детали платежей', link: '/payments'},
+    ]
+  },[activeSub, reload])
+  
+  useEffect(() => {
+    if(location.pathname !== '/cabinet/payments' && location.pathname !== '/cabinet/profile'){
+      setReload(true)
+    }
   },[active])
 
-  // сделать переход как в кабинете
-  if(window.innerWidth < 1024){
-    document.title = 'Профиль'
-  }
+if(window.innerWidth < 1024){
+  document.title = 'Профиль'
+}
 
-  useEffect(() => {
-    const f = dataRef.current.map(e => e.link.includes(location.pathname.replace('/cabinet', '')) === true? true : null).filter(e => e !== null)
-    setActive(prev =>f.length >= 1? location.pathname.replace('/cabinet', ''): `${activeSub? '' : '/changeSubs'}`)
-  },[activeSub,reload])
+useEffect(() => {
+  const f = dataRef.current.map(e => e.link.includes(location.pathname.replace('/cabinet', '')) === true? true : null).filter(e => e !== null)
+  setActive(prev =>f.length >= 1? location.pathname.replace('/cabinet', ''): `${activeSub? '' : '/changeSubs'}`)
+},[activeSub,reload])
 
   return (
     <div className='h-full mx-[16rem] lg:mx-[0rem]'>
@@ -106,11 +106,8 @@ const MyProfile = () => {
           })
         }
       </div>
-      <div onClick={() =>setActivePopup(true)} className='absolute bottom-[150rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-[#CB1D1D] lg:hidden'>
+      <div onClick={() =>setActivePopup(true)} className='absolute bottom-[100rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-[#CB1D1D] lg:hidden'>
         Выход
-      </div>
-      <div className='absolute bottom-[110rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-[#1F2117] lg:hidden'>
-        Удалить аккаунт
       </div>
     </div>
     <div className='hidden lg:flex'>

@@ -1,8 +1,6 @@
 import { useContext } from 'react'
 import { Link } from 'react-router-dom'
-
 import { Profile } from '../App'
-
 import IMG1 from '../images/preview1.png'
 import IMG2 from '../images/preview2.svg'
 
@@ -12,7 +10,7 @@ export const Preview = () => {
 
   return (
     <div className='w-full h-min relative mb-[72rem] 
-    lg:mb-[413rem]'>
+    lg:mb-[413rem] lg:pt-[93rem]'>
       <img className='hidden 
       lg:block lg:absolute lg:translate-x-[920rem] lg:translate-y-[70rem] lg:w-[782rem]' src={IMG1} alt='logo'/>
       <div className=''>

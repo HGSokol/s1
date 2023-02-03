@@ -1,4 +1,4 @@
-import React, { useRef, ChangeEvent } from "react";
+import React, { useRef, ChangeEvent, useEffect, useLayoutEffect } from "react";
 import { useState, useContext } from 'react'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -28,9 +28,28 @@ const schema = yup.object({
 
 
 const CabinetInfo = () => {
-  const { user, deviceName } = useContext(Profile)
+  const { user, deviceName, reload, setReload, setUser } = useContext(Profile)
 
   document.title = 'Общая информация'
+
+  useLayoutEffect(() => {
+      axios.get('https://stage.fitnesskaknauka.com/api/customer')
+      .then((res) => {
+        console.log(res)
+        //@ts-ignore
+        setUser(prev => ({
+          ...prev,
+          email: res.data.email,
+          name: res.data.name,
+          lastName: res.data.lastName,
+          avatar: res.data.avatar,
+          uuid: res.data.uuid,
+        }))
+      })
+      .catch((error) => {
+        console.log(error.response)
+      })
+    }, [reload])
 
   const dataInfo = [
     {label: 'Имя', data: user?.name},
@@ -63,9 +82,9 @@ const CabinetInfo = () => {
         deviceName,
       }
   
-      axios.put('/api/auth/reset-password', userInfo)
+      axios.put('https://stage.fitnesskaknauka.com/api/auth/reset-password', userInfo)
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         reset()
       })
       .catch((error) => {

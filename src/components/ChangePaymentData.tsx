@@ -9,14 +9,12 @@ import CardIcon from './CardIcon'
 
 const schema = yup.object({
   cardNumber: yup.string(),
-  nameCard: yup.string().uppercase().matches(/[A-Z]+/, "Введите имя держателя заглавными буквами").required('Поле Имя держателя карты обязательно'),
   date: yup.string(),
   cvv: yup.number(),
 }).required();
 
 interface IFormInputs {
   cardNumber: string
-  nameCard: string
   date: string,
   cvv: string,
 }
@@ -40,10 +38,9 @@ export const ChangePaymentData = (props?: ChangeCard) => {
   });
 
   const onSubmit = (data: IFormInputs) => {
-    const { nameCard, cvv} = data
+    const { cvv} = data
     const cardInfo = {
       numberCard: numberCard.replace(/\s+/g,''),
-      nameCard,
       dateCard: {
         month: dateCard.slice(0,2),
         year: dateCard.slice(3,5),
@@ -55,7 +52,7 @@ export const ChangePaymentData = (props?: ChangeCard) => {
     setDateCard('')
     reset()
 
-    props && props.ChangeCard ? navigate('/cabinet/ordering2') : navigate('/cabinet/ordering2')
+    navigate('/cabinet/ordering2')
 
     // axios.post('https://stage.fitnesskaknauka.com/api/auth/send-reset-code', userInfo)
     // .then((res) => {
@@ -112,21 +109,6 @@ export const ChangePaymentData = (props?: ChangeCard) => {
                 {/* {
                   errors.cardNumber? <p className='text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]'>{errors.cardNumber?.message}</p> : null
                 } */}
-            </div>
-          </div>
-          <div className='mb-[16rem]'>
-            <p className='font-bodyalt font-[400] text-[14rem] leading-[14rem] text-[#AAAAAA] mb-[8rem] lg:text-[16rem] lg:leading-[19rem]'>Имя держателя карты</p>
-            <div>
-              <input 
-                placeholder='Имя Фамилия'
-                type='text' 
-                {...register('nameCard')}
-                className={`font-bodyalt font-[400] leading-[14rem] text-[#1F2117] text-[14rem] hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
-                lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
-                `}/>
-                {
-                  errors.nameCard? <p className='text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]'>{errors.nameCard?.message}</p> : null
-                }
             </div>
           </div>
           <div className='w-full grid grid-cols-2 gap-[16rem] mb-[20rem]'>

@@ -48,7 +48,7 @@ const ChangePassword3 = () => {
       deviceName,
     }
 
-    axios.put('/api/auth/reset-password', userInfo)
+    axios.put('https://stage.fitnesskaknauka.com/api/auth/reset-password', userInfo)
     .then((res) => {
 
       reset()

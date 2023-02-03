@@ -1,17 +1,18 @@
 import { useContext } from 'react'
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 import { Profile } from '../App'
 
 
 export const Header = () => {
   const { activeSub, user } = useContext(Profile)
+  const navigate = useNavigate()
 
   return (
     <div className='pt-[25rem] flex flex-row justify-between items-center mb-[60rem]
-    lg:mb-[183rem]  lg:pt-[32rem]
+    lg:mb-[96rem]  lg:pt-[32rem]
     '>
-      <div className=''>
+      <div onClick={() =>navigate('/')} className='cursor-pointer'>
         <svg viewBox="0 0 126 56" fill="none" xmlns="http://www.w3.org/2000/svg" className='w-[80rem] h-[36rem] 
         lg:w-[126rem] lg:h-[56rem]'>
           <path d="M6.68241 4.4514V51.5486H23.6529V56H2.19141V0H23.6529V4.4514H6.68241Z" fill="#FAB513"/>

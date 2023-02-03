@@ -8,7 +8,7 @@ import {ReactComponent as Loader} from '../images/loader.svg';
 
 const Ordering = () => {
   const navigate = useNavigate()
-  const { setSelectedPlan, selectedPlan, setActiveSub, activeSub , yandexToken, user, cardInfo, setYandexToken, setReload } = useContext(Profile)
+  const { setCardInfo ,setSelectedPlan, selectedPlan, setActiveSub, activeSub , yandexToken, user, cardInfo, setYandexToken, setReload } = useContext(Profile)
   const [status, setStatus] = useState<string | null>(null)
   const [error, setErrorMessage] = useState<string>('')
   const [link, setLink] = useState(false)
@@ -61,14 +61,32 @@ const Ordering = () => {
         })
         .finally(() => {
           setYandexToken(null)
+          setCardInfo(null)
           myuuid = ''
         })
       }
       if(activeSub && yandexToken){
         axios.put(`https://stage.fitnesskaknauka.com/api/customer/subscriptions/internal/${activeSub.id2}/payment-method`,data)
         .then((res) => {
-          console.log(res, 'изменение карты прошло')
+          if(res.data && !res.data.confirmationUrl){
+            console.log(res.data)
+            //@ts-ignore
+            setActiveSub(prev => ({
+              ...prev,
+              name: res.data.plan.name,
+              duration: res.data.plan.invoicePeriod,
+              price: res.data.plan.price,
+              id: res.data.plan.id,
+              id2: res.data.id,
+              isFromApple: res.data.isFromApple,
+              endsAt: res.data.endsAt
+            }))
+            console.log(res, 'изменение карты прошло')
             setStatus('ok')
+          } else {
+            console.log('перенаправление')
+            window.location.replace(res.data.confirmationUrl)
+          }
         })
         .catch((error) => {
           console.log(error.response.data, 'изменение карты ошибка')
@@ -76,8 +94,9 @@ const Ordering = () => {
           setStatus('reject')
         })
         .finally(() => {
-          setYandexToken(null)
-          myuuid = ''
+          // setYandexToken(null)
+          setCardInfo(null)
+          // myuuid = ''
           setReload(true)
         })
       }
@@ -89,6 +108,7 @@ const Ordering = () => {
     setYandexToken(null)
     setSelectedPlan(null)
     setReload(true)
+    setCardInfo(null)
     if(status === 'ok' || (activeSub && status === 'reject')){
       navigate('/cabinet')
     }
@@ -123,7 +143,7 @@ const Ordering = () => {
         <div className='mb-[24rem] font-body font-[600] text-[20rem] leading-[23rem] text-center text-[#1F2117]
         lg:font-body lg:font-[600] lg:text-[26rem] lg:leading-[30rem]'>{link?'Изменение карты прошло успешло':'Оплата прошла успешно'}</div>
         <div className='mb-[32rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-center text-[#777872] whitespace-pre-wrap
-        lg:font-bodyalt lg:font-[400] lg:text-[22rem] lg:leading-[32rem] ' >{link? 'Вы успешно изменили платежный метод' :`Вы успешно оплатили подписку "${selectedPlan?.duration}"\nна сумму ${selectedPlan?.price}`}</div>
+        lg:font-bodyalt lg:font-[400] lg:text-[22rem] lg:leading-[32rem] ' >{link? 'Вы успешно изменили платежный метод' :`Вы успешно оплатили подписку "${selectedPlan?.name}"\nна сумму ${selectedPlan?.price}`}</div>
         <div onClick={moveToCabinet}   className='w-full h-[50rem] bg-[#FFB700] rounded-full flex flex-row items-center justify-center
         lg:w-[272rem] cursor-pointer'>
           <div className='mr-[12rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-white '>Вернуться к подпискам</div>

@@ -7,6 +7,7 @@ import { UpdateSubPopup } from "../components/UpdateSubPopup";
 import { SubCard } from "../components/SubCard";
 import { ActiveSub, Profile } from '../App'
 import axios from "axios";
+import { CardInfo } from "../components/CardInfo";
 
 
 export type Sub = {
@@ -157,22 +158,46 @@ const Subs = () => {
         <div className='my-[20.5rem] w-full text-center font-bodyalt font-[600] text-[18rem] leading-[19rem] text-[#1F2117]'>Общая информация</div>
       </div>
       <div className='hidden lg:flex lg:font-body lg:font-[600] lg:text-[40rem] lg:leading-[47rem] lg:text-[#1F2117] lg:mb-[32rem]'>Подписки</div>
-      <p className='mb-[24rem] font-bodyalt font-[600] text-[22rem] leading-[26rem] text-[#1F2117] lg:font-body lg:font-[600] lg:text-[26rem] lg:leaing-[30rem] lg:text-[#1F2117] lg:mb-[32rem]'>Текущая подписка</p>
-      <div className=' mb-[24rem] flex flex-col gap-[24rem] lg:flex-row lg:justify-between lg:mb-[48rem] lg:w-max'>
-        <div className='w-full flex justify-between items-center lg:items-start flex-row lg:flex-col lg:justify-start'>
-          <p className='font-bodyalt font-[600] text-[22rem] leading-[26rem] text-[#1F2117] lg:font-body lg:font-[600] lg:text-[20rem] lg:leading-[23rem] lg:text-[#1F2117] lg:mb-[12rem]'>{activeSub?.name}</p>
-          <p className='font-bodyalt font-[400] text-[14rem] leading-[17rem] text-[#777872] lg:font-bodyalt lg:font-[400] lg:text-[16rem] lg:leading-[19rem] lg:text-[#777872]'>{`${activeSub?.price} руб/${activeSub?.duration === 1? 'мес.': activeSub?.duration === 3? '3 мес.': 'год'}`}</p>
+      <p className='mb-[24rem] font-bodyalt font-[600] text-[22rem] leading-[26rem] text-[#1F2117] lg:font-body lg:font-[600] lg:text-[26rem] lg:leaing-[30rem] lg:text-[#1F2117] lg:mb-[32rem]'>{
+        activeSub && activeSub.type === 'free'? 'Бесплатная подписка': 'Способ оплаты'
+      }</p>
+      <div className={`flex flex-col lg:flex-row gap-[20rem] ${
+        activeSub && activeSub.type === 'internal'? '': ' hidden'
+      }`}>
+        <div>
+          <div className='w-full lg:w-[356rem]'>
+            <CardInfo />
+          </div>
+          <div className=' mb-[24rem] flex flex-col gap-[24rem] lg:flex-row lg:justify-between lg:mb-[48rem] lg:w-max '>
+            <div className=''>
+              <button onClick={() => {
+                setActiveChangeCardPopup(true)
+                setReload(true)
+              }} className='bg-white border-[1px] border-[#1F2117] w-full lg:w-[356rem] lg:h-[56rem] py-[14rem] text-[16rem] font-bodyalt text-[#1F2117] font-[600] rounded-[40rem] lg:px-[24rem] hover:duration-[200ms] hover:border-[#FFB700] hover:text-[#FFB700]'>
+                Изменить платежные данные
+              </button>
+            </div>
+          </div>
         </div>
-        <div className=''>
-          <button onClick={() => {
-            setActiveChangeCardPopup(true)
-            setReload(true)
-          }} className='bg-white border-[1px] border-[#1F2117] w-full lg:w-[286rem] py-[14rem] text-[16rem] font-bodyalt text-[#1F2117] font-[600] rounded-[40rem] lg:px-[24rem]'>
-            Изменить платежные данные
-          </button>
-        </div>
+        <div>
+          {
+            activeSub && activeSub.error? (
+            <div className='text-[16rem] text-red-600 mb-[20rem]'>
+              <div>
+                последняя попытка списания была не успешна
+              </div>
+              <div className=' mb-[24rem] flex flex-col gap-[24rem] lg:flex-row lg:justify-between lg:mb-[48rem] lg:w-max'>
+                <div className=''>
+                  <button className='bg-white border-[1px] border-[#1F2117] w-full lg:w-[356rem] lg:h-[56rem] py-[14rem] text-[16rem] font-bodyalt text-[#1F2117] font-[600] rounded-[40rem] lg:px-[24rem] hover:duration-[200ms] tracking-[0.04em] hover:border-[#FFB700] hover:text-[#FFB700]'>
+                    Повторить попытку с текущей карты
+                  </button>
+                </div>
+              </div>
+            </div>): null
+          }
+        </div> 
       </div>
-      <div className='mb-[30rem] flex flex-col lg:grid lg:grid-cols-3 gap-[24rem] lg:w-[1370rem] lg:gap-[40rem]'>
+      <div className='mb-[30rem] flex flex-col lg:grid lg:grid-cols-3 gap-[24rem] lg:w-[1370rem] lg:gap-[40rem] lg:mb-[40rem]'>
         {
           sub?.map((e,i) => {
             return (

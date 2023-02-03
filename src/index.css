@@ -11,11 +11,17 @@ html, body{
   background-color:  #fafafa;
   margin: 0;
   padding: 0;
-  scroll-behavior: smooth
+  scroll-behavior: smooth;
+  -webkit-appearance: none;
+  -ms-touch-action: manipulation;
 }
 
 ::-webkit-scrollbar {
   width: 0;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
 }
 
 @media screen and (min-width: 1024px) {

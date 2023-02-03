@@ -6,7 +6,7 @@ import { Profile } from '../App'
 
 const PaymentsStatus = () => {
   document.title = 'Подтверждение оплаты'
-  const { setReload, setYandexToken, activeSub } = useContext(Profile)
+  const { setReload, setYandexToken, activeSub, setCardInfo} = useContext(Profile)
   const [searchParams] = useSearchParams();
   const [statusCode, setStatusCode] = useState<number | null>(null)
   const [statusMessage, setStatusMessage] = useState('Ожидание оплаты')
@@ -24,7 +24,6 @@ const PaymentsStatus = () => {
               console.log(res)
               //@ts-ignore
             setStatusMessage(prev => res.data.message)
-            setStateButton(true)
             setYandexToken(null)
             setReload(true)
           }
@@ -37,6 +36,9 @@ const PaymentsStatus = () => {
           console.log(error.response)
           setStatusCode(prev => error.response.status)
           setStatusMessage('Платеж не одобрен')
+        })
+        .finally(() => {
+          setCardInfo(null)
           setStateButton(true)
         })
     }, 2000);
@@ -49,6 +51,7 @@ const PaymentsStatus = () => {
   const moveToCabinet = () => {
     setYandexToken(null)
     setReload(true)
+    setCardInfo(null)
     if(statusCode === 202){
       navigate('/cabinet')
     } else {

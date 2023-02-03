@@ -40,7 +40,7 @@ const ChangePassword = () => {
       email: data.email
     }
     
-    axios.post('/api/auth/send-reset-code', userInfo)
+    axios.post('https://stage.fitnesskaknauka.com/api/auth/send-reset-code', userInfo)
     .then((res) => {
       console.log(res)
       navigate("/login/step2");

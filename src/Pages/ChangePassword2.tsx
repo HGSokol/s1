@@ -80,7 +80,7 @@ const ChangePassword2 = () => {
       email: 'g.w.sokolov98@mail.ru'
     }
 
-    axios.post('/api/auth/send-reset-code', userInfo, {
+    axios.post('https://stage.fitnesskaknauka.com/api/auth/send-reset-code', userInfo, {
       headers: {
         'Content-type':'application/json',
         'Timezone': `${timezone}`

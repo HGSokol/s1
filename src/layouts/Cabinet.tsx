@@ -1,4 +1,4 @@
-import React,{ useState, useContext, useEffect, useRef } from 'react'
+import React,{ useState, useContext, useEffect, useLayoutEffect, useRef } from 'react'
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom"
 import { Profile } from '../App'
 import { HeaderForm } from '../components/HeaderForm'
@@ -23,7 +23,7 @@ const Cabinet = () => {
   document.title = 'Подписки'
   const location = useLocation()
   const navigate = useNavigate()
-  const { user, activeSub, reload, setReload, setActiveSub, setUser } = useContext(Profile)
+  const { user, activeSub, reload, setReload, setActiveSub, setUser, setUserPaymentMethod, userPaymentMethod } = useContext(Profile)
   const ref = useRef<HTMLDivElement | null>(null)
   const refNav = useRef<NavType[]>(window.innerWidth >= 1024? [
     {name: 'Полезное', img: <UsefulIcon />, link: '/usefull'},
@@ -43,43 +43,51 @@ const Cabinet = () => {
 
   const localUser = localStorage.getItem('user')
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if(reload === true && localUser && JSON.parse(localUser).token) {
-      axios.get('https://stage.fitnesskaknauka.com/api/customer')
+      axios.get(`https://stage.fitnesskaknauka.com/api/customer/subscriptions/active`)
       .then((res) => {
-        //@ts-ignore
-        setUser(prev => ({
-          ...prev,
-          email: res.data.email,
-          name: res.data.name,
-          lastName: res.data.lastName,
-          avatar: res.data.avatar,
-          uuid: res.data.uuid,
-        }))
-        if(res.data && res.data.subscription){
+        console.log(res.data,'подписка')
+        let typeSubs:any;
+
+        res.data.internalSubscription? typeSubs=res.data.internalSubscription:
+        res.data.externalSubscription.appleSubscription? typeSubs=res.data.externalSubscription?.appleSubscription :
+        res.data.free? typeSubs=res.data.free: typeSubs=null
+        
+        if(typeSubs){
+          if(typeSubs === res.data.internalSubscription){
+            setUserPaymentMethod({
+              cardType: typeSubs.userPaymentMethod.cardType,
+              expireMonth: typeSubs.userPaymentMethod.expireMonth,
+              expireYear: typeSubs.userPaymentMethod.expireYear,
+              last4:typeSubs.userPaymentMethod.last4,
+            })
+          }
           //@ts-ignore
           setActiveSub(prev => ({
             ...prev,
-            name: res.data.subscription.plan.name,
-            duration: res.data.subscription.plan.invoicePeriod,
-            price: res.data.subscription.plan.price,
-            id: res.data.subscription.plan.id,
-            id2: res.data.subscription.id,
-            isFromApple: res.data.subscription.isFromApple,
-            endsAt: res.data.subscription.endsAt
+            name: typeSubs.plan.name,
+            duration: typeSubs.plan.invoicePeriod,
+            price: typeSubs.plan.price,
+            id: typeSubs.plan.id,
+            id2: typeSubs.id,
+            isFromApple: typeSubs === res.data.externalSubscription.appleSubscription,
+            endsAt: typeSubs.endsAt,
+            error: typeSubs !==res.data.free && typeSubs.userPaymentMethod.status === 'has_error' && typeSubs.userPaymentMethod.lastError === 'insufficient_funds',
+            type: res.data.internalSubscription? 'internal': res.data.externalSubscription.appleSubscription? 'external': 'free'
           }))
         }else{
           setActiveSub(null)
         }
       })
       .catch((error) => {
-        console.log(error.response.data)
+        console.log(error)
       })
     }
     setReload(false)
-  }, [reload])
+  },[reload])
   
-  useEffect(() => {
+  useLayoutEffect(() => {
     window.innerWidth >= 1024? refNav.current = [
       {name: 'Полезное', img: <UsefulIcon />, link: '/usefull'},
       {name: 'Активность', img: <ActivityIcon />, link: '/activity'},
@@ -95,11 +103,7 @@ const Cabinet = () => {
     ]
   },[activeSub, reload])
   
-  // useEffect(() => {
-  //   setReload(true)
-  // },[active])
-
-  useEffect(() => {
+  useLayoutEffect(() => {
     if(!activeSub && location.pathname.replace('/cabinet','') === ''){
       navigate('/cabinet/changeSubs')
     }
@@ -108,14 +112,14 @@ const Cabinet = () => {
     }
   },[activeSub])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const f = refNav.current.map(e => e.link.includes(location.pathname.replace('/cabinet', '')) === true? true : null).filter(e => e !== null)
     setActive(prev =>f.length >= 1? location.pathname.replace('/cabinet', ''): `${activeSub? '' : '/changeSubs'}`)
   },[ activeSub, reload])
 
   return (
     <div className='relative'>
-      <div className={`z-0 grid grid-rows-[calc(100vh-80rem)_80rem] lg:grid lg:grid-rows-1 lg:grid-cols-[360rem_auto] lg:w-[1920rem]`}>
+      <div className={`z-0 grid grid-rows-[calc(100vh-65rem)_65rem] lg:grid lg:grid-rows-1 lg:grid-cols-[360rem_auto] lg:w-[1920rem]`}>
         <div ref={ref} className='z-[100] bg-[#FFFFFF] border-t-[1px] shadow-[0px_2px_8px_rgba(0_0_0_0.04)] flex flex-col my-auto w-full  order-2 b-[0rem] lg:relative lg:order-1 lg:border-r-[1px] lg:border-[#EEF1F6] lg:h-[100vh] lg:grid lg:grid-rows-[121rem_auto]'>
           <div className='hidden lg:block'>
             <HeaderForm/>
@@ -150,21 +154,18 @@ const Cabinet = () => {
               <p className='lg:font-bodyalt lg:font-[400] lg:text-[#AAAAAA] lg:text-[18rem] lg:leading-[21px] lg:group-hover/logout:text-[#1F2117]'>Выход</p>
             </button>
           </div>
-          <div className='w-full flex justify-center lg:hidden'>
-            <div className='h-[5rem] w-[114rem] bg-[#1F2117] rounded-full mb-[8rem]'></div>
-          </div>
         </div>
         <div className='order-1 h-full lg:order-2 lg:grid lg:grid-rows-[121rem_calc(100vh-121rem)] lg:mr-[120rem]'>
           <div className='hidden lg:mt-[32rem] lg:flex lg:flex-row lg:justify-end lg:h-[60rem] '>
-              <div className='lg:flex lg:flex-row lg:gap-[12rem]'>
-                <div className='lg:py-[5rem]'>
-                  <p className='lg:font-bodyalt lg:font-[500] lg:text-[#1F2117] lg:text-[18rem] lg:text-end' >{`${user?.name} ${user?.lastName}`}</p>
-                  <p className='lg:font-bodyalt lg:font-[400] lg:text-[#1F2117]/60 lg:text-[14rem]  lg:text-end'>{user?.email}</p>
-                </div>
-                <div>
-                {!user?.avatar ? (<img src={UnknownUser} alt='avatar' className='rounded-full w-[60rem] h-[60rem] lg:w-[60rem] lg:h-[60rem]'/>): (<img src={user.avatar} alt='avatar' className='rounded-full w-[60rem] h-[60rem] lg:w-[60rem] lg:h-[60rem]'/>)}
-                </div>
+            <div className='lg:flex lg:flex-row lg:gap-[12rem]'>
+              <div className='lg:py-[5rem]'>
+                <p className='lg:font-bodyalt lg:font-[500] lg:text-[#1F2117] lg:text-[18rem] lg:text-end' >{`${user?.name} ${user?.lastName}`}</p>
+                <p className='lg:font-bodyalt lg:font-[400] lg:text-[#1F2117]/60 lg:text-[14rem]  lg:text-end'>{user?.email}</p>
               </div>
+              <div>
+              {!user?.avatar ? (<img src={UnknownUser} alt='avatar' className='rounded-full w-[60rem] h-[60rem] lg:w-[60rem] lg:h-[60rem]'/>): (<img src={user.avatar} alt='avatar' className='rounded-full w-[60rem] h-[60rem] lg:w-[60rem] lg:h-[60rem]'/>)}
+              </div>
+            </div>
           </div>
           <div className='overflow-y-scroll h-full lg:ml-[32rem] lg:overflow-y-scroll'>
             <Outlet/>

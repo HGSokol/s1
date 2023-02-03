@@ -9,7 +9,7 @@ import {ReactComponent as Loader} from '../images/loader.svg';
 
 const Ordering = () => {
   document.title = 'Оформление заказа'
-  const { activeSub, selectedPlan, setYandexToken } = useContext(Profile)
+  const { activeSub, selectedPlan, setYandexToken, cardInfo } = useContext(Profile)
   const [load, setLoad] = useState(false)
   const navigate = useNavigate()
 
@@ -17,12 +17,12 @@ const Ordering = () => {
     if(selectedPlan === null && !activeSub){
       navigate('/cabinet')
     }
-  },[])
+  },[])  
 
   const CreateYandexToken = () => {
     if(selectedPlan || activeSub){
       setLoad(true)
-      Checkout(/* cardInfo */).then((res) => {
+      Checkout(cardInfo).then((res) => {
         console.log(res)
         if(res.status === 'success') {
           console.log(res.data, 'ответ яндекса')

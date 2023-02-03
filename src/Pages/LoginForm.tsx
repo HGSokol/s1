@@ -25,7 +25,7 @@ const schema = yup.object({
 
 const LoginForm = () => {
   const [ errorMessage, setErrorMessage ] = useState<string | null>(null)
-  const { deviceName, setUser, setReload, activeSub, setActiveSub } = useContext(Profile)
+  const { deviceName, setUser, setReload, activeSub, setActiveSub, setUserPaymentMethod } = useContext(Profile)
   const [ type, setType ] = useState(true)
   const navigate = useNavigate()
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IFormInputs>({
@@ -62,19 +62,43 @@ const LoginForm = () => {
           avatar: res.data.avatar,
           uuid: res.data.uuid,
         }))
-        if(res.data && res.data.subscription){
-          //@ts-ignore
-          setActiveSub(prev => ({
-            ...prev,
-            name: res.data.subscription.plan.name,
-            duration: res.data.subscription.plan.invoicePeriod,
-            price: res.data.subscription.plan.price,
-            id: res.data.subscription.plan.id,
-            id2: res.data.subscription.id,
-            isFromApple: res.data.subscription.isFromApple,
-            endsAt: res.data.subscription.endsAt
-          }))
-        }
+        axios.get(`https://stage.fitnesskaknauka.com/api/customer/subscriptions/active`)
+        .then((res) => {
+          let typeSubs:any;
+  
+          res.data.internalSubscription? typeSubs=res.data.internalSubscription:
+          res.data.externalSubscription.appleSubscription? typeSubs=res.data.externalSubscription.appleSubscription :
+          res.data.free? typeSubs=res.data.free: typeSubs=null
+  
+          if(typeSubs){
+            if(typeSubs === res.data.internalSubscription || typeSubs === res.data.externalSubscription.appleSubscription ){
+              setUserPaymentMethod({
+                cardType: typeSubs.userPaymentMethod.cardType,
+                expireMonth: typeSubs.userPaymentMethod.expireMonth,
+                expireYear: typeSubs.userPaymentMethod.expireYear,
+                last4:typeSubs.userPaymentMethod.last4,
+              })
+            }
+            //@ts-ignore
+            setActiveSub(prev => ({
+              ...prev,
+              name: typeSubs.plan.name,
+              duration: typeSubs.plan.invoicePeriod,
+              price: typeSubs.plan.price,
+              id: typeSubs.plan.id,
+              id2: typeSubs.id,
+              isFromApple: typeSubs === res.data.externalSubscription.appleSubscription? true: false,
+              endsAt: typeSubs.endsAt,
+              error: typeSubs !==res.data.free && typeSubs.userPaymentMethod.status === 'has_error' && typeSubs.userPaymentMethod.lastError === 'insufficient_funds'? true: false,
+              type: res.data.internalSubscription? 'internal': res.data.externalSubscription.appleSubscription? 'external': 'free'
+            }))
+          }else{
+            setActiveSub(null)
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+        })
         navigate(window.innerWidth >= 1024? `${activeSub? '/cabinet' : '/cabinet/changeSubs'}`: '/cabinet')
       })
       .catch((error) => {
@@ -85,8 +109,8 @@ const LoginForm = () => {
       })
     })
     .catch((error) => {
-      console.log(error.response.data)
       if(error.response.status === 401){
+        console.log(error.response.data)
         setErrorMessage(error.response.data.message)
       }
     })
@@ -136,7 +160,7 @@ const LoginForm = () => {
       </Link>  
       <p className='w-full flex justify-center h-[20rem] mb-[5rem]'>
       {
-        errorMessage ? (<p className='text-[11px] text-[#CB1D1D] text-center h-[30rem] lg:h-[30rem] md:text-[15px] leading-[10rem] lg:text-[15rem]'>{errorMessage}</p>) : null
+        errorMessage ? (<span className='text-[11px] text-[#CB1D1D] text-center h-[30rem] lg:h-[30rem] md:text-[15px] leading-[10rem] lg:text-[15rem]'>{errorMessage}</span>) : null
       } 
       </p>
       <div className='mb-[36rem]'>

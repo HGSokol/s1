@@ -37,6 +37,7 @@ const Subs = () => {
 
   const navigate = useNavigate()
   document.title = 'Подписки'
+
   
   useEffect(() => {
     setReload(true)
@@ -47,11 +48,11 @@ const Subs = () => {
     .catch((error) => {
       console.log(error.response.data)
     })
-    .finally(() => {
-      // if(activeSub){
-      //   navigate('/cabinet')
-      // }
-    })
+    // .finally(() => {
+    //   if(activeSub){
+    //     navigate('/cabinet')
+    //   }
+    // })
     
   },[])
 

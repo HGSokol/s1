@@ -1,4 +1,4 @@
-import { lazy, Suspense, createContext, useState, useEffect } from 'react'
+import { lazy, Suspense, createContext, useState, useEffect, useLayoutEffect } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import { deviceType } from 'react-device-detect'
 import { Helmet } from "react-helmet"
@@ -28,6 +28,8 @@ const Register = lazy(() => import('./Pages/Registration'))
 const ChangePassword = lazy(() => import('./Pages/ChangePassword'))
 const ChangePassword2 = lazy(() => import('./Pages/ChangePassword2'))
 const ChangePassword3 = lazy(() => import('./Pages/ChangePassword3'))
+const UserAgreements = lazy(() => import('./Pages/UserAgreements'))
+const PrivacyPolicy = lazy(() => import('./Pages/PrivacyPolicy'))
 const NotFound = lazy(() => import('./Pages/PageNotFound'))
 
 // const metaTag = document.querySelector(`meta[name="google-signin-client_id"]`) as HTMLMetaElement
@@ -55,12 +57,18 @@ export interface User {
 
 export interface CardInfo {
   numberCard: string,
-  nameCard: string,
   dateCard:{
     month: string,
     year:string,
   },
   cvv: string
+}
+
+export interface userPaymentMethod {
+  cardType: string,
+  expireMonth: string,
+  expireYear: string,
+  last4:string,
 }
 
 export interface ActiveSub {
@@ -70,7 +78,9 @@ export interface ActiveSub {
   id?: number,
   id2?: number,
   isFromApple?: boolean,
-  endsAt?: string | null
+  endsAt?: string | null,
+  error?: boolean,
+  type?:string,
 }
 
 export interface ProfileContext {
@@ -82,6 +92,8 @@ export interface ProfileContext {
   setReload: (reload:boolean) => void,
   cardInfo: CardInfo | null
   setCardInfo: (cardInfo: CardInfo | null) => void
+  userPaymentMethod: userPaymentMethod | null
+  setUserPaymentMethod: (userPaymentMethod: userPaymentMethod | null) => void
   activeSub: ActiveSub | null,
   setActiveSub: (activeSub: ActiveSub | null) => void
   selectedPlan: ActiveSub | null,
@@ -99,6 +111,8 @@ const ProfileUser: ProfileContext = {
   setReload: () => {},
   cardInfo: null,
   setCardInfo: () => {},
+  userPaymentMethod: null,
+  setUserPaymentMethod: () => {},
   activeSub: null,
   setActiveSub: () => {},
   selectedPlan: null,
@@ -117,10 +131,11 @@ function App() {
   const [activeSub, setActiveSub] = useState<ActiveSub | null>(null)
   const [selectedPlan, setSelectedPlan] = useState<ActiveSub | null>(null)
   const [yandexToken, setYandexToken] = useState<string | null>(null)
+  const [userPaymentMethod, setUserPaymentMethod] = useState<userPaymentMethod | null>(null)
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
-  const deviceName = deviceType
   const navigate = useNavigate()
-  
+  let deviceName = deviceType
+
   const localUser = localStorage.getItem('user')
 
   if(localUser){
@@ -130,12 +145,56 @@ function App() {
   axios.defaults.headers.common['Content-Type'] = 'application/json'
   axios.defaults.headers.common['Timezone'] = `${timezone}` 
   axios.defaults.headers.common['Client-Platform'] = 'web'
+
+  useEffect(() => {
+    deviceName = deviceType
+  },[])
+
+  useEffect(() => {
+      axios.get(`https://stage.fitnesskaknauka.com/api/customer/subscriptions/active`)
+      .then((res) => {
+        let typeSubs:any;
+
+        res.data.internalSubscription? typeSubs=res.data.internalSubscription:
+        res.data.externalSubscription.appleSubscription? typeSubs=res.data.externalSubscription.appleSubscription :
+        res.data.free? typeSubs=res.data.free: typeSubs=null
+
+        if (typeSubs) {
+          if (typeSubs === res.data.internalSubscription || typeSubs === res.data.externalSubscription.appleSubscription ) {
+            setUserPaymentMethod({
+              cardType: typeSubs.userPaymentMethod.cardType,
+              expireMonth: typeSubs.userPaymentMethod.expireMonth,
+              expireYear: typeSubs.userPaymentMethod.expireYear,
+              last4:typeSubs.userPaymentMethod.last4,
+            })
+          }
+          //@ts-ignore
+          setActiveSub(prev => ({
+            ...prev,
+            name: typeSubs.plan.name,
+            duration: typeSubs.plan.invoicePeriod,
+            price: typeSubs.plan.price,
+            id: typeSubs.plan.id,
+            id2: typeSubs.id,
+            isFromApple: typeSubs === res.data.externalSubscription.appleSubscription? true: false,
+            endsAt: typeSubs.endsAt,
+            error: typeSubs !==res.data.free && typeSubs.userPaymentMethod.status === 'has_error' && typeSubs.userPaymentMethod.lastError === 'insufficient_funds'? true: false,
+            type: res.data.internalSubscription? 'internal': res.data.externalSubscription.appleSubscription? 'external': 'free'
+          }))
+        } else {
+          setActiveSub(null)
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  },[])
   
   useEffect(() => {
-    if(reload === true && localUser && JSON.parse(localUser).token) {
+    if (reload === true && localUser && JSON.parse(localUser).token) {
       axios.get('https://stage.fitnesskaknauka.com/api/customer')
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         setUser(prev => ({
           ...prev,
           email: res.data.email,
@@ -144,18 +203,6 @@ function App() {
           avatar: res.data.avatar,
           uuid: res.data.uuid,
         }))
-        if(res.data && res.data.subscription){
-          setActiveSub(prev => ({
-            ...prev,
-            name: res.data.subscription.plan.name,
-            duration: res.data.subscription.plan.invoicePeriod,
-            price: res.data.subscription.plan.price,
-            id: res.data.subscription.plan.id,
-            id2: res.data.subscription.id,
-            isFromApple: res.data.subscription.isFromApple,
-            endsAt: res.data.subscription.endsAt
-          }))
-        }
       })
       .catch((error) => {
         console.log(error.response.data)
@@ -193,6 +240,8 @@ function App() {
               setReload,
               cardInfo,
               setCardInfo,
+              userPaymentMethod,
+              setUserPaymentMethod,
               activeSub,
               setActiveSub,  
               selectedPlan,
@@ -210,9 +259,9 @@ function App() {
                         <Route path='/cabinet' element={<MyProfile/>} >
                           <Route index element={<Subs/>} />
                           <Route path='/cabinet/changeSubs' element={<ChangeSubs/>} />
-                          <Route path='/cabinet/payment' element={<Payment/>} />
+                          <Route path='/cabinet/payments' element={<Payment/>} />
                           <Route path='/cabinet/changePayment' element={<ChangePayment/>} />
-                          <Route path='/cabinet/cabinetInfo' element={<CabinetInfo/>} />
+                          <Route path='/cabinet/profile' element={<CabinetInfo/>} />
                           <Route path='/cabinet/ordering' element={<Ordering/>} />
                           <Route path='/cabinet/ordering2' element={<Ordering2/>} />
                           <Route path='/cabinet/ordering3' element={<Ordering3/>} />
@@ -230,8 +279,8 @@ function App() {
                             <Route path='/cabinet/ordering3' element={<Ordering3/>} />
                             <Route path='/cabinet/changeSubs' element={<ChangeSubs/>} />
                             <Route path='/cabinet/changePayment' element={<ChangePayment/>} />
-                            <Route path='/cabinet/payment' element={<Payment/>} />
-                            <Route path='/cabinet/cabinetInfo' element={<CabinetInfo/>} />
+                            <Route path='/cabinet/payments' element={<Payment/>} />
+                            <Route path='/cabinet/profile' element={<CabinetInfo/>} />
                             <Route path='/cabinet/payments/status' element={<PaymentsStatus/>}>
                               <Route index element={<PaymentsStatus/>} />
                               <Route path='/cabinet/payments/status?paymentId=:paymentId' element={<PaymentsStatus/>} />
@@ -255,6 +304,8 @@ function App() {
                     </Route>
                   )
                 }
+                <Route path='/userAgreements' element={<UserAgreements/>} />
+                <Route path='/privacyPolicy' element={<PrivacyPolicy/>} />
                 <Route path='*' element={<NotFound/>} />
               </Routes>
             </Profile.Provider>

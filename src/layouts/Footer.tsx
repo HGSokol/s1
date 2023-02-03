@@ -1,9 +1,11 @@
 import { FaFacebookF, FaTelegramPlane } from 'react-icons/fa'
 import { AiFillInstagram } from 'react-icons/ai'
 import { HiMail } from 'react-icons/hi'
+import { useNavigate } from 'react-router-dom'
 
 
 export const Footer = () => {
+  const navigate = useNavigate()
   return (
     <div className='bg-black h-[454rem] py-[32rem] flex flex-col
     lg:flex-row lg:h-[206rem] lg:py-[48rem] lg:px-[120rem]'>
@@ -78,10 +80,10 @@ export const Footer = () => {
               </div>
             </a>
         </div>
-        <div className='font-bodyalt font-[500] text-[16rem] leading-[19.09rem] text-white
-        lg:leading-[19rem] lg:text-[16rem] mb-[16rem] lg:mb-[12rem]'>Пользовательское соглашение</div>
-        <div className='font-bodyalt font-[500] text-[16rem] leading-[19.09rem] text-white
-        lg:leading-[19rem] lg:text-[16rem]'>Политика конфиденциальности</div>
+        <div onClick={() => navigate('/userAgreements')} className='font-bodyalt font-[500] text-[16rem] leading-[19.09rem] text-white
+        lg:leading-[19rem] lg:text-[16rem] mb-[16rem] lg:mb-[12rem] cursor-pointer'>Пользовательское соглашение</div>
+        <div onClick={() => navigate('/privacyPolicy')} className='font-bodyalt font-[500] text-[16rem] leading-[19.09rem] text-white
+        lg:leading-[19rem] lg:text-[16rem] cursor-pointer'>Политика конфиденциальности</div>
         </div>
       </div>
   )
