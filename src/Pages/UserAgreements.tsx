@@ -12,33 +12,31 @@ function UserAgreements() {
 				<div className="mx-[16rem] lg:mx-[120rem] overflow-hidden">
 					<Header />
 					<div className="lg:mr-[450rem]">
-						<div className="font-body font-[600] text-[35rem] mb-[15rem] lg:text-[64rem] lg:leading-[75rem] text-[#1F2117] lg:mb-[64rem]">
+						<div className="font-body font-[600] text-[32rem] leading-[38rem] mb-[32rem] lg:text-[64rem] lg:leading-[75rem] text-[#1F2117] lg:mb-[64rem]">
 							Пользовательское Соглашение
 						</div>
-						<div className="font-bodyalt font-[400] text-[16rem] mb-[15rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] lg:mb-[21rem] lg:tracking-[0.03em]">
+						<div className="font-bodyalt font-[400] text-[14rem] leading-[21rem] mb-[21rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] lg:mb-[21rem] lg:tracking-[0.03em]">
 							Настоящее Пользовательское Соглашение (Далее Соглашение) регулирует отношения между
-							владельцем ООО "МИДО" ИНН 6141058830 КПП 614101001 в лице Генерального директора
-							Лапшина Владислава Владимировича (далее или Администрация) с одной стороны и
-							пользователем мобильного приложения с другой. Мобильное приложение не является
+							ООО "МИДО" ИНН 6141058830 КПП 614101001 в лице Генерального директора Лапшина
+							Владислава Владимировича (далее Фитнес Как Наука или Администрация) с одной стороны и
+							пользователем мобильного приложения с другой. Продукты Администрации не является
 							средством массовой информации.
 						</div>
-						<div className="font-bodyalt font-[600] text-[18rem] mb-[4rem] lg:text-[22rem] lg:leading-[32rem] text-[#1F2117] lg:mb-[4rem] lg:tracking-[0.05em]">
+						<div className="font-bodyalt font-[600] text-[14rem] leading-[21rem] mb-[4rem] lg:text-[22rem] lg:leading-[32rem] text-[#1F2117] lg:mb-[4rem] lg:tracking-[0.05em]">
 							Используя мобильное приложение, Вы соглашаетесь с условиями данного соглашения.
 						</div>
-						<div className="font-bodyalt font-[600] text-[18rem] mb-[40rem] lg:text-[22rem] lg:leading-[32rem] text-[#1F2117] lg:mb-[64rem] lg:tracking-[0.05em]">
-							Если Вы не согласны с условиями данного соглашения, не используйте мобильное
-							приложение!
+						<div className="font-bodyalt font-[600] text-[14rem] mb-[32rem] leading-[21rem] lg:text-[22rem] lg:leading-[32rem] text-[#1F2117] lg:mb-[64rem] lg:tracking-[0.05em]">
+							Если Вы не согласны с условиями данного соглашения, не используйте информационные
+							продукты ООО “МИДО”!
 						</div>
-						<div className="font-body font-[600] text-[24rem] lg:text-[40rem] lg:leading-[47rem] text-[#1F2117] mb-[24rem] lg:mb-[48rem]">
+						<div className="font-[600] text-[22rem] leading-[26rem] mb-[16rem] font-body lg:text-[40rem] lg:leading-[47rem] text-[#1F2117] lg:mb-[48rem]">
 							Права и обязанности сторон
 						</div>
 						<div className="mb-[24rem] lg:mb-[48rem]">
-							<div className="font-body font-[600] text-[20rem] lg:text-[32rem] lg:leading-[37rem] text-[#1F2117] mb-[8rem] lg:mb-[20rem]">
+							<div className="font-bodyalt lg:font-body font-[600] text-[22rem] leading-[26rem] lg:text-[32rem] lg:leading-[37rem] text-[#1F2117] mb-[8rem] lg:mb-[20rem]">
 								Пользователь имеет право:
 							</div>
-							<ol
-								type="1"
-								className="list-decimal list-inside font-bodyalt font-[400] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]">
+							<ul className="ml-[22rem] lg:ml-[27rem] list-disc list-outsude font-bodyalt font-[400] text-[14rem] leading-[21rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]">
 								<li>осуществлять поиск информации в мобильном приложении.</li>
 								<li>
 									получать информацию рекомендательного характера в мобильном приложении о
@@ -47,28 +45,23 @@ function UserAgreements() {
 								<li>делиться с Администрацией результатами своих достижений.</li>
 								<li>предоставлять данные о себе.</li>
 								<li>использовать информацию сайта в личных некоммерческих целях.</li>
-							</ol>
+							</ul>
 						</div>
 						<div className="mb-[24rem] lg:mb-[48rem]">
-							<div className="font-body font-[600] text-[20rem] lg:text-[32rem] lg:leading-[37rem] text-[#1F2117] mb-[8rem] lg:mb-[20rem]">
+							<div className="font-bodyalt lg:font-body font-[600] text-[22rem] leading-[26rem] lg:text-[32rem] lg:leading-[37rem] text-[#1F2117] mb-[8rem] lg:mb-[20rem]">
 								Администрация имеет право:
 							</div>
-							<ol
-								type="1"
-								className="list-decimal list-inside font-bodyalt font-[400] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]">
+							<ul className="ml-[22rem] lg:ml-[27rem] list-disc list-outsude font-bodyalt font-[400] text-[14rem] leading-[21rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]">
 								<li>по своему усмотрению и необходимости создавать, изменять, отменять правила.</li>
 								<li>ограничивать доступ к любой информации на сайте.</li>
 								<li>создавать, изменять, удалять информацию.</li>
-							</ol>
+							</ul>
 						</div>
 						<div className="mb-[24rem] lg:mb-[48rem]">
-							<div className="font-body font-[600] text-[20rem] lg:text-[32rem] lg:leading-[37rem] text-[#1F2117] mb-[8rem] lg:mb-[20rem]">
+							<div className="font-bodyalt lg:font-body font-[600] text-[22rem] leading-[26rem] lg:text-[32rem] lg:leading-[37rem] text-[#1F2117] mb-[16rem] lg:mb-[24rem]">
 								Пользователь обязуется:
 							</div>
-							<ol
-								type="1"
-								start={1}
-								className="list-decimal list-inside font-bodyalt font-[400] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]">
+							<ul className="ml-[22rem] lg:ml-[27rem] list-disc list-outsude font-bodyalt font-[400] text-[14rem] leading-[21rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]">
 								<li>
 									обеспечить достоверность предоставляемой информации о себе и своих результатах.
 								</li>
@@ -101,15 +94,13 @@ function UserAgreements() {
 									не использовать скрипты (программы) для автоматизированного сбора информации и/или
 									взаимодействия с мобильным приложением и его Сервисами.
 								</li>
-							</ol>
+							</ul>
 						</div>
-						<div className="mb-[24rem] lg:mb-[48rem]">
-							<div className="font-body font-[600] text-[20rem] lg:text-[32rem] lg:leading-[37rem] text-[#1F2117] mb-[8rem] lg:mb-[20rem]">
+						<div className="mb-[32rem] lg:mb-[48rem]">
+							<div className="font-bodyalt lg:font-body font-[600] text-[22rem] leading-[26rem] lg:text-[32rem] lg:leading-[37rem] text-[#1F2117] mb-[16rem] lg:mb-[24rem]">
 								Администрация обязуется:
 							</div>
-							<ol
-								type="1"
-								className="list-decimal list-inside font-bodyalt font-[400] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]">
+							<ul className="ml-[22rem] lg:ml-[27rem] list-disc list-outsude font-bodyalt font-[400] text-[14rem] leading-[21rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]">
 								<li>
 									поддерживать работоспособность мобильного приложения за исключением случаев, когда
 									это невозможно по независящим от Администрации причинам.
@@ -127,15 +118,13 @@ function UserAgreements() {
 									предоставить всю доступную информацию о Пользователе уполномоченным на то органам
 									государственной власти в случаях, установленных законом.
 								</li>
-							</ol>
+							</ul>
 						</div>
-						<div className="mb-[24rem] lg:mb-[48rem]">
-							<div className="font-body font-[600] text-[20rem] lg:text-[32rem] lg:leading-[37rem] text-[#1F2117] mb-[8rem] lg:mb-[20rem]">
+						<div className="mb-[32rem] lg:mb-[64rem]">
+							<div className="font-body font-[600] text-[24rem] leading-[28rem] lg:text-[32rem] lg:leading-[37rem] text-[#1F2117] mb-[24rem] lg:mb-[48rem]">
 								Ответственность сторон
 							</div>
-							<ol
-								type="1"
-								className="list-decimal list-inside font-bodyalt font-[400] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]">
+							<ul className="ml-[22rem] lg:ml-[27rem] list-disc list-outsude font-bodyalt font-[400] text-[14rem] leading-[21rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]">
 								<li>
 									Администрация не несёт ответственность за несовпадение ожидаемых Пользователем и
 									реально полученных услуг.
@@ -161,13 +150,13 @@ function UserAgreements() {
 									информации, размещенной Пользователем, а также бесперебойную работу
 									информационного ресурса.
 								</li>
-							</ol>
+							</ul>
 						</div>
-						<div className="mb-[24rem] lg:mb-[48rem]">
-							<div className="font-body font-[600] text-[20rem] lg:text-[32rem] lg:leading-[37rem] text-[#1F2117] mb-[8rem] lg:mb-[20rem]">
+						<div className="mb-[100rem] lg:mb-[150rem]">
+							<div className="font-body font-[600] text-[24rem] leading-[28rem] lg:text-[32rem] lg:leading-[37rem] text-[#1F2117] mb-[24rem] lg:mb-[48rem]">
 								Условия действия Соглашения
 							</div>
-							<ol className="font-bodyalt font-[400] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]">
+							<ul className="ml-[22rem] lg:ml-[27rem] list-disc list-outsude font-bodyalt font-[400] text-[14rem] leading-[21rem] lg:text-[20rem] lg:leading-[34rem] text-[#777872] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]">
 								<li>
 									данное Соглашение вступает в силу при использовании любых продуктов ООО “МИДО”.
 								</li>
@@ -177,11 +166,7 @@ function UserAgreements() {
 									соглашение по своему усмотрению.
 								</li>
 								<li>администрация не оповещает пользователей об изменении в Соглашении.</li>
-							</ol>
-						</div>
-						<div className="flex flex-row justify-between font-bodyalt font-[400] text-[16rem] lg:text-[20rem] lg:leading-[34rem] text-[#1F2117] mb-[24rem] lg:mb-[48rem] lg:tracking-[0.05em]">
-							<div>29.01.2023</div>
-							<div>Лапшин В.В.</div>
+							</ul>
 						</div>
 					</div>
 				</div>
