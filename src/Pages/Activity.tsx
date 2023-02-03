@@ -6,7 +6,7 @@ const Activity = () => {
 
   return (
     <>
-      <Develop />
+      <Develop />1
     </>
   )
 }
