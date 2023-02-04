@@ -48,7 +48,6 @@ const LoginForm = () => {
 			...data,
 			deviceName: deviceName,
 		};
-		localStorage.setItem('password', JSON.stringify(data.password));
 
 		axios
 			.post('https://stage.fitnesskaknauka.com/api/auth/login', userInfo)

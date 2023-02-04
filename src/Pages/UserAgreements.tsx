@@ -11,7 +11,7 @@ function UserAgreements() {
 			<div className="lg:w-[1920rem]">
 				<div className="mx-[16rem] lg:mx-[120rem] overflow-hidden">
 					<Header />
-					<div className="lg:mr-[450rem]">
+					<div className="lg:mr-[340rem]">
 						<div className="font-body font-[600] text-[32rem] leading-[38rem] mb-[32rem] lg:text-[64rem] lg:leading-[75rem] text-[#1F2117] lg:mb-[64rem]">
 							Пользовательское Соглашение
 						</div>

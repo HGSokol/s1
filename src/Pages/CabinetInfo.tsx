@@ -74,38 +74,37 @@ const CabinetInfo = () => {
 	});
 
 	const token = localStorage.getItem('user');
-	const oldPass = localStorage.getItem('password');
 
 	// reset password
-	const onSubmit = (data: IFormInputs) => {
-		reset();
-		if (
-			oldPass &&
-			token &&
-			data.oldpassword === JSON.parse(oldPass) &&
-			data.password !== JSON.parse(oldPass)
-		) {
-			const userInfo = {
-				password: data.password,
-				email: `${user?.email}`,
-				token: `${token ? JSON.parse(token).token : ''}`,
-				deviceName,
-			};
+	// const onSubmit = (data: IFormInputs) => {
+	// 	reset();
+	// 	if (
+	// 		oldPass &&
+	// 		token &&
+	// 		data.oldpassword === JSON.parse(oldPass) &&
+	// 		data.password !== JSON.parse(oldPass)
+	// 	) {
+	// 		const userInfo = {
+	// 			password: data.password,
+	// 			email: `${user?.email}`,
+	// 			token: `${token ? JSON.parse(token).token : ''}`,
+	// 			deviceName,
+	// 		};
 
-			axios
-				.put('https://stage.fitnesskaknauka.com/api/auth/reset-password', userInfo)
-				.then((res) => {
-					// console.log(res)
-					reset();
-				})
-				.catch((error) => {
-					console.log(error.response.data);
-				});
-		}
-		if (oldPass && data.password === JSON.parse(oldPass)) {
-			setOldPassError('Старый и новый пароль должны быть различны');
-		}
-	};
+	// 		axios
+	// 			.put('https://stage.fitnesskaknauka.com/api/auth/reset-password', userInfo)
+	// 			.then((res) => {
+	// 				// console.log(res)
+	// 				reset();
+	// 			})
+	// 			.catch((error) => {
+	// 				console.log(error.response.data);
+	// 			});
+	// 	}
+	// 	if (oldPass && data.password === JSON.parse(oldPass)) {
+	// 		setOldPassError('Старый и новый пароль должны быть различны');
+	// 	}
+	// };
 
 	const onClickChangeType = () => {
 		setType((prev) => !prev);
@@ -249,7 +248,7 @@ const CabinetInfo = () => {
 				</p>
 				<div>
 					<form
-						onSubmit={handleSubmit(onSubmit)}
+						/* onSubmit={handleSubmit(onSubmit)} */
 						className="flex flex-col gap-[20rem] w-full lg:flex-row lg:flex-wrap lg:gap-[20rem] lg:w-[1000rem]">
 						<div className="relative lg:w-[441rem]">
 							<div
