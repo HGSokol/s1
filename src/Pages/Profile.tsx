@@ -141,7 +141,7 @@ const MyProfile = () => {
 				</div>
 				<div
 					onClick={() => setActivePopup(true)}
-					className="absolute bottom-[100rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-[#CB1D1D] lg:hidden">
+					className="absolute bottom-[100rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-[#CB1D1D] sm:static sm:my-[40rem] lg:hidden">
 					Выход
 				</div>
 			</div>
