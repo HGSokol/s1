@@ -95,18 +95,6 @@ export const ChangePaymentData = (props?: ChangeCard) => {
 					setLoad(false);
 				});
 		}
-
-		// axios.post('https://stage.fitnesskaknauka.com/api/auth/send-reset-code', userInfo)
-		// .then((res) => {
-		//   console.log(res)
-		//   navigate("/login/step2");
-		// })
-		// .catch((error) => {
-		//   console.log(error)
-		//   setErrorMessage(error.response.data.message)
-		//   reset()
-
-		// })
 	};
 
 	const handleSubmitNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -123,7 +111,15 @@ export const ChangePaymentData = (props?: ChangeCard) => {
 		let cardCode: any = refDateCard?.current?.value.replace(/[^\d]/g, '').substring(0, 4);
 		cardCode = cardCode !== '' ? cardCode.match(/.{1,2}/g).join('/') : '';
 
-		setDateCard(cardCode);
+		const currentYear = +String(new Date().getFullYear()).slice(2, 4);
+		const year = Number(cardCode.slice(0, 2)) > 12 ? ' ' : cardCode.slice(0, 2);
+		const month = Number(cardCode.slice(3, 5)) > currentYear + 7 ? ' ' : cardCode.slice(3, 5);
+		const f = `${year}${month}`;
+
+		let matchCard: any = f.replace(/[^\d]/g, '').substring(0, 4);
+		matchCard = matchCard !== '' ? matchCard.match(/.{1,2}/g).join('/') : '';
+
+		setDateCard(matchCard);
 	};
 
 	return (

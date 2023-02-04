@@ -1,12 +1,11 @@
 import React, { useLayoutEffect } from 'react';
 import { Header } from '../layouts/Header';
 import { Footer } from '../layouts/Footer';
-import { FaCcDiscover } from 'react-icons/fa';
 
 function PrivacyPolicy() {
-	// useLayoutEffect(() => {
-	// 	window.scrollTo(0, 0);
-	// }, []);
+	useLayoutEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
 	return (
 		<>
 			<div className="lg:w-[1920rem]">
@@ -506,7 +505,10 @@ function PrivacyPolicy() {
 							</div>
 							<div className="before:content-['12.3.'] mb-[8rem] lg:mb-[16rem] before:absolute before:-translate-x-[33rem] lg:before:-translate-x-[52rem]">
 								Актуальная версия Политики в свободном доступе расположена в сети Интернет по адресу
-								<span className="text-[#FFB700] underline">{` https://fitnesskaknauka.ru`}</span>.
+								<a
+									href="https://fitnesskaknauka.ru"
+									className="text-[#FFB700] underline">{` https://fitnesskaknauka.ru`}</a>
+								.
 							</div>
 						</div>
 					</div>

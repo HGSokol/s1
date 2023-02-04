@@ -149,63 +149,63 @@ function App() {
 		deviceName = deviceType;
 	}, []);
 
-	useEffect(() => {
-		axios
-			.get(`https://stage.fitnesskaknauka.com/api/customer/subscriptions/active`)
-			.then((res) => {
-				let typeSubs: any;
+	// useEffect(() => {
+	// 	axios
+	// 		.get(`https://stage.fitnesskaknauka.com/api/customer/subscriptions/active`)
+	// 		.then((res) => {
+	// 			let typeSubs: any;
 
-				res.data.internalSubscription
-					? (typeSubs = res.data.internalSubscription)
-					: res.data.externalSubscription.appleSubscription
-					? (typeSubs = res.data.externalSubscription.appleSubscription)
-					: res.data.free
-					? (typeSubs = res.data.free)
-					: (typeSubs = null);
+	// 			res.data.internalSubscription
+	// 				? (typeSubs = res.data.internalSubscription)
+	// 				: res.data.externalSubscription.appleSubscription
+	// 				? (typeSubs = res.data.externalSubscription.appleSubscription)
+	// 				: res.data.free
+	// 				? (typeSubs = res.data.free)
+	// 				: (typeSubs = null);
 
-				if (typeSubs) {
-					if (
-						typeSubs === res.data.internalSubscription ||
-						typeSubs === res.data.externalSubscription.appleSubscription
-					) {
-						setUserPaymentMethod({
-							cardType: typeSubs.userPaymentMethod.cardType,
-							expireMonth: typeSubs.userPaymentMethod.expireMonth,
-							expireYear: typeSubs.userPaymentMethod.expireYear,
-							last4: typeSubs.userPaymentMethod.last4,
-						});
-					}
-					//@ts-ignore
-					setActiveSub((prev) => ({
-						...prev,
-						name: typeSubs.plan.name,
-						duration: typeSubs.plan.invoicePeriod,
-						price: typeSubs.plan.price,
-						id: typeSubs.plan.id,
-						id2: typeSubs.id,
-						isFromApple:
-							typeSubs === res.data.externalSubscription.appleSubscription ? true : false,
-						endsAt: typeSubs.endsAt,
-						error:
-							typeSubs !== res.data.free &&
-							typeSubs.userPaymentMethod.status === 'has_error' &&
-							typeSubs.userPaymentMethod.lastError === 'insufficient_funds'
-								? true
-								: false,
-						type: res.data.internalSubscription
-							? 'internal'
-							: res.data.externalSubscription.appleSubscription
-							? 'external'
-							: 'free',
-					}));
-				} else {
-					setActiveSub(null);
-				}
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}, []);
+	// 			if (typeSubs) {
+	// 				if (
+	// 					typeSubs === res.data.internalSubscription ||
+	// 					typeSubs === res.data.externalSubscription.appleSubscription
+	// 				) {
+	// 					setUserPaymentMethod({
+	// 						cardType: typeSubs.userPaymentMethod.cardType,
+	// 						expireMonth: typeSubs.userPaymentMethod.expireMonth,
+	// 						expireYear: typeSubs.userPaymentMethod.expireYear,
+	// 						last4: typeSubs.userPaymentMethod.last4,
+	// 					});
+	// 				}
+	// 				//@ts-ignore
+	// 				setActiveSub((prev) => ({
+	// 					...prev,
+	// 					name: typeSubs.plan.name,
+	// 					duration: typeSubs.plan.invoicePeriod,
+	// 					price: typeSubs.plan.price,
+	// 					id: typeSubs.plan.id,
+	// 					id2: typeSubs.id,
+	// 					isFromApple:
+	// 						typeSubs === res.data.externalSubscription.appleSubscription ? true : false,
+	// 					endsAt: typeSubs.endsAt,
+	// 					error:
+	// 						typeSubs !== res.data.free &&
+	// 						typeSubs.userPaymentMethod.status === 'has_error' &&
+	// 						typeSubs.userPaymentMethod.lastError === 'insufficient_funds'
+	// 							? true
+	// 							: false,
+	// 					type: res.data.internalSubscription
+	// 						? 'internal'
+	// 						: res.data.externalSubscription.appleSubscription
+	// 						? 'external'
+	// 						: 'free',
+	// 				}));
+	// 			} else {
+	// 				setActiveSub(null);
+	// 			}
+	// 		})
+	// 		.catch((error) => {
+	// 			console.log(error);
+	// 		});
+	// }, []);
 
 	useEffect(() => {
 		if (reload === true && localUser && JSON.parse(localUser).token) {
@@ -325,7 +325,7 @@ function App() {
 							</Route>
 						)}
 						<Route path="/userAgreements" element={<UserAgreements />} />
-						<Route path="/privacyPolicy" element={<PrivacyPolicy />} />
+						<Route path="/policy" element={<PrivacyPolicy />} />
 						<Route path="*" element={<NotFound />} />
 					</Routes>
 				</Profile.Provider>

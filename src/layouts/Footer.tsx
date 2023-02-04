@@ -165,7 +165,7 @@ export const Footer = () => {
 					Пользовательское соглашение
 				</div>
 				<div
-					onClick={() => navigate('/privacyPolicy')}
+					onClick={() => navigate('/policy')}
 					className="font-bodyalt font-[500] text-[16rem] leading-[19.09rem] text-white
         lg:leading-[19rem] lg:text-[16rem] cursor-pointer">
 					Политика конфиденциальности

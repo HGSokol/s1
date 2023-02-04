@@ -71,7 +71,31 @@ const Ordering = () => {
 					})
 					.catch((error) => {
 						console.log(error.response.data, 'ошибка оплаты');
-						setErrorMessage(error.response.data.message);
+						if (error.response.data.message === 'insufficient_funds') {
+							setErrorMessage('Недостаточно средств');
+						} else if (error.response.data.message === 'invalid_card_number') {
+							setErrorMessage('Неправильно указан номер карты');
+						} else if (error.response.data.message === 'card_expired') {
+							setErrorMessage('Истек срок действия банковской карты');
+						} else if (error.response.data.message === 'invalid_csc') {
+							setErrorMessage('Неправильно указан код CVV2 (CVC2, CID)');
+						} else if (error.response.data.message === 'country_forbidden') {
+							setErrorMessage('Нельзя заплатить банковской картой, выпущенной в этой стране');
+						} else if (error.response.data.message === '3d_secure_failed') {
+							setErrorMessage('Не пройдена аутентификация по 3-D Secure');
+						} else if (error.response.data.message === 'fraud_suspected') {
+							setErrorMessage('Платеж заблокирован из-за подозрения в мошенничестве');
+						} else if (error.response.data.message === 'issuer_unavailable') {
+							setErrorMessage('Организация, выпустившая платежное средство, недоступна');
+						} else if (error.response.data.message === 'payment_method_limit_exceeded') {
+							setErrorMessage(
+								'Исчерпан лимит платежей для данного платежного средства или вашего магазина',
+							);
+						} else if (error.response.data.message === 'payment_method_restricted') {
+							setErrorMessage('Запрещены операции данным платежным средством ');
+						} else {
+							setErrorMessage(error.response.data.message);
+						}
 						setStatus('reject');
 					})
 					.finally(() => {
@@ -109,7 +133,31 @@ const Ordering = () => {
 					})
 					.catch((error) => {
 						console.log(error.response.data, 'изменение карты ошибка');
-						setErrorMessage(error.response.data.message);
+						if (error.response.data.message === 'insufficient_funds') {
+							setErrorMessage('Недостаточно средств');
+						} else if (error.response.data.message === 'invalid_card_number') {
+							setErrorMessage('Неправильно указан номер карты');
+						} else if (error.response.data.message === 'card_expired') {
+							setErrorMessage('Истек срок действия банковской карты');
+						} else if (error.response.data.message === 'invalid_csc') {
+							setErrorMessage('Неправильно указан код CVV2 (CVC2, CID)');
+						} else if (error.response.data.message === 'country_forbidden') {
+							setErrorMessage('Нельзя заплатить банковской картой, выпущенной в этой стране');
+						} else if (error.response.data.message === '3d_secure_failed') {
+							setErrorMessage('Не пройдена аутентификация по 3-D Secure');
+						} else if (error.response.data.message === 'fraud_suspected') {
+							setErrorMessage('Платеж заблокирован из-за подозрения в мошенничестве');
+						} else if (error.response.data.message === 'issuer_unavailable') {
+							setErrorMessage('Организация, выпустившая платежное средство, недоступна');
+						} else if (error.response.data.message === 'payment_method_limit_exceeded') {
+							setErrorMessage(
+								'Исчерпан лимит платежей для данного платежного средства или вашего магазина',
+							);
+						} else if (error.response.data.message === 'payment_method_restricted') {
+							setErrorMessage('Запрещены операции данным платежным средством ');
+						} else {
+							setErrorMessage(error.response.data.message);
+						}
 						setStatus('reject');
 					})
 					.finally(() => {

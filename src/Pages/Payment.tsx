@@ -177,7 +177,7 @@ const Payment = () => {
 									<div className="font-bodyalt font-[400] text-[14rem] leading-[19rem] text-[#AAAAAA] lg:hidden">
 										Тип подписки
 									</div>
-									<div className="font-bodyalt font-[400] text-[14rem] leaiding-[17rem] text-[#1F2117] lg:text-[18rem] whitespace-pre text-end">{`${typeSub}\n${trial}`}</div>
+									<div className="font-bodyalt font-[400] text-[14rem] leaiding-[17rem] text-[#1F2117] lg:text-[18rem] whitespace-pre text-end lg:text-center">{`${typeSub}\n${trial}`}</div>
 								</div>
 								<div className="flex flex-row justify-between">
 									<div className="font-bodyalt font-[400] text-[14rem] leading-[19rem] text-[#AAAAAA] lg:hidden">
@@ -207,7 +207,7 @@ const Payment = () => {
 									<div className="font-bodyalt font-[400] text-[14rem] leading-[19rem] text-[#AAAAAA] lg:hidden">
 										Начало
 									</div>
-									<div className="font-bodyalt font-[400] text-[14rem] leaiding-[17rem] text-[#1F2117] lg:text-[18rem] whitespace-pre text-end">
+									<div className="font-bodyalt font-[400] text-[14rem] leaiding-[17rem] text-[#1F2117] lg:text-[18rem] whitespace-pre text-end lg:text-center">
 										{e && e.paidPeriodStart
 											? `${new Date(e.paidPeriodStart).toLocaleDateString()}\n${new Date(
 													e.paidPeriodStart,
@@ -219,7 +219,7 @@ const Payment = () => {
 									<div className="font-bodyalt font-[400] text-[14rem] leading-[19rem] text-[#AAAAAA] lg:hidden">
 										Конец
 									</div>
-									<div className="font-bodyalt font-[400] text-[14rem] leaiding-[17rem] text-[#1F2117] lg:text-[18rem] whitespace-pre text-end">
+									<div className="font-bodyalt font-[400] text-[14rem] leaiding-[17rem] text-[#1F2117] lg:text-[18rem] whitespace-pre text-end lg:text-center">
 										{e && e.paidPeriodEnd
 											? `${new Date(e.paidPeriodEnd).toLocaleDateString()}\n${new Date(
 													e.paidPeriodEnd,
