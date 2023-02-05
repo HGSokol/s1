@@ -1,6 +1,6 @@
 import React, { useRef, ChangeEvent, useEffect, useLayoutEffect } from 'react';
 import { useState, useContext } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
@@ -11,21 +11,10 @@ import { Profile } from '../../App';
 import UnknownUser from '../../img/unknownUser.png';
 
 interface IFormInputs {
-	oldpassword: string;
-	password: string;
-	password2: string;
+	avatar: File;
+	name: string;
+	lastName: string;
 }
-
-const schema = yup
-	.object({
-		password: yup
-			.string()
-			.required('Обязательное поле')
-			.min(8, 'Пароль слишком короткий - минимум 8 знаков.')
-			.matches(/[a-zA-Z0-9]/, 'Пароль может содержать только латинские буквы'),
-		password2: yup.string().oneOf([yup.ref('password'), null], 'Пароли должны совпадать'),
-	})
-	.required();
 
 const CabinetInfo = () => {
 	const { user, deviceName, reload, setReload, setUser } = useContext(Profile);
@@ -52,59 +41,45 @@ const CabinetInfo = () => {
 			});
 	}, [reload]);
 
-	const dataInfo = [
-		{ label: 'Имя', data: user?.name },
-		{ label: 'Фамилия', data: user?.lastName },
-		{ label: 'E-mail', data: user?.email },
-	];
-
-	const [oldPassError, setOldPassError] = useState<string | null>(null);
 	const [type, setType] = useState(true);
 	const filePicker = useRef<HTMLInputElement | null>(null);
+	const [avatar, setAvatar] = useState<File | null>(null);
 
 	const navigate = useNavigate();
-	const {
-		register,
-		handleSubmit,
-		formState: { errors, isValid },
-		reset,
-	} = useForm<IFormInputs>({
-		resolver: yupResolver(schema),
-		mode: 'onChange',
-	});
-
-	const token = localStorage.getItem('user');
-	const oldPass = localStorage.getItem('password');
+	const { register, handleSubmit, reset } = useForm<IFormInputs>({ mode: 'onSubmit' });
 
 	// reset password
-	const onSubmit = (data: IFormInputs) => {
-		reset();
-		if (
-			oldPass &&
-			token &&
-			data.oldpassword === JSON.parse(oldPass) &&
-			data.password !== JSON.parse(oldPass)
-		) {
-			const userInfo = {
-				password: data.password,
-				email: `${user?.email}`,
-				token: `${token ? JSON.parse(token).token : ''}`,
-				deviceName,
-			};
+	const onSubmit: SubmitHandler<IFormInputs> = (data: any) => {
+		const { name, lastName } = data;
+		let fromData = new FormData();
+		fromData.append('avatar', avatar!);
 
+		if (avatar) {
 			axios
-				.put('https://stage.fitnesskaknauka.com/api/auth/reset-password', userInfo)
+				.put('https://stage.fitnesskaknauka.com/api/customer', fromData)
 				.then((res) => {
-					// console.log(res)
-					reset();
+					console.log(res, 'ответ');
+					setReload(true);
 				})
-				.catch((error) => {
-					console.log(error.response.data);
+				.catch((err) => {
+					console.log(err.response.data);
 				});
 		}
-		if (oldPass && data.password === JSON.parse(oldPass)) {
-			setOldPassError('Старый и новый пароль должны быть различны');
-		}
+
+		axios
+			.put('https://stage.fitnesskaknauka.com/api/customer', {
+				name: name === '' ? user?.name : name,
+				lastName: lastName === '' ? user?.lastName : lastName,
+			})
+			.then((res) => {
+				console.log(res, 'ответ');
+				setReload(true);
+			})
+			.catch((err) => {
+				console.log(err.response.data);
+			});
+
+		reset();
 	};
 
 	const onClickChangeType = () => {
@@ -113,19 +88,9 @@ const CabinetInfo = () => {
 
 	// update img
 	const getPhoto = async (data: ChangeEvent<HTMLInputElement>) => {
-		let fromData = new FormData();
+		// let fromData = new FormData();
 		if (data.target && data.target.files && data.target.files[0]) {
-			fromData.append('avatar', data.target.files[0]);
-
-			axios
-				.put('https://stage.fitnesskaknauka.com/api/customer', fromData)
-				.then((res) => {
-					console.log(res);
-					setReload(true);
-				})
-				.catch((err) => {
-					console.log(err.response.data);
-				});
+			setAvatar(data.target.files[0]);
 		}
 	};
 
@@ -133,6 +98,7 @@ const CabinetInfo = () => {
 		filePicker?.current?.click();
 	};
 
+	console.log(avatar);
 	return (
 		<div className="mx-[16rem] lg:mx-[0rem]">
 			<div className="pt-[15rem] w-full flex flex-row relative mb-[24rem] lg:hidden">
@@ -166,31 +132,34 @@ const CabinetInfo = () => {
 			<div className="hidden lg:flex font-body font-[600] text-[40rem] leading-[47rem] text-[#1F2117] mb-[32rem]">
 				Общая информация
 			</div>
-			<div
-				onClick={getPhotoTest}
-				className="cursor-pointer mb-[20rem] w-full p-[16rem] flex flex-row items-center bg-[#FFFFFF] border-[1px] border-[rgba(31_33_23_0.08)] rounded-[8rem] lg:mb-[20rem] lg:w-[441rem] lg:p-[16rem] lg:flex lg:flex-row lg:items-center lg:bg-[#FFFFFF] lg:border-[1px] lg:border-[rgba(31_33_23_0.08)] lg:rounded-[8rem]">
-				<div className="w-[60rem] h-[60rem] mr-[20rem] lg:mr-[28rem]">
-					{!user?.avatar ? (
-						<img
-							src={UnknownUser}
-							alt="avatar"
-							className="rounded-full w-[60rem] h-[60rem] lg:w-[60rem] lg:h-[60rem]"
-						/>
-					) : (
-						<img
-							src={user.avatar}
-							alt="avatar"
-							className="rounded-full w-[60rem] h-[60rem] lg:w-[60rem] lg:h-[60rem]"
-						/>
-					)}
-				</div>
-				<div className="mr-[14rem] lg:mr-[16rem]">
-					<form className="upload">
+			<form className="upload" onSubmit={handleSubmit(onSubmit)}>
+				<div
+					onClick={getPhotoTest}
+					className={`cursor-pointer mb-[20rem] w-full p-[16rem] flex flex-row items-center bg-[#FFFFFF] border-[1px] ${
+						avatar !== null ? ' border-yellow-600:' : ' border-[rgba(31_33_23_0.08)]'
+					}  rounded-[8rem] lg:mb-[20rem] lg:w-[441rem] lg:p-[16rem] lg:flex lg:flex-row lg:items-center lg:bg-[#FFFFFF] lg:border-[1px] lg:border-[rgba(31_33_23_0.08)] lg:rounded-[8rem]`}>
+					<div className="w-[60rem] h-[60rem] mr-[20rem] lg:mr-[28rem]">
+						{!user?.avatar ? (
+							<img
+								src={UnknownUser}
+								alt="avatar"
+								className="rounded-full w-[60rem] h-[60rem] lg:w-[60rem] lg:h-[60rem]"
+							/>
+						) : (
+							<img
+								src={user.avatar}
+								alt="avatar"
+								className="rounded-full w-[60rem] h-[60rem] lg:w-[60rem] lg:h-[60rem]"
+							/>
+						)}
+					</div>
+					<div className="mr-[14rem] lg:mr-[16rem]">
 						<input
 							type="file"
-							className="overflow-hidden opacity-0 h-[0rem] w-[0rem] leading-[0rem] p-[0rem] m-[0rem]"
 							name="uploadFile"
+							className="overflow-hidden opacity-0 h-[0rem] w-[0rem] leading-[0rem] p-[0rem] m-[0rem]"
 							accept=".jpg,.jpeg,.png"
+							// {...register('avatar')}
 							ref={filePicker}
 							onChange={getPhoto}
 						/>
@@ -221,36 +190,48 @@ const CabinetInfo = () => {
 								strokeLinejoin="round"
 							/>
 						</svg>
-					</form>
+					</div>
+					<div className="w-[189rem] font-bodyalt font-[400] text-[16rem] text-[#1F2117]/60 leading-[19rem] lg:w-max lg:font-bodyalt lg:font-[400] lg:text-[16rem] lg:text-[#1F2117]/60 lg:leading-[19rem]">
+						Загрузить другое изображение
+					</div>
 				</div>
-				<div className="w-[189rem] font-bodyalt font-[400] text-[16rem] text-[#1F2117]/60 leading-[19rem] lg:w-max lg:font-bodyalt lg:font-[400] lg:text-[16rem] lg:text-[#1F2117]/60 lg:leading-[19rem]">
-					Загрузить другое изображение
-				</div>
-			</div>
-			<div className="flex flex-col gap-[16rem] w-full mb-[24rem] lg:flex lg:flex-row lg:flex-wrap lg:gap-[20rem] lg:w-[1000rem] lg:mb-[48rem]">
-				{dataInfo.map((e, i) => {
-					return (
-						<div key={i} className="w-full lg:w-[441rem]">
-							<p className="font-bodyalt font-[400] text-[14rem] text-[#AAAAAA] leading-[19rem] mb-[12rem] lg:font-bodyalt lg:font-[400] lg:text-[16rem] lg:text-[#AAAAAA] lg:leading-[19rem] lg:mb-[14rem]">
-								{e.label}
-							</p>
-							<div
-								className="flex items-center text-[14rem] hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] 
-              lg:text-[16rem] lg:h-[56rem] lg:px-[16rem] lg:rounded-[8rem]">
-								{e.data}
-							</div>
+				<div className="flex flex-col gap-[16rem] w-full mb-[24rem] lg:flex lg:flex-row lg:flex-wrap lg:gap-[20rem] lg:w-[1000rem] lg:mb-[48rem]">
+					<div className="w-full lg:w-[441rem]">
+						<p className="font-bodyalt font-[400] text-[14rem] text-[#AAAAAA] leading-[19rem] mb-[12rem] lg:font-bodyalt lg:font-[400] lg:text-[16rem] lg:text-[#AAAAAA] lg:leading-[19rem] lg:mb-[14rem]">
+							Имя
+						</p>
+						<input
+							{...register('name')}
+							placeholder={user?.name !== null ? user?.name : ''}
+							className="flex items-center text-[14rem] placeholder:text-[#1F2117]  hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] 
+								lg:text-[16rem] lg:h-[56rem] lg:px-[16rem] lg:rounded-[8rem]"></input>
+					</div>
+					<div className="w-full lg:w-[441rem]">
+						<p className="font-bodyalt font-[400] text-[14rem] text-[#AAAAAA] leading-[19rem] mb-[12rem] lg:font-bodyalt lg:font-[400] lg:text-[16rem] lg:text-[#AAAAAA] lg:leading-[19rem] lg:mb-[14rem]">
+							Фамилия
+						</p>
+						<input
+							{...register('lastName')}
+							placeholder={user?.lastName !== null ? user?.lastName : ''}
+							className="flex items-center text-[14rem] placeholder:text-[#1F2117]  hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] 
+								lg:text-[16rem] lg:h-[56rem] lg:px-[16rem] lg:rounded-[8rem]"></input>
+					</div>
+					<div className="w-full lg:w-[441rem]">
+						<p className="font-bodyalt font-[400] text-[14rem] text-[#AAAAAA] leading-[19rem] mb-[12rem] lg:font-bodyalt lg:font-[400] lg:text-[16rem] lg:text-[#AAAAAA] lg:leading-[19rem] lg:mb-[14rem]">
+							E-mail
+						</p>
+						<div
+							className="flex items-center text-[14rem]  hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] 
+								lg:text-[16rem] lg:h-[56rem] lg:px-[16rem] lg:rounded-[8rem]">
+							{user?.email}
 						</div>
-					);
-				})}
-			</div>
-			<div className="w-full lg:w-[1000rem]">
-				<p className="font-bodyalt font-[600] text-[16rem] leaing-[19rem] text-[#1F2117] mb-[24rem] lg:font-body lg:font-[600] lg:text-[26rem] lg:text-[#1F2117] lg:leading-[30rem] lg:mb-[32rem]">
-					Изменение пароля
-				</p>
-				<div>
-					<form
-						onSubmit={handleSubmit(onSubmit)}
-						className="flex flex-col gap-[20rem] w-full lg:flex-row lg:flex-wrap lg:gap-[20rem] lg:w-[1000rem]">
+					</div>
+				</div>
+				<div className="w-full lg:w-[1000rem]">
+					<p className="font-bodyalt font-[600] text-[16rem] leaing-[19rem] text-[#1F2117] mb-[24rem] lg:font-body lg:font-[600] lg:text-[26rem] lg:text-[#1F2117] lg:leading-[30rem] lg:mb-[32rem]">
+						Изменение пароля
+					</p>
+					<div className="flex flex-col gap-[20rem] w-full lg:flex-row lg:flex-wrap lg:gap-[20rem] lg:w-[1000rem]">
 						<div className="relative lg:w-[441rem]">
 							<div
 								className="absolute translate-x-[305rem] translate-y-[47rem] lg:translate-x-[400rem] lg:translate-y-[50rem] cursor-pointer"
@@ -266,10 +247,9 @@ const CabinetInfo = () => {
 							</p>
 							<input
 								placeholder="Введите старый пароль"
-								{...register('oldpassword')}
 								type={`${type === true ? 'password' : 'text'}`}
 								className={`text-[14rem] hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
-              lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]`}
+								lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]`}
 							/>
 						</div>
 						<div className="relative lg:w-[441rem]">
@@ -288,14 +268,13 @@ const CabinetInfo = () => {
 							<input
 								placeholder="Введите новый пароль"
 								type={`${type === true ? 'password' : 'text'}`}
-								{...register('password')}
 								className={`text-[14rem] hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
-              lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
-              ${errors.password ? ' hover:border-[#CB1D1D]' : ' '}`}
+								lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
+								`}
 							/>
-							{errors.password ? (
+							{/* {errors.password ? (
 								<p className="text-red-600 h-[24rem] text-[15rem]">{errors.password?.message}</p>
-							) : null}
+							) : null} */}
 						</div>
 						<div className="relative lg:flex lg:flex-col lg:w-[441rem]">
 							<div
@@ -313,33 +292,30 @@ const CabinetInfo = () => {
 							<input
 								placeholder="Введите новый пароль"
 								type={`${type === true ? 'password' : 'text'}`}
-								{...register('password2')}
 								className={`text-[14rem] hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
-              lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem] mb-[32rem]
-              ${errors.password2 ? ' hover:border-[#CB1D1D]' : ' '}`}
+								lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem] mb-[32rem]
+								`}
 							/>
-							{errors.password2 ? (
+							{/* {errors.password2 ? (
 								<p className="text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]">
 									{errors.password2?.message}
 								</p>
-							) : null}
+							) : null} */}
 							<div className="mb-[15rem] lg:mb-[26rem]">
-								{oldPassError ? (
+								{/* {oldPassError ? (
 									<p className="lg:text-red-600 lg:h-[24rem] lg:text-[15rem]">{oldPassError}</p>
-								) : null}
+								) : null} */}
 								<button
 									type="submit"
-									disabled={!isValid}
-									className={`${
-										isValid === true ? ' bg-[#FFB700]' : ' bg-[#FFB700]/50'
-									} font-bodyalt  lg:mb-[24rem] w-full h-[51rem] rem-[18rem] text-[16rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem]`}>
+									// disabled={!isValid}
+									className={` font-bodyalt bg-yellow-600 lg:mb-[24rem] w-full h-[51rem] rem-[18rem] text-[16rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem]`}>
 									Изменить пароль
 								</button>
 							</div>
 						</div>
-					</form>
+					</div>
 				</div>
-			</div>
+			</form>
 		</div>
 	);
 };

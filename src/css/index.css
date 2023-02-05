@@ -19,6 +19,12 @@ html, body{
 ::-webkit-scrollbar {
   width: 0;
 }
+::-webkit-credentials-auto-fill-button {
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}
 
 * {
   -webkit-tap-highlight-color: transparent;
