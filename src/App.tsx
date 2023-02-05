@@ -3,33 +3,33 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { deviceType } from 'react-device-detect';
 import { Helmet } from 'react-helmet';
 import axios from 'axios';
-import HomePage from './Pages/Home';
-import Spinner from './components/Spinner';
+import HomePage from './js/Pages/Home';
+import Spinner from './js/components/Spinner';
 import { gapi } from 'gapi-script';
 
-const Login = lazy(() => import('./layouts/Login'));
-const Cabinet = lazy(() => import('./layouts/Cabinet'));
-const Usefull = lazy(() => import('./Pages/Usefull'));
-const Activity = lazy(() => import('./Pages/Activity'));
-const Statistics = lazy(() => import('./Pages/Statistics'));
-const Nutrition = lazy(() => import('./Pages/Nutrition'));
-const MyProfile = lazy(() => import('./Pages/Profile'));
-const Subs = lazy(() => import('./Pages/Subs'));
-const ChangeSubs = lazy(() => import('./Pages/ChangeSubs'));
-const ChangePayment = lazy(() => import('./Pages/ChangePayment'));
-const Ordering = lazy(() => import('./Pages/Ordering'));
-const Ordering3 = lazy(() => import('./Pages/Ordering3'));
-const CabinetInfo = lazy(() => import('./Pages/CabinetInfo'));
-const Payment = lazy(() => import('./Pages/Payment'));
-const PaymentsStatus = lazy(() => import('./Pages/PaymentsStatus'));
-const LoginForm = lazy(() => import('./Pages/LoginForm'));
-const Register = lazy(() => import('./Pages/Registration'));
-const ChangePassword = lazy(() => import('./Pages/ChangePassword'));
-const ChangePassword2 = lazy(() => import('./Pages/ChangePassword2'));
-const ChangePassword3 = lazy(() => import('./Pages/ChangePassword3'));
-const UserAgreements = lazy(() => import('./Pages/UserAgreements'));
-const PrivacyPolicy = lazy(() => import('./Pages/PrivacyPolicy'));
-const NotFound = lazy(() => import('./Pages/PageNotFound'));
+const Login = lazy(() => import('./js/layouts/Login'));
+const Cabinet = lazy(() => import('./js/layouts/Cabinet'));
+const Usefull = lazy(() => import('./js/Pages/Usefull'));
+const Activity = lazy(() => import('./js/Pages/Activity'));
+const Statistics = lazy(() => import('./js/Pages/Statistics'));
+const Nutrition = lazy(() => import('./js/Pages/Nutrition'));
+const MyProfile = lazy(() => import('./js/Pages/Profile'));
+const Subs = lazy(() => import('./js/Pages/Subs'));
+const ChangeSubs = lazy(() => import('./js/Pages/ChangeSubs'));
+const ChangePayment = lazy(() => import('./js/Pages/ChangePayment'));
+const Ordering = lazy(() => import('./js/Pages/Ordering'));
+const Ordering3 = lazy(() => import('./js/Pages/Ordering3'));
+const CabinetInfo = lazy(() => import('./js/Pages/CabinetInfo'));
+const Payment = lazy(() => import('./js/Pages/Payment'));
+const PaymentsStatus = lazy(() => import('./js/Pages/PaymentsStatus'));
+const LoginForm = lazy(() => import('./js/Pages/LoginForm'));
+const Register = lazy(() => import('./js/Pages/Registration'));
+const ChangePassword = lazy(() => import('./js/Pages/ChangePassword'));
+const ChangePassword2 = lazy(() => import('./js/Pages/ChangePassword2'));
+const ChangePassword3 = lazy(() => import('./js/Pages/ChangePassword3'));
+const UserAgreements = lazy(() => import('./js/Pages/UserAgreements'));
+const PrivacyPolicy = lazy(() => import('./js/Pages/PrivacyPolicy'));
+const NotFound = lazy(() => import('./js/Pages/PageNotFound'));
 
 // const metaTag = document.querySelector(`meta[name="google-signin-client_id"]`) as HTMLMetaElement
 // const MetaContent = metaTag.content
@@ -229,13 +229,13 @@ function App() {
 					}
 				});
 
-			gapi.load('client:auth2', () => {
-				//@ts-ignore
-				gapi.auth2.init({
-					clientId: '690913230835-7gqha5d9kt9seh5imsdgaht12rpj3sj9.apps.googleusercontent.com',
-					plugin_name: 'chat',
-				});
-			});
+			// gapi.load('client:auth2', () => {
+			// 	//@ts-ignore
+			// 	gapi.auth2.init({
+			// 		clientId: `${MetaContent}`,
+			// 		plugin_name: 'chat',
+			// 	});
+			// });
 			setReload(false);
 		}
 	}, []);

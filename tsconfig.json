@@ -25,6 +25,6 @@
     "node_modules"
   ],
   "include": [
-    "src", "src/@types", "src/@types"
+    "src", "src/js/@types", "src/js/@types"
   ]
 }
