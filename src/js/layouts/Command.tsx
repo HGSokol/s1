@@ -194,9 +194,6 @@ export const Command = () => {
 		active! <= 0 ? setActive(data.length - 1) : setActive((prev) => prev! - 1);
 	};
 
-	const trLength = active! > 4 ? `${(size + gap) * (active! - 3)}` : 0;
-	const sizeCarousel = trLength >= 2200 ? '2200rem' : `${trLength}px`;
-
 	React.useEffect(() => {
 		if (ref.current) {
 			setSize(ref.current.getBoundingClientRect().width);
@@ -207,6 +204,11 @@ export const Command = () => {
 	React.useEffect(() => {
 		setWrapper(size * 6 + gap * 5);
 	}, [size, gap]);
+
+	const fullLength = (data.length - 5) * size + gap * (data.length - 5);
+
+	const trLength = active! > 4 ? `${(size + gap) * (active! - 3)}` : 0;
+	const sizeCarousel = trLength >= fullLength ? `${fullLength}px` : `${trLength}px`;
 
 	return (
 		<div
@@ -287,7 +289,7 @@ export const Command = () => {
               lg:grid-rows-[420rem_150rem] snap-center lg:gap-[0rem">
 								<div
 									ref={ref}
-									className={`relative h-[355rem] bg-cover bg-center delay-300 duration-[500ms] rounded-[20rem] z-0 w-[340rem]
+									className={`relative h-[355rem] bg-cover bg-center delay-300 duration-[500ms] rounded-[20rem] z-0 w-[320rem]
                   lg:h-[420rem] lg:rounded-[20rem] 
                   ${active === i ? ' lg:w-[530rem]' : ' lg:w-[255rem]'}`}
 									style={{ backgroundImage: `url(${e.img})` }}
@@ -356,8 +358,8 @@ export const Command = () => {
 									</div>
 								</div>
 								<div
-									className={`font-bodyalt py-[14rem] text-[16rem] leading-[19rem] animate-wiggle text-[#777872]/80 font-[400]
-                  lg:leading-[32.71rem] lg:pl-[20rem] lg:pt-[20rem] lg:text-[22rem] 
+									className={`font-bodyalt px-[8rem] py-[14rem] text-[16rem] leading-[19rem] animate-wiggle text-[#777872]/80 font-[400]
+                  lg:leading-[32.71rem] lg:pl-[20rem] lg:px-[0rem] lg:pt-[20rem] lg:text-[22rem] 
                   lg:${active === i ? 'visible' : 'hidden'}`}>
 									{e.description}
 								</div>

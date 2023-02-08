@@ -145,7 +145,7 @@ const MyProfile = () => {
 					Выход
 				</div>
 			</div>
-			<div className="hidden lg:flex">
+			<div className="lg:flex">
 				<Outlet />
 			</div>
 		</div>

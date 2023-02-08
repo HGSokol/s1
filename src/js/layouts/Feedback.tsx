@@ -103,11 +103,14 @@ export const Feedback = () => {
 	const [wrapper, setWrapper] = useState<number>(0);
 	const ref = useRef<HTMLDivElement | null>(null);
 
+	const fullLength = (data.length - 3) * size + gap * (data.length - 4);
+
 	const right = () => {
-		if (translate <= (size + gap) * data.length - size * 4) {
+		if (translate <= fullLength) {
 			setTranslate((prev) => prev + (size + gap));
 		}
 	};
+
 	const left = () => {
 		if (translate > 0) {
 			setTranslate((prev) => prev - (size + gap));

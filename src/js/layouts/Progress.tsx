@@ -11,7 +11,7 @@ const frameInteractive = [
 	{ img1: require('../../img/gr2.png'), img2: require('../../img/g2.png') },
 ];
 
-const data: Data = ['Отчеты по питанию', 'Статистика тренировок'];
+const data: Data = ['Отчеты по питанию', 'Режим тренировок'];
 
 export const Progress = () => {
 	const [active, setActive] = useState(0);

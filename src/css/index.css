@@ -14,11 +14,24 @@ html, body{
   scroll-behavior: smooth;
   -webkit-appearance: none;
   -ms-touch-action: manipulation;
+
+  /*fix safari border-radius and overflow hidden problem*/
+  -webkit-transform: translateZ(0);
+  -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
+
 }
 
+.g_id_signin {
+  display: none;
+}
+
+#appleid-signin {
+  display: none;
+}
 ::-webkit-scrollbar {
   width: 0;
 }
+
 ::-webkit-credentials-auto-fill-button {
   visibility: hidden;
   pointer-events: none;

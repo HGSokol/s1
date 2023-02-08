@@ -43,6 +43,8 @@ const CabinetInfo = () => {
 
 	const [type, setType] = useState(true);
 	const filePicker = useRef<HTMLInputElement | null>(null);
+	const [nameChanges, setNamechanges] = useState(false);
+	const [lastNameChanges, setLastNameChanges] = useState(false);
 	const [avatar, setAvatar] = useState<File | null>(null);
 
 	const navigate = useNavigate();
@@ -51,6 +53,7 @@ const CabinetInfo = () => {
 	// reset password
 	const onSubmit: SubmitHandler<IFormInputs> = (data: any) => {
 		const { name, lastName } = data;
+		console.log(name, lastName);
 		let fromData = new FormData();
 		fromData.append('avatar', avatar!);
 
@@ -58,8 +61,8 @@ const CabinetInfo = () => {
 			axios
 				.put('https://stage.fitnesskaknauka.com/api/customer', fromData)
 				.then((res) => {
-					console.log(res, 'ответ');
 					setReload(true);
+					setAvatar(null);
 				})
 				.catch((err) => {
 					console.log(err.response.data);
@@ -72,7 +75,6 @@ const CabinetInfo = () => {
 				lastName: lastName === '' ? user?.lastName : lastName,
 			})
 			.then((res) => {
-				console.log(res, 'ответ');
 				setReload(true);
 			})
 			.catch((err) => {
@@ -98,7 +100,6 @@ const CabinetInfo = () => {
 		filePicker?.current?.click();
 	};
 
-	console.log(avatar);
 	return (
 		<div className="mx-[16rem] lg:mx-[0rem]">
 			<div className="pt-[15rem] w-full flex flex-row relative mb-[24rem] lg:hidden">
@@ -136,7 +137,7 @@ const CabinetInfo = () => {
 				<div
 					onClick={getPhotoTest}
 					className={`cursor-pointer mb-[20rem] w-full p-[16rem] flex flex-row items-center bg-[#FFFFFF] border-[1px] ${
-						avatar !== null ? ' border-yellow-600:' : ' border-[rgba(31_33_23_0.08)]'
+						avatar !== null ? ' border-[#009245]' : ' border-[#1F211714] hover:border-[#777872]'
 					}  rounded-[8rem] lg:mb-[20rem] lg:w-[441rem] lg:p-[16rem] lg:flex lg:flex-row lg:items-center lg:bg-[#FFFFFF] lg:border-[1px] lg:border-[rgba(31_33_23_0.08)] lg:rounded-[8rem]`}>
 					<div className="w-[60rem] h-[60rem] mr-[20rem] lg:mr-[28rem]">
 						{!user?.avatar ? (
@@ -201,20 +202,36 @@ const CabinetInfo = () => {
 							Имя
 						</p>
 						<input
-							{...register('name')}
+							{...register('name', {
+								onChange: (e) => {
+									e.target.value !== '' ? setNamechanges(true) : setNamechanges(false);
+								},
+							})}
 							placeholder={user?.name !== null ? user?.name : ''}
-							className="flex items-center text-[14rem] placeholder:text-[#1F2117]  hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] 
-								lg:text-[16rem] lg:h-[56rem] lg:px-[16rem] lg:rounded-[8rem]"></input>
+							className={`flex items-center text-[14rem] placeholder:text-[#1F2117] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] 
+								lg:text-[16rem] lg:h-[56rem] lg:px-[16rem] lg:rounded-[8rem]
+                ${
+									nameChanges ? ' border-[#009245]' : ' border-[#1F211714] hover:border-[#777872]'
+								}`}></input>
 					</div>
 					<div className="w-full lg:w-[441rem]">
 						<p className="font-bodyalt font-[400] text-[14rem] text-[#AAAAAA] leading-[19rem] mb-[12rem] lg:font-bodyalt lg:font-[400] lg:text-[16rem] lg:text-[#AAAAAA] lg:leading-[19rem] lg:mb-[14rem]">
 							Фамилия
 						</p>
 						<input
-							{...register('lastName')}
+							{...register('lastName', {
+								onChange: (e) => {
+									e.target.value !== '' ? setLastNameChanges(true) : setLastNameChanges(false);
+								},
+							})}
 							placeholder={user?.lastName !== null ? user?.lastName : ''}
-							className="flex items-center text-[14rem] placeholder:text-[#1F2117]  hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] 
-								lg:text-[16rem] lg:h-[56rem] lg:px-[16rem] lg:rounded-[8rem]"></input>
+							className={`flex items-center text-[14rem] placeholder:text-[#1F2117]  outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] 
+								lg:text-[16rem] lg:h-[56rem] lg:px-[16rem] lg:rounded-[8rem]
+                ${
+									lastNameChanges
+										? ' border-[#009245]'
+										: ' border-[#1F211714] hover:border-[#777872]'
+								}`}></input>
 					</div>
 					<div className="w-full lg:w-[441rem]">
 						<p className="font-bodyalt font-[400] text-[14rem] text-[#AAAAAA] leading-[19rem] mb-[12rem] lg:font-bodyalt lg:font-[400] lg:text-[16rem] lg:text-[#AAAAAA] lg:leading-[19rem] lg:mb-[14rem]">
@@ -307,8 +324,11 @@ const CabinetInfo = () => {
 								) : null} */}
 								<button
 									type="submit"
-									// disabled={!isValid}
-									className={` font-bodyalt bg-yellow-600 lg:mb-[24rem] w-full h-[51rem] rem-[18rem] text-[16rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem]`}>
+									disabled={!nameChanges && !lastNameChanges && !avatar}
+									className={` font-bodyalt bg-[#FFB700] lg:mb-[24rem] w-full h-[51rem] rem-[18rem] text-[16rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem]
+                  ${
+										!nameChanges && !lastNameChanges && !avatar ? ' bg-yellow-300' : ' bg-[#FFB700]'
+									}`}>
 									Изменить пароль
 								</button>
 							</div>

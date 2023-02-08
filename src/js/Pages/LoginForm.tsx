@@ -200,11 +200,11 @@ const LoginForm = () => {
 						</p>
 					) : null}
 				</div>
-				<Link to="/login/step1" className="lg:mb-[28rem]">
-					<p className="font-bodyalt text-[14rem] text-[#777872] font-[600] text-end lg:text-[16rem]">
+				<p className="font-bodyalt text-[14rem] text-[#777872] font-[600] text-end lg:text-[16rem] lg:mb-[28rem]">
+					<Link to="/login/step1" className="">
 						Забыли пароль?
-					</p>
-				</Link>
+					</Link>
+				</p>
 				<p className="w-full flex justify-center h-[20rem] mb-[5rem]">
 					{errorMessage ? (
 						<span className="text-[11px] text-[#CB1D1D] text-center h-[30rem] lg:h-[30rem] md:text-[15px] leading-[10rem] lg:text-[15rem]">

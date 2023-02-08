@@ -108,7 +108,7 @@ export const Footer = () => {
 					</div>
 				</div>
 				<div className="font-[400] font-bodyalt text-[16rem] text-[#CBCBCB] leading-[19rem]">
-					© 2022 Фитнес как наука.
+					© 2023 Фитнес как наука.
 				</div>
 			</div>
 			<div

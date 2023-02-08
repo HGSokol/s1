@@ -45,7 +45,6 @@ const PaymentsStatus = () => {
 						setReload(true);
 					}
 					if (res.status === 200) {
-						setReload(true);
 						payment();
 					}
 				})
@@ -59,7 +58,7 @@ const PaymentsStatus = () => {
 					setCardInfo(null);
 					setStateButton(true);
 				});
-		}, 2000);
+		}, 4000);
 	}
 
 	useEffect(() => {

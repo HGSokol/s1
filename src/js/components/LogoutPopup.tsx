@@ -20,7 +20,7 @@ export const LogoutPopup = (props: Props) => {
 			setSelectedPlan(null);
 			setCardInfo(null);
 			localStorage.clear();
-			navigate('/login');
+			navigate('/');
 		});
 	};
 

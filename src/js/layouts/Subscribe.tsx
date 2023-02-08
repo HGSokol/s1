@@ -48,7 +48,7 @@ const subsData: Subscribe[] = [
 			],
 		},
 		price: 3000,
-		name: '1 месяц',
+		name: '3 месяца',
 		id: 2,
 	},
 	{
@@ -60,7 +60,7 @@ const subsData: Subscribe[] = [
 			],
 		},
 		price: 9600,
-		name: '1 месяц',
+		name: 'год',
 		id: 3,
 		isBestChoice: true,
 	},
@@ -76,7 +76,7 @@ export const Subscribe = () => {
   lg:mb-[200rem]">
 			<p
 				className="font-[600] text-[32rem] leading-[37.57rem] mb-[32rem] text-[#1F2117]  
-    lg:text-[64rem] lg:leading-[75.14rem] lg:w-[842rem] lg:h-[75rem] lg:text-center lg:mx-auto lg:mb-[127rem]">
+    lg:text-[64rem] lg:leading-[75.14rem] lg:w-[842rem] lg:h-[75rem] lg:text-center lg:mx-auto lg:mb-[64rem]">
 				Подписки
 			</p>
 			<div
@@ -94,7 +94,7 @@ export const Subscribe = () => {
 					);
 				})}
 			</div>
-			<div className="lg:mt-[64rem] font-bodyalt lg:flex lg:justify-center">
+			<div className="lg:mt-[100rem] font-bodyalt lg:flex lg:justify-center">
 				<Link to={user ? '/cabinet' : '/login'}>
 					<button
 						className="bg-[#FFB700] text-[16rem] w-full leading-[14rem] h-[51rem] rounded-full text-center text-white tracking-[0.04em] flex flex-row items-center justify-center hover:bg-[#F0AD04]

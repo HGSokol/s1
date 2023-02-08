@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet';
 import axios from 'axios';
 import HomePage from './js/Pages/Home';
 import Spinner from './js/components/Spinner';
-import { gapi } from 'gapi-script';
+// import { gapi } from 'gapi-script';
 
 const Login = lazy(() => import('./js/layouts/Login'));
 const Cabinet = lazy(() => import('./js/layouts/Cabinet'));
@@ -225,7 +225,7 @@ function App() {
 				.catch((error) => {
 					console.log(error.response.data);
 					if (error.response.status === 401) {
-						navigate('/login');
+						// navigate('/login');
 					}
 				});
 
@@ -274,7 +274,23 @@ function App() {
 						<Route path="/" element={<HomePage />} />
 						{user ? (
 							<Route path="/cabinet" element={<Cabinet />}>
-								{window.innerWidth >= 1024 ? (
+								<Route path="/cabinet" element={<MyProfile />}>
+									<Route index element={<Subs />} />
+									<Route path="/cabinet/changeSubs" element={<ChangeSubs />} />
+									<Route path="/cabinet/payments" element={<Payment />} />
+									<Route path="/cabinet/changePayment" element={<ChangePayment />} />
+									<Route path="/cabinet/profile" element={<CabinetInfo />} />
+									<Route path="/cabinet/ordering" element={<Ordering />} />
+									<Route path="/cabinet/ordering3" element={<Ordering3 />} />
+									<Route path="/cabinet/payments/status" element={<PaymentsStatus />}>
+										<Route index element={<PaymentsStatus />} />
+										<Route
+											path="/cabinet/payments/status?paymentId=:paymentId"
+											element={<PaymentsStatus />}
+										/>
+									</Route>
+								</Route>
+								{/* {window.innerWidth >= 1024 ? (
 									<Route path="/cabinet" element={<MyProfile />}>
 										<Route index element={<Subs />} />
 										<Route path="/cabinet/changeSubs" element={<ChangeSubs />} />
@@ -309,7 +325,7 @@ function App() {
 											/>
 										</Route>
 									</>
-								)}
+								)} */}
 								<Route path="/cabinet/activity" element={<Activity />} />
 								<Route path="/cabinet/statistic" element={<Statistics />} />
 								<Route path="/cabinet/nutrition" element={<Nutrition />} />

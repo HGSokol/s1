@@ -12,13 +12,15 @@ export const CardInfo = () => {
 		lastCardNumber.current = numberCard.substring(12, numberCard.length);
 	}
 
+	console.log(cardInfo);
 	return (
 		<>
 			{cardInfo || userPaymentMethod ? (
 				<div className="w-full px-[20rem] py-[20rem] mb-[16rem] flex justify-between shadow-drop rounded-[14rem] lg:px-[20rem] lg:py-[25rem] lg:mb-[24rem] lg:flex lg:justify-between lg:shadow-drop lg:rounded-[14rem]">
 					<div
 						className={`w-[28rem] h-[28rem] ${
-							cardInfo && cardInfo.numberCard[0] === '2'
+							(cardInfo && cardInfo.numberCard[0] === '2') ||
+							(userPaymentMethod && userPaymentMethod.cardType === 'Mir')
 								? ' translate-y-[12rem] lg:translate-y-[0rem]'
 								: ''
 						}`}>
