@@ -88,10 +88,7 @@ const LoginForm = () => {
 									: (typeSubs = null);
 
 								if (typeSubs) {
-									if (
-										typeSubs === res.data.internalSubscription ||
-										typeSubs === res.data.externalSubscription.appleSubscription
-									) {
+									if (typeSubs === res.data.internalSubscription) {
 										setUserPaymentMethod({
 											cardType: typeSubs.userPaymentMethod.cardType,
 											expireMonth: typeSubs.userPaymentMethod.expireMonth,
@@ -109,13 +106,12 @@ const LoginForm = () => {
 										id2: typeSubs.id,
 										isFromApple:
 											typeSubs === res.data.externalSubscription.appleSubscription ? true : false,
-										endsAt: typeSubs.endsAt,
+										endsAt: typeSubs === res.data.internalSubscription ? typeSubs.endsAt : '',
 										error:
 											typeSubs !== res.data.free &&
+											typeSubs !== res.data.externalSubscription.appleSubscription &&
 											typeSubs.userPaymentMethod.status === 'has_error' &&
-											typeSubs.userPaymentMethod.lastError === 'insufficient_funds'
-												? true
-												: false,
+											typeSubs.userPaymentMethod.lastError === 'insufficient_funds',
 										type: res.data.internalSubscription
 											? 'internal'
 											: res.data.externalSubscription.appleSubscription

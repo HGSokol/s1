@@ -12,7 +12,6 @@ export const CardInfo = () => {
 		lastCardNumber.current = numberCard.substring(12, numberCard.length);
 	}
 
-	console.log(cardInfo);
 	return (
 		<>
 			{cardInfo || userPaymentMethod ? (

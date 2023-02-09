@@ -102,7 +102,7 @@ const Subs = () => {
 					</p>
 					<div className=" mb-[24rem] flex flex-col gap-[24rem] lg:flex-row lg:justify-between lg:mb-[48rem] lg:w-[472rem]">
 						<div className="w-full flex justify-between items-center lg:items-start flex-row lg:flex-col lg:justify-start">
-							<p className="font-bodyalt font-[600] text-[22rem] leading-[26rem] text-[#1F2117] lg:font-body lg:font-[600] lg:text-[20rem] lg:leading-[23rem] lg:text-[#1F2117] lg:mb-[12rem]">
+							<p className="font-bodyalt w-max font-[600] text-[22rem] leading-[26rem] text-[#1F2117] lg:font-body lg:font-[600] lg:text-[20rem] lg:leading-[23rem] lg:text-[#1F2117] lg:mb-[12rem]">
 								{activeSub?.name}
 							</p>
 							<p className="font-bodyalt font-[400] text-[14rem] leading-[17rem] text-[#777872] lg:font-bodyalt lg:font-[400] lg:text-[16rem] lg:leading-[19rem] lg:text-[#777872]">{`${

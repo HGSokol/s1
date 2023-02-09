@@ -1,11 +1,10 @@
-import { lazy, Suspense, createContext, useState, useEffect, useLayoutEffect } from 'react';
+import { lazy, Suspense, createContext, useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { deviceType } from 'react-device-detect';
 import { Helmet } from 'react-helmet';
 import axios from 'axios';
 import HomePage from './js/Pages/Home';
 import Spinner from './js/components/Spinner';
-// import { gapi } from 'gapi-script';
 
 const Login = lazy(() => import('./js/layouts/Login'));
 const Cabinet = lazy(() => import('./js/layouts/Cabinet'));
@@ -149,70 +148,11 @@ function App() {
 		deviceName = deviceType;
 	}, []);
 
-	// useEffect(() => {
-	// 	axios
-	// 		.get(`https://stage.fitnesskaknauka.com/api/customer/subscriptions/active`)
-	// 		.then((res) => {
-	// 			let typeSubs: any;
-
-	// 			res.data.internalSubscription
-	// 				? (typeSubs = res.data.internalSubscription)
-	// 				: res.data.externalSubscription.appleSubscription
-	// 				? (typeSubs = res.data.externalSubscription.appleSubscription)
-	// 				: res.data.free
-	// 				? (typeSubs = res.data.free)
-	// 				: (typeSubs = null);
-
-	// 			if (typeSubs) {
-	// 				if (
-	// 					typeSubs === res.data.internalSubscription ||
-	// 					typeSubs === res.data.externalSubscription.appleSubscription
-	// 				) {
-	// 					setUserPaymentMethod({
-	// 						cardType: typeSubs.userPaymentMethod.cardType,
-	// 						expireMonth: typeSubs.userPaymentMethod.expireMonth,
-	// 						expireYear: typeSubs.userPaymentMethod.expireYear,
-	// 						last4: typeSubs.userPaymentMethod.last4,
-	// 					});
-	// 				}
-	// 				//@ts-ignore
-	// 				setActiveSub((prev) => ({
-	// 					...prev,
-	// 					name: typeSubs.plan.name,
-	// 					duration: typeSubs.plan.invoicePeriod,
-	// 					price: typeSubs.plan.price,
-	// 					id: typeSubs.plan.id,
-	// 					id2: typeSubs.id,
-	// 					isFromApple:
-	// 						typeSubs === res.data.externalSubscription.appleSubscription ? true : false,
-	// 					endsAt: typeSubs.endsAt,
-	// 					error:
-	// 						typeSubs !== res.data.free &&
-	// 						typeSubs.userPaymentMethod.status === 'has_error' &&
-	// 						typeSubs.userPaymentMethod.lastError === 'insufficient_funds'
-	// 							? true
-	// 							: false,
-	// 					type: res.data.internalSubscription
-	// 						? 'internal'
-	// 						: res.data.externalSubscription.appleSubscription
-	// 						? 'external'
-	// 						: 'free',
-	// 				}));
-	// 			} else {
-	// 				setActiveSub(null);
-	// 			}
-	// 		})
-	// 		.catch((error) => {
-	// 			console.log(error);
-	// 		});
-	// }, []);
-
 	useEffect(() => {
 		if (reload === true && localUser && JSON.parse(localUser).token) {
 			axios
 				.get('https://stage.fitnesskaknauka.com/api/customer')
 				.then((res) => {
-					// console.log(res)
 					setUser((prev) => ({
 						...prev,
 						email: res.data.email,
@@ -224,18 +164,7 @@ function App() {
 				})
 				.catch((error) => {
 					console.log(error.response.data);
-					if (error.response.status === 401) {
-						// navigate('/login');
-					}
 				});
-
-			// gapi.load('client:auth2', () => {
-			// 	//@ts-ignore
-			// 	gapi.auth2.init({
-			// 		clientId: `${MetaContent}`,
-			// 		plugin_name: 'chat',
-			// 	});
-			// });
 			setReload(false);
 		}
 	}, []);
@@ -274,23 +203,7 @@ function App() {
 						<Route path="/" element={<HomePage />} />
 						{user ? (
 							<Route path="/cabinet" element={<Cabinet />}>
-								<Route path="/cabinet" element={<MyProfile />}>
-									<Route index element={<Subs />} />
-									<Route path="/cabinet/changeSubs" element={<ChangeSubs />} />
-									<Route path="/cabinet/payments" element={<Payment />} />
-									<Route path="/cabinet/changePayment" element={<ChangePayment />} />
-									<Route path="/cabinet/profile" element={<CabinetInfo />} />
-									<Route path="/cabinet/ordering" element={<Ordering />} />
-									<Route path="/cabinet/ordering3" element={<Ordering3 />} />
-									<Route path="/cabinet/payments/status" element={<PaymentsStatus />}>
-										<Route index element={<PaymentsStatus />} />
-										<Route
-											path="/cabinet/payments/status?paymentId=:paymentId"
-											element={<PaymentsStatus />}
-										/>
-									</Route>
-								</Route>
-								{/* {window.innerWidth >= 1024 ? (
+								{window.innerWidth >= 1024 ? (
 									<Route path="/cabinet" element={<MyProfile />}>
 										<Route index element={<Subs />} />
 										<Route path="/cabinet/changeSubs" element={<ChangeSubs />} />
@@ -325,7 +238,7 @@ function App() {
 											/>
 										</Route>
 									</>
-								)} */}
+								)}
 								<Route path="/cabinet/activity" element={<Activity />} />
 								<Route path="/cabinet/statistic" element={<Statistics />} />
 								<Route path="/cabinet/nutrition" element={<Nutrition />} />

@@ -69,7 +69,7 @@ const Cabinet = () => {
 						? (typeSubs = res.data.externalSubscription?.appleSubscription)
 						: res.data.free
 						? (typeSubs = res.data.free)
-						: (typeSubs = null);
+						: (typeSubs = '');
 
 					if (typeSubs) {
 						if (typeSubs === res.data.internalSubscription) {
@@ -89,9 +89,10 @@ const Cabinet = () => {
 							id: typeSubs.plan.id,
 							id2: typeSubs.id,
 							isFromApple: typeSubs === res.data.externalSubscription.appleSubscription,
-							endsAt: typeSubs.endsAt,
+							endsAt: typeSubs === res.data.internalSubscription ? typeSubs.endsAt : '',
 							error:
 								typeSubs !== res.data.free &&
+								typeSubs !== res.data.externalSubscription.appleSubscription &&
 								typeSubs.userPaymentMethod.status === 'has_error' &&
 								typeSubs.userPaymentMethod.lastError === 'insufficient_funds',
 							type: res.data.internalSubscription

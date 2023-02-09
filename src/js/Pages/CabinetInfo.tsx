@@ -17,7 +17,7 @@ interface IFormInputs {
 }
 
 const CabinetInfo = () => {
-	const { user, deviceName, reload, setReload, setUser } = useContext(Profile);
+	const { user, reload, setReload, setUser } = useContext(Profile);
 
 	document.title = 'Общая информация';
 
@@ -50,10 +50,8 @@ const CabinetInfo = () => {
 	const navigate = useNavigate();
 	const { register, handleSubmit, reset } = useForm<IFormInputs>({ mode: 'onSubmit' });
 
-	// reset password
 	const onSubmit: SubmitHandler<IFormInputs> = (data: any) => {
 		const { name, lastName } = data;
-		console.log(name, lastName);
 		let fromData = new FormData();
 		fromData.append('avatar', avatar!);
 
@@ -76,6 +74,8 @@ const CabinetInfo = () => {
 			})
 			.then((res) => {
 				setReload(true);
+				setNamechanges(false);
+				setLastNameChanges(false);
 			})
 			.catch((err) => {
 				console.log(err.response.data);
