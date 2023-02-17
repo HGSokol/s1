@@ -63,18 +63,15 @@ export const ChangePaymentData = (props?: ChangeCard) => {
 		errorNumber.current = null;
 		errorMonth.current = null;
 		errorCVC.current = null;
-		// setDateCard('')
-		// reset()
 
 		if (selectedPlan || activeSub) {
 			setLoad(true);
 			Checkout(cardInfo)
 				.then((res) => {
-					console.log(res);
 					if (res.status === 'success') {
 						console.log(res.data, 'ответ яндекса');
 						setYandexToken(res.data.response.paymentToken);
-						navigate('/cabinet/ordering3');
+						navigate('/cabinet/payments/processing');
 					}
 					if (res.status === 'error') {
 						console.log(res.status);
@@ -95,18 +92,6 @@ export const ChangePaymentData = (props?: ChangeCard) => {
 					setLoad(false);
 				});
 		}
-
-		// axios.post('https://stage.fitnesskaknauka.com/api/auth/send-reset-code', userInfo)
-		// .then((res) => {
-		//   console.log(res)
-		//   navigate("/login/step2");
-		// })
-		// .catch((error) => {
-		//   console.log(error)
-		//   setErrorMessage(error.response.data.message)
-		//   reset()
-
-		// })
 	};
 
 	const handleSubmitNumber = (event: React.ChangeEvent<HTMLInputElement>) => {

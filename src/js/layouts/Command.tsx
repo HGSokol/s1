@@ -14,9 +14,8 @@ type dataCard = {
 		youtube: string;
 	};
 };
-type DataType = dataCard[];
 
-const data: DataType = [
+const data: dataCard[] = [
 	{
 		img: require('../../img/face1.png'),
 		prof: 'Нутрициолог',
@@ -199,7 +198,7 @@ export const Command = () => {
 			setSize(ref.current.getBoundingClientRect().width);
 			setGap((window.innerWidth / 1920) * 20);
 		}
-	}, []);
+	}, [document.documentElement.clientWidth]);
 
 	React.useEffect(() => {
 		setWrapper(size * 6 + gap * 5);
@@ -276,7 +275,7 @@ export const Command = () => {
 			</div>
 			<div
 				className="mb-[30rem] overflow-hidden"
-				style={{ width: `${window.innerWidth >= 1024 ? `${wrapper}` : ''}px` }}>
+				style={{ width: `${window.innerWidth >= 1024 ? `${98}` : ''}%` }}>
 				<div
 					className="flex flex-row gap-[8rem] cursor-pointer duration-[600ms] snap-mandatory snap-x overflow-scroll -wekbit-scrollbar:w-[0rem] 
           lg:snap-none lg:overflow-visible lg:gap-[20rem] "

@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Profile } from '../../App';
+import { ReactComponent as Loader } from '../../img/loader.svg';
 
 interface IFormInputs {
 	email: string;
@@ -18,7 +19,8 @@ const schema = yup
 
 const ChangePassword = () => {
 	const [errorMessage, setErrorMessage] = useState<string | null>(null);
-	const { setUser } = useContext(Profile);
+	// const { setUser } = useContext(Profile);
+	const [load, setLoad] = useState(false);
 	const navigate = useNavigate();
 
 	document.title = 'Восстановление пароля';
@@ -34,11 +36,10 @@ const ChangePassword = () => {
 	});
 
 	const onSubmit = (data: IFormInputs) => {
-		setUser({
-			email: data.email,
-		});
+		setLoad(true);
+
 		localStorage.setItem(
-			'user',
+			'email',
 			JSON.stringify({
 				email: data.email,
 			}),
@@ -51,13 +52,20 @@ const ChangePassword = () => {
 		axios
 			.post('https://stage.fitnesskaknauka.com/api/auth/send-reset-code', userInfo)
 			.then((res) => {
+				reset();
 				console.log(res);
 				navigate('/login/step2');
 			})
 			.catch((error) => {
+				if (error.response.status === 401) {
+					localStorage.clear();
+					navigate('/');
+				}
 				console.log(error);
 				setErrorMessage(error.response.data.message);
-				reset();
+			})
+			.finally(() => {
+				setLoad(false);
 			});
 	};
 
@@ -98,8 +106,14 @@ const ChangePassword = () => {
 						disabled={!isValid}
 						className={`${
 							isValid === true ? ' bg-[#FFB700]' : ' bg-[#FFB700]/50'
-						} font-bodyalt mb-[20rem] lg:mb-[24rem] w-full h-[51rem] py-[14rem] rem-[18rem] text-[16rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem]`}>
-						Отправить код подтверждения
+						} flex items-center justify-center font-bodyalt mb-[20rem] lg:mb-[24rem] w-full h-[51rem] py-[14rem] rem-[18rem] text-[16rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem]`}>
+						{!load ? (
+							'Отправить код подтверждения'
+						) : (
+							<div className="w-[32rem] h-[32rem]">
+								<Loader />
+							</div>
+						)}
 					</button>
 				</div>
 			</form>

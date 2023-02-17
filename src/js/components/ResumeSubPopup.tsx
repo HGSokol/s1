@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { Dispatch, SetStateAction, useContext, useState } from 'react';
 import { Profile } from '../../App';
 import { ReactComponent as Loader } from '../../img/loader.svg';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
 	setActiveResumePopup: Dispatch<SetStateAction<boolean>>;
@@ -9,6 +10,8 @@ interface Props {
 
 export const ResumeSubPopup = (props: Props) => {
 	const { activeSub, setReload } = useContext(Profile);
+	const navigate = useNavigate();
+
 	const [load, setLoad] = useState(false);
 	const { setActiveResumePopup } = props;
 
@@ -19,12 +22,15 @@ export const ResumeSubPopup = (props: Props) => {
 				`https://stage.fitnesskaknauka.com/api/customer/subscriptions/internal/${activeSub?.id2}`,
 			)
 			.then((res) => {
-				// console.log(res, 'обновил подписку')
 				setActiveResumePopup(false);
 				setReload(true);
 			})
 			.catch((error) => {
 				console.log(error.response.data, 'ошибка обновления');
+				if (error.response.status === 401) {
+					localStorage.clear();
+					navigate('/');
+				}
 			})
 			.finally(() => {
 				setLoad(false);

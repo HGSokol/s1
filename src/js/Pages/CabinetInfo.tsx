@@ -1,11 +1,9 @@
 import React, { useRef, ChangeEvent, useEffect, useLayoutEffect } from 'react';
 import { useState, useContext } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
-import { AiOutlineEye } from 'react-icons/ai';
-import { BsEyeSlash } from 'react-icons/bs';
+import { ReactComponent as Loader } from '../../img/loader.svg';
+
 import axios from 'axios';
 import { Profile } from '../../App';
 import UnknownUser from '../../img/unknownUser.png';
@@ -17,9 +15,15 @@ interface IFormInputs {
 }
 
 const CabinetInfo = () => {
-	const { user, reload, setReload, setUser } = useContext(Profile);
-
 	document.title = 'Общая информация';
+	const { user, reload, setReload, setUser } = useContext(Profile);
+	const filePicker = useRef<HTMLInputElement | null>(null);
+	const [nameChanges, setNameChanges] = useState(false);
+	const [lastNameChanges, setLastNameChanges] = useState(false);
+	const [avatar, setAvatar] = useState<File | null>(null);
+
+	const navigate = useNavigate();
+	const { register, handleSubmit, reset } = useForm<IFormInputs>({ mode: 'onSubmit' });
 
 	useEffect(() => {
 		axios
@@ -34,58 +38,40 @@ const CabinetInfo = () => {
 					lastName: res.data.lastName,
 					avatar: res.data.avatar,
 					uuid: res.data.uuid,
+					isExternalRegistration: res.data.isExternalRegistration,
 				}));
 			})
 			.catch((error) => {
 				console.log(error.response);
 			});
-	}, [reload]);
-
-	const [type, setType] = useState(true);
-	const filePicker = useRef<HTMLInputElement | null>(null);
-	const [nameChanges, setNamechanges] = useState(false);
-	const [lastNameChanges, setLastNameChanges] = useState(false);
-	const [avatar, setAvatar] = useState<File | null>(null);
-
-	const navigate = useNavigate();
-	const { register, handleSubmit, reset } = useForm<IFormInputs>({ mode: 'onSubmit' });
+	}, []);
 
 	const onSubmit: SubmitHandler<IFormInputs> = (data: any) => {
 		const { name, lastName } = data;
 		let fromData = new FormData();
-		fromData.append('avatar', avatar!);
-
 		if (avatar) {
-			axios
-				.put('https://stage.fitnesskaknauka.com/api/customer', fromData)
-				.then((res) => {
-					setReload(true);
-					setAvatar(null);
-				})
-				.catch((err) => {
-					console.log(err.response.data);
-				});
+			fromData.append('avatar', avatar!);
 		}
+		fromData.append('name', name === '' ? user?.name : name);
+		fromData.append('lastName', lastName === '' ? user?.lastName : lastName);
 
 		axios
-			.put('https://stage.fitnesskaknauka.com/api/customer', {
-				name: name === '' ? user?.name : name,
-				lastName: lastName === '' ? user?.lastName : lastName,
-			})
+			.put('https://stage.fitnesskaknauka.com/api/customer', fromData)
 			.then((res) => {
 				setReload(true);
-				setNamechanges(false);
+				setAvatar(null);
+				setNameChanges(false);
 				setLastNameChanges(false);
 			})
 			.catch((err) => {
 				console.log(err.response.data);
+				if (err.response.status === 401) {
+					localStorage.clear();
+					navigate('/');
+				}
 			});
 
 		reset();
-	};
-
-	const onClickChangeType = () => {
-		setType((prev) => !prev);
 	};
 
 	// update img
@@ -137,7 +123,7 @@ const CabinetInfo = () => {
 				<div
 					onClick={getPhotoTest}
 					className={`cursor-pointer mb-[20rem] w-full p-[16rem] flex flex-row items-center bg-[#FFFFFF] border-[1px] ${
-						avatar !== null ? ' border-[#009245]' : ' border-[#1F211714] hover:border-[#777872]'
+						avatar !== null ? ' border-[#00ff00]' : ' border-[#1F211714] hover:border-[#777872]'
 					}  rounded-[8rem] lg:mb-[20rem] lg:w-[441rem] lg:p-[16rem] lg:flex lg:flex-row lg:items-center lg:bg-[#FFFFFF] lg:border-[1px] lg:border-[rgba(31_33_23_0.08)] lg:rounded-[8rem]`}>
 					<div className="w-[60rem] h-[60rem] mr-[20rem] lg:mr-[28rem]">
 						{!user?.avatar ? (
@@ -202,16 +188,17 @@ const CabinetInfo = () => {
 							Имя
 						</p>
 						<input
+							type="text"
 							{...register('name', {
 								onChange: (e) => {
-									e.target.value !== '' ? setNamechanges(true) : setNamechanges(false);
+									e.target.value !== '' ? setNameChanges(true) : setNameChanges(false);
 								},
 							})}
 							placeholder={user?.name !== null ? user?.name : ''}
-							className={`flex items-center text-[14rem] placeholder:text-[#1F2117] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] 
+							className={`flex items-center text-[14rem] placeholder:text-[#1F2117] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] 
 								lg:text-[16rem] lg:h-[56rem] lg:px-[16rem] lg:rounded-[8rem]
                 ${
-									nameChanges ? ' border-[#009245]' : ' border-[#1F211714] hover:border-[#777872]'
+									nameChanges ? ' border-[#00ff00]' : ' border-[#1F211714] hover:border-[#777872]'
 								}`}></input>
 					</div>
 					<div className="w-full lg:w-[441rem]">
@@ -219,17 +206,18 @@ const CabinetInfo = () => {
 							Фамилия
 						</p>
 						<input
+							type="text"
 							{...register('lastName', {
 								onChange: (e) => {
 									e.target.value !== '' ? setLastNameChanges(true) : setLastNameChanges(false);
 								},
 							})}
 							placeholder={user?.lastName !== null ? user?.lastName : ''}
-							className={`flex items-center text-[14rem] placeholder:text-[#1F2117]  outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] 
+							className={`flex items-center text-[14rem] placeholder:text-[#1F2117]  outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px]
 								lg:text-[16rem] lg:h-[56rem] lg:px-[16rem] lg:rounded-[8rem]
                 ${
 									lastNameChanges
-										? ' border-[#009245]'
+										? ' border-[#00ff00]'
 										: ' border-[#1F211714] hover:border-[#777872]'
 								}`}></input>
 					</div>
@@ -244,96 +232,17 @@ const CabinetInfo = () => {
 						</div>
 					</div>
 				</div>
-				<div className="w-full lg:w-[1000rem]">
-					<p className="font-bodyalt font-[600] text-[16rem] leaing-[19rem] text-[#1F2117] mb-[24rem] lg:font-body lg:font-[600] lg:text-[26rem] lg:text-[#1F2117] lg:leading-[30rem] lg:mb-[32rem]">
-						Изменение пароля
-					</p>
-					<div className="flex flex-col gap-[20rem] w-full lg:flex-row lg:flex-wrap lg:gap-[20rem] lg:w-[1000rem]">
-						<div className="relative lg:w-[441rem]">
-							<div
-								className="absolute translate-x-[305rem] translate-y-[47rem] lg:translate-x-[400rem] lg:translate-y-[50rem] cursor-pointer"
-								onClick={onClickChangeType}>
-								{type ? (
-									<BsEyeSlash color="#AAAAAA" className="w-[20rem] h-[20rem]" />
-								) : (
-									<AiOutlineEye color="#AAAAAA" className="w-[20rem] h-[20rem]" />
-								)}
-							</div>
-							<p className="font-bodyalt font-[400] text-[14rem] text-[#AAAAAA] leading-[19rem] mb-[12rem] lg:mb-[14rem]">
-								Старый пароль
-							</p>
-							<input
-								placeholder="Введите старый пароль"
-								type={`${type === true ? 'password' : 'text'}`}
-								className={`text-[14rem] hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
-								lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]`}
-							/>
-						</div>
-						<div className="relative lg:w-[441rem]">
-							<div
-								className="absolute translate-x-[305rem] translate-y-[47rem] lg:translate-x-[400rem] lg:translate-y-[50rem] cursor-pointer"
-								onClick={onClickChangeType}>
-								{type ? (
-									<BsEyeSlash color="#AAAAAA" className="w-[20rem] h-[20rem]" />
-								) : (
-									<AiOutlineEye color="#AAAAAA" className="w-[20rem] h-[20rem]" />
-								)}
-							</div>
-							<p className="font-bodyalt font-[400] text-[14rem] text-[#AAAAAA] leading-[19rem] mb-[12rem] lg:mb-[14rem]">
-								Введите новый пароль
-							</p>
-							<input
-								placeholder="Введите новый пароль"
-								type={`${type === true ? 'password' : 'text'}`}
-								className={`text-[14rem] hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
-								lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
-								`}
-							/>
-							{/* {errors.password ? (
-								<p className="text-red-600 h-[24rem] text-[15rem]">{errors.password?.message}</p>
-							) : null} */}
-						</div>
-						<div className="relative lg:flex lg:flex-col lg:w-[441rem]">
-							<div
-								className="absolute translate-x-[305rem] translate-y-[47rem] lg:translate-x-[400rem] lg:translate-y-[50rem] cursor-pointer"
-								onClick={onClickChangeType}>
-								{type ? (
-									<BsEyeSlash color="#AAAAAA" className="w-[20rem] h-[20rem]" />
-								) : (
-									<AiOutlineEye color="#AAAAAA" className="w-[20rem] h-[20rem]" />
-								)}
-							</div>
-							<p className="font-bodyalt font-[400] text-[14rem] text-[#AAAAAA] leading-[19rem] mb-[12rem] lg:mb-[14rem]">
-								Повторите новый пароль
-							</p>
-							<input
-								placeholder="Введите новый пароль"
-								type={`${type === true ? 'password' : 'text'}`}
-								className={`text-[14rem] hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
-								lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem] mb-[32rem]
-								`}
-							/>
-							{/* {errors.password2 ? (
-								<p className="text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]">
-									{errors.password2?.message}
-								</p>
-							) : null} */}
-							<div className="mb-[15rem] lg:mb-[26rem]">
-								{/* {oldPassError ? (
-									<p className="lg:text-red-600 lg:h-[24rem] lg:text-[15rem]">{oldPassError}</p>
-								) : null} */}
-								<button
-									type="submit"
-									disabled={!nameChanges && !lastNameChanges && !avatar}
-									className={` font-bodyalt bg-[#FFB700] lg:mb-[24rem] w-full h-[51rem] rem-[18rem] text-[16rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem]
-                  ${
-										!nameChanges && !lastNameChanges && !avatar ? ' bg-yellow-300' : ' bg-[#FFB700]'
-									}`}>
-									Изменить пароль
-								</button>
-							</div>
-						</div>
-					</div>
+				<div className="mb-[15rem] lg:mb-[26rem] w-full lg:w-[441rem]">
+					{/* {oldPassError ? (
+              <p className="lg:text-red-600 lg:h-[24rem] lg:text-[15rem]">{oldPassError}</p>
+            ) : null} */}
+					<button
+						type="submit"
+						disabled={!nameChanges && !lastNameChanges && !avatar}
+						className={` font-bodyalt bg-[#FFB700] lg:mb-[24rem] w-full h-[51rem] rem-[18rem] text-[16rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem]
+              ${!nameChanges && !lastNameChanges && !avatar ? ' bg-yellow-300' : ' bg-[#FFB700]'}`}>
+						Сохранить изменения
+					</button>
 				</div>
 			</form>
 		</div>

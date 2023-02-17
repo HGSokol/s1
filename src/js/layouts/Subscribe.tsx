@@ -1,41 +1,19 @@
 import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { SubCard } from '../components/SubCard';
-import { Profile, ActiveSub } from '../../App';
+import { Profile } from '../../App';
+import { SubscribeType } from '../@types/appTypes';
 
-export type Sub = {
-	text?: string[];
-	price: string;
-	top?: string;
-	info?: ActiveSub;
-};
-
-interface Subscribe {
-	currency?: string;
-	description?: string;
-	id?: number;
-	invoicePeriod?: number;
-	isBestChoice?: boolean;
-	name?: string;
-	price?: number;
-	productId?: string;
-	properties?: {
-		card?: string[];
-		pricePerMonth?: number;
-	};
-	tier?: number;
-	trialPeriod?: number;
-}
-
-const subsData: Subscribe[] = [
+const subsData: SubscribeType[] = [
 	{
 		properties: {
 			card: [
-				'Подписка на 1 месяц',
-				'Доступ на один месяц ко всем тренировкам и планам питания, а так же более чем 1000 вкусных и полезных рецептов',
+				'Подписка на месяц',
+				'Первая неделя бесплатно!',
+				'Доступ на месяц ко всем тренировкам и планам питания, а также к большому количеству полезных рецептов',
 			],
 		},
-		price: 1200,
+		price: 999,
 		name: '1 месяц',
 		id: 1,
 		invoicePeriod: 1,
@@ -44,11 +22,12 @@ const subsData: Subscribe[] = [
 		properties: {
 			card: [
 				'Подписка на 3 месяца',
-				'Доступ на 3 месяца ко всем тренировкам и планам питания, а так же более чем 1000 вкусных и полезных рецептов',
-				'Экономь 17% при оплате 3-х месячной подписки (1000 руб./мес.)',
+				'Первая неделя бесплатно!',
+				'Доступ на 3 месяца ко всем тренировкам и планам питания, а также к большому количеству полезных рецептов',
+				'Экономь 19% при оплате 3-х месячной подписки',
 			],
 		},
-		price: 3000,
+		price: 2490,
 		name: '3 месяца',
 		id: 2,
 		invoicePeriod: 3,
@@ -57,11 +36,12 @@ const subsData: Subscribe[] = [
 		properties: {
 			card: [
 				'Подписка на год',
-				'Доступ на целый год ко всем тренировкам и планам питания, а так же более чем 1000 вкусных и полезных рецептов',
-				'Экономь 34% при оплате годовой подписки (800 руб./мес.)',
+				'Первая неделя бесплатно!',
+				'Доступ на целый год ко всем тренировкам и планам питания, а также к большому количеству полезных рецептов',
+				'Экономь 69% при оплате годовой подписки',
 			],
 		},
-		price: 9600,
+		price: 6990,
 		name: 'год',
 		id: 3,
 		invoicePeriod: 12,
@@ -97,7 +77,7 @@ export const Subscribe = () => {
 					);
 				})}
 			</div>
-			<div className="lg:mt-[100rem] font-bodyalt lg:flex lg:justify-center">
+			<div className="lg:mt-[160rem] font-bodyalt lg:flex lg:justify-center">
 				<Link to={user ? '/cabinet' : '/login'}>
 					<button
 						className="bg-[#FFB700] text-[16rem] w-full leading-[14rem] h-[51rem] rounded-full text-center text-white tracking-[0.04em] flex flex-row items-center justify-center hover:bg-[#F0AD04]

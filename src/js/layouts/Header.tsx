@@ -10,7 +10,7 @@ export const Header = () => {
 	return (
 		<div
 			className="pt-[25rem] flex flex-row justify-between items-center mb-[60rem]
-    lg:mb-[96rem]  lg:pt-[32rem]
+    lg:mb-[96rem] lg:pt-[32rem]
     ">
 			<div onClick={() => navigate('/')} className="cursor-pointer">
 				<svg
@@ -81,34 +81,33 @@ export const Header = () => {
 					/>
 				</svg>
 			</div>
-			{user ? (
+			<div className="font-bodyalt">
 				<Link
-					to={`${!activeSub && window.innerWidth >= 1024 ? '/cabinet/changeSubs' : '/cabinet'}`}>
-					<p
-						className="font-bodyalt font-[600] text-[#777872] hover:text-[#1F2117] leading-[19rem] p-[7rem] text-[16rem]
-              lg:text-[17rem]">
-						Личный кабинет
-					</p>
-				</Link>
-			) : (
-				<div className="font-bodyalt">
-					<Link to="/login">
-						<button
-							className=" w-[70rem] font-[600] text-[#777872] hover:text-[#1F2117] tracking-[0.04em] p-[16rem] text-[16rem]
+					to={
+						!user
+							? '/login'
+							: `${!activeSub && window.innerWidth >= 1024 ? '/cabinet/plans' : '/cabinet'}`
+					}>
+					<button
+						className=" w-[70rem] font-[600] text-[#777872] hover:text-[#1F2117] tracking-[0.04em] p-[16rem] text-[16rem]
               lg:text-[17rem] lg:w-[151rem]">
-							Вход
-						</button>
-					</Link>
-					<Link to="/login/registration">
-						<button
-							className="#FAFAFA p-auto rounded-full w-[139rem] h-[51rem] font-[600] tracking-[0.02em] border-[1px] text-[black] border-[#1F2117] hover:text-[#FFB700] hover:border-[#FFB700] text-[16rem]
+						Вход
+					</button>
+				</Link>
+				<Link
+					to={
+						!user
+							? '/login/registration'
+							: `${!activeSub && window.innerWidth >= 1024 ? '/cabinet/plans' : '/cabinet'}`
+					}>
+					<button
+						className="#FAFAFA p-auto rounded-full w-[139rem] h-[51rem] font-[600] tracking-[0.02em] border-[1px] text-[black] border-[#1F2117] hover:text-[#FFB700] hover:border-[#FFB700] text-[16rem]
               lg:text-[17rem] lg:w-[151rem] lg:h-[56rem]
               ">
-							Регистрация
-						</button>
-					</Link>
-				</div>
-			)}
+						Регистрация
+					</button>
+				</Link>
+			</div>
 		</div>
 	);
 };

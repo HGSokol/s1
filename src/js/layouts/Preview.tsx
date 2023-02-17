@@ -67,7 +67,7 @@ export const Preview = () => {
 					<Link
 						to={
 							user
-								? `${!activeSub && window.innerWidth >= 1024 ? '/cabinet/changeSubs' : '/cabinet'}`
+								? `${!activeSub && window.innerWidth >= 1024 ? '/cabinet/plans' : '/cabinet'}`
 								: '/login'
 						}>
 						<button

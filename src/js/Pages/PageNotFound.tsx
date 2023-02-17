@@ -8,7 +8,7 @@ const NotFound = () => {
 		<div className=" h-screen flex">
 			<div className="w-[1536rem] h-[512rem] my-auto mx-auto text-center text-[16rem]">
 				<h1>
-					<span className="">:(</span>
+					<span className="">{':('}</span>
 					<br />
 					Page Not Found!
 				</h1>

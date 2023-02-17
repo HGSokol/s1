@@ -3,7 +3,7 @@ import HeaderOrder from './HeaderOrder';
 
 export const Develop = () => {
 	return (
-		<div className="mx-[18rem]">
+		<div className="mx-[16rem]">
 			<div className=" lg:hidden">
 				<HeaderOrder />
 			</div>

@@ -1,5 +1,7 @@
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { HeaderForm } from '../components/HeaderForm';
+import Spinner from '../components/Spinner';
 
 const Login = () => {
 	return (
@@ -7,12 +9,14 @@ const Login = () => {
 			<div>
 				<HeaderForm />
 				<div className="flex justify-center w-full">
-					<Outlet />
+					<Suspense fallback={<Spinner />}>
+						<Outlet />
+					</Suspense>
 				</div>
 			</div>
-			<div className='hidden lg:block bg-[url("../img/authorization.png")] bg-cover bg-no-repeat bg-center'></div>
+			<div className="hidden  bg-cover bg-no-repeat bg-center"></div>
 		</div>
 	);
 };
-
+// lg:block bg-[url("../img/authorization.png")]
 export default Login;

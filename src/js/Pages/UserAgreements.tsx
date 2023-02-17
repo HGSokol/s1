@@ -6,6 +6,7 @@ function UserAgreements() {
 	useLayoutEffect(() => {
 		window.scrollTo(0, 0);
 	}, []);
+
 	return (
 		<>
 			<div className="lg:w-[1920rem]">

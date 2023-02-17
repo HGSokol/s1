@@ -13,7 +13,7 @@ export const ChangeCardPopup = (props: Props) => {
 
 	const nav = () => {
 		setReload(true);
-		navigate('/cabinet/changePayment');
+		navigate('/cabinet/new-payment-method');
 	};
 
 	return (

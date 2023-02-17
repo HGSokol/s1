@@ -1,7 +1,5 @@
 import { AboutCard } from '../components/AboutCard';
 
-// import IMG1 from '../../img/about2.svg'
-
 export interface dataAboutCard {
 	text: string;
 	img: string;

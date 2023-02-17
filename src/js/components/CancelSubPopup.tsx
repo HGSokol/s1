@@ -19,12 +19,14 @@ export const CancelSubPopup = (props: Props) => {
 				`https://stage.fitnesskaknauka.com/api/customer/subscriptions/internal/${activeSub?.id2}`,
 			)
 			.then((res) => {
-				// console.log(res,'успешная отмена подписки')
 				setActiveCancelPopup(false);
 				setReload(true);
 			})
 			.catch((error) => {
 				console.log(error.response.data);
+				if (error.response.status === 401) {
+					localStorage.clear();
+				}
 			})
 			.finally(() => {
 				setLoad(false);
@@ -37,8 +39,8 @@ export const CancelSubPopup = (props: Props) => {
 				Вы уверены, что хотите отключить автопродление подписки?
 			</div>
 			<div className="text-[14rem] leading-[17rem] mb-[32rem] lg:mb-[32rem] font-bodyalt font-[400] lg:text-[22rem] lg:leading-[32rem] text-center text-[#777872]">
-				Подписка будет активна до конца месяца. По истечение этого срока данные привязанной карты
-				будут удалены
+				Подписка будет действовать до конца оплаченного периода. По истечение этого срока данные
+				привязанной карты будут удалены
 			</div>
 			<div className="w-full grid grid-cols-2 gap-[16rem] lg:gap-[24rem]">
 				<div

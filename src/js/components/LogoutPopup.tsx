@@ -14,18 +14,26 @@ export const LogoutPopup = (props: Props) => {
 	const { setActivePopup } = props;
 
 	const logout = () => {
-		axios.post('https://stage.fitnesskaknauka.com/api/auth/logout').then((res) => {
-			setUser(null);
-			setActiveSub(null);
-			setSelectedPlan(null);
-			setCardInfo(null);
-			localStorage.clear();
-			navigate('/');
-		});
+		axios
+			.post('https://stage.fitnesskaknauka.com/api/auth/logout')
+			.then((res) => {
+				setUser(null);
+				setActiveSub(null);
+				setSelectedPlan(null);
+				setCardInfo(null);
+				localStorage.clear();
+				navigate('/');
+			})
+			.catch((error) => {
+				if (error.response.status === 401) {
+					localStorage.clear();
+					navigate('/');
+				}
+			});
 	};
 
 	return (
-		<div className="flex flex-col w-[343rem] h-[193rem] px-[20rem] pt-[32rem] lg:w-[604rem] lg:h-[309rem] rounded-[20rem] lg:px-[80rem] lg:py-[70rem] shadow-drop bg-white">
+		<div className="flex flex-col w-[343rem] h-[193rem] px-[20rem] pt-[32rem] lg:w-[604rem] lg:h-[290rem] rounded-[20rem] lg:px-[80rem] lg:py-[70rem] shadow-drop bg-white">
 			<div className="text-[20rem] leading-[23rem] mb-[32rem] lg:mb-[62rem] font-body font-[600] lg:text-[26rem] lg:leading-[30rem] text-center text-[#1F2117]">
 				Вы уверены, что хотите выйти?
 			</div>

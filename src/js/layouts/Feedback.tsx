@@ -7,9 +7,8 @@ type dataCard = {
 	prof: string;
 	rate: number;
 };
-type DataType = dataCard[];
 
-const data: DataType = [
+const data: dataCard[] = [
 	{
 		text: 'Удобное отслеживание прогресса. хороший мотиватор делать лучше и больше. Неплохой набор действительно бесплатных функций. ',
 		img: require('../../img/feedbackphoto.png'),
@@ -100,22 +99,10 @@ export const Feedback = () => {
 	const [size, setSize] = useState<number>(0);
 	const [gap, setGap] = useState<number>(0);
 	const [translate, setTranslate] = useState<number>(0);
-	const [wrapper, setWrapper] = useState<number>(0);
+	const [wrapper, setWrapper] = useState(0);
 	const ref = useRef<HTMLDivElement | null>(null);
-
-	const fullLength = (data.length - 3) * size + gap * (data.length - 4);
-
-	const right = () => {
-		if (translate <= fullLength) {
-			setTranslate((prev) => prev + (size + gap));
-		}
-	};
-
-	const left = () => {
-		if (translate > 0) {
-			setTranslate((prev) => prev - (size + gap));
-		}
-	};
+	const refSize = useRef(0);
+	const number = useRef(0);
 
 	const counterStars = (rate: number): string[] => {
 		return ' '.repeat(rate).split('');
@@ -124,11 +111,21 @@ export const Feedback = () => {
 	React.useEffect(() => {
 		setSize(Number(ref.current?.getBoundingClientRect().width));
 		setGap((window.innerWidth / 1920) * 40);
-	}, []);
+	}, [document.documentElement.clientWidth]);
 
-	React.useEffect(() => {
-		setWrapper(size * 3 + gap * 3);
-	}, [size, gap]);
+	const right = () => {
+		if (number.current <= data.length - 4) {
+			number.current = number.current + 1;
+			setTranslate((prev) => number.current * (size + gap));
+		}
+	};
+
+	const left = () => {
+		if (number.current > 0) {
+			number.current = number.current - 1;
+			setTranslate((prev) => number.current * (size + gap));
+		}
+	};
 
 	return (
 		<div
@@ -195,7 +192,7 @@ export const Feedback = () => {
 			</div>
 			<div
 				className="overflow-hidden"
-				style={{ width: `${window.innerWidth >= 1024 ? `${wrapper}` : ''}px` }}>
+				style={{ width: `${window.innerWidth >= 1024 ? `${96}` : ''}%` }}>
 				<div
 					className="ml-[20rem] flex flex-row gap-[16rem] duration-[600ms] h-[290rem] items-center snap-mandatory snap-x overflow-scroll    
           lg:snap-none lg:overflow-visible lg:h-[350rem] lg:gap-[40rem]"

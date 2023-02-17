@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useLayoutEffect, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -17,18 +17,21 @@ interface IFormInputs {
 const schema = yup
 	.object({
 		email: yup.string().email('Не правильный email').required('Обязательное поле'),
-		password: yup
-			.string()
-			.required('Обязательное поле')
-			.min(8, 'Пароль слишком короткий - минимум 8 знаков.')
-			.matches(/[a-zA-Z0-9]/, 'Пароль может содержать только латинские буквы'),
+		password: yup.string().required('Обязательное поле'),
 	})
 	.required();
 
 const LoginForm = () => {
-	const [errorMessage, setErrorMessage] = useState<string | null>(null);
-	const { deviceName, setUser, setReload, activeSub, setActiveSub, setUserPaymentMethod } =
-		useContext(Profile);
+	document.title = 'Вход';
+	const {
+		deviceName,
+		setUser,
+		activeSub,
+		setActiveSub,
+		setUserPaymentMethod,
+		setErrorMessage,
+		errorMessage,
+	} = useContext(Profile);
 	const [type, setType] = useState(true);
 	const navigate = useNavigate();
 	const {
@@ -36,22 +39,24 @@ const LoginForm = () => {
 		handleSubmit,
 		formState: { errors, isValid },
 		reset,
+		clearErrors,
 	} = useForm<IFormInputs>({
 		resolver: yupResolver(schema),
-		mode: 'onSubmit',
+		mode: 'onChange',
 	});
 
-	document.title = 'Вход';
-
 	const onSubmit = (data: IFormInputs) => {
+		clearErrors();
+		// setValid(false)
 		const userInfo = {
 			...data,
-			deviceName: deviceName,
+			deviceName,
 		};
 
 		axios
 			.post('https://stage.fitnesskaknauka.com/api/auth/login', userInfo)
 			.then((res) => {
+				reset();
 				localStorage.setItem(
 					'user',
 					JSON.stringify({
@@ -73,6 +78,7 @@ const LoginForm = () => {
 							lastName: res.data.lastName,
 							avatar: res.data.avatar,
 							uuid: res.data.uuid,
+							isExternalRegistration: res.data.isExternalRegistration,
 						}));
 						axios
 							.get(`https://stage.fitnesskaknauka.com/api/customer/subscriptions/active`)
@@ -104,14 +110,13 @@ const LoginForm = () => {
 										price: typeSubs.plan.price,
 										id: typeSubs.plan.id,
 										id2: typeSubs.id,
-										isFromApple:
-											typeSubs === res.data.externalSubscription.appleSubscription ? true : false,
+										isFromApple: typeSubs === res.data.externalSubscription.appleSubscription,
 										endsAt: typeSubs === res.data.internalSubscription ? typeSubs.endsAt : '',
 										error:
 											typeSubs !== res.data.free &&
 											typeSubs !== res.data.externalSubscription.appleSubscription &&
-											typeSubs.userPaymentMethod.status === 'has_error' &&
-											typeSubs.userPaymentMethod.lastError === 'insufficient_funds',
+											typeSubs.openInvoice &&
+											typeSubs.openInvoice.id,
 										type: res.data.internalSubscription
 											? 'internal'
 											: res.data.externalSubscription.appleSubscription
@@ -123,29 +128,32 @@ const LoginForm = () => {
 								}
 							})
 							.catch((error) => {
-								console.log(error);
+								if (error.response.status === 401) {
+									localStorage.clear();
+									navigate('/');
+								}
 							});
 						navigate(
 							window.innerWidth >= 1024
-								? `${activeSub ? '/cabinet' : '/cabinet/changeSubs'}`
+								? `${activeSub ? '/cabinet' : '/cabinet/plans'}`
 								: '/cabinet',
 						);
 					})
 					.catch((error) => {
 						console.log(error.response.data);
 						if (error.response.status === 401) {
+							localStorage.clear();
 							navigate('/login');
 						}
 					});
 			})
 			.catch((error) => {
 				if (error.response.status === 401) {
+					localStorage.clear();
 					console.log(error.response.data);
 					setErrorMessage(error.response.data.message);
 				}
 			});
-
-		reset();
 	};
 
 	const onClickChangeType = () => {
@@ -162,15 +170,16 @@ const LoginForm = () => {
 					<input
 						placeholder="Ваш e-mail"
 						type="text"
-						{...register('email')}
-						className={`px-[16rem] font-bodyalt font-[400] text-[14rem] hover:border-[#777872] outline-none w-full h-[48rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56rem] lg:placeholder:text-[16rem] lg:text-[16rem]
-          ${errors.email ? ' hover:border-[#CB1D1D]' : ' '}`}
+						{...register('email', {
+							// onChange: (e) => setEmail(e.target.value)
+						})}
+						className={`px-[16rem] font-bodyalt font-[400] text-[14rem] hover:border-[#777872] outline-none w-full h-[48rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56rem] lg:placeholder:text-[16rem] lg:text-[16rem]`}
 					/>
-					{errors.email ? (
+					{/* {errors.email ? (
 						<p className="text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]">
 							{errors.email?.message}
 						</p>
-					) : null}
+					) : null} */}
 				</div>
 				<div className="relative mb-[14rem]">
 					<div
@@ -186,15 +195,16 @@ const LoginForm = () => {
 					<input
 						placeholder="Ваш пароль"
 						type={`${type === true ? 'password' : 'text'}`}
-						{...register('password')}
-						className={`px-[16rem] font-bodyalt font-[400] text-[14rem] hover:border-[#777872] outline-none w-full h-[48rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56rem] lg:placeholder:text-[16rem] lg:text-[16rem]
-          ${errors.password ? ' hover:border-[#CB1D1D]' : ' '}`}
+						{...register('password', {
+							// onChange: (e) => setPassword(e.target.value)
+						})}
+						className={`px-[16rem] font-bodyalt font-[400] text-[14rem] hover:border-[#777872] outline-none w-full h-[48rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56rem] lg:placeholder:text-[16rem] lg:text-[16rem]`}
 					/>
-					{errors.password ? (
+					{/* {errors.password ? (
 						<p className="text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]">
 							{errors.password?.message}
 						</p>
-					) : null}
+					) : null} */}
 				</div>
 				<p className="font-bodyalt text-[14rem] text-[#777872] font-[600] text-end lg:text-[16rem] lg:mb-[28rem]">
 					<Link to="/login/step1" className="">
@@ -210,7 +220,6 @@ const LoginForm = () => {
 				</p>
 				<div className="mb-[36rem]">
 					<button
-						type="submit"
 						disabled={!isValid}
 						className={`${
 							isValid === true ? ' bg-[#FFB700]' : ' bg-[#FFB700]/50'
@@ -228,12 +237,12 @@ const LoginForm = () => {
 						</Link>
 					</div>
 				</div>
-				<AlternativeLogin>
-					<h4 className="text-center text-[14rem] text-[#777872] font-[400] mb-[14rem] lg:mb-[24rem lg:text-[16rem]">
-						Войти с помощью
-					</h4>
-				</AlternativeLogin>
 			</form>
+			<AlternativeLogin>
+				<h4 className="text-center text-[14rem] text-[#777872] font-[400] mb-[14rem] lg:mb-[24rem lg:text-[16rem]">
+					Войти с помощью
+				</h4>
+			</AlternativeLogin>
 		</div>
 	);
 };

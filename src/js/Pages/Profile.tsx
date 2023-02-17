@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useContext, useRef, useLayoutEffect } from 'react';
+import React, { useState, useContext, useRef, useLayoutEffect, Suspense } from 'react';
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { Profile } from '../../App';
 import UnknownUser from '../../img/unknownUser.png';
 import HeaderOrder from '../components/HeaderOrder';
 import { LogoutPopup } from '../components/LogoutPopup';
+import Spinner from '../components/Spinner';
 
 type dataLink = {
 	name: string;
@@ -18,31 +19,34 @@ const MyProfile = () => {
 	const dataRef = useRef<dataLink[]>(
 		window.innerWidth >= 1024
 			? [
-					{ name: 'Подписки', link: `${activeSub ? '' : '/changeSubs'}` },
+					{ name: 'Подписки', link: `${activeSub ? '' : '/plans'}` },
 					{ name: 'Общая информация', link: '/profile' },
 					{ name: 'Детали платежей', link: '/payments' },
+					{ name: 'Безопасность', link: '/security' },
 			  ]
 			: [
-					{ name: 'Подписки', link: `${activeSub ? '/subs' : '/changeSubs'}` },
+					{ name: 'Подписки', link: `${activeSub ? '/subs' : '/plans'}` },
 					{ name: 'Общая информация', link: '/profile' },
 					{ name: 'Детали платежей', link: '/payments' },
+					{ name: 'Безопасность', link: '/security' },
 			  ],
 	);
-	const [active, setActive] = useState(dataRef.current[0].link);
-
 	useLayoutEffect(() => {
 		window.innerWidth >= 1024
 			? (dataRef.current = [
-					{ name: 'Подписки', link: `${activeSub ? '' : '/changeSubs'}` },
+					{ name: 'Подписки', link: `${activeSub ? '' : '/plans'}` },
 					{ name: 'Общая информация', link: '/profile' },
 					{ name: 'Детали платежей', link: '/payments' },
+					{ name: 'Безопасность', link: '/security' },
 			  ])
 			: (dataRef.current = [
-					{ name: 'Подписки', link: `${activeSub ? '/subs' : '/changeSubs'}` },
+					{ name: 'Подписки', link: `${activeSub ? '/subs' : '/plans'}` },
 					{ name: 'Общая информация', link: '/profile' },
 					{ name: 'Детали платежей', link: '/payments' },
+					{ name: 'Безопасность', link: '/security' },
 			  ]);
 	}, [activeSub, reload]);
+	const [active, setActive] = useState(dataRef.current?.[0].link);
 
 	useLayoutEffect(() => {
 		if (location.pathname !== '/cabinet/payments' && location.pathname !== '/cabinet/profile') {
@@ -56,14 +60,12 @@ const MyProfile = () => {
 
 	useLayoutEffect(() => {
 		const f = dataRef.current
-			.map((e) =>
+			?.map((e) =>
 				e.link.includes(location.pathname.replace('/cabinet', '')) === true ? true : null,
 			)
 			.filter((e) => e !== null);
 		setActive((prev) =>
-			f.length >= 1
-				? location.pathname.replace('/cabinet', '')
-				: `${activeSub ? '' : '/changeSubs'}`,
+			f?.length! >= 1 ? location.pathname.replace('/cabinet', '') : `${activeSub ? '' : '/plans'}`,
 		);
 	}, [activeSub, reload]);
 
@@ -104,14 +106,14 @@ const MyProfile = () => {
 					</div>
 				</div>
 			</div>
-			<div className="flex flex-col lg:w-[487rem] lg:h-[47rem] lg:p-[2rem] lg:rounded-[10rem] lg:bg-[#F4F4F4] lg:mb-[32rem] lg:flex-row lg:cursor-pointer">
+			<div className="flex flex-col lg:w-[634rem] lg:h-[47rem] lg:p-[2rem] lg:rounded-[10rem] lg:bg-[#F4F4F4] lg:mb-[32rem] lg:flex-row lg:cursor-pointer">
 				<div className="flex flex-col gap-[35rem] lg:h-full lg:gap-[0rem] lg:flex-row">
-					{dataRef?.current.map((e, i) => {
+					{dataRef?.current?.map((e, i) => {
 						return (
 							<Link to={`/cabinet${e.link}`} key={i}>
 								<div
-									className={` flex flex-row justify-between items-center font-bodyalt font-[400] text-[16rem] text-[#1F2117] lg:flex lg:h-full lg:justify-center lg:items-center lg:px-[24rem] lg:font-bodyalt lg:font-[400] lg:text-[16rem] lg:leading-[19rem] lg:rounded-[8rem]
-                ${active === e.link ? ' lg:bg-[#FFFFFF] ' : ' '}`}
+									className={`w-max flex flex-row justify-between items-center font-bodyalt font-[400] text-[16rem] text-[#1F2117] lg:flex lg:h-full lg:justify-center lg:items-center lg:px-[24rem] lg:font-bodyalt lg:font-[400] lg:text-[16rem] lg:leading-[19rem] lg:rounded-[8rem]
+                  ${active === e.link ? ' lg:bg-[#FFFFFF] ' : ' '}`}
 									onClick={() => {
 										setActive((prev) => e.link);
 									}}>
@@ -145,8 +147,10 @@ const MyProfile = () => {
 					Выход
 				</div>
 			</div>
-			<div className="lg:flex">
-				<Outlet />
+			<div className="hidden lg:flex">
+				<Suspense fallback={<Spinner />}>
+					<Outlet />
+				</Suspense>
 			</div>
 		</div>
 	);

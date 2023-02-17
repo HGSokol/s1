@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import HeaderOrder from '../components/HeaderOrder';
 import { ChangePaymentData } from '../components/ChangePaymentData';
 import { Profile } from '../../App';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Ordering = () => {
 	document.title = 'Оформление заказа';

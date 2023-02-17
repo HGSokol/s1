@@ -10,7 +10,7 @@ export const AboutCard = ({ item }: TextItem) => {
 	return (
 		<a
 			href={`#${idName}`}
-			className="mx-auto w-[343rem] h-[200rem] rounded-[20rem] relative overflow-hidden group/about 
+			className="wrapper mx-auto w-[343rem] relative h-[200rem] rounded-[20rem] overflow-hidden group/about 
     lg:w-[390rem] lg:h-[390rem] lg:rounded-[24rem] ">
 			<div
 				className={`w-[343rem] h-[200rem] duration-[400ms] bg-cover bg-no-repeat bg-center rounded-[20rem] flex flex-row items-end space-x-4 absolute z-1 overflow-hidden group-hover/about:scale-[1.2] 

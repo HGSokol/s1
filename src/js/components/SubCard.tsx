@@ -1,26 +1,10 @@
 import { Dispatch, SetStateAction, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Profile } from '../../App';
-
-interface Subscribe {
-	currency?: string;
-	description?: string;
-	id?: number;
-	invoicePeriod?: number;
-	isBestChoice?: boolean;
-	name?: string;
-	price?: number;
-	productId?: string;
-	properties?: {
-		card?: string[];
-		pricePerMonth?: number;
-	};
-	tier?: number;
-	trialPeriod?: number;
-}
+import { SubscribeType } from '../@types/appTypes';
 
 interface SubCard {
-	items: Subscribe;
+	items: SubscribeType;
 	active: string | undefined;
 	landing: boolean;
 	setActiveCancelPopup?: Dispatch<SetStateAction<boolean>>;
@@ -40,7 +24,6 @@ export const SubCard = ({
 	const { isBestChoice, name, price, properties, invoicePeriod, id } = items;
 	const navigate = useNavigate();
 	const location = useLocation();
-
 	return (
 		<div
 			onClick={() => {
@@ -53,20 +36,20 @@ export const SubCard = ({
 					id: id!,
 				}));
 				if (landing && window.innerWidth >= 1024 && location.pathname !== '/') {
-					navigate(`${cardInfo ? '/cabinet/ordering2' : '/cabinet/ordering'}`);
+					navigate('/cabinet/order');
 				}
 			}}
-			className="relative overflow-hidden rounded-[20rem] drop-shadow-drop duration-[400ms]">
+			className="verf relative h-max overflow-hidden rounded-[20rem] drop-shadow-drop duration-[400ms]">
 			<div
-				className={` bg-white  h-max w-full py-[20rem] px-[20rem] overflow-hidden border-[1px] border-transparent cursor-pointer flex flex-col justify-between rounded-[20rem] 
+				className={` bg-white h-max w-full py-[20rem] px-[20rem] overflow-hidden border-[1px] border-transparent cursor-pointer flex flex-col justify-between rounded-[20rem] 
         ${
 					landing
-						? ' lg:h-[452rem]'
+						? ' lg:h-[514rem]'
 						: activeSub && activeSub.type === 'internal'
-						? ' lg:h-[535rem]'
-						: ' lg:lg:h-[452rem]'
-				} lg:w-full lg:py-[40rem] lg:px-[40rem] duration-[400ms] hover:border-[1px] ${
-					active === 'active' ? ' border-[#FFB700]' : 'hover:border-[#CBCBCB]'
+						? ' lg:h-[585rem]'
+						: ' lg:h-[514rem]'
+				} lg:w-full lg:py-[40rem] lg:px-[40rem] duration-[400ms] lg:hover:border-[1px] ${
+					active === 'active' ? ' border-[#FFB700]' : ' lg:hover:border-[#CBCBCB]'
 				}`}>
 				{isBestChoice === true && landing ? (
 					<div
@@ -154,7 +137,7 @@ export const SubCard = ({
 										Включить автопродление
 									</p>
 								</div>
-							) : !landing && activeSub ? (
+							) : !landing && activeSub && !activeSub.endsAt ? (
 								<div
 									onClick={() => {
 										setActiveUpdatePopup?.(true);

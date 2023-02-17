@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Profile } from '../../App';
+import { ReactComponent as Loader } from '../../img/loader.svg';
 
 interface IFormInputs {
 	n1: number;
@@ -29,6 +30,7 @@ const schema = yup
 const ChangePassword2 = () => {
 	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 	const { setUser, user, timezone } = useContext(Profile);
+	const [load, setLoad] = useState(false);
 	const navigate = useNavigate();
 	document.title = 'Восстановление пароля';
 
@@ -42,7 +44,7 @@ const ChangePassword2 = () => {
 		resolver: yupResolver(schema),
 		mode: 'onChange',
 	});
-	const localUser = localStorage.getItem('user');
+	const localUser = localStorage.getItem('email');
 
 	useEffect(() => {
 		if (!localUser) {
@@ -51,6 +53,7 @@ const ChangePassword2 = () => {
 	}, []);
 
 	const onSubmit = (data: IFormInputs) => {
+		setLoad(true);
 		const key = [data.n1, data.n2, data.n3, data.n4, data.n5, data.n6].join('');
 
 		if (localUser && JSON.parse(localUser).email) {
@@ -64,25 +67,22 @@ const ChangePassword2 = () => {
 			axios
 				.put('https://stage.fitnesskaknauka.com/api/auth/confirm-reset-code', userInfo)
 				.then((res) => {
+					reset();
 					localStorage.setItem(
-						'user',
+						'token',
 						JSON.stringify({
-							...user,
 							token: res.data.token,
 						}),
 					);
-					setUser({
-						...user,
-						token: res.data.token,
-					});
-
 					navigate('/login/step3');
 				})
 				.catch((error) => {
 					setErrorMessage(error.response.data.message);
+				})
+				.finally(() => {
+					setLoad(false);
 				});
 		}
-		reset();
 	};
 
 	const sendCode = () => {
@@ -97,13 +97,13 @@ const ChangePassword2 = () => {
 					Timezone: `${timezone}`,
 				},
 			})
-			.then((res) => {
-				// console.log(res)
-				// console.log(res.data)
-			})
+			.then((res) => {})
 			.catch((error) => {
-				// console.log(error)
-				// console.log(error.response.data)
+				if (error.response.status === 401) {
+					localStorage.clear();
+					navigate('/');
+				}
+				console.log(error.response.data);
 			});
 	};
 
@@ -196,8 +196,14 @@ const ChangePassword2 = () => {
 							disabled={!isValid}
 							className={`${
 								isValid === true ? ' bg-[#FFB700]' : ' bg-[#FFB700]/50'
-							} w-full h-[51rem] rem-[18rem] text-[16rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem]`}>
-							Подтвердить
+							} flex items-center justify-center w-full h-[51rem] rem-[18rem] text-[16rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem]`}>
+							{!load ? (
+								'Подтвердить'
+							) : (
+								<div className="w-[32rem] h-[32rem]">
+									<Loader />
+								</div>
+							)}
 						</button>
 					</div>
 				</form>

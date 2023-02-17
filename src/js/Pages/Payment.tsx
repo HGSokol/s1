@@ -1,26 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CardInfo } from '../components/CardInfo';
-
-type TypeDataHistory = {
-	amount?: number;
-	createdAt?: string;
-	currency?: string;
-	id?: number;
-	isTrial?: boolean;
-	paidPeriodEnd?: string;
-	paidPeriodStart?: string;
-	payment?: {
-		id?: number;
-		transactionId?: string;
-		chargedAt?: string;
-		paymentProvider?: string;
-	};
-	paymentMethod?: string;
-	planName?: string;
-	status?: string;
-};
+import { TypeDataHistory } from '../@types/appTypes';
 
 const Payment = () => {
 	document.title = 'Детали платежей';
@@ -52,6 +33,10 @@ const Payment = () => {
 			})
 			.catch((error) => {
 				console.log(error.response.data);
+				if (error.response.status === 401) {
+					localStorage.clear();
+					navigate('/');
+				}
 			});
 	}, [currentPage]);
 
@@ -89,13 +74,13 @@ const Payment = () => {
 		return arr;
 	};
 
-	let ss1: number[] = [];
+	let arrPages: number[] = [];
 	if (lastPage.current >= 5) {
-		const pagggggg: any[] = [];
-		createPages(pagggggg, lastPage.current, currentPage);
-		ss1 = [1, ...pagggggg, lastPage.current];
+		const page: any[] = [];
+		createPages(page, lastPage.current, currentPage);
+		arrPages = [1, ...page, lastPage.current];
 	} else {
-		ss1 = pages(lastPage.current);
+		arrPages = pages(lastPage.current);
 	}
 
 	return (
@@ -232,7 +217,7 @@ const Payment = () => {
 					})}
 				</div>
 				<div className="hidden lg:w-full lg:flex lg:justify-end lg:mb-[20rem]">
-					{[...ss1].map((e, i) => {
+					{[...arrPages].map((e, i) => {
 						return (
 							<div
 								onClick={() => setCurrentPage(Array.isArray(e) === true ? e : e)}

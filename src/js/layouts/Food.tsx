@@ -14,9 +14,7 @@ const frameInteractive = [
 	{ img1: require('../../img/HeartRate.png'), img2: require('../../img/Frame.png') },
 ];
 
-type buttonName = string[];
-
-const data: buttonName = [
+const data: string[] = [
 	'Веганская диета',
 	'Кето-диета',
 	'Низкоуглеводная диета',

@@ -1,12 +1,19 @@
 import { useState, useCallback, useLayoutEffect, useEffect, useContext } from 'react';
 import { BsApple } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import useScript from './useScript';
 import { Profile } from '../../App';
-import axios from 'axios';
+
+// const clientId = document.querySelector(`meta[name="apple-signin-client_id"]`) as HTMLMetaElement;
+// const redirectUrl = document.querySelector(
+// 	`meta[name="apple-signin-redirect_url"]`,
+// ) as HTMLMetaElement;
+// const metaClientId = clientId.content;
+// const metaRedirect = redirectUrl.content;
 
 export const AppleAuth = () => {
-	const { setUser, deviceName, setUserPaymentMethod, setActiveSub, activeSub } =
+	const { setUser, deviceName, setUserPaymentMethod, setActiveSub, activeSub, setErrorMessage } =
 		useContext(Profile);
 	const navigate = useNavigate();
 	const [code, setCode] = useState<string | null>(null);
@@ -17,9 +24,9 @@ export const AppleAuth = () => {
 		() => {
 			//@ts-ignore
 			window.AppleID.auth.init({
-				clientId: 'com.fitnesskaknauka.fkn', // This is the service ID we created.
+				clientId: `com.fitnesskaknauka.fkn`, // This is the service ID we created.
 				scope: 'name email', // To tell apple we want the user name and emails fields in the response it sends us.
-				redirectURI: 'https://stage.fitnesskaknauka.com/api/auth/apple/redirect', // As registered along with our service ID
+				redirectURI: `https://stage.fitnesskaknauka.com/api/auth/apple/redirect`, // As registered along with our service ID
 				state: 'origin:web', // Any string of your choice that you may use for some logic. It's optional and you may omit it.
 				usePopup: true, // Important if we want to capture the data apple sends on the client side.
 			});
@@ -74,8 +81,8 @@ export const AppleAuth = () => {
 			console.log('запрос эпл');
 			axios
 				.post('https://stage.fitnesskaknauka.com/api/auth/apple/redirect', {
-					idToken: `${code}`,
-					code: `${idToken}`,
+					idToken: `${idToken}`,
+					code: `${code}`,
 					deviceName,
 				})
 				.then((res) => {
@@ -98,6 +105,7 @@ export const AppleAuth = () => {
 								lastName: res.data.lastName,
 								avatar: res.data.avatar,
 								uuid: res.data.uuid,
+								isExternalRegistration: res.data.isExternalRegistration,
 							}));
 							axios
 								.get(`https://stage.fitnesskaknauka.com/api/customer/subscriptions/active`)
@@ -111,10 +119,7 @@ export const AppleAuth = () => {
 										? (typeSubs = res.data.free)
 										: (typeSubs = null);
 									if (typeSubs) {
-										if (
-											typeSubs === res.data.internalSubscription ||
-											typeSubs === res.data.externalSubscription.appleSubscription
-										) {
+										if (typeSubs === res.data.internalSubscription) {
 											setUserPaymentMethod({
 												cardType: typeSubs.userPaymentMethod.cardType,
 												expireMonth: typeSubs.userPaymentMethod.expireMonth,
@@ -131,13 +136,12 @@ export const AppleAuth = () => {
 											id: typeSubs.plan.id,
 											id2: typeSubs.id,
 											isFromApple: typeSubs === res.data.externalSubscription.appleSubscription,
-											endsAt: typeSubs.endsAt,
+											endsAt: typeSubs === res.data.internalSubscription ? typeSubs.endsAt : '',
 											error:
 												typeSubs !== res.data.free &&
-												typeSubs.userPaymentMethod.status === 'has_error' &&
-												typeSubs.userPaymentMethod.lastError === 'insufficient_funds'
-													? true
-													: false,
+												typeSubs !== res.data.externalSubscription.appleSubscription &&
+												typeSubs.openInvoice &&
+												typeSubs.openInvoice.id,
 											type: res.data.internalSubscription
 												? 'internal'
 												: res.data.externalSubscription.appleSubscription
@@ -149,20 +153,36 @@ export const AppleAuth = () => {
 									}
 								})
 								.catch((error) => {
-									console.log(error);
+									if (error.response.status === 401) {
+										localStorage.clear();
+										navigate('/');
+									}
 								});
 							navigate(
 								window.innerWidth >= 1024
-									? `${activeSub ? '/cabinet' : '/cabinet/changeSubs'}`
+									? `${activeSub ? '/cabinet' : '/cabinet/plans'}`
 									: '/cabinet',
 							);
 						})
 						.catch((error) => {
-							console.log(error.response.data);
 							if (error.response.status === 401) {
-								navigate('/login');
+								localStorage.clear();
+								navigate('/');
 							}
 						});
+				})
+				.catch((error) => {
+					if (error.response.status === 422) {
+						if (error.response.data.errors && error.response.data.errors.password) {
+							setErrorMessage(error.response.data.errors.email);
+						}
+					} else {
+						setErrorMessage(error.response.data.message);
+					}
+					if (error.response.status === 401) {
+						localStorage.clear();
+						navigate('/');
+					}
 				});
 		}
 	}, [code, idToken]);

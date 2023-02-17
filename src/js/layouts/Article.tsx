@@ -4,14 +4,12 @@ import IMG1 from '../../img/article.png';
 import Group from '../../img/group.png';
 import Shadow from '../../img/Ellipse.png';
 
-type buttonName = string[];
-
 const frameInteractive = [
 	{ img1: require('../../img/HeartRate.png'), img2: require('../../img/Frame.png') },
 	{ img1: require('../../img/gr2.png'), img2: require('../../img/g2.png') },
 ];
 
-const data: buttonName = ['Статьи', 'Лекции'];
+const data: string[] = ['Статьи', 'Лекции'];
 
 export const Article = () => {
 	const [active, setActive] = useState(0);

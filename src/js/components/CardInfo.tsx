@@ -20,7 +20,7 @@ export const CardInfo = () => {
 						className={`w-[28rem] h-[28rem] ${
 							(cardInfo && cardInfo.numberCard[0] === '2') ||
 							(userPaymentMethod && userPaymentMethod.cardType === 'Mir')
-								? ' translate-y-[12rem] lg:translate-y-[0rem]'
+								? ' translate-y-[12rem]'
 								: ''
 						}`}>
 						{cardInfo ? (

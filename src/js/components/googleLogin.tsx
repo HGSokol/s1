@@ -1,14 +1,12 @@
-import { useRef, useLayoutEffect, useState } from 'react';
-import { GoogleLogin } from '@react-oauth/google';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import axios from 'axios';
-import { Profile } from '../../App';
-import useScript from './useScript';
 import { FcGoogle } from 'react-icons/fc';
 import { useNavigate } from 'react-router-dom';
+import { Profile } from '../../App';
+import useScript from './useScript';
 
 // const metaTag = document.querySelector(`meta[name="google-signin-client_id"]`) as HTMLMetaElement;
-// const MetaContent = metaTag.content;
+// const metaClientId = metaTag.content;
 
 declare global {
 	interface Window {
@@ -16,43 +14,41 @@ declare global {
 	}
 }
 
-export const GoogleLogin1 = ({ onGoogleSignIn = () => {} }) => {
-	const { setUser, deviceName, setUserPaymentMethod, setActiveSub, activeSub } =
+export const GoogleLogin1 = () => {
+	const { setUser, deviceName, setUserPaymentMethod, setActiveSub, activeSub, setErrorMessage } =
 		useContext(Profile);
 	const navigate = useNavigate();
 
 	useScript('https://accounts.google.com/gsi/client', () => {
 		//@ts-ignore
 		window.google.accounts.id.initialize({
-			client_id: `1021272275946-6nkj7bbvatts5nhf9s2jm3jphjf7v9fc.apps.googleusercontent.com`,
-			callback: onGoogleSignIn,
+			client_id: `690913230835-7gqha5d9kt9seh5imsdgaht12rpj3sj9.apps.googleusercontent.com`,
+			callback: handleCredentialResponse,
+		});
+
+		//@ts-ignore
+		window.google.accounts.id.renderButton(document.getElementById('buttonDiv'), {
+			theme: 'outline',
+			size: 'large',
 		});
 	});
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		const googleBtn = document.getElementById('custom-google-btn');
 		//@ts-ignore
 		googleBtn?.addEventListener('click', () => {
 			//@ts-ignore
-			document.querySelector('.g_id_signin div[role=button]').click();
+			document.querySelector('#buttonDiv div div div').click();
 		});
-
 		return () => {
-			//@ts-ignore
-			googleBtn.removeEventListener('click', () => {
+			googleBtn?.removeEventListener('click', () => {
 				//@ts-ignore
-				document.querySelector('.g_id_signin div[role=button]').click();
+				document.querySelector('#buttonDiv div div div').click();
 			});
 		};
-	}, []);
-
-	const fs = useRef<any>();
-
-	window.handleCredentialResponse = handleCredentialResponse;
+	});
 
 	function handleCredentialResponse(event: any) {
-		console.log(event.credential);
-
 		axios
 			.post('https://stage.fitnesskaknauka.com/api/auth/google', {
 				idToken: `${event.credential}`,
@@ -80,6 +76,7 @@ export const GoogleLogin1 = ({ onGoogleSignIn = () => {} }) => {
 							lastName: res.data.lastName,
 							avatar: res.data.avatar,
 							uuid: res.data.uuid,
+							isExternalRegistration: res.data.isExternalRegistration,
 						}));
 						axios
 							.get(`https://stage.fitnesskaknauka.com/api/customer/subscriptions/active`)
@@ -95,10 +92,7 @@ export const GoogleLogin1 = ({ onGoogleSignIn = () => {} }) => {
 									: (typeSubs = null);
 
 								if (typeSubs) {
-									if (
-										typeSubs === res.data.internalSubscription ||
-										typeSubs === res.data.externalSubscription.appleSubscription
-									) {
+									if (typeSubs === res.data.internalSubscription) {
 										setUserPaymentMethod({
 											cardType: typeSubs.userPaymentMethod.cardType,
 											expireMonth: typeSubs.userPaymentMethod.expireMonth,
@@ -115,13 +109,12 @@ export const GoogleLogin1 = ({ onGoogleSignIn = () => {} }) => {
 										id: typeSubs.plan.id,
 										id2: typeSubs.id,
 										isFromApple: typeSubs === res.data.externalSubscription.appleSubscription,
-										endsAt: typeSubs.endsAt,
+										endsAt: typeSubs === res.data.internalSubscription ? typeSubs.endsAt : '',
 										error:
 											typeSubs !== res.data.free &&
-											typeSubs.userPaymentMethod.status === 'has_error' &&
-											typeSubs.userPaymentMethod.lastError === 'insufficient_funds'
-												? true
-												: false,
+											typeSubs !== res.data.externalSubscription.appleSubscription &&
+											typeSubs.openInvoice &&
+											typeSubs.openInvoice.id,
 										type: res.data.internalSubscription
 											? 'internal'
 											: res.data.externalSubscription.appleSubscription
@@ -133,42 +126,43 @@ export const GoogleLogin1 = ({ onGoogleSignIn = () => {} }) => {
 								}
 							})
 							.catch((error) => {
-								console.log(error);
+								if (error.response.status === 401) {
+									localStorage.clear();
+									navigate('/');
+								}
 							});
 						navigate(
 							window.innerWidth >= 1024
-								? `${activeSub ? '/cabinet' : '/cabinet/changeSubs'}`
+								? `${activeSub ? '/cabinet' : '/cabinet/plans'}`
 								: '/cabinet',
 						);
 					})
 					.catch((error) => {
-						console.log(error.response.data);
 						if (error.response.status === 401) {
-							navigate('/login');
+							localStorage.clear();
+							navigate('/');
 						}
 					});
+			})
+			.catch((error) => {
+				if (error.response.status === 422) {
+					if (error.response.data.errors && error.response.data.errors.password) {
+						setErrorMessage(error.response.data.errors.email);
+					}
+				} else {
+					setErrorMessage(error.response.data.message);
+				}
+				if (error.response.status === 401) {
+					localStorage.clear();
+					navigate('/');
+				}
 			});
 	}
 
 	return (
 		<>
-			<div className="hidden">
-				<div
-					id="g_id_onload"
-					data-client_id={`1021272275946-6nkj7bbvatts5nhf9s2jm3jphjf7v9fc.apps.googleusercontent.com`}
-					data-auto_prompt="false"
-					data-callback="handleCredentialResponse"></div>
-			</div>
-			<div
-				className="g_id_signin"
-				data-type="icon"
-				data-size="large"
-				data-theme="outline"
-				data-text="sign_in_with"
-				data-shape="rectangular"
-				ref={fs}
-				data-logo_alignment="left"></div>
-			<button id="custom-google-btn" /* onClick={() => console.log(fs?.current)} */>
+			<div className="hidden" id="buttonDiv"></div>
+			<button id="custom-google-btn">
 				<div className=" w-[50rem] h-[50rem] rounded-[10rem] bg-white grid place-content-center drop-shadow-md cursor-pointer lg:w-[64rem] lg:h-[64rem]">
 					<FcGoogle className="w-[24rem] h-[24rem] lg:w-[34.5rem] lg:h-[34.5rem]" />
 				</div>

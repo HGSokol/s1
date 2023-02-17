@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineEye } from 'react-icons/ai';
 import { BsEyeSlash } from 'react-icons/bs';
-import axios from 'axios';
 import { Profile } from '../../App';
 
 interface IFormInputs {
@@ -25,10 +25,14 @@ const schema = yup
 	.required();
 
 const ChangePassword3 = () => {
-	const { user, deviceName } = useContext(Profile);
+	const { deviceName } = useContext(Profile);
 	const [type, setType] = useState(true);
+	const [email, setEmail] = useState(true);
+	const [token, setToken] = useState(true);
 	const navigate = useNavigate();
 	document.title = 'Восстановление пароля';
+	const localUserEmail = localStorage.getItem('email');
+	const localUserToken = localStorage.getItem('token');
 
 	const {
 		register,
@@ -41,16 +45,20 @@ const ChangePassword3 = () => {
 	});
 
 	useEffect(() => {
-		if (!user || !user.token) {
+		if (!localUserEmail || !localUserToken) {
 			navigate('/login/step1');
+		}
+		if (localUserEmail && localUserToken) {
+			setEmail(JSON.parse(localUserEmail).email);
+			setToken(JSON.parse(localUserToken).token);
 		}
 	}, []);
 
 	const onSubmit = (data: IFormInputs) => {
 		const userInfo = {
 			password: data.password,
-			email: `${user?.email}`,
-			token: `${user?.token}`,
+			email: `${email}`,
+			token: `${token}`,
 			deviceName,
 		};
 
@@ -61,7 +69,7 @@ const ChangePassword3 = () => {
 				navigate('/login');
 			})
 			.catch((error) => {
-				// console.log(error.response.data)
+				console.log(error.response.data);
 			});
 	};
 

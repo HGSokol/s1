@@ -17,13 +17,9 @@ const PaymentsStatus = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		console.log(activeSub, 'activeSub');
 		if (activeSub) {
 			setLink(true);
 		}
-		// if(!selectedPlan || !yandexToken ){
-		//   navigate('/cabinet')
-		// }
 	}, []);
 
 	function payment() {
@@ -53,6 +49,11 @@ const PaymentsStatus = () => {
 					setStatusCode((prev) => error.response.status);
 					setErrorMessage(error.response.data.error);
 					setStatusMessage('Платеж не одобрен');
+					setStatus(error.response.data.message);
+					if (error.response.status === 401) {
+						localStorage.clear();
+						navigate('/');
+					}
 				})
 				.finally(() => {
 					setCardInfo(null);
@@ -72,72 +73,20 @@ const PaymentsStatus = () => {
 		if (statusCode === 202) {
 			navigate('/cabinet');
 		} else {
-			navigate('/cabinet/changeSubs');
+			navigate('/cabinet/plans');
 		}
-		// navigate(`${activeSub? '/cabinet' : '/cabinet/changeSubs'}`)
 	};
 
-	useEffect(() => {
-		if (!link && statusCode === 402) {
-			if (errorMessage === 'insufficient_funds') {
-				setStatus('Недостаточно средств');
-			} else if (errorMessage === 'invalid_card_number') {
-				setStatus('Неправильно указан номер карты');
-			} else if (errorMessage === 'card_expired') {
-				setStatus('Истек срок действия банковской карты');
-			} else if (errorMessage === 'invalid_csc') {
-				setStatus('Неправильно указан код CVV2 (CVC2, CID)');
-			} else if (errorMessage === 'country_forbidden') {
-				setStatus('Нельзя заплатить банковской картой, выпущенной в этой стране');
-			} else if (errorMessage === '3d_secure_failed') {
-				setStatus('Не пройдена аутентификация по 3-D Secure');
-			} else if (errorMessage === 'fraud_suspected') {
-				setStatus('Платеж заблокирован из-за подозрения в мошенничестве');
-			} else if (errorMessage === 'issuer_unavailable') {
-				setStatus('Организация, выпустившая платежное средство, недоступна');
-			} else if (errorMessage === 'payment_method_limit_exceeded') {
-				setStatus('Исчерпан лимит платежей для данного платежного средства или вашего магазина');
-			} else if (errorMessage === 'payment_method_restricted') {
-				setStatus('Запрещены операции данным платежным средством ');
-			} else {
-				setStatus('Платеж отклонен');
-			}
-		}
-		if (link && statusCode === 402) {
-			if (errorMessage === 'insufficient_funds') {
-				setStatus('Недостаточно средств');
-			} else if (errorMessage === 'invalid_card_number') {
-				setStatus('Неправильно указан номер карты');
-			} else if (errorMessage === 'card_expired') {
-				setStatus('Истек срок действия банковской карты');
-			} else if (errorMessage === 'invalid_csc') {
-				setStatus('Неправильно указан код CVV2 (CVC2, CID)');
-			} else if (errorMessage === 'country_forbidden') {
-				setStatus('Нельзя заплатить банковской картой, выпущенной в этой стране');
-			} else if (errorMessage === '3d_secure_failed') {
-				setStatus('Не пройдена аутентификация по 3-D Secure');
-			} else if (errorMessage === 'fraud_suspected') {
-				setStatus('Платеж заблокирован из-за подозрения в мошенничестве');
-			} else if (errorMessage === 'issuer_unavailable') {
-				setStatus('Организация, выпустившая платежное средство, недоступна');
-			} else if (errorMessage === 'payment_method_limit_exceeded') {
-				setStatus('Исчерпан лимит платежей для данного платежного средства или вашего магазина');
-			} else if (errorMessage === 'payment_method_restricted') {
-				setStatus('Запрещены операции данным платежным средством ');
-			} else {
-				setStatus('Изменение карты отклонено');
-			}
-		}
-		if (statusCode === 404) {
-			setStatus('Платеж не найден');
-		}
-		if (!link && statusCode === 202) {
-			setStatus('Оплата прошла успешно');
-		}
-		if (link && statusCode === 202) {
-			setStatus('Изменение карты прошло успешно');
-		}
-	}, [statusCode]);
+	// 	if (statusCode === 404) {
+	// 		setStatus('Платеж не найден');
+	// 	}
+	// 	if (!link && statusCode === 202) {
+	// 		setStatus('Оплата прошла успешно');
+	// 	}
+	// 	if (link && statusCode === 202) {
+	// 		setStatus('Изменение карты прошло успешно');
+	// 	}
+	// }, [statusCode]);
 
 	return (
 		<div className="mx-[16rem] lg:mx-[0rem] lg:w-[700rem]">

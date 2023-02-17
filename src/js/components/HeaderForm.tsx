@@ -4,7 +4,7 @@ export const HeaderForm = () => {
 	return (
 		<div
 			className="pt-[25rem] grid place-content-center 
-   lg:place-content-start lg:mx-[120rem] lg:pt-[32rem] ">
+      lg:place-content-start lg:mx-[120rem] lg:pt-[32rem] ">
 			<Link to="/" className="">
 				<svg
 					viewBox="0 0 126 56"

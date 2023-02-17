@@ -17,7 +17,8 @@ export const Footer = () => {
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
 					className="w-[126rem] h-[56rem] 
-          lg:w-[126rem] lg:h-[56rem]">
+          lg:w-[126rem] lg:h-[56rem] cursor-pointer"
+					onClick={() => window.scrollTo(0, 0)}>
 					<path
 						d="M6.68241 4.4514V51.5486H23.6529V56H2.19141V0H23.6529V4.4514H6.68241Z"
 						fill="#FAB513"
@@ -117,43 +118,55 @@ export const Footer = () => {
 				<div
 					className="mb-[32rem] flex flex-row gap-[16rem] items-center items-self-start
         lg:gap-[16rem] lg:mb-[24rem]">
-					<a href="https://www.facebook.com/" target="_blank" rel="noreferrer">
+					<a
+						href="https://www.facebook.com/"
+						target="_blank"
+						rel="noreferrer"
+						className="group/item ">
 						<div
 							className="w-[36rem] h-[36rem] rounded-full grid place-items-center
-              lg:w-[36rem] lg:h-[36rem] bg-white">
+              lg:w-[36rem] lg:h-[36rem] bg-white group-hover/item:bg-black group-hover/item:border-[1rem] group-hover/item:border-white">
 							<FaFacebookF
 								className="w-[18rem] h-[18rem]
-                lg:w-[18rem] lg:h-[18rem] bg-white"
+                lg:w-[18rem] lg:h-[18rem] bg-white group-hover/item:bg-black group-hover/item:fill-white"
 							/>
 						</div>
 					</a>
-					<a href="https://www.instagram.com/" target="_blank" rel="noreferrer">
+					<a
+						href="https://www.instagram.com/"
+						target="_blank"
+						rel="noreferrer"
+						className="group/item1">
 						<div
 							className="w-[36rem] h-[36rem] rounded-full grid place-items-center 
-               lg:w-[36rem] lg:h-[36rem] bg-white">
+               lg:w-[36rem] lg:h-[36rem] bg-white group-hover/item1:bg-black group-hover/item1:border-[1rem] group-hover/item1:border-white">
 							<AiFillInstagram
 								className="w-[18rem] h-[18rem]
-                lg:w-[18rem] lg:h-[18rem] bg-white"
+                lg:w-[18rem] lg:h-[18rem] bg-white group-hover/item1:bg-black group-hover/item1:fill-white"
 							/>
 						</div>
 					</a>
-					<a href="https://web.telegram.org/z/" target="_blank" rel="noreferrer">
+					<a
+						href="https://web.telegram.org/z/"
+						target="_blank"
+						rel="noreferrer"
+						className="group/item2">
 						<div
 							className="w-[36rem] h-[36rem] rounded-full grid place-items-center 
-               lg:w-[36rem] lg:h-[36rem] bg-white">
+               lg:w-[36rem] lg:h-[36rem] bg-white group-hover/item2:bg-black group-hover/item2:border-[1rem] group-hover/item2:border-white">
 							<FaTelegramPlane
 								className="w-[18rem] h-[18rem]
-                lg:w-[18rem] lg:h-[18rem] bg-white"
+                lg:w-[18rem] lg:h-[18rem] bg-white group-hover/item2:bg-black group-hover/item2:fill-white"
 							/>
 						</div>
 					</a>
-					<a href="#" target="_blank" rel="noreferrer">
+					<a href="#" target="_blank" rel="noreferrer" className="group/item3">
 						<div
 							className="w-[36rem] h-[36rem] rounded-full  grid place-items-center 
-               lg:w-[36rem] lg:h-[36rem] bg-white">
+               lg:w-[36rem] lg:h-[36rem] bg-white group-hover/item3:bg-black group-hover/item3:border-[1rem] group-hover/item3:border-white">
 							<HiMail
 								className="w-[18rem] h-[18rem]
-                lg:w-[18rem] lg:h-[18rem] bg-white"
+                lg:w-[18rem] lg:h-[18rem] bg-white group-hover/item3:bg-black group-hover/item3:fill-white"
 							/>
 						</div>
 					</a>

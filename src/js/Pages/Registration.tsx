@@ -20,17 +20,15 @@ const schema = yup
 		name: yup.string().required('Обязательное поле'),
 		lastName: yup.string().required('Обязательное поле'),
 		email: yup.string().email('Не правильный email').required('Обязательное поле'),
-		password: yup
-			.string()
-			.required('Обязательное поле')
-			.min(8, 'Пароль слишком короткий - минимум 8 знаков.')
-			.matches(/[a-zA-Z0-9]/, 'Пароль может содержать только латинские буквы'),
+		password: yup.string().required('Обязательное поле'),
 	})
 	.required();
 
 const Login = () => {
 	const [type, setType] = useState(true);
 	const [errorMessage, setErrorMessage] = useState<string | null>(null);
+	const [errEmail, setErrEmail] = useState<string | null>(null);
+	const [errPassword, setErrPassword] = useState<string | null>(null);
 	const navigate = useNavigate();
 
 	document.title = 'Регистрация';
@@ -39,13 +37,14 @@ const Login = () => {
 		register,
 		handleSubmit,
 		formState: { errors, isValid },
-		reset,
 	} = useForm<IFormInputs>({
 		resolver: yupResolver(schema),
 		mode: 'onChange',
 	});
 
 	const onSubmit = (data: IFormInputs) => {
+		setErrEmail(null);
+		setErrPassword(null);
 		const userInfo = {
 			...data,
 			deviceName: 'deckstop',
@@ -58,10 +57,15 @@ const Login = () => {
 			})
 			.catch((error) => {
 				console.log(error.response);
-				setErrorMessage(error.response.data.message);
+				if (error.response.status === 422) {
+					if (error.response.data.errors && error.response.data.errors.email) {
+						setErrEmail(error.response.data.errors.email);
+					}
+					if (error.response.data.errors && error.response.data.errors.password) {
+						setErrPassword(error.response.data.errors.password);
+					}
+				}
 			});
-
-		// reset()
 	};
 
 	const onClickChangeType = () => {
@@ -109,11 +113,7 @@ const Login = () => {
           lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
           ${errors.email ? ' hover:border-[#CB1D1D]' : ' '}`}
 					/>
-					{errors.email ? (
-						<p className="text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]">
-							{errors.email?.message}
-						</p>
-					) : null}
+					{errEmail ? <p className="text-red-600 h-[24rem] text-[15rem]">{errEmail}</p> : null}
 				</div>
 				<div className="relative mb-[32rem] lg:mb-[24rem]">
 					<div
@@ -133,17 +133,10 @@ const Login = () => {
           lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
           ${errors.email ? ' hover:border-[#CB1D1D]' : ' '}`}
 					/>
-					{errors.password ? (
-						<p className="text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]">
-							{errors.password?.message}
-						</p>
+					{errPassword ? (
+						<p className="text-red-600 h-[24rem] text-[15rem]">{errPassword}</p>
 					) : null}
 				</div>
-				{errorMessage ? (
-					<p className="text-center text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]">
-						{errorMessage}
-					</p>
-				) : null}
 				<div className="mb-[36rem]">
 					<button
 						type="submit"

@@ -5,8 +5,8 @@ const HeaderOrder = () => {
 
 	return (
 		<>
-			<div className="mt-[25rem] w-full flex flex-row justify-between items-center relative mb-[24rem] lg:hidden">
-				<div className="w-[80rem] h-[36rem]" onClick={() => navigate('/cabinet/subs')}>
+			<div className="mt-[35rem] w-full flex flex-row justify-between items-center relative mb-[24rem] lg:hidden">
+				<div className="w-[80rem] h-[36rem]" onClick={() => navigate('/')}>
 					<svg viewBox="0 0 126 56" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path
 							d="M6.68241 4.4514V51.5486H23.6529V56H2.19141V0H23.6529V4.4514H6.68241Z"

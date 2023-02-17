@@ -1,5 +1,6 @@
-import React, { useState, useContext, useEffect, useLayoutEffect, useRef } from 'react';
+import React, { useState, useContext, useEffect, useLayoutEffect, useRef, Suspense } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { Profile } from '../../App';
 import { HeaderForm } from '../components/HeaderForm';
 import { LogoutPopup } from '../components/LogoutPopup';
@@ -10,7 +11,7 @@ import { ReactComponent as NutritionIcon } from '../../img/nutrition.svg';
 import { ReactComponent as ProfileIcon } from '../../img/profile.svg';
 import { ReactComponent as Logout } from '../../img/logout.svg';
 import UnknownUser from '../../img/unknownUser.png';
-import axios from 'axios';
+import Spinner from '../components/Spinner';
 
 type NavType = {
 	name: string;
@@ -40,7 +41,7 @@ const Cabinet = () => {
 					{ name: 'Активность', img: <ActivityIcon />, link: '/activity' },
 					{ name: 'Статистика', img: <StatisticIcon />, link: '/statistic' },
 					{ name: 'Питание', img: <NutritionIcon />, link: '/nutrition' },
-					{ name: 'Профиль', img: <ProfileIcon />, link: `${activeSub ? '' : '/changeSubs'}` },
+					{ name: 'Профиль', img: <ProfileIcon />, link: `${activeSub ? '' : '/plans'}` },
 			  ]
 			: [
 					{ name: 'Полезное', img: <UsefulIcon />, link: '/usefull' },
@@ -55,8 +56,8 @@ const Cabinet = () => {
 
 	const localUser = localStorage.getItem('user');
 
-	useLayoutEffect(() => {
-		if (reload === true && localUser && JSON.parse(localUser).token) {
+	useEffect(() => {
+		if (reload && localUser && JSON.parse(localUser).token) {
 			axios
 				.get(`https://stage.fitnesskaknauka.com/api/customer/subscriptions/active`)
 				.then((res) => {
@@ -93,8 +94,8 @@ const Cabinet = () => {
 							error:
 								typeSubs !== res.data.free &&
 								typeSubs !== res.data.externalSubscription.appleSubscription &&
-								typeSubs.userPaymentMethod.status === 'has_error' &&
-								typeSubs.userPaymentMethod.lastError === 'insufficient_funds',
+								typeSubs.openInvoice &&
+								typeSubs.openInvoice.id,
 							type: res.data.internalSubscription
 								? 'internal'
 								: res.data.externalSubscription.appleSubscription
@@ -106,7 +107,10 @@ const Cabinet = () => {
 					}
 				})
 				.catch((error) => {
-					console.log(error);
+					if (error.response.status === 401) {
+						localStorage.clear();
+						navigate('/');
+					}
 				});
 		}
 		setReload(false);
@@ -119,7 +123,7 @@ const Cabinet = () => {
 					{ name: 'Активность', img: <ActivityIcon />, link: '/activity' },
 					{ name: 'Статистика', img: <StatisticIcon />, link: '/statistic' },
 					{ name: 'Питание', img: <NutritionIcon />, link: '/nutrition' },
-					{ name: 'Профиль', img: <ProfileIcon />, link: `${activeSub ? '' : '/changeSubs'}` },
+					{ name: 'Профиль', img: <ProfileIcon />, link: `${activeSub ? '' : '/plans'}` },
 			  ])
 			: (refNav.current = [
 					{ name: 'Полезное', img: <UsefulIcon />, link: '/usefull' },
@@ -130,12 +134,12 @@ const Cabinet = () => {
 			  ]);
 	}, [activeSub, reload]);
 
-	useLayoutEffect(() => {
-		if (!activeSub && location.pathname.replace('/cabinet', '') === '') {
-			navigate('/cabinet/changeSubs');
-		}
-		if (activeSub && location.pathname.replace('/cabinet', '') === '/changeSubs') {
+	useEffect(() => {
+		if (activeSub && location.pathname.replace('/cabinet', '') === '/plans') {
 			navigate('/cabinet');
+		}
+		if (!activeSub && location.pathname.replace('/cabinet', '') === '') {
+			navigate('/cabinet/plans');
 		}
 	}, [activeSub]);
 
@@ -146,9 +150,7 @@ const Cabinet = () => {
 			)
 			.filter((e) => e !== null);
 		setActive((prev) =>
-			f.length >= 1
-				? location.pathname.replace('/cabinet', '')
-				: `${activeSub ? '' : '/changeSubs'}`,
+			f.length >= 1 ? location.pathname.replace('/cabinet', '') : `${activeSub ? '' : '/plans'}`,
 		);
 	}, [activeSub, reload]);
 
@@ -158,7 +160,7 @@ const Cabinet = () => {
 				className={`z-0 grid grid-rows-[calc(100vh-65rem)_65rem] lg:grid lg:grid-rows-1 lg:grid-cols-[360rem_auto] lg:w-[1920rem]`}>
 				<div
 					ref={ref}
-					className="z-[100] bg-[#FFFFFF] border-t-[1px] shadow-[0px_2px_8px_rgba(0_0_0_0.04)] flex flex-col my-auto w-full  order-2 b-[0rem] lg:relative lg:order-1 lg:border-r-[1px] lg:border-[#EEF1F6] lg:h-[100vh] lg:grid lg:grid-rows-[121rem_auto]">
+					className="z-[100] bg-[#FFFFFF] border-t-[1px] shadow-[0px_2px_8px_rgba(0_0_0_0.04)] flex flex-col my-auto w-full  order-2 b-[0rem] lg:relative lg:order-1 lg:border-t-[0px] lg:border-r-[1px] lg:border-[#EEF1F6] lg:h-[100vh] lg:grid lg:grid-rows-[121rem_auto]">
 					<div className="hidden lg:block">
 						<HeaderForm />
 					</div>
@@ -173,17 +175,17 @@ const Cabinet = () => {
 												<div className={`flex flex-col justify-center items-center  lg:mt-[0rem]`}>
 													<svg
 														className={`h-[20rem] w-[20rem] lg:w-[23rem] lg:h-[22rem] lg:group-hover/link:fill-[#1F2117] 
-                        ${active === e.link ? ' fill-[#1F2117] ' : 'fill-[#AAAAAA]'}`}>
+                          ${active === e.link ? ' fill-[#1F2117] ' : 'fill-[#AAAAAA]'}`}>
 														{e.img}
 													</svg>
 												</div>
 												<p
 													className={`font-bodyalt font-[500] lg:mt-[0rem] text-[10rem] leading-[12rem] text-[#1F2117] lg:font-bodyalt lg:font-[400] lg:leading-[21px] lg:group-hover/link:text-[#1F2117]
-                      ${
-												active === e.link
-													? '  lg:text-[20rem] text-[#1F2117] lg:leading-[24px]'
-													: 'lg:flex lg:text-[18rem] text-[#AAAAAA] lg:leading-[21px]'
-											}`}>
+                        ${
+													active === e.link
+														? '  lg:text-[20rem] text-[#1F2117] lg:leading-[24px]'
+														: 'lg:flex lg:text-[18rem] text-[#AAAAAA] lg:leading-[21px]'
+												}`}>
 													{e.name}
 												</p>
 											</div>
@@ -230,8 +232,10 @@ const Cabinet = () => {
 							</div>
 						</div>
 					</div>
-					<div className="overflow-y-scroll h-full lg:ml-[32rem] lg:overflow-y-scroll">
-						<Outlet />
+					<div className="overflows overflow-y-scroll h-full lg:ml-[32rem] lg:overflow-y-scroll">
+						<Suspense fallback={window.innerWidth >= 1024 ? <Spinner /> : null}>
+							<Outlet />
+						</Suspense>
 					</div>
 				</div>
 			</div>

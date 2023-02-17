@@ -4,14 +4,12 @@ import IMG3 from '../../img/eat3.png';
 import Group from '../../img/group.png';
 import Shadow from '../../img/Ellipse.png';
 
-type Data = string[];
-
 const frameInteractive = [
 	{ img1: require('../../img/HeartRate.png'), img2: require('../../img/Frame.png') },
 	{ img1: require('../../img/gr2.png'), img2: require('../../img/g2.png') },
 ];
 
-const data: Data = ['Отчеты по питанию', 'Статистика тренировок'];
+const data: string[] = ['Отчеты по питанию', 'Статистика тренировок'];
 
 export const Progress = () => {
 	const [active, setActive] = useState(0);
