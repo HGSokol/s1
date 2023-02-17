@@ -67,10 +67,18 @@ const CabinetInfo = () => {
 		axios
 			.put('https://stage.fitnesskaknauka.com/api/customer', fromData)
 			.then((res) => {
-				setReload(true);
 				setAvatar(null);
 				setNameChanges(false);
 				setLastNameChanges(false);
+
+				setUser({
+					email: res.data.email,
+					name: res.data.name === null ? '' : res.data.name,
+					lastName: res.data.lastName === null ? '' : res.data.lastName,
+					avatar: res.data.avatar,
+					uuid: res.data.uuid,
+					isExternalRegistration: res.data.isExternalRegistration,
+				});
 				reset();
 			})
 			.catch((error) => {
@@ -207,12 +215,12 @@ const CabinetInfo = () => {
 						</p>
 						<input
 							type="text"
+							defaultValue={user?.name !== null ? user?.name : ''}
 							{...register('name', {
 								onChange: (e) => {
 									e.target.value !== '' ? setNameChanges(true) : setNameChanges(false);
 								},
 							})}
-							placeholder={user?.name !== null ? user?.name : ''}
 							className={`flex items-center text-[14rem] placeholder:text-[#1F2117] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] 
 								lg:text-[16rem] lg:h-[56rem] lg:px-[16rem] lg:rounded-[8rem]
                 ${
@@ -227,12 +235,12 @@ const CabinetInfo = () => {
 						</p>
 						<input
 							type="text"
+							defaultValue={user?.lastName !== null ? user?.lastName : ''}
 							{...register('lastName', {
 								onChange: (e) => {
 									e.target.value !== '' ? setLastNameChanges(true) : setLastNameChanges(false);
 								},
 							})}
-							placeholder={user?.lastName !== null ? user?.lastName : ''}
 							className={`flex items-center text-[14rem] placeholder:text-[#1F2117]  outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px]
 								lg:text-[16rem] lg:h-[56rem] lg:px-[16rem] lg:rounded-[8rem]
                 ${
