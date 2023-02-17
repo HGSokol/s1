@@ -21,6 +21,9 @@ const CabinetInfo = () => {
 	const [nameChanges, setNameChanges] = useState(false);
 	const [lastNameChanges, setLastNameChanges] = useState(false);
 	const [avatar, setAvatar] = useState<File | null>(null);
+	const [errAvatar, setErrAvatar] = useState<string | null>(null);
+	const [errName, setErrName] = useState<string | null>(null);
+	const [errLastName, setErrLastName] = useState<string | null>(null);
 
 	const navigate = useNavigate();
 	const { register, handleSubmit, reset } = useForm<IFormInputs>({ mode: 'onSubmit' });
@@ -42,11 +45,17 @@ const CabinetInfo = () => {
 				}));
 			})
 			.catch((error) => {
-				console.log(error.response);
+				if (error.response.status === 401) {
+					localStorage.clear();
+					navigate('/');
+				}
 			});
 	}, []);
 
 	const onSubmit: SubmitHandler<IFormInputs> = (data: any) => {
+		setErrAvatar(null);
+		setErrName(null);
+		setErrLastName(null);
 		const { name, lastName } = data;
 		let fromData = new FormData();
 		if (avatar) {
@@ -62,16 +71,25 @@ const CabinetInfo = () => {
 				setAvatar(null);
 				setNameChanges(false);
 				setLastNameChanges(false);
+				reset();
 			})
-			.catch((err) => {
-				console.log(err.response.data);
-				if (err.response.status === 401) {
+			.catch((error) => {
+				if (error.response.status === 422) {
+					if (error.response.data.errors && error.response.data.errors.name) {
+						setErrName(error.response.data.errors.name);
+					}
+					if (error.response.data.errors && error.response.data.errors.lastName) {
+						setErrLastName(error.response.data.errors.lastName);
+					}
+					if (error.response.data.errors && error.response.data.errors.avatar) {
+						setErrAvatar(error.response.data.errors.avatar);
+					}
+				}
+				if (error.response.status === 401) {
 					localStorage.clear();
 					navigate('/');
 				}
 			});
-
-		reset();
 	};
 
 	// update img
@@ -136,7 +154,7 @@ const CabinetInfo = () => {
 							<img
 								src={user.avatar}
 								alt="avatar"
-								className="rounded-full w-[60rem] h-[60rem] lg:w-[60rem] lg:h-[60rem]"
+								className="rounded-full w-[60rem] h-[60rem] lg:w-[60rem] lg:h-[60rem] object-cover"
 							/>
 						)}
 					</div>
@@ -146,7 +164,6 @@ const CabinetInfo = () => {
 							name="uploadFile"
 							className="overflow-hidden opacity-0 h-[0rem] w-[0rem] leading-[0rem] p-[0rem] m-[0rem]"
 							accept=".jpg,.jpeg,.png"
-							// {...register('avatar')}
 							ref={filePicker}
 							onChange={getPhoto}
 						/>
@@ -182,6 +199,7 @@ const CabinetInfo = () => {
 						Загрузить другое изображение
 					</div>
 				</div>
+				{errAvatar ? <p className="text-red-600 h-[24rem] text-[15rem]">{errAvatar}</p> : null}
 				<div className="flex flex-col gap-[16rem] w-full mb-[24rem] lg:flex lg:flex-row lg:flex-wrap lg:gap-[20rem] lg:w-[1000rem] lg:mb-[48rem]">
 					<div className="w-full lg:w-[441rem]">
 						<p className="font-bodyalt font-[400] text-[14rem] text-[#AAAAAA] leading-[19rem] mb-[12rem] lg:font-bodyalt lg:font-[400] lg:text-[16rem] lg:text-[#AAAAAA] lg:leading-[19rem] lg:mb-[14rem]">
@@ -199,7 +217,9 @@ const CabinetInfo = () => {
 								lg:text-[16rem] lg:h-[56rem] lg:px-[16rem] lg:rounded-[8rem]
                 ${
 									nameChanges ? ' border-[#00ff00]' : ' border-[#1F211714] hover:border-[#777872]'
-								}`}></input>
+								}`}
+						/>
+						{errName ? <p className="text-red-600 h-[24rem] text-[15rem]">{errName}</p> : null}
 					</div>
 					<div className="w-full lg:w-[441rem]">
 						<p className="font-bodyalt font-[400] text-[14rem] text-[#AAAAAA] leading-[19rem] mb-[12rem] lg:font-bodyalt lg:font-[400] lg:text-[16rem] lg:text-[#AAAAAA] lg:leading-[19rem] lg:mb-[14rem]">
@@ -219,7 +239,11 @@ const CabinetInfo = () => {
 									lastNameChanges
 										? ' border-[#00ff00]'
 										: ' border-[#1F211714] hover:border-[#777872]'
-								}`}></input>
+								}`}
+						/>
+						{errLastName ? (
+							<p className="text-red-600 h-[24rem] text-[15rem]">{errLastName}</p>
+						) : null}
 					</div>
 					<div className="w-full lg:w-[441rem]">
 						<p className="font-bodyalt font-[400] text-[14rem] text-[#AAAAAA] leading-[19rem] mb-[12rem] lg:font-bodyalt lg:font-[400] lg:text-[16rem] lg:text-[#AAAAAA] lg:leading-[19rem] lg:mb-[14rem]">
@@ -233,9 +257,6 @@ const CabinetInfo = () => {
 					</div>
 				</div>
 				<div className="mb-[15rem] lg:mb-[26rem] w-full lg:w-[441rem]">
-					{/* {oldPassError ? (
-              <p className="lg:text-red-600 lg:h-[24rem] lg:text-[15rem]">{oldPassError}</p>
-            ) : null} */}
 					<button
 						type="submit"
 						disabled={!nameChanges && !lastNameChanges && !avatar}

@@ -173,7 +173,7 @@ export const AppleAuth = () => {
 				})
 				.catch((error) => {
 					if (error.response.status === 422) {
-						if (error.response.data.errors && error.response.data.errors.password) {
+						if (error.response.data.errors && error.response.data.errors.email) {
 							setErrorMessage(error.response.data.errors.email);
 						}
 					} else {

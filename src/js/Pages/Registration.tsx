@@ -26,7 +26,8 @@ const schema = yup
 
 const Login = () => {
 	const [type, setType] = useState(true);
-	const [errorMessage, setErrorMessage] = useState<string | null>(null);
+	const [errName, setErrName] = useState<string | null>(null);
+	const [errLastName, setErrLastName] = useState<string | null>(null);
 	const [errEmail, setErrEmail] = useState<string | null>(null);
 	const [errPassword, setErrPassword] = useState<string | null>(null);
 	const navigate = useNavigate();
@@ -43,6 +44,8 @@ const Login = () => {
 	});
 
 	const onSubmit = (data: IFormInputs) => {
+		setErrName(null);
+		setErrLastName(null);
 		setErrEmail(null);
 		setErrPassword(null);
 		const userInfo = {
@@ -58,6 +61,12 @@ const Login = () => {
 			.catch((error) => {
 				console.log(error.response);
 				if (error.response.status === 422) {
+					if (error.response.data.errors && error.response.data.errors.name) {
+						setErrName(error.response.data.errors.name);
+					}
+					if (error.response.data.errors && error.response.data.errors.lastName) {
+						setErrLastName(error.response.data.errors.lastName);
+					}
 					if (error.response.data.errors && error.response.data.errors.email) {
 						setErrEmail(error.response.data.errors.email);
 					}
@@ -85,11 +94,7 @@ const Login = () => {
 						{...register('name')}
 						className="px-[16rem] font-bodyalt font-[400] text-[14rem] hover:border-[#777872] outline-none w-full h-[48rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56rem] lg:placeholder:text-[16rem] lg:text-[16rem]"
 					/>
-					{errors.name ? (
-						<p className="text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]">
-							{errors.name?.message}
-						</p>
-					) : null}
+					{errName ? <p className="text-red-600 h-[24rem] text-[15rem]">{errName}</p> : null}
 				</div>
 				<div className="mb-[16rem] lg:mb-[24rem]">
 					<input
@@ -98,10 +103,8 @@ const Login = () => {
 						{...register('lastName')}
 						className="px-[16rem] font-bodyalt font-[400] text-[14rem] outline-none w-full h-[48rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] hover:border-[#777872] lg:text-[16rem]  lg:h-[56rem] lg:placeholder:text-[16rem]  "
 					/>
-					{errors.lastName ? (
-						<p className="text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]">
-							{errors.lastName?.message}
-						</p>
+					{errLastName ? (
+						<p className="text-red-600 h-[24rem] text-[15rem]">{errLastName}</p>
 					) : null}
 				</div>
 				<div className="mb-[16rem] lg:mb-[24rem]">

@@ -22,7 +22,7 @@ export const GoogleLogin1 = () => {
 	useScript('https://accounts.google.com/gsi/client', () => {
 		//@ts-ignore
 		window.google.accounts.id.initialize({
-			client_id: `690913230835-7gqha5d9kt9seh5imsdgaht12rpj3sj9.apps.googleusercontent.com`,
+			client_id: '690913230835-7gqha5d9kt9seh5imsdgaht12rpj3sj9.apps.googleusercontent.com',
 			callback: handleCredentialResponse,
 		});
 
@@ -146,7 +146,7 @@ export const GoogleLogin1 = () => {
 			})
 			.catch((error) => {
 				if (error.response.status === 422) {
-					if (error.response.data.errors && error.response.data.errors.password) {
+					if (error.response.data.errors && error.response.data.errors.email) {
 						setErrorMessage(error.response.data.errors.email);
 					}
 				} else {

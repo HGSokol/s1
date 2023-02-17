@@ -94,7 +94,7 @@ const MyProfile = () => {
 							<img
 								src={user.avatar}
 								alt="avatar"
-								className="rounded-full w-[60rem] h-[60rem] lg:w-[60rem] lg:h-[60rem]"
+								className="rounded-full w-[60rem] h-[60rem] lg:w-[60rem] lg:h-[60rem] object-cover"
 							/>
 						)}
 					</div>
