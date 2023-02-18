@@ -66,6 +66,8 @@ export interface ProfileContext {
 	setYandexToken: (token: string | null) => void;
 	errorMessage: string | null;
 	setErrorMessage: (errorMessage: string | null) => void;
+	errorLoadCheckout: boolean | null;
+	setErrorLoadCheckout: (errorMessage: boolean | null) => void;
 }
 
 export type TypeDataHistory = {

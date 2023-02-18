@@ -51,6 +51,8 @@ const ProfileUser: ProfileContext = {
 	setYandexToken: () => {},
 	errorMessage: null,
 	setErrorMessage: () => {},
+	errorLoadCheckout: false,
+	setErrorLoadCheckout: () => {},
 };
 
 export const Profile = createContext<ProfileContext>(ProfileUser);
@@ -65,6 +67,7 @@ function App() {
 	const [yandexToken, setYandexToken] = useState<string | null>(null);
 	const [userPaymentMethod, setUserPaymentMethod] = useState<userPaymentMethod | null>(null);
 	const [errorMessage, setErrorMessage] = useState<string | null>(null);
+	const [errorLoadCheckout, setErrorLoadCheckout] = useState<boolean | null>(null);
 	const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 	const navigate = useNavigate();
 	let deviceName = deviceType;
@@ -111,14 +114,6 @@ function App() {
 
 	return (
 		<div className="font-body">
-			<div>
-				<Helmet>
-					<script
-						src="https://static.yoomoney.ru/checkout-js/v1/checkout.js"
-						type="text/javascript"
-					/>
-				</Helmet>
-			</div>
 			<Profile.Provider
 				value={{
 					user,
@@ -139,6 +134,8 @@ function App() {
 					setYandexToken,
 					errorMessage,
 					setErrorMessage,
+					errorLoadCheckout,
+					setErrorLoadCheckout,
 				}}>
 				<Suspense fallback={<Spinner />}>
 					<Routes>

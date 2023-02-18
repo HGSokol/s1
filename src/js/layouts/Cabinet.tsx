@@ -12,6 +12,7 @@ import { ReactComponent as ProfileIcon } from '../../img/profile.svg';
 import { ReactComponent as Logout } from '../../img/logout.svg';
 import UnknownUser from '../../img/unknownUser.png';
 import Spinner from '../components/Spinner';
+import useScript from '../components/useScript';
 
 type NavType = {
 	name: string;
@@ -32,6 +33,7 @@ const Cabinet = () => {
 		setUser,
 		setUserPaymentMethod,
 		userPaymentMethod,
+		setErrorLoadCheckout,
 	} = useContext(Profile);
 	const ref = useRef<HTMLDivElement | null>(null);
 	const refNav = useRef<NavType[]>(
@@ -55,6 +57,18 @@ const Cabinet = () => {
 	const [active, setActive] = useState(refNav.current[4].link);
 
 	const localUser = localStorage.getItem('user');
+
+	useScript(
+		'https://static.yoomoney.ru/checkout-js/v1/checkout.js',
+		function () {
+			console.log('Скрипт загружен');
+			setErrorLoadCheckout(false);
+		},
+		function () {
+			console.log('Ошибка при загрузке скрипта');
+			setErrorLoadCheckout(true);
+		},
+	);
 
 	useEffect(() => {
 		if (reload && localUser && JSON.parse(localUser).token) {
