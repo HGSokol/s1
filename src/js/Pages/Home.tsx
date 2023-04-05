@@ -11,6 +11,7 @@ import { Footer } from '../layouts/Footer';
 import { Feedback } from '../layouts/Feedback';
 
 function HomePage() {
+	document.title = 'Фитнес как наука';
 	return (
 		<>
 			<div className="lg:w-[1920rem]">

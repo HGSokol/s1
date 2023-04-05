@@ -3,6 +3,7 @@ import { Header } from '../layouts/Header';
 import { Footer } from '../layouts/Footer';
 
 function UserAgreements() {
+	document.title = 'Пользовательское Соглашение';
 	useLayoutEffect(() => {
 		window.scrollTo(0, 0);
 	}, []);

@@ -3,6 +3,7 @@ import { Header } from '../layouts/Header';
 import { Footer } from '../layouts/Footer';
 
 function PrivacyPolicy() {
+	document.title = 'Политика Конфиденциальности';
 	useLayoutEffect(() => {
 		window.scrollTo(0, 0);
 	}, []);

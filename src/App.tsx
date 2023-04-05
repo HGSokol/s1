@@ -58,7 +58,6 @@ const ProfileUser: ProfileContext = {
 export const Profile = createContext<ProfileContext>(ProfileUser);
 
 function App() {
-	document.title = 'Фитнес как наука';
 	const [user, setUser] = useState<User | null>(null);
 	const [cardInfo, setCardInfo] = useState<CardInfo | null>(null);
 	const [reload, setReload] = useState(true);
