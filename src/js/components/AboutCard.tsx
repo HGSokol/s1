@@ -23,7 +23,7 @@ export const AboutCard = ({ item }: TextItem) => {
       lg:p-[32rem]">
 				<p
 					className="font-[600] text-[28rem] text-[#FAFAFA] z-10 w-[230rem]
-        lg:text-[36rem] lg:w-[238rem]">{`${text}`}</p>
+        lg:text-[36rem] lg:w-[238rem] whitespace-pre-wrap">{`${text}`}</p>
 				<button
 					className="rounded-full bg-[#FAFAFA] w-[42rem] h-[42rem] flex justify-center items-center rotate-[45deg] group-hover/about:bg-[#FFB700] 
         lg:w-[50rem] lg:h-[50rem]">

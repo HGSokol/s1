@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction, useContext, useEffect, useState } from
 import axios from 'axios';
 import { Profile } from '../../App';
 import { ReactComponent as Loader } from '../../img/loader.svg';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
 	setActiveCancelPopup: Dispatch<SetStateAction<boolean>>;
@@ -10,22 +11,25 @@ interface Props {
 export const CancelSubPopup = (props: Props) => {
 	const { activeSub, setReload } = useContext(Profile);
 	const [load, setLoad] = useState(false);
+	const navigate = useNavigate();
 	const { setActiveCancelPopup } = props;
 
 	const resetSub = () => {
 		setLoad(true);
 		axios
-			.delete(
-				`https://stage.fitnesskaknauka.com/api/customer/subscriptions/internal/${activeSub?.id2}`,
-			)
+			.delete(`/api/customer/subscriptions/internal/${activeSub?.id2}`)
 			.then((res) => {
 				setActiveCancelPopup(false);
 				setReload(true);
 			})
 			.catch((error) => {
-				console.log(error.response.data);
 				if (error.response.status === 401) {
 					localStorage.clear();
+					navigate('/');
+				}
+				if (error.response.status === 503) {
+					localStorage.clear();
+					navigate('/maintenance');
 				}
 			})
 			.finally(() => {

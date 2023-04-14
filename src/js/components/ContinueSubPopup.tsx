@@ -20,15 +20,21 @@ export const ContinueSubPopup = (props: Props) => {
 	const onClickResumeSub = () => {
 		setLoad(true);
 		axios
-			.put(`https://stage.fitnesskaknauka.com/api/customer/invoices/${activeSub?.error}`)
+			.put(`/api/customer/invoices/${activeSub?.error}`)
 			.then((res) => {
 				setReload(true);
 				setContinueAgree(true);
-				console.log(res, 'gjgsnrf cgbcfybz');
 			})
 			.catch((error) => {
-				console.log(error.response.data);
 				setErrorResumeSub(error.response.data.message);
+				if (error.response.status === 503) {
+					localStorage.clear();
+					navigate('/maintenance');
+				}
+				if (error.response.status === 401) {
+					localStorage.clear();
+					navigate('/');
+				}
 			})
 			.finally(() => {
 				setLoad(false);

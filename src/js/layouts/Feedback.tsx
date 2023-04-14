@@ -99,9 +99,7 @@ export const Feedback = () => {
 	const [size, setSize] = useState<number>(0);
 	const [gap, setGap] = useState<number>(0);
 	const [translate, setTranslate] = useState<number>(0);
-	const [wrapper, setWrapper] = useState(0);
 	const ref = useRef<HTMLDivElement | null>(null);
-	const refSize = useRef(0);
 	const number = useRef(0);
 
 	const counterStars = (rate: number): string[] => {
@@ -132,12 +130,12 @@ export const Feedback = () => {
 			className="mb-[72rem] gap-[10rem] 
     lg:overflow-hidden lg:gap-[15rem] lg:mb-[150rem]">
 			<div
-				className="flex flex-row mb-[32rem] space-x-[200rem] justify-between 
+				className="flex flex-row mb-[22rem] space-x-[200rem] justify-between 
       lg:mb-[64rem]">
 				<div
 					className="font-[600] text-[36rem] leading-[42rem] text-[#1F2117] 
         lg:leading-[75.14rem] lg:text-[64rem]">
-					Нас любят и ценят
+					Отзывы
 				</div>
 				<div className="hidden lg:flex lg:flex-row lg:gap-[10rem]">
 					<button

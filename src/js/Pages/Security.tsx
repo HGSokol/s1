@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { Profile } from '../../App';
+import { handleKeyDown, handleChange } from '../Pages/LoginForm';
 
 interface IFormInputs {
 	password: number;
@@ -16,9 +17,9 @@ interface IFormInputs {
 
 const schema = yup
 	.object({
-		password: yup.string().required('Обязательное поле'),
-		newPassword: yup.string().required('Обязательное поле'),
-		newPasswordConfirmation: yup.string().required('Обязательное поле'),
+		password: yup.string().min(8).required('Обязательное поле'),
+		newPassword: yup.string().min(8).required('Обязательное поле'),
+		newPasswordConfirmation: yup.string().min(8).required('Обязательное поле'),
 	})
 	.required();
 
@@ -56,9 +57,8 @@ const Security = () => {
 		};
 
 		axios
-			.put('https://stage.fitnesskaknauka.com/api/auth/change-password', fetchData)
+			.put('/api/auth/change-password', fetchData)
 			.then((res) => {
-				console.log(res);
 				localStorage.setItem(
 					'user',
 					JSON.stringify({
@@ -72,7 +72,10 @@ const Security = () => {
 				reset();
 			})
 			.catch((err) => {
-				console.log(err.response.data);
+				if (err.response.status === 503) {
+					localStorage.clear();
+					navigate('/maintenance');
+				}
 				if (err.response.status === 422) {
 					if (err.response.data.errors && err.response.data.errors.password) {
 						setErrPassword(err.response.data.errors.password);
@@ -150,7 +153,10 @@ const Security = () => {
 										Старый пароль
 									</p>
 									<input
-										{...register('password')}
+										onKeyDown={handleKeyDown}
+										{...register('password', {
+											onChange: (e) => handleChange(e),
+										})}
 										placeholder="Введите старый пароль"
 										type={`${type === true ? 'password' : 'text'}`}
 										className={`text-[14rem] hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
@@ -174,7 +180,10 @@ const Security = () => {
 										Введите новый пароль
 									</p>
 									<input
-										{...register('newPassword')}
+										onKeyDown={handleKeyDown}
+										{...register('newPassword', {
+											onChange: (e) => handleChange(e),
+										})}
 										placeholder="Введите новый пароль"
 										type={`${type === true ? 'password' : 'text'}`}
 										className={`text-[14rem] hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
@@ -199,7 +208,10 @@ const Security = () => {
 										Повторите новый пароль
 									</p>
 									<input
-										{...register('newPasswordConfirmation')}
+										onKeyDown={handleKeyDown}
+										{...register('newPasswordConfirmation', {
+											onChange: (e) => handleChange(e),
+										})}
 										placeholder="Введите новый пароль"
 										type={`${type === true ? 'password' : 'text'}`}
 										className={`text-[14rem] hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 

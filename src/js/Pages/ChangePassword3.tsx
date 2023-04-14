@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { AiOutlineEye } from 'react-icons/ai';
 import { BsEyeSlash } from 'react-icons/bs';
 import { Profile } from '../../App';
+import { handleKeyDown, handleChange } from './LoginForm';
 
 interface IFormInputs {
 	password: string;
@@ -63,13 +64,20 @@ const ChangePassword3 = () => {
 		};
 
 		axios
-			.put('https://stage.fitnesskaknauka.com/api/auth/reset-password', userInfo)
+			.put('/api/auth/reset-password', userInfo)
 			.then((res) => {
 				reset();
 				navigate('/login');
 			})
 			.catch((error) => {
-				console.log(error.response.data);
+				if (error.response.status === 503) {
+					localStorage.clear();
+					navigate('/maintenance');
+				}
+				if (error.response.status === 401) {
+					localStorage.clear();
+					navigate('/');
+				}
 			});
 	};
 
@@ -101,7 +109,10 @@ const ChangePassword3 = () => {
 					<input
 						placeholder="Ваш пароль"
 						type={`${type === true ? 'password' : 'text'}`}
-						{...register('password')}
+						onKeyDown={handleKeyDown}
+						{...register('password', {
+							onChange: (e) => handleChange(e),
+						})}
 						className={`text-[14rem] hover:border-[#777872] outline-none w-full h-[48rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
               lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
               ${errors.password ? ' hover:border-[#CB1D1D]' : ' '}`}
@@ -123,7 +134,10 @@ const ChangePassword3 = () => {
 					<input
 						placeholder="Подтвердите пароль"
 						type={`${type === true ? 'password' : 'text'}`}
-						{...register('password2')}
+						onKeyDown={handleKeyDown}
+						{...register('password2', {
+							onChange: (e) => handleChange(e),
+						})}
 						className={`text-[14rem] hover:border-[#777872] outline-none w-full h-[48rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
             lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
             ${errors.password2 ? ' hover:border-[#CB1D1D]' : ' '}`}

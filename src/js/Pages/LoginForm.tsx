@@ -17,9 +17,20 @@ interface IFormInputs {
 const schema = yup
 	.object({
 		email: yup.string().email('Не правильный email').required('Обязательное поле'),
-		password: yup.string().required('Обязательное поле'),
+		password: yup.string().min(8).required('Обязательное поле'),
 	})
 	.required();
+
+export const handleKeyDown = (e: any) => {
+	if (e.key === ' ') {
+		e.preventDefault();
+	}
+};
+export const handleChange = (e: any) => {
+	if (e.currentTarget.value.includes(' ')) {
+		e.currentTarget.value = e.currentTarget.value.replace(/\s/g, '');
+	}
+};
 
 const LoginForm = () => {
 	document.title = 'Вход';
@@ -54,7 +65,7 @@ const LoginForm = () => {
 		};
 
 		axios
-			.post('https://stage.fitnesskaknauka.com/api/auth/login', userInfo)
+			.post('/api/auth/login', userInfo)
 			.then((res) => {
 				reset();
 				localStorage.setItem(
@@ -67,9 +78,8 @@ const LoginForm = () => {
 				axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
 
 				axios
-					.get('https://stage.fitnesskaknauka.com/api/customer')
+					.get('/api/customer')
 					.then((res) => {
-						console.log(res);
 						//@ts-ignore
 						setUser((prev) => ({
 							...prev,
@@ -81,7 +91,7 @@ const LoginForm = () => {
 							isExternalRegistration: res.data.isExternalRegistration,
 						}));
 						axios
-							.get(`https://stage.fitnesskaknauka.com/api/customer/subscriptions/active`)
+							.get(`/api/customer/subscriptions/active`)
 							.then((res) => {
 								let typeSubs: any;
 
@@ -128,6 +138,10 @@ const LoginForm = () => {
 								}
 							})
 							.catch((error) => {
+								if (error.response.status === 503) {
+									localStorage.clear();
+									navigate('/maintenance');
+								}
 								if (error.response.status === 401) {
 									localStorage.clear();
 									navigate('/');
@@ -140,7 +154,10 @@ const LoginForm = () => {
 						);
 					})
 					.catch((error) => {
-						console.log(error.response.data);
+						if (error.response.status === 503) {
+							localStorage.clear();
+							navigate('/maintenance');
+						}
 						if (error.response.status === 401) {
 							localStorage.clear();
 							navigate('/login');
@@ -148,9 +165,12 @@ const LoginForm = () => {
 					});
 			})
 			.catch((error) => {
+				if (error.response.status === 503) {
+					localStorage.clear();
+					navigate('/maintenance');
+				}
 				if (error.response.status === 401) {
 					localStorage.clear();
-					console.log(error.response.data);
 					setErrorMessage(error.response.data.message);
 				}
 			});
@@ -170,8 +190,9 @@ const LoginForm = () => {
 					<input
 						placeholder="Ваш e-mail"
 						type="text"
+						onKeyDown={handleKeyDown}
 						{...register('email', {
-							// onChange: (e) => setEmail(e.target.value)
+							onChange: (e) => handleChange(e),
 						})}
 						className={`px-[16rem] font-bodyalt font-[400] text-[14rem] hover:border-[#777872] outline-none w-full h-[48rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56rem] lg:placeholder:text-[16rem] lg:text-[16rem]`}
 					/>
@@ -195,16 +216,12 @@ const LoginForm = () => {
 					<input
 						placeholder="Ваш пароль"
 						type={`${type === true ? 'password' : 'text'}`}
+						onKeyDown={handleKeyDown}
 						{...register('password', {
-							// onChange: (e) => setPassword(e.target.value)
+							onChange: (e) => handleChange(e),
 						})}
 						className={`px-[16rem] font-bodyalt font-[400] text-[14rem] hover:border-[#777872] outline-none w-full h-[48rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56rem] lg:placeholder:text-[16rem] lg:text-[16rem]`}
 					/>
-					{/* {errors.password ? (
-						<p className="text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]">
-							{errors.password?.message}
-						</p>
-					) : null} */}
 				</div>
 				<p className="font-bodyalt text-[14rem] text-[#777872] font-[600] text-end lg:text-[16rem] lg:mb-[28rem]">
 					<Link to="/login/step1" className="">

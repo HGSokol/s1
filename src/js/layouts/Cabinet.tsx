@@ -24,15 +24,14 @@ const Cabinet = () => {
 	document.title = 'Подписки';
 	const location = useLocation();
 	const navigate = useNavigate();
+
 	const {
 		user,
 		activeSub,
 		reload,
 		setReload,
 		setActiveSub,
-		setUser,
 		setUserPaymentMethod,
-		userPaymentMethod,
 		setErrorLoadCheckout,
 	} = useContext(Profile);
 	const ref = useRef<HTMLDivElement | null>(null);
@@ -61,11 +60,9 @@ const Cabinet = () => {
 	useScript(
 		'https://static.yoomoney.ru/checkout-js/v1/checkout.js',
 		function () {
-			console.log('Скрипт загружен');
 			setErrorLoadCheckout(false);
 		},
 		function () {
-			console.log('Ошибка при загрузке скрипта');
 			setErrorLoadCheckout(true);
 		},
 	);
@@ -73,9 +70,8 @@ const Cabinet = () => {
 	useEffect(() => {
 		if (reload && localUser && JSON.parse(localUser).token) {
 			axios
-				.get(`https://stage.fitnesskaknauka.com/api/customer/subscriptions/active`)
+				.get(`/api/customer/subscriptions/active`)
 				.then((res) => {
-					console.log(res.data, 'подписка');
 					let typeSubs: any;
 
 					res.data.internalSubscription
@@ -124,6 +120,10 @@ const Cabinet = () => {
 					if (error.response.status === 401) {
 						localStorage.clear();
 						navigate('/');
+					}
+					if (error.response.status === 503) {
+						localStorage.clear();
+						navigate('/maintenance');
 					}
 				});
 		}
@@ -224,7 +224,9 @@ const Cabinet = () => {
 					<div className="hidden lg:mt-[32rem] lg:flex lg:flex-row lg:justify-end lg:h-[60rem] ">
 						<div className="lg:flex lg:flex-row lg:gap-[12rem]">
 							<div className="lg:py-[5rem]">
-								<p className="lg:font-bodyalt lg:font-[500] lg:text-[#1F2117] lg:text-[18rem] lg:text-end">{`${user?.name} ${user?.lastName}`}</p>
+								<p className="lg:font-bodyalt lg:font-[500] lg:text-[#1F2117] lg:text-[18rem] lg:text-end">{`${
+									user?.name !== null ? user?.name : ''
+								} ${user?.lastName !== null ? user?.lastName : ''}`}</p>
 								<p className="lg:font-bodyalt lg:font-[400] lg:text-[#1F2117]/60 lg:text-[14rem]  lg:text-end">
 									{user?.email}
 								</p>
@@ -234,7 +236,7 @@ const Cabinet = () => {
 									<img
 										src={UnknownUser}
 										alt="avatar"
-										className="rounded-full w-[60rem] h-[60rem] lg:w-[60rem] lg:h-[60rem]"
+										className="rounded-full w-[60rem] h-[60rem] lg:w-[60rem] lg:h-[60rem] object-cover"
 									/>
 								) : (
 									<img

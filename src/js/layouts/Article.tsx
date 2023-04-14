@@ -6,10 +6,9 @@ import Shadow from '../../img/Ellipse.png';
 
 const frameInteractive = [
 	{ img1: require('../../img/HeartRate.png'), img2: require('../../img/Frame.png') },
-	{ img1: require('../../img/gr2.png'), img2: require('../../img/g2.png') },
 ];
 
-const data: string[] = ['Статьи', 'Лекции'];
+const data: string[] = ['# Статьи', '# Лекции', '# Советы экспертов'];
 
 export const Article = () => {
 	const [active, setActive] = useState(0);
@@ -21,7 +20,7 @@ export const Article = () => {
 	return (
 		<div
 			id="article"
-			className="grid grid-rows-[330rem_317rem] grid-col-1 mb-[116.52rem] 
+			className="grid grid-rows-[410rem_317rem] grid-col-1 mb-[116.52rem] 
     lg:grid-cols-[1fr_1fr] lg:grid-rows-1 lg:mb-[150rem] lg:pt-[40rem] ">
 			<div
 				className="relative order-2 duration-300 mx-auto
@@ -53,7 +52,7 @@ export const Article = () => {
 				</div>
 				<img
 					className="mx-auto w-[287rem] h-[327rem]
-        lg:w-[537rem] lg:h-[607rem] lg:mx-auto  "
+        lg:w-[537rem] lg:h-[607rem]"
 					src={IMG1}
 					alt="eat1"
 				/>
@@ -62,22 +61,16 @@ export const Article = () => {
 				className="order-1 mb-[52rem] 
       lg:pt-[90rem]">
 				<div
-					className="mb-[25rem]  flex flex-row gap-[8rem] 
-        lg:w-[814rem] lg:mb-[32rem] lg:gap-[18rem]">
+					className="mb-[25rem] w-[187rem]  flex flex-row gap-[8rem] 
+        lg:w-[814rem] lg:mb-[32rem] lg:gap-[18rem] flex-wrap">
 					{data.map((item, i) => {
 						return (
-							<button
+							<div
 								key={i}
-								className={` hover:bg-[#FFB700] hover:text-[#FAFAFA] bg-white font-bodyalt w-max h-[33rem] px-[12rem] py-[8rem] text-[14rem] leading-[17rem] rounded-full font-[400] duration-[600ms] whitespace-nowrap
-                  lg:h-[43rem] lg:text-[16rem] lg:leading-[19rem] lg:rem-[24rem] lg:py-[12rem] lg:w-max lg:px-[24rem]
-                  ${
-										active === i
-											? ' bg-[#FFB700] text-[#FAFAFA] drop-shadow-dropActive'
-											: ' bg-[#FFFFFF] text-[#1F2117] drop-shadow-drop'
-									}`}
-								onClick={() => activeButton(i)}>
+								className={` border-[1rem] border-[#FFB700] text-[#FFB700] font-bodyalt w-max h-[33rem] px-[12rem] py-[8rem] text-[14rem] leading-[17rem] rounded-full font-[400] duration-[600ms] whitespace-nowrap
+                  lg:h-[43rem] lg:text-[16rem] lg:leading-[19rem] lg:rem-[24rem] lg:py-[12rem] lg:w-max lg:px-[24rem]`}>
 								{item}
-							</button>
+							</div>
 						);
 					})}
 				</div>
@@ -87,27 +80,11 @@ export const Article = () => {
 					Получай ценные знания каждый день.
 				</h2>
 				<div
-					className="font-bodyalt font-[400] text-[16rem] leading-[19rem] h-[76rem] tracking-[0.02em] 
-        lg:text-[22rem] lg:leading-[32rem] text-[#777872] lg:w-[734rem] lg:h-[128rem]">
-					В нашем приложение собраны
-					<div className="inline-block relative">
-						<div className="z-10 relative">&nbsp;тысячи&nbsp;</div>
-						<div className="-z-0 absolute">
-							<svg
-								className="w-[68rem] h-[10rem] -translate-y-[5rem] -translate-x-[2rem] 
-              lg:w-[167rem] lg:h-[17rem] lg:-translate-y-[11rem] lg:-translate-x-[3rem]"
-								viewBox="0 0 153 14"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg">
-								<path
-									d="M152.226 5.87917C152.226 5.87917 152.345 5.96151 152.18 6.34634C152.096 6.39578 151.774 6.64456 150.969 7.08498C149.783 7.98078 103.914 4.26149 77.2313 6.90812L0.3698 13.497C-0.34056 13.5484 0.211171 12.8273 0.211171 12.8273C10.1775 9.17608 20.4009 5.29578 47.2288 3.31143C65.6471 1.22719 99.8388 -0.194657 106.805 0.254519C117.21 0.621249 139.301 3.30028 152.226 5.87917Z"
-									fill="#FFB700"
-								/>
-							</svg>
-						</div>
-					</div>
-					статей и лекций на темы спорта и здоровья. Изучай новую информацию, чтобы лучше
-					разбираться в том, как работает наше тело.
+					className="font-bodyalt font-[400] text-[16rem] leading-[19rem] h-[133rem] tracking-[0.02em] 
+        lg:text-[22rem] lg:leading-[32rem] text-[#777872] lg:w-[660rem] lg:h-[128rem]">
+					В коллекции наших статей и лекций актуальная и полезная информация о здоровье, питании и
+					тренировках. Наши эксперты предоставляют результаты новейших исследований и делятся
+					секретами “внутренней кухни”. Вооружайся знаниями для достижения целей.
 				</div>
 			</div>
 		</div>

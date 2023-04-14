@@ -1,9 +1,23 @@
 import React from 'react';
 import HeaderOrder from './HeaderOrder';
+import { Header } from '../layouts/Header';
 
-export const Develop = () => {
+interface Text {
+	text: {
+		text1: string;
+		text2: string;
+	};
+	glob?: boolean;
+}
+
+export const Develop = (text: Text) => {
 	return (
 		<div className="mx-[16rem]">
+			{text?.glob ? (
+				<div className="hidden lg:block">
+					<Header maintenance={true} />
+				</div>
+			) : null}
 			<div className=" lg:hidden">
 				<HeaderOrder />
 			</div>
@@ -167,13 +181,12 @@ export const Develop = () => {
 				</div>
 				<div className="w-full mb-[32rem] lg:w-[415rem]">
 					<p className="text-center font-body font-[600] text-[24rem] leading-[28rem]  lg:text-[40rem] lg:leading-[46rem] text-[#1F2117]">
-						Страница находится в разработке
+						{text.text.text1}
 					</p>
 				</div>
 				<div className="w-full lg:w-[590rem] mb-[32rem]">
 					<p className="text-center font-bodyalt font-[400] text-[16rem] leading-[19rem] lg:text-[22rem] lg:leading-[32rem] text-[#777872] ">
-						На данный момент эта страница находится в разработке. Вы можете воспользоваться нашим
-						приложением.
+						{text.text.text2}
 					</p>
 				</div>
 				<div className="w-[152rem] h-[45rem] lg:w-[194rem] lg:h-[56rem]">

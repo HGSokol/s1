@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { BsEyeSlash } from 'react-icons/bs';
 import axios from 'axios';
 import { AlternativeLogin } from '../components/AlternativeLogin';
+import { handleKeyDown, handleChange } from '../Pages/LoginForm';
 
 interface IFormInputs {
 	name: string;
@@ -17,19 +18,20 @@ interface IFormInputs {
 
 const schema = yup
 	.object({
-		name: yup.string().required('Обязательное поле'),
-		lastName: yup.string().required('Обязательное поле'),
+		name: yup.string().trim().required('Обязательное поле'),
+		lastName: yup.string().trim(),
 		email: yup.string().email('Не правильный email').required('Обязательное поле'),
-		password: yup.string().required('Обязательное поле'),
+		password: yup.string().min(8).required('Обязательное поле'),
 	})
 	.required();
 
 const Login = () => {
 	const [type, setType] = useState(true);
-	const [errName, setErrName] = useState<string | null>(null);
-	const [errLastName, setErrLastName] = useState<string | null>(null);
 	const [errEmail, setErrEmail] = useState<string | null>(null);
 	const [errPassword, setErrPassword] = useState<string | null>(null);
+	const [errName, setErrName] = useState<string | null>(null);
+	const [errLastName, setErrLastName] = useState<string | null>(null);
+
 	const navigate = useNavigate();
 
 	document.title = 'Регистрация';
@@ -54,12 +56,19 @@ const Login = () => {
 		};
 
 		axios
-			.post('https://stage.fitnesskaknauka.com/api/auth/register', userInfo)
+			.post('/api/auth/register', userInfo)
 			.then((res) => {
 				navigate('/login');
 			})
 			.catch((error) => {
-				console.log(error.response);
+				if (error.response.status === 503) {
+					localStorage.clear();
+					navigate('/maintenance');
+				}
+				if (error.response.status === 401) {
+					localStorage.clear();
+					navigate('/');
+				}
 				if (error.response.status === 422) {
 					if (error.response.data.errors && error.response.data.errors.name) {
 						setErrName(error.response.data.errors.name);
@@ -91,7 +100,9 @@ const Login = () => {
 					<input
 						placeholder="Ваше имя"
 						type="text"
-						{...register('name')}
+						{...register('name', {
+							// onChange: (e) => handleChangeFullName(e)
+						})}
 						className="px-[16rem] font-bodyalt font-[400] text-[14rem] hover:border-[#777872] outline-none w-full h-[48rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] lg:h-[56rem] lg:placeholder:text-[16rem] lg:text-[16rem]"
 					/>
 					{errName ? <p className="text-red-600 h-[24rem] text-[15rem]">{errName}</p> : null}
@@ -100,7 +111,9 @@ const Login = () => {
 					<input
 						placeholder="Ваша фамилия"
 						type="text"
-						{...register('lastName')}
+						{...register('lastName', {
+							// onChange: (e) => handleChangeFullName(e)
+						})}
 						className="px-[16rem] font-bodyalt font-[400] text-[14rem] outline-none w-full h-[48rem] rounded-[8rem] bg-white border-[1rem] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] hover:border-[#777872] lg:text-[16rem]  lg:h-[56rem] lg:placeholder:text-[16rem]  "
 					/>
 					{errLastName ? (
@@ -111,7 +124,10 @@ const Login = () => {
 					<input
 						placeholder="Ваш e-mail"
 						type="text"
-						{...register('email')}
+						onKeyDown={handleKeyDown}
+						{...register('email', {
+							onChange: (e) => handleChange(e),
+						})}
 						className={`font-bodyalt font-[400] text-[14rem]  hover:border-[#777872] outline-none w-full h-[48rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
           lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
           ${errors.email ? ' hover:border-[#CB1D1D]' : ' '}`}
@@ -131,7 +147,10 @@ const Login = () => {
 					<input
 						placeholder="Ваш пароль"
 						type={`${type === true ? 'password' : 'text'}`}
-						{...register('password')}
+						onKeyDown={handleKeyDown}
+						{...register('password', {
+							onChange: (e) => handleChange(e),
+						})}
 						className={`font-bodyalt font-[400] text-[14rem] hover:border-[#777872] outline-none w-full h-[48rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
           lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
           ${errors.email ? ' hover:border-[#CB1D1D]' : ' '}`}

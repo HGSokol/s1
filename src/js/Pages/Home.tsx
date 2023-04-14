@@ -24,7 +24,7 @@ function HomePage() {
 					<Food />
 					<Progress />
 					<Command />
-					<Feedback />
+					{/* <Feedback /> */}
 					<Subscribe />
 				</div>
 				<Footer />

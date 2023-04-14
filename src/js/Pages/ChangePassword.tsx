@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Profile } from '../../App';
 import { ReactComponent as Loader } from '../../img/loader.svg';
+import { handleKeyDown, handleChange } from './LoginForm';
 
 interface IFormInputs {
 	email: string;
@@ -19,7 +20,6 @@ const schema = yup
 
 const ChangePassword = () => {
 	const [errorMessage, setErrorMessage] = useState<string | null>(null);
-	// const { setUser } = useContext(Profile);
 	const [load, setLoad] = useState(false);
 	const navigate = useNavigate();
 
@@ -50,18 +50,20 @@ const ChangePassword = () => {
 		};
 
 		axios
-			.post('https://stage.fitnesskaknauka.com/api/auth/send-reset-code', userInfo)
+			.post('/api/auth/send-reset-code', userInfo)
 			.then((res) => {
 				reset();
-				console.log(res);
 				navigate('/login/step2');
 			})
 			.catch((error) => {
+				if (error.response.status === 503) {
+					localStorage.clear();
+					navigate('/maintenance');
+				}
 				if (error.response.status === 401) {
 					localStorage.clear();
 					navigate('/');
 				}
-				console.log(error);
 				setErrorMessage(error.response.data.message);
 			})
 			.finally(() => {
@@ -84,7 +86,10 @@ const ChangePassword = () => {
 					<input
 						placeholder="Ваш e-mail"
 						type="text"
-						{...register('email')}
+						onKeyDown={handleKeyDown}
+						{...register('email', {
+							onChange: (e) => handleChange(e),
+						})}
 						className={`font-bodyalt font-[400] text-[14rem] hover:border-[#777872] outline-none w-full h-[48rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
           lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
           ${errors.email ? ' hover:border-[#CB1D1D]' : ' '}`}

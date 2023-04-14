@@ -69,12 +69,10 @@ export const ChangePaymentData = (props?: ChangeCard) => {
 			Checkout(cardInfo)
 				.then((res) => {
 					if (res.status === 'success') {
-						console.log(res.data, 'ответ яндекса');
 						setYandexToken(res.data.response.paymentToken);
 						navigate('/cabinet/payments/processing');
 					}
 					if (res.status === 'error') {
-						console.log(res.status);
 						res.error.params.forEach((e: any) => {
 							if (e.code === 'invalid_number') {
 								errorNumber.current = e.message;
@@ -110,7 +108,7 @@ export const ChangePaymentData = (props?: ChangeCard) => {
 
 		const currentYear = +String(new Date().getFullYear()).slice(2, 4);
 		const year = Number(cardCode.slice(0, 2)) > 12 ? ' ' : cardCode.slice(0, 2);
-		const month = Number(cardCode.slice(3, 5)) > currentYear + 7 ? ' ' : cardCode.slice(3, 5);
+		const month = Number(cardCode.slice(3, 5)) > currentYear + 70 ? ' ' : cardCode.slice(3, 5);
 		const f = `${year}${month}`;
 
 		let matchCard: any = f.replace(/[^\d]/g, '').substring(0, 4);
@@ -142,12 +140,13 @@ export const ChangePaymentData = (props?: ChangeCard) => {
 						<input
 							ref={refNumberCard}
 							value={numberCard}
+							autoComplete="cc-number"
 							onChange={handleSubmitNumber}
 							maxLength={19}
 							minLength={19}
 							placeholder="XXXX XXXX XXXX XXXX"
 							type="text"
-							className={`font-bodyalt font-[400] leading-[14rem] text-[#1F2117] text-[14rem] hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
+							className={`font-bodyalt font-[400] leading-[14rem] text-[#1F2117] text-[14rem] hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA]
                 lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
                 `}
 						/>
@@ -169,10 +168,11 @@ export const ChangePaymentData = (props?: ChangeCard) => {
 								value={dateCard}
 								onChange={handleSubmitDate}
 								placeholder="ММ/ГГ"
+								autoComplete="cc-exp"
 								type="text"
 								maxLength={5}
 								minLength={5}
-								className={`font-bodyalt font-[400] leading-[14rem] text-[#1F2117] text-[14rem] hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
+								className={`font-bodyalt font-[400] leading-[14rem] text-[#1F2117] text-[14rem] hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA]
                   lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
                   `}
 							/>
@@ -191,10 +191,11 @@ export const ChangePaymentData = (props?: ChangeCard) => {
 							<input
 								placeholder="CVV"
 								type="text"
+								autoComplete="cc-csc"
 								maxLength={3}
 								minLength={3}
 								{...register('cvv')}
-								className={`font-bodyalt font-[400] leading-[14rem] text-[#1F2117] text-[14rem] hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA] 
+								className={`font-bodyalt font-[400] leading-[14rem] text-[#1F2117] text-[14rem] hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA]
                   lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
                   `}
 							/>
@@ -212,9 +213,6 @@ export const ChangePaymentData = (props?: ChangeCard) => {
 						обратно
 					</p>
 				</div>
-				{/* {
-            errorMessage ? (<p className='text-center text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]'>{errorMessage}</p>) : null
-          } */}
 				<div>
 					<button
 						type="submit"

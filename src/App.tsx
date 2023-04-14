@@ -31,6 +31,7 @@ const ChangePassword3 = lazy(() => import('./js/Pages/ChangePassword3'));
 const UserAgreements = lazy(() => import('./js/Pages/UserAgreements'));
 const PrivacyPolicy = lazy(() => import('./js/Pages/PrivacyPolicy'));
 const NotFound = lazy(() => import('./js/Pages/PageNotFound'));
+const Maintenance = lazy(() => import('./js/Pages/Maintanance'));
 
 const ProfileUser: ProfileContext = {
 	user: null,
@@ -67,6 +68,7 @@ function App() {
 	const [userPaymentMethod, setUserPaymentMethod] = useState<userPaymentMethod | null>(null);
 	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 	const [errorLoadCheckout, setErrorLoadCheckout] = useState<boolean | null>(null);
+
 	const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 	const navigate = useNavigate();
 	let deviceName = deviceType;
@@ -88,7 +90,7 @@ function App() {
 	useEffect(() => {
 		if (reload && localUser && JSON.parse(localUser).token) {
 			axios
-				.get('https://stage.fitnesskaknauka.com/api/customer')
+				.get('/api/customer')
 				.then((res) => {
 					setUser((prev) => ({
 						...prev,
@@ -101,15 +103,29 @@ function App() {
 					}));
 				})
 				.catch((error) => {
-					console.log(error.response);
 					if (error.response.status === 401) {
 						localStorage.clear();
 						navigate('/');
+					}
+					if (error.response.status === 503) {
+						localStorage.clear();
+						navigate('/maintenance');
 					}
 				});
 			setReload(false);
 		}
 	}, [reload]);
+
+	useEffect(() => {
+		window.addEventListener('popstate', function (event) {
+			setYandexToken(null);
+		});
+		return () => {
+			window.removeEventListener('popstate', function (event) {
+				setYandexToken(null);
+			});
+		};
+	}, []);
 
 	return (
 		<div className="font-body">
@@ -194,6 +210,7 @@ function App() {
 							</Route>
 						)}
 						<Route path="/userAgreements" element={<UserAgreements />} />
+						<Route path="/maintenance" element={<Maintenance />} />
 						<Route path="/policy" element={<PrivacyPolicy />} />
 						<Route path="*" element={<NotFound />} />
 					</Routes>
