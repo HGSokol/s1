@@ -205,7 +205,7 @@ const Ordering = () => {
         lg:font-bodyalt lg:font-[400] lg:text-[22rem] lg:leading-[32rem] ">
 							{link
 								? 'Вы успешно изменили платежный метод'
-								: `Вы успешно оплатили подписку "${selectedPlan?.name}"\nна сумму ${selectedPlan?.price}`}
+								: `Вы успешно оплатили подписку "${selectedPlan?.name}"`}
 						</div>
 						<div
 							onClick={moveToCabinet}
