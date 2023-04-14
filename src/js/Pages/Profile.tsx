@@ -99,7 +99,9 @@ const MyProfile = () => {
 						)}
 					</div>
 					<div className="py-[5rem]">
-						<p className="font-bodyalt font-[500] text-[#1F2117] text-[18rem] lg:text-end">{`${user?.name} ${user?.lastName}`}</p>
+						<p className="font-bodyalt font-[500] text-[#1F2117] text-[18rem] lg:text-end">{`${
+							user?.name !== null ? user?.name : ''
+						} ${user?.lastName !== null ? user?.lastName : ''}`}</p>
 						<p className="font-bodyalt font-[400] text-[#1F2117]/60 text-[14rem] lg:text-end">
 							{user?.email}
 						</p>

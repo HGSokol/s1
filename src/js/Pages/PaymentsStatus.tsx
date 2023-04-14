@@ -25,16 +25,11 @@ const PaymentsStatus = () => {
 	function payment() {
 		setTimeout(() => {
 			axios
-				.get(
-					`https://stage.fitnesskaknauka.com/api/customer/payments/status/${searchParams.get(
-						'paymentId',
-					)}`,
-				)
+				.get(`/api/customer/payments/status/${searchParams.get('paymentId')}`)
 				.then((res) => {
 					//@ts-ignore
 					setStatusCode((prev) => res.status);
 					if (res.status === 202) {
-						console.log(res);
 						//@ts-ignore
 						setStatusMessage((prev) => res.data.message);
 						setYandexToken(null);
@@ -45,11 +40,14 @@ const PaymentsStatus = () => {
 					}
 				})
 				.catch((error) => {
-					console.log(error.response);
 					setStatusCode((prev) => error.response.status);
 					setErrorMessage(error.response.data.error);
 					setStatusMessage('Платеж не одобрен');
 					setStatus(error.response.data.message);
+					if (error.response.status === 503) {
+						localStorage.clear();
+						navigate('/maintenance');
+					}
 					if (error.response.status === 401) {
 						localStorage.clear();
 						navigate('/');
@@ -76,17 +74,6 @@ const PaymentsStatus = () => {
 			navigate('/cabinet/plans');
 		}
 	};
-
-	// 	if (statusCode === 404) {
-	// 		setStatus('Платеж не найден');
-	// 	}
-	// 	if (!link && statusCode === 202) {
-	// 		setStatus('Оплата прошла успешно');
-	// 	}
-	// 	if (link && statusCode === 202) {
-	// 		setStatus('Изменение карты прошло успешно');
-	// 	}
-	// }, [statusCode]);
 
 	return (
 		<div className="mx-[16rem] lg:mx-[0rem] lg:w-[700rem]">

@@ -30,9 +30,8 @@ const CabinetInfo = () => {
 
 	useEffect(() => {
 		axios
-			.get('https://stage.fitnesskaknauka.com/api/customer')
+			.get('/api/customer')
 			.then((res) => {
-				console.log(res);
 				//@ts-ignore
 				setUser((prev) => ({
 					...prev,
@@ -49,6 +48,10 @@ const CabinetInfo = () => {
 					localStorage.clear();
 					navigate('/');
 				}
+				if (error.response.status === 503) {
+					localStorage.clear();
+					navigate('/maintenance');
+				}
 			});
 	}, []);
 
@@ -62,10 +65,10 @@ const CabinetInfo = () => {
 			fromData.append('avatar', avatar!);
 		}
 		fromData.append('name', name === '' ? user?.name : name);
-		fromData.append('lastName', lastName === '' ? user?.lastName : lastName);
+		fromData.append('lastName', lastName);
 
 		axios
-			.put('https://stage.fitnesskaknauka.com/api/customer', fromData)
+			.put('/api/customer', fromData)
 			.then((res) => {
 				setAvatar(null);
 				setNameChanges(false);
@@ -79,9 +82,14 @@ const CabinetInfo = () => {
 					uuid: res.data.uuid,
 					isExternalRegistration: res.data.isExternalRegistration,
 				});
+
 				reset();
 			})
 			.catch((error) => {
+				if (error.response.status === 503) {
+					localStorage.clear();
+					navigate('/maintenance');
+				}
 				if (error.response.status === 422) {
 					if (error.response.data.errors && error.response.data.errors.name) {
 						setErrName(error.response.data.errors.name);
@@ -102,9 +110,18 @@ const CabinetInfo = () => {
 
 	// update img
 	const getPhoto = async (data: ChangeEvent<HTMLInputElement>) => {
-		// let fromData = new FormData();
+		const FileSizeLimit = 5120;
+
 		if (data.target && data.target.files && data.target.files[0]) {
-			setAvatar(data.target.files[0]);
+			const FileSize = data.target.files[0].size / 1024;
+
+			if (FileSize > FileSizeLimit) {
+				setAvatar(null);
+				setErrAvatar('Поле Аватар должно быть не больше 5120 Килобайт.');
+			} else {
+				setAvatar(data.target.files[0]);
+				setErrAvatar(null);
+			}
 		}
 	};
 
@@ -148,9 +165,15 @@ const CabinetInfo = () => {
 			<form className="upload" onSubmit={handleSubmit(onSubmit)}>
 				<div
 					onClick={getPhotoTest}
-					className={`cursor-pointer mb-[20rem] w-full p-[16rem] flex flex-row items-center bg-[#FFFFFF] border-[1px] ${
-						avatar !== null ? ' border-[#00ff00]' : ' border-[#1F211714] hover:border-[#777872]'
-					}  rounded-[8rem] lg:mb-[20rem] lg:w-[441rem] lg:p-[16rem] lg:flex lg:flex-row lg:items-center lg:bg-[#FFFFFF] lg:border-[1px] lg:border-[rgba(31_33_23_0.08)] lg:rounded-[8rem]`}>
+					className={`cursor-pointer ${
+						errAvatar ? 'mb-[5rem] lg:mb-[8rem]' : 'mb-[20rem] lg:mb-[20rem]'
+					} w-full p-[16rem] flex flex-row items-center bg-[#FFFFFF] border-[1px] ${
+						errAvatar
+							? 'border-red-600 '
+							: avatar !== null
+							? ' border-[#00ff00]'
+							: ' border-[#1F211714] hover:border-[#777872]'
+					}  rounded-[8rem] lg:w-[441rem] lg:p-[16rem] lg:flex lg:flex-row lg:items-center lg:bg-[#FFFFFF] lg:border-[1px] lg:border-[rgba(31_33_23_0.08)] lg:rounded-[8rem]`}>
 					<div className="w-[60rem] h-[60rem] mr-[20rem] lg:mr-[28rem]">
 						{!user?.avatar ? (
 							<img
@@ -207,7 +230,11 @@ const CabinetInfo = () => {
 						Загрузить другое изображение
 					</div>
 				</div>
-				{errAvatar ? <p className="text-red-600 h-[24rem] text-[15rem]">{errAvatar}</p> : null}
+				{errAvatar ? (
+					<div className="text-red-600 mb-[25rem] h-[24rem] text-[15rem] lg:mb-[10rem]">
+						{errAvatar}
+					</div>
+				) : null}
 				<div className="flex flex-col gap-[16rem] w-full mb-[24rem] lg:flex lg:flex-row lg:flex-wrap lg:gap-[20rem] lg:w-[1000rem] lg:mb-[48rem]">
 					<div className="w-full lg:w-[441rem]">
 						<p className="font-bodyalt font-[400] text-[14rem] text-[#AAAAAA] leading-[19rem] mb-[12rem] lg:font-bodyalt lg:font-[400] lg:text-[16rem] lg:text-[#AAAAAA] lg:leading-[19rem] lg:mb-[14rem]">
@@ -215,16 +242,20 @@ const CabinetInfo = () => {
 						</p>
 						<input
 							type="text"
-							defaultValue={user?.name !== null ? user?.name : ''}
 							{...register('name', {
 								onChange: (e) => {
 									e.target.value !== '' ? setNameChanges(true) : setNameChanges(false);
 								},
 							})}
+							defaultValue={user?.name !== null ? user?.name : ''}
 							className={`flex items-center text-[14rem] placeholder:text-[#1F2117] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] 
 								lg:text-[16rem] lg:h-[56rem] lg:px-[16rem] lg:rounded-[8rem]
                 ${
-									nameChanges ? ' border-[#00ff00]' : ' border-[#1F211714] hover:border-[#777872]'
+									errName
+										? 'border-red-600 '
+										: nameChanges
+										? ' border-[#00ff00]'
+										: ' border-[#1F211714] hover:border-[#777872]'
 								}`}
 						/>
 						{errName ? <p className="text-red-600 h-[24rem] text-[15rem]">{errName}</p> : null}
@@ -235,16 +266,21 @@ const CabinetInfo = () => {
 						</p>
 						<input
 							type="text"
-							defaultValue={user?.lastName !== null ? user?.lastName : ''}
 							{...register('lastName', {
 								onChange: (e) => {
-									e.target.value !== '' ? setLastNameChanges(true) : setLastNameChanges(false);
+									setLastNameChanges(true);
+									// 	// e.target.value !== '' ? setLastNameChanges(true) : setLastNameChanges(false);
 								},
 							})}
+							defaultValue={
+								user?.lastName === null || user?.lastName === 'null' ? '' : user?.lastName
+							}
 							className={`flex items-center text-[14rem] placeholder:text-[#1F2117]  outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px]
 								lg:text-[16rem] lg:h-[56rem] lg:px-[16rem] lg:rounded-[8rem]
                 ${
-									lastNameChanges
+									errLastName
+										? 'border-red-600 '
+										: lastNameChanges
 										? ' border-[#00ff00]'
 										: ' border-[#1F211714] hover:border-[#777872]'
 								}`}
@@ -252,16 +288,6 @@ const CabinetInfo = () => {
 						{errLastName ? (
 							<p className="text-red-600 h-[24rem] text-[15rem]">{errLastName}</p>
 						) : null}
-					</div>
-					<div className="w-full lg:w-[441rem]">
-						<p className="font-bodyalt font-[400] text-[14rem] text-[#AAAAAA] leading-[19rem] mb-[12rem] lg:font-bodyalt lg:font-[400] lg:text-[16rem] lg:text-[#AAAAAA] lg:leading-[19rem] lg:mb-[14rem]">
-							E-mail
-						</p>
-						<div
-							className="flex items-center text-[14rem]  hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] 
-								lg:text-[16rem] lg:h-[56rem] lg:px-[16rem] lg:rounded-[8rem]">
-							{user?.email}
-						</div>
 					</div>
 				</div>
 				<div className="mb-[15rem] lg:mb-[26rem] w-full lg:w-[441rem]">

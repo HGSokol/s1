@@ -35,12 +35,19 @@ const Subs = () => {
 
 	useEffect(() => {
 		axios
-			.get('https://stage.fitnesskaknauka.com/api/plans')
+			.get('/api/plans')
 			.then((res) => {
 				setSub(res.data);
 			})
 			.catch((error) => {
-				console.log(error.response.data);
+				if (error.response.status === 503) {
+					localStorage.clear();
+					navigate('/maintenance');
+				}
+				if (error.response.status === 401) {
+					localStorage.clear();
+					navigate('/');
+				}
 			})
 			.finally(() => {
 				setDiDMount(true);
@@ -273,7 +280,7 @@ const Subs = () => {
 													<div className="w-full">
 														<button
 															onClick={() => setActiveContinueSubPopup(true)}
-															className="font-bodyalt h-[51rem] w-full rounded-full bg-[#FFB700] flex flex-row text-[#FAFAFA] justify-center items-center lg:h-[56rem] hover:bg-[#F0AD04]">
+															className="font-bodyalt flex items-center justify-center h-[51rem] w-full rounded-full bg-[#FFB700] flex flex-row text-[#FAFAFA] justify-center items-center lg:h-[56rem] hover:bg-[#F0AD04]">
 															Повторить попытку
 														</button>
 													</div>

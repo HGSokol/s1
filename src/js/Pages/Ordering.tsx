@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import HeaderOrder from '../components/HeaderOrder';
 import { ChangePaymentData } from '../components/ChangePaymentData';
 import { Profile } from '../../App';
@@ -8,7 +8,6 @@ import { ReactComponent as Loader } from '../../img/loader.svg';
 const Ordering = () => {
 	document.title = 'Оформление заказа';
 	const { selectedPlan, activeSub, errorLoadCheckout } = useContext(Profile);
-
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -16,14 +15,13 @@ const Ordering = () => {
 			navigate('/cabinet');
 		}
 	}, []);
-	console.log(errorLoadCheckout);
 
 	return (
 		<div className="relative">
 			{errorLoadCheckout === null ? (
 				<div className="mx-[16rem]">
 					<HeaderOrder />
-					<div className="mt-[121rem] lg:mt-[171rem] lg:translate-x-[300rem] absolute text-center lg:w-max h-[200rem] text-[16rem] lg:text-[18rem] text-black flex items-center jusitfy-center gap-[15rem] flex-row">
+					<div className="mt-[121rem] lg:mt-[171rem] lg:translate-x-[300rem] lg:absolute text-center w-full lg:w-max h-[270rem] text-[18rem] lg:text-[18rem] text-black flex items-center jusitfy-center gap-[15rem] flex-col lg:flex-row">
 						<div>Устанавливается связь с платежным шлюзом</div>
 						<div className="w-[32rem] h-[32rem] ">
 							<Loader />
@@ -33,7 +31,7 @@ const Ordering = () => {
 			) : errorLoadCheckout === true ? (
 				<div className="mx-[16rem]">
 					<HeaderOrder />
-					<div className="mt-[151rem] lg:mt-[171rem] mx-[16rem] lg:translate-x-[300rem] text-center lg:w-max h-[300rem] text-[18rem] text-red-600 flex items-center jusitfy-center gap-[15rem] flex-col">
+					<div className="mt-[151rem] lg:mt-[171rem] mx-[16rem] lg:absolute lg:translate-x-[300rem] text-center lg:w-max h-[300rem] text-[18rem] text-red-600 flex items-center jusitfy-center gap-[15rem] flex-col">
 						<div>
 							<svg
 								className="w-[60rem] h-[60rem] lg:w-[78rem] lg:h-[78rem]"
@@ -70,7 +68,7 @@ const Ordering = () => {
 							</p>
 						</div>
 						<div className="lg:grid lg:grid-cols-[1fr_1fr] lg:w-full">
-							<div className="mb-[24rem] lg:order-2">
+							<div className="lg:ml-[50rem] mb-[24rem] lg:order-2">
 								<p className="mb-[16rem] font-bodyalt font-[600] text-[16rem] leading-[19rem] text-[#1F2117] lg:font-body lg:font-[600] lg:text-[20rem] lg:leaing-[23rem] lg:text-[#1F2117] lg:mb-[28rem]">
 									Информация о заказе
 								</p>

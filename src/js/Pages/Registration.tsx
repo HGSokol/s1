@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { BsEyeSlash } from 'react-icons/bs';
 import axios from 'axios';
 import { AlternativeLogin } from '../components/AlternativeLogin';
-import { handleKeyDown, handleChange } from '../Pages/LoginForm';
+import { handleKeyDown, handleChange } from './LoginForm';
 
 interface IFormInputs {
 	name: string;

@@ -18,14 +18,17 @@ const Subs = () => {
 	useEffect(() => {
 		setReload(true);
 		axios
-			.get('https://stage.fitnesskaknauka.com/api/plans')
+			.get('/api/plans')
 			.then((res) => {
 				setSub(res.data);
 			})
 			.catch((error) => {
+				if (error.response.status === 503) {
+					localStorage.clear();
+					navigate('/maintenance');
+				}
 				if (error.response.status === 401) {
 					localStorage.clear();
-					console.log(error.response.data);
 				}
 			})
 			.finally(() => {

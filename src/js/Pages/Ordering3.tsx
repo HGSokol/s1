@@ -28,6 +28,12 @@ const Ordering = () => {
 		}
 	}, []);
 
+	useEffect(() => {
+		if (yandexToken === null) {
+			navigate('/cabinet');
+		}
+	}, []);
+
 	let fix = true;
 	useEffect(() => {
 		if (fix) {
@@ -39,12 +45,8 @@ const Ordering = () => {
 			};
 			if (!activeSub && selectedPlan && yandexToken) {
 				axios
-					.post(
-						`https://stage.fitnesskaknauka.com/api/customer/subscriptions/internal/${selectedPlan?.id}`,
-						data,
-					)
+					.post(`/api/customer/subscriptions/internal/${selectedPlan?.id}`, data)
 					.then((res) => {
-						console.log(res.data, 'оплата прошла');
 						// setReload(true)
 						if (res.data && !res.data.confirmationUrl) {
 							//@ts-ignore
@@ -64,11 +66,14 @@ const Ordering = () => {
 						}
 					})
 					.catch((error) => {
+						if (error.response.status === 503) {
+							localStorage.clear();
+							navigate('/maintenance');
+						}
 						if (error.response.status === 401) {
 							localStorage.clear();
 							navigate('/');
 						}
-						console.log(error.response.data, 'ошибка оплаты');
 						setErrorMessage(error.response.data.message);
 						setStatus('reject');
 					})
@@ -80,13 +85,9 @@ const Ordering = () => {
 			}
 			if (activeSub && yandexToken) {
 				axios
-					.put(
-						`https://stage.fitnesskaknauka.com/api/customer/subscriptions/internal/${activeSub.id2}/payment-method`,
-						data,
-					)
+					.put(`/api/customer/subscriptions/internal/${activeSub.id2}/payment-method`, data)
 					.then((res) => {
 						if (res.data && !res.data.confirmationUrl) {
-							console.log(res.data);
 							//@ts-ignore
 							setActiveSub((prev) => ({
 								...prev,
@@ -98,15 +99,20 @@ const Ordering = () => {
 								isFromApple: res.data.isFromApple,
 								endsAt: res.data.endsAt,
 							}));
-							console.log(res, 'изменение карты прошло');
 							setStatus('ok');
 						} else {
-							console.log('перенаправление');
 							window.location.replace(res.data.confirmationUrl);
 						}
 					})
 					.catch((error) => {
-						console.log(error.response.data, 'изменение карты ошибка');
+						if (error.response.status === 503) {
+							localStorage.clear();
+							navigate('/maintenance');
+						}
+						if (error.response.status === 401) {
+							localStorage.clear();
+							navigate('/');
+						}
 						setErrorMessage(error.response.data.message);
 						setStatus('reject');
 					})
@@ -328,7 +334,7 @@ const Ordering = () => {
         lg:w-[272rem] cursor-pointer">
 							<button
 								disabled={status === null}
-								className="mr-[12rem] font-bodyalt font-[400] text-[16rem] leading-[19rem] text-white ">
+								className="font-bodyalt font-[400] text-[16rem] leading-[19rem] text-white ">
 								<div className="w-[32rem] h-[32rem]">
 									<Loader />
 								</div>

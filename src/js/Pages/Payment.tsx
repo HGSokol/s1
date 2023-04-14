@@ -13,9 +13,8 @@ const Payment = () => {
 
 	useEffect(() => {
 		axios
-			.get(`https://stage.fitnesskaknauka.com/api/customer/invoices?page=${currentPage}`)
+			.get(`/api/customer/invoices?page=${currentPage}`)
 			.then((res) => {
-				console.log(res, 'история подписок');
 				if (window.innerWidth >= 1024) {
 					setHistory(res.data.data);
 				} else {
@@ -32,7 +31,10 @@ const Payment = () => {
 				length.current = res.data.data.length;
 			})
 			.catch((error) => {
-				console.log(error.response.data);
+				if (error.response.status === 503) {
+					localStorage.clear();
+					navigate('/maintenance');
+				}
 				if (error.response.status === 401) {
 					localStorage.clear();
 					navigate('/');
