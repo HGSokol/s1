@@ -15,7 +15,7 @@ export const LogoutPopup = (props: Props) => {
 
 	const logout = () => {
 		axios
-			.post('https://stage.fitnesskaknauka.com/api/auth/logout')
+			.post('/api/auth/logout')
 			.then((res) => {
 				setUser(null);
 				setActiveSub(null);

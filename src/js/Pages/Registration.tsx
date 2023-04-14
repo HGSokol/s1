@@ -3,11 +3,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { AiOutlineEye } from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { BsEyeSlash } from 'react-icons/bs';
 import axios from 'axios';
 import { AlternativeLogin } from '../components/AlternativeLogin';
 import { handleKeyDown, handleChange } from './LoginForm';
+import { Profile } from '../../App';
 
 interface IFormInputs {
 	name: string;
@@ -26,6 +27,17 @@ const schema = yup
 	.required();
 
 const Login = () => {
+	document.title = 'Регистрация';
+
+	const {
+		deviceName,
+		setUser,
+		activeSub,
+		setActiveSub,
+		setUserPaymentMethod,
+		setErrorMessage,
+		errorMessage,
+	} = useContext(Profile);
 	const [type, setType] = useState(true);
 	const [errEmail, setErrEmail] = useState<string | null>(null);
 	const [errPassword, setErrPassword] = useState<string | null>(null);
@@ -33,8 +45,6 @@ const Login = () => {
 	const [errLastName, setErrLastName] = useState<string | null>(null);
 
 	const navigate = useNavigate();
-
-	document.title = 'Регистрация';
 
 	const {
 		register,
@@ -58,7 +68,101 @@ const Login = () => {
 		axios
 			.post('/api/auth/register', userInfo)
 			.then((res) => {
-				navigate('/login');
+				localStorage.setItem(
+					'user',
+					JSON.stringify({
+						token: res.data.token,
+					}),
+				);
+
+				axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
+
+				axios
+					.get('/api/customer')
+					.then((res) => {
+						//@ts-ignore
+						setUser((prev) => ({
+							...prev,
+							email: res.data.email,
+							name: res.data.name,
+							lastName: res.data.lastName,
+							avatar: res.data.avatar,
+							uuid: res.data.uuid,
+							isExternalRegistration: res.data.isExternalRegistration,
+						}));
+						axios
+							.get(`/api/customer/subscriptions/active`)
+							.then((res) => {
+								let typeSubs: any;
+
+								res.data.internalSubscription
+									? (typeSubs = res.data.internalSubscription)
+									: res.data.externalSubscription.appleSubscription
+									? (typeSubs = res.data.externalSubscription.appleSubscription)
+									: res.data.free
+									? (typeSubs = res.data.free)
+									: (typeSubs = null);
+
+								if (typeSubs) {
+									if (typeSubs === res.data.internalSubscription) {
+										setUserPaymentMethod({
+											cardType: typeSubs.userPaymentMethod.cardType,
+											expireMonth: typeSubs.userPaymentMethod.expireMonth,
+											expireYear: typeSubs.userPaymentMethod.expireYear,
+											last4: typeSubs.userPaymentMethod.last4,
+										});
+									}
+									//@ts-ignore
+									setActiveSub((prev) => ({
+										...prev,
+										name: typeSubs.plan.name,
+										duration: typeSubs.plan.invoicePeriod,
+										price: typeSubs.plan.price,
+										id: typeSubs.plan.id,
+										id2: typeSubs.id,
+										isFromApple: typeSubs === res.data.externalSubscription.appleSubscription,
+										endsAt: typeSubs === res.data.internalSubscription ? typeSubs.endsAt : '',
+										error:
+											typeSubs !== res.data.free &&
+											typeSubs !== res.data.externalSubscription.appleSubscription &&
+											typeSubs.openInvoice &&
+											typeSubs.openInvoice.id,
+										type: res.data.internalSubscription
+											? 'internal'
+											: res.data.externalSubscription.appleSubscription
+											? 'external'
+											: 'free',
+									}));
+								} else {
+									setActiveSub(null);
+								}
+							})
+							.catch((error) => {
+								if (error.response.status === 503) {
+									localStorage.clear();
+									navigate('/maintenance');
+								}
+								if (error.response.status === 401) {
+									localStorage.clear();
+									navigate('/');
+								}
+							});
+						navigate(
+							window.innerWidth >= 1024
+								? `${activeSub ? '/cabinet' : '/cabinet/plans'}`
+								: '/cabinet',
+						);
+					})
+					.catch((error) => {
+						if (error.response.status === 503) {
+							localStorage.clear();
+							navigate('/maintenance');
+						}
+						if (error.response.status === 401) {
+							localStorage.clear();
+							navigate('/login');
+						}
+					});
 			})
 			.catch((error) => {
 				if (error.response.status === 503) {

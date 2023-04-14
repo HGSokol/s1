@@ -101,7 +101,7 @@ const ChangePassword = () => {
 					) : null}
 				</div>
 				{errorMessage ? (
-					<p className="text-center text-[#CB1D1D] h-[24rem] text-[11rem] lg:text-[15rem]">
+					<p className="text-center text-[#CB1D1D] h-auto text-[11rem] lg:text-[15rem]">
 						{errorMessage}
 					</p>
 				) : null}

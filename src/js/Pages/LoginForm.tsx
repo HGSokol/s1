@@ -228,9 +228,9 @@ const LoginForm = () => {
 						Забыли пароль?
 					</Link>
 				</p>
-				<p className="w-full flex justify-center h-[20rem] mb-[5rem]">
+				<p className="w-full flex justify-center h-auto mb-[5rem]">
 					{errorMessage ? (
-						<span className="text-[11px] text-[#CB1D1D] text-center h-[30rem] lg:h-[30rem] md:text-[15px] leading-[10rem] lg:text-[15rem]">
+						<span className="text-[11px] text-[#CB1D1D] text-center h-auto md:text-[15px] leading-[10rem] lg:text-[15rem]">
 							{errorMessage}
 						</span>
 					) : null}

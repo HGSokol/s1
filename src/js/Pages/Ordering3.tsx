@@ -131,7 +131,11 @@ const Ordering = () => {
 		setReload(true);
 		setCardInfo(null);
 		if (status === 'ok' || (activeSub && status === 'reject')) {
-			navigate('/cabinet');
+			if (window.innerWidth >= 1024) {
+				navigate('/cabinet');
+			} else {
+				navigate('/cabinet/subs');
+			}
 		}
 		if (status === 'reject') {
 			navigate('/cabinet/plans');
