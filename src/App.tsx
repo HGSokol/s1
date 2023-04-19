@@ -32,6 +32,7 @@ const UserAgreements = lazy(() => import('./js/Pages/UserAgreements'));
 const PrivacyPolicy = lazy(() => import('./js/Pages/PrivacyPolicy'));
 const NotFound = lazy(() => import('./js/Pages/PageNotFound'));
 const Maintenance = lazy(() => import('./js/Pages/Maintanance'));
+const CookiePopup = lazy(() => import('./js/components/CookiePopup'));
 
 const ProfileUser: ProfileContext = {
 	user: null,
@@ -127,8 +128,11 @@ function App() {
 		};
 	}, []);
 
+	console.log(document.cookie);
+
 	return (
-		<div className="font-body">
+		<div className="font-body relative">
+			{<CookiePopup />}
 			<Profile.Provider
 				value={{
 					user,

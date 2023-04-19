@@ -81,7 +81,7 @@ export const Footer = () => {
 					/>
 				</svg>
 			</div>
-			<div className="mx-auto order-3 lg:order-2 lg:mr-[740rem] flex flex-col gap-[24rem] lg:items-start lg:justify-center lg:mx-0 lg:my-auto lg:gap-[16rem]">
+			<div className="mx-auto order-3 lg:order-2 lg:mr-[700rem] flex flex-col gap-[24rem] lg:items-start lg:justify-center lg:mx-0 lg:my-auto lg:gap-[16rem]">
 				<div className="text-white flex flex-col lg:flex-row gap-[16rem] items-center">
 					<div className="flex flex-row gap-[8rem]">
 						<div className="font-[600] font-bodyalt text-[16rem] text-[#CBCBCB] leading-[19rem]">
@@ -114,25 +114,11 @@ export const Footer = () => {
 			</div>
 			<div
 				className="order-2 lg:order-3 flex flex-col items-center w-[256rem] h-[122rem] mb-[40rem] mx-auto
-       lg:mx-0  lg:h-[110rem] lg:mb-[0rem] lg:items-end">
+       lg:mx-0 lg:w-auto lg:h-[110rem] lg:mb-[0rem] lg:items-end">
 				<div
 					className="mb-[32rem] flex flex-row gap-[16rem] items-center items-self-start
-        lg:gap-[16rem] lg:mb-[24rem]">
-					<a
-						href="https://www.facebook.com/"
-						target="_blank"
-						rel="noreferrer"
-						className="group/item ">
-						<div
-							className="w-[36rem] h-[36rem] rounded-full grid place-items-center
-              lg:w-[36rem] lg:h-[36rem] bg-white group-hover/item:bg-black group-hover/item:border-[1rem] group-hover/item:border-white">
-							<FaFacebookF
-								className="w-[18rem] h-[18rem]
-                lg:w-[18rem] lg:h-[18rem] bg-white group-hover/item:bg-black group-hover/item:fill-white"
-							/>
-						</div>
-					</a>
-					<a
+        lg:gap-[16rem] lg:mb-[14rem]">
+					{/* <a
 						href="https://www.instagram.com/"
 						target="_blank"
 						rel="noreferrer"
@@ -159,8 +145,12 @@ export const Footer = () => {
                 lg:w-[18rem] lg:h-[18rem] bg-white group-hover/item2:bg-black group-hover/item2:fill-white"
 							/>
 						</div>
-					</a>
-					<a href="#" target="_blank" rel="noreferrer" className="group/item3">
+					</a> */}
+					<a
+						href="mailto:fkn.help.user@yandex.ru"
+						target="_blank"
+						rel="noreferrer"
+						className="group/item3">
 						<div
 							className="w-[36rem] h-[36rem] rounded-full  grid place-items-center 
                lg:w-[36rem] lg:h-[36rem] bg-white group-hover/item3:bg-black group-hover/item3:border-[1rem] group-hover/item3:border-white">
@@ -179,9 +169,15 @@ export const Footer = () => {
 				</div>
 				<div
 					onClick={() => navigate('/policy')}
-					className="font-bodyalt font-[500] text-[16rem] leading-[19.09rem] text-white
+					className="font-bodyalt font-[500] text-[16rem] mb-[12rem] leading-[19.09rem] text-white
         lg:leading-[19rem] lg:text-[16rem] cursor-pointer">
 					Политика конфиденциальности
+				</div>
+				<div
+					onClick={() => navigate('/policy')}
+					className="font-bodyalt font-[500] text-[16rem] leading-[19.09rem] text-white
+        lg:leading-[19rem] lg:text-[16rem] cursor-pointer">
+					Политика использования файлов cookie
 				</div>
 			</div>
 		</div>
