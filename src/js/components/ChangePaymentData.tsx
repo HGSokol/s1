@@ -38,6 +38,7 @@ export const ChangePaymentData = (props?: ChangeCard) => {
 
 	const [numberCard, setNumberCard] = useState('');
 	const [dateCard, setDateCard] = useState('');
+	const [cvvCard, setCVVCard] = useState('');
 
 	const {
 		register,
@@ -50,15 +51,15 @@ export const ChangePaymentData = (props?: ChangeCard) => {
 	});
 
 	const onSubmit = (data: IFormInputs) => {
-		const { cvv } = data;
 		const cardInfo = {
 			numberCard: numberCard.replace(/\s+/g, ''),
 			dateCard: {
 				month: dateCard.slice(0, 2),
 				year: dateCard.slice(3, 5),
 			},
-			cvv,
+			cvv: cvvCard,
 		};
+
 		setCardInfo(cardInfo);
 		errorNumber.current = null;
 		errorMonth.current = null;
@@ -106,10 +107,12 @@ export const ChangePaymentData = (props?: ChangeCard) => {
 		let cardCode: any = refDateCard?.current?.value.replace(/[^\d]/g, '').substring(0, 4);
 		cardCode = cardCode !== '' ? cardCode.match(/.{1,2}/g).join('/') : '';
 
-		const currentYear = +String(new Date().getFullYear()).slice(2, 4);
+		const currentYear = String(new Date().getFullYear()).slice(2, 4);
 		const year = Number(cardCode.slice(0, 2)) > 12 ? ' ' : cardCode.slice(0, 2);
-		const month = Number(cardCode.slice(3, 5)) > currentYear + 70 ? ' ' : cardCode.slice(3, 5);
-		const f = `${year}${month}`;
+		const month1 =
+			Number(cardCode.slice(3, 4)) < Number(currentYear[0]) ? ' ' : cardCode.slice(3, 4);
+		const month2 = Number(cardCode.slice(3, 5)) < Number(currentYear) ? ' ' : cardCode.slice(4, 5);
+		const f = `${year}${month1}${month2}`;
 
 		let matchCard: any = f.replace(/[^\d]/g, '').substring(0, 4);
 		matchCard = matchCard !== '' ? matchCard.match(/.{1,2}/g).join('/') : '';
@@ -192,9 +195,12 @@ export const ChangePaymentData = (props?: ChangeCard) => {
 								placeholder="CVV"
 								type="text"
 								autoComplete="cc-csc"
-								maxLength={3}
+								maxLength={4}
 								minLength={3}
-								{...register('cvv')}
+								{...(register('cvv'),
+								{
+									onChange: (e) => setCVVCard(e.target.value),
+								})}
 								className={`font-bodyalt font-[400] leading-[14rem] text-[#1F2117] text-[14rem] hover:border-[#777872] outline-none w-full h-[50rem] px-[16rem] rounded-[8rem] bg-white border-[1px] border-[#1F211714] placeholder:text-[14rem] placeholder:font-[400] placeholder:text-[#AAAAAA]
                   lg:text-[16rem] lg:h-[56rem] lg:placeholder:text-[16rem] lg:px-[16rem] lg:rounded-[8rem]
                   `}
@@ -216,9 +222,15 @@ export const ChangePaymentData = (props?: ChangeCard) => {
 				<div>
 					<button
 						type="submit"
-						disabled={load}
+						disabled={
+							numberCard.length === 19 && dateCard.length === 5 && cvvCard.length >= 3
+								? false
+								: true
+						}
 						className={`${
-							load ? ' bg-[#FFB700]/50' : ' bg-[#FFB700]'
+							numberCard.length === 19 && dateCard.length === 5 && cvvCard.length >= 3
+								? ' bg-[#FFB700]'
+								: ' bg-[#FFB700]/50'
 						} mb-[30rem] lg:mb-[24rem] w-full h-[51rem] flex items-center justify-center rem-[18rem] text-[16rem] text-white font-[600] rounded-[40rem] lg:h-[56rem] lg:py-[16rem] lg:rem-[24rem] lg:text-[16rem]`}>
 						{!load ? (
 							activeSub ? (

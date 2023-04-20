@@ -92,6 +92,7 @@ function App() {
 
 	useEffect(() => {
 		if (reload && localUser && JSON.parse(localUser).token) {
+			// https://stage.fitnesskaknauka.com/
 			axios
 				.get('/api/customer')
 				.then((res) => {
