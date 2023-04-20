@@ -1,4 +1,19 @@
-const CookiePopup = () => {
+import { Dispatch, SetStateAction } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { setCookie } from '../util/CookieM';
+
+interface Cookie {
+	setClickCookie: Dispatch<SetStateAction<boolean | null>>;
+}
+
+const CookiePopup = (props: Cookie) => {
+	const navigate = useNavigate();
+
+	const setCookieFunc = () => {
+		setCookie('notification', 'true', 30);
+		props.setClickCookie(true);
+	};
+
 	return (
 		<div className="kuki z-[10000] absolute h-[100%] w-[0rem]">
 			<div className="sticky top-0 bottom-0 px-[20rem] py-[20rem] rounded-t-lg lg:rounded-[20rem] w-[375rem] h-[260rem] translate-y-[calc(100vh_-_260rem)] lg:px-[35rem] lg:py-[40rem] lg:translate-x-[calc(100vw_-_680rem)] lg:translate-y-[calc(100vh_-_309rem)] lg:w-[640rem] lg:h-[269rem] bg-[#FFFFFF]">
@@ -23,9 +38,13 @@ const CookiePopup = () => {
 				<div className="mb-[22rem] font-body font-[400] text-[14rem] lg:text-[16rem] leading-[19rem] text-[#777872]">
 					Для улучшения работы сайта и персонализации информации мы используем файлы cookie. Нажимая
 					ПРИНЯТЬ или продолжая просмотр сайта, вы соглашаетесь &nbsp;
-					<a className=" cursor-pointer text-[#EBA900]">с политикой использования файлов cookie.</a>
+					<a onClick={() => navigate('/policy')} className=" cursor-pointer text-[#EBA900]">
+						с политикой использования файлов cookie.
+					</a>
 				</div>
-				<div className="kukiclose flex justify-center mx-auto lg:mx-0 items-center rounded-[40rem] w-[116rem] h-[56rem] px-[24rem] py-[16rem] bg-[#FFB700] font-body font-[600[ text-[16rem] text-[#FAFAFA] leading-[19rem]">
+				<div
+					onClick={() => setCookieFunc()}
+					className="cursor-pointer kukiclose flex justify-center mx-auto lg:mx-0 items-center rounded-[40rem] w-[116rem] h-[56rem] px-[24rem] py-[16rem] bg-[#FFB700] font-body font-[600[ text-[16rem] text-[#FAFAFA] leading-[19rem]">
 					Принять
 				</div>
 			</div>

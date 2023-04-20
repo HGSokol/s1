@@ -6,6 +6,7 @@ import axios from 'axios';
 import HomePage from './js/Pages/Home';
 import Spinner from './js/components/Spinner';
 import { User, CardInfo, userPaymentMethod, ActiveSub, ProfileContext } from './js/@types/appTypes';
+import { setCookie, getCookie } from './js/util/CookieM';
 
 const Login = lazy(() => import('./js/layouts/Login'));
 const Cabinet = lazy(() => import('./js/layouts/Cabinet'));
@@ -69,6 +70,7 @@ function App() {
 	const [userPaymentMethod, setUserPaymentMethod] = useState<userPaymentMethod | null>(null);
 	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 	const [errorLoadCheckout, setErrorLoadCheckout] = useState<boolean | null>(null);
+	const [clickCookie, setClickCookie] = useState<boolean | null>(getCookie('notification'));
 
 	const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 	const navigate = useNavigate();
@@ -128,11 +130,9 @@ function App() {
 		};
 	}, []);
 
-	console.log(document.cookie);
-
 	return (
 		<div className="font-body relative">
-			{<CookiePopup />}
+			{clickCookie ? null : <CookiePopup setClickCookie={setClickCookie} />}
 			<Profile.Provider
 				value={{
 					user,
