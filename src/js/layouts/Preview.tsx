@@ -243,7 +243,7 @@ export const Preview = () => {
                     src={PREVIEW}
                     alt="preview image"
                 />
-                <div className="translate-x-[20rem] lg:translate-x-[100rem] w-[312rem] h-[13rem] lg:w-[640rem] lg:h-[28rem] bg-[#ADADAD] rounded-[28rem/312rem] lg:rounded-[682rem] blur-[10rem] lg:blur-[22rem]"></div>
+                <div className="translate-x-[20rem] lg:translate-x-[100rem] w-[312rem] h-[13rem] lg:w-[640rem] lg:h-[28rem] bg-[#ADADAD] rounded-[50%_50%_50%_50%] lg:rounded-[50%_50%_50%_50%] blur-[10rem] lg:blur-[22rem]"></div>
             </div>
         </div>
     );
