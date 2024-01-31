@@ -1,5 +1,5 @@
 import React from 'react';
-import { Develop } from '../components/Develop';
+// import { Develop } from '../components/Develop';
 
 const Activity = () => {
 	document.title = 'Полезное';
@@ -12,7 +12,7 @@ const Activity = () => {
 
 	return (
 		<>
-			<Develop text={text} />
+			{/* <Develop text={text} /> */}
 		</>
 	);
 };

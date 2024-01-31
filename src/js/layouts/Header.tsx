@@ -1,22 +1,25 @@
 import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { Profile } from '../../App';
+// import { Profile } from '../../App';
 
-interface Text {
-	maintenance?: boolean;
-}
+// interface Text {
+// 	maintenance?: boolean;
+// }
 
-export const Header = (props: Text) => {
-	const { activeSub, user } = useContext(Profile);
-	const navigate = useNavigate();
+export const Header = () => {
+	// const { activeSub, user } = useContext(Profile);
+	// const navigate = useNavigate();
 
+	const navData = [
+		'Главная', 'О приложении', 'Эксперты', 'Отзывы'
+	]
 	return (
 		<div
-			className="pt-[25rem] flex flex-row justify-between items-center mb-[60rem]
-    lg:mb-[96rem] lg:pt-[32rem]
+			className="px-[16rem] lg:px-[120rem] pt-[25rem] flex flex-row justify-between items-center mb-[60rem]
+    lg:mb-[140rem] lg:pt-[22rem]
     ">
-			<div onClick={() => navigate('/')} className="cursor-pointer">
+			<div className="cursor-pointer">
 				<svg
 					viewBox="0 0 126 56"
 					fill="none"
@@ -85,35 +88,15 @@ export const Header = (props: Text) => {
 					/>
 				</svg>
 			</div>
-			{props.maintenance ? null : (
-				<div className="font-bodyalt">
-					<Link
-						to={
-							!user
-								? '/login'
-								: `${!activeSub && window.innerWidth >= 1024 ? '/cabinet/plans' : '/cabinet'}`
-						}>
-						<button
-							className=" w-[70rem] font-[600] text-[#777872] hover:text-[#1F2117] tracking-[0.04em] p-[16rem] text-[16rem]
-                lg:text-[17rem] lg:w-[151rem]">
-							Вход
-						</button>
-					</Link>
-					<Link
-						to={
-							!user
-								? '/login/registration'
-								: `${!activeSub && window.innerWidth >= 1024 ? '/cabinet/plans' : '/cabinet'}`
-						}>
-						<button
-							className="#FAFAFA p-auto rounded-full w-[139rem] h-[51rem] font-[600] tracking-[0.02em] border-[1px] text-[black] border-[#1F2117] hover:text-[#FFB700] hover:border-[#FFB700] text-[16rem]
-                lg:text-[17rem] lg:w-[151rem] lg:h-[56rem]
-                ">
-							Регистрация
-						</button>
-					</Link>
-				</div>
-			)}
+			<nav className='hidden lg:block'>
+				<ul className='flex flex-row gap-[80rem] text-[16rem] font-[400] font-body text-[#16191C]'>
+					{navData.map(e => {
+						return (
+							<li className='cursor-pointer text-[#686868] hover:text-[#16191C]'>{e}</li>
+						)
+					})}
+				</ul>
+			</nav>
 		</div>
 	);
 };

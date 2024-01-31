@@ -1,5 +1,5 @@
 import React from 'react';
-import { Develop } from '../components/Develop';
+// import { Develop } from '../components/Develop';
 
 const Usefull = () => {
 	document.title = 'Полезное';
@@ -12,7 +12,7 @@ const Usefull = () => {
 
 	return (
 		<>
-			<Develop text={text} />
+			{/* <Develop text={text} /> */}
 		</>
 	);
 };

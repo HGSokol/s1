@@ -1,5 +1,5 @@
 import React from 'react';
-import { Develop } from '../components/Develop';
+// import { Develop } from '../components/Develop';
 
 const Maintenance = () => {
 	document.title = 'Техническое обслуживание';
@@ -14,7 +14,7 @@ const Maintenance = () => {
 		<>
 			<div className="lg:w-[1920rem]">
 				<div className="lg:mx-[104rem] overflow-hidden">
-					<Develop text={text} glob={true} />
+					{/* <Develop text={text} glob={true} /> */}
 				</div>
 			</div>
 		</>

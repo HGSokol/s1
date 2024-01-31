@@ -1,6 +1,6 @@
 import React from 'react';
 import HeaderOrder from '../components/HeaderOrder';
-import { ChangePaymentData } from '../components/ChangePaymentData';
+// import { ChangePaymentData } from '../components/ChangePaymentData';
 
 const ChangePayment = () => {
 	document.title = 'Изменение платежных данных';
@@ -15,7 +15,7 @@ const ChangePayment = () => {
 				<div className=" mb-[16rem] font-bodyalt font-[600] text-[16rem] text-[#1F2117] leading-[19rem] lg:mb-[32rem] lg:font-body lg:text-[20rem] lg:leading-[23rem]">
 					Введите данные карты
 				</div>
-				<ChangePaymentData ChangeCard={true} />
+				{/* <ChangePaymentData ChangeCard={true} /> */}
 			</div>
 		</div>
 	);
