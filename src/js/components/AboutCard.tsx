@@ -1,57 +1,40 @@
-import { dataAboutCard } from '../layouts/About';
+export const AboutCard = (props: any) => {
+  const { name, title, text, img, num, button } = props;
 
-interface TextItem {
-	item: dataAboutCard;
-}
-
-export const AboutCard = ({ item }: TextItem) => {
-	const { text, img, idName } = item;
-
-	return (
-		<a
-			href={`#${idName}`}
-			className="wrapper mx-auto w-[343rem] relative h-[200rem] rounded-[20rem] overflow-hidden group/about 
-    lg:w-[390rem] lg:h-[390rem] lg:rounded-[24rem] ">
-			<div
-				className={`w-[343rem] h-[200rem] duration-[400ms] bg-cover bg-no-repeat bg-center rounded-[20rem] flex flex-row items-end space-x-4 absolute z-1 overflow-hidden group-hover/about:scale-[1.2] 
-      lg:w-[390rem] lg:h-[390rem] lg:rounded-[24rem] `}
-				style={{ backgroundImage: `url(${img})` }}>
-				<div className="w-full h-full z-5 bg-[#1F2117]/30 group-hover/about:bg-yellow-500/30 duration-[400ms]"></div>
-			</div>
-			<div
-				className="w-full h-full p-[16rem] flex flex-row justify-between items-end space-x-4 z-10 
-      lg:p-[32rem]">
-				<p
-					className="font-[600] text-[28rem] text-[#FAFAFA] z-10 w-[230rem]
-        lg:text-[36rem] lg:w-[238rem] whitespace-pre-wrap">{`${text}`}</p>
-				<button
-					className="rounded-full bg-[#FAFAFA] w-[42rem] h-[42rem] flex justify-center items-center rotate-[45deg] group-hover/about:bg-[#FFB700] 
-        lg:w-[50rem] lg:h-[50rem]">
-					<svg
-						viewBox="0 0 24 24"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
-						className="w-[18rem] h-[18rem]
-          lg:w-[25rem] lg:h-[25rem]">
-						<path
-							d="M3.75 12L20.25 12"
-							stroke="black"
-							strokeWidth="1.4"
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							className="group-hover/about:stroke-white"
-						/>
-						<path
-							d="M13.5 18.75L20.25 12L13.5 5.25"
-							stroke="black"
-							strokeWidth="1.4"
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							className="group-hover/about:stroke-white"
-						/>
-					</svg>
-				</button>
-			</div>
-		</a>
-	);
+  return (
+    <div className="flex flex-col lg:flex-row lg:gap-[140rem] w-full justify-between">
+      <div
+        className={`${
+          num % 2 === 0 ? "lg:order-2" : "lg:order-1"
+        } contents lg:block`}
+      >
+        <div className="w-max rounded-[8rem] p-[8rem] lg:px-[12rem] lg:py-[11rem] flex flex-col font-bodyalt text-[18rem] lg:text-[26rem] font-[600] leading-[21rem] lg:leading-[30rem] bg-[#FFFFFF] shadow-[0px_6.91px_7.03px_0px_rgba(0,0,0,0.12)] lg:mt-[64rem] mb-[24rem] lg:mb-[32rem]">
+          {name}
+        </div>
+        <div className="lg:w-[810rem] mb-[24rem] lg:mb-[32rem] font-bodyalt font-[500] text-[36rem] lg:text-[64rem] leading-[44rem] lg:leading-[77rem]">
+          {title}
+        </div>
+        <div className="lg:w-[690rem] mb-[32rem] lg:mb-[46rem] text-[#686868] font-body font-[400] text-[16rem] lg:text-[22rem] leading-[22rem] lg:leading-[32rem]">
+          {text}
+        </div>
+        {button && (
+          <div className="mt-[32rem] lg:mt-[0rem] order-4 flex flex-col lg:flex-row gap-[14rem] lg:gap-[20rem]">
+            <div className="cursor-pointer flex items-center justify-center rounded-[12rem] px-[18rem] lg:px-[24rem] py-[16rem] bg-[#16191C] text-[#FFFFFF] text-[16rem] leading-[19rem] font-bodyalt font-[600]">
+              Скачать с App Store
+            </div>
+            <div className="cursor-pointer flex items-center justify-center rounded-[12rem] px-[18rem] lg:px-[24rem] py-[16rem] text-[#16191C] text-[16rem] leading-[19rem] font-bodyalt font-[600] border-[1rem] border-[#16191C]">
+              Скачать с Google Play
+            </div>
+          </div>
+        )}
+      </div>
+      <div className={`${num % 2 === 0 ? "lg:order-1" : "lg:order-2"}`}>
+        <img
+          className="w-[343rem] h-[294rem] lg:w-[770rem] lg:h-[660rem]"
+          src={img}
+          alt="text"
+        />
+      </div>
+    </div>
+  );
 };

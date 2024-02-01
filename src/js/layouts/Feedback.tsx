@@ -1,265 +1,144 @@
-import React, { useState, useRef } from 'react';
-
 type dataCard = {
-	text: string;
-	img: string;
-	name: string;
-	prof: string;
-	rate: number;
+  text: string;
+  image: string;
+  name: string;
+  mail: string;
 };
 
 const data: dataCard[] = [
-	{
-		text: 'Удобное отслеживание прогресса. хороший мотиватор делать лучше и больше. Неплохой набор действительно бесплатных функций. ',
-		img: require('../../img/feedbackphoto.png'),
-		name: 'Игорь Василевский',
-		prof: 'Фитнес-тренер',
-		rate: 5,
-	},
-	{
-		text: 'Пользуюсь уже более 4 лет. Приложение очень крутое.есть все необходимые упражнения, легко составлять планы тренировок, большой выбор готовых тренировок!',
-		img: require('../../img/feedbackphoto.png'),
-		name: 'Cody Fisher',
-		prof: 'Фитнес-тренер',
-		rate: 5,
-	},
-	{
-		text: 'Пользуюсь уже более 4 лет. Приложение очень крутое.есть все необходимые упражнения, легко составлять планы тренировок, большой выбор готовых тренировок!',
-		img: require('../../img/feedbackphoto.png'),
-		name: 'Marvin McKinney',
-		prof: 'Фитнес-тренер',
-		rate: 5,
-	},
-	{
-		text: 'Пользуюсь уже более 4 лет. Приложение очень крутое.есть все необходимые упражнения, легко составлять планы тренировок, большой выбор готовых тренировок!',
-		img: require('../../img/feedbackphoto.png'),
-		name: 'Игорь Василевский',
-		prof: 'Фитнес-тренер',
-		rate: 5,
-	},
-	{
-		text: 'Пользуюсь уже более 4 лет. Приложение очень крутое.есть все необходимые упражнения, легко составлять планы тренировок, большой выбор готовых тренировок!',
-		img: require('../../img/feedbackphoto.png'),
-		name: 'Игорь Василевский',
-		prof: 'Фитнес-тренер',
-		rate: 5,
-	},
-	{
-		text: 'Пользуюсь уже более 4 лет. Приложение очень крутое.есть все необходимые упражнения, легко составлять планы тренировок, большой выбор готовых тренировок!',
-		img: require('../../img/feedbackphoto.png'),
-		name: 'Игорь Василевский',
-		prof: 'Фитнес-тренер',
-		rate: 5,
-	},
-	{
-		text: 'Пользуюсь уже более 4 лет. Приложение очень крутое.есть все необходимые упражнения, легко составлять планы тренировок, большой выбор готовых тренировок!',
-		img: require('../../img/feedbackphoto.png'),
-		name: 'Игорь Василевский',
-		prof: 'Фитнес-тренер',
-		rate: 5,
-	},
-	{
-		text: 'Пользуюсь уже более 4 лет. Приложение очень крутое.есть все необходимые упражнения, легко составлять планы тренировок, большой выбор готовых тренировок!',
-		img: require('../../img/feedbackphoto.png'),
-		name: 'Игорь Василевский',
-		prof: 'Фитнес-тренер',
-		rate: 5,
-	},
-	{
-		text: 'Пользуюсь уже более 4 лет. Приложение очень крутое.есть все необходимые упражнения, легко составлять планы тренировок, большой выбор готовых тренировок!',
-		img: require('../../img/feedbackphoto.png'),
-		name: 'Игорь Василевский',
-		prof: 'Фитнес-тренер',
-		rate: 5,
-	},
-	{
-		text: 'Пользуюсь уже более 4 лет. Приложение очень крутое.есть все необходимые упражнения, легко составлять планы тренировок, большой выбор готовых тренировок!',
-		img: require('../../img/feedbackphoto.png'),
-		name: 'Игорь Василевский',
-		prof: 'Фитнес-тренер',
-		rate: 5,
-	},
-	{
-		text: 'Пользуюсь уже более 4 лет. Приложение очень крутое.есть все необходимые упражнения, легко составлять планы тренировок, большой выбор готовых тренировок!',
-		img: require('../../img/feedbackphoto.png'),
-		name: 'Игорь Василевский',
-		prof: 'Фитнес-тренер',
-		rate: 5,
-	},
-	{
-		text: 'Пользуюсь уже более 4 лет. Приложение очень крутое.есть все необходимые упражнения, легко составлять планы тренировок, большой выбор готовых тренировок!',
-		img: require('../../img/feedbackphoto.png'),
-		name: 'Игорь Василевский',
-		prof: 'Фитнес-тренер',
-		rate: 5,
-	},
+  {
+    text: "Спасибо разработчикам за приложение, очень много пользы внутри. Теперь не нужно иметь отдельно много приложений 🔥",
+    image: require("../../img/feedbackphoto.png"),
+    name: "Christopher Lo",
+    mail: "@ChristopherLoCC",
+  },
+  {
+    text: "Крутое приложение!",
+    image: require("../../img/feedbackphoto.png"),
+    name: "Christopher Lo",
+    mail: "@ChristopherLoCC",
+  },
+  {
+    text: "Спасибо разработчикам за приложение, очень много пользы внутри. Теперь не нужно иметь отдельно много приложений 🔥",
+    image: require("../../img/feedbackphoto.png"),
+    name: "Christopher Lo",
+    mail: "@ChristopherLoCC",
+  },
+  {
+    text: "Крутое приложение!",
+    image: require("../../img/feedbackphoto.png"),
+    name: "Christopher Lo",
+    mail: "@ChristopherLoCC",
+  },
+  {
+    text: "Скачала! Спасибо за классное приложение, есть все, что мне нужно в одном месте. Буду пользоваться 🧡 Скачала! Спасибо за классное приложение, есть все, что мне нужно в одном месте. Буду пользоваться ",
+    image: require("../../img/feedbackphoto.png"),
+    name: "Christopher Lo",
+    mail: "@ChristopherLoCC",
+  },
+  {
+    text: "Крутое приложение!",
+    image: require("../../img/feedbackphoto.png"),
+    name: "Christopher Lo",
+    mail: "@ChristopherLoCC",
+  },
+  {
+    text: "Огромное спасибо команде за такое приложение! Еще и бесплатно 🤩",
+    image: require("../../img/feedbackphoto.png"),
+    name: "Christopher Lo",
+    mail: "@ChristopherLoCC",
+  },
+  {
+    text: "Крутое приложение!",
+    image: require("../../img/feedbackphoto.png"),
+    name: "Christopher Lo",
+    mail: "@ChristopherLoCC",
+  },
+  {
+    text: "Огромное спасибо команде за такое приложение! Еще и бесплатно 🤩",
+    image: require("../../img/feedbackphoto.png"),
+    name: "Christopher Lo",
+    mail: "@ChristopherLoCC",
+  },
+  {
+    text: "Спасибо разработчикам за приложение, очень много пользы внутри. Теперь не нужно иметь отдельно много приложений 🔥",
+    image: require("../../img/feedbackphoto.png"),
+    name: "Christopher Lo",
+    mail: "@ChristopherLoCC",
+  },
+  {
+    text: "Крутое приложение!",
+    image: require("../../img/feedbackphoto.png"),
+    name: "Christopher Lo",
+    mail: "@ChristopherLoCC",
+  },
+  {
+    text: "Спасибо разработчикам за приложение, очень много пользы внутри. Теперь не нужно иметь отдельно много приложений 🔥",
+    image: require("../../img/feedbackphoto.png"),
+    name: "Christopher Lo",
+    mail: "@ChristopherLoCC",
+  },
+  {
+    text: "Узнай еще больше о приложении",
+    image: require("../../img/feedbackphoto.png"),
+    name: "Фитнесс как наука",
+    mail: "@FKN",
+  },
+  {
+    text: "Спасибо разработчикам за приложение, очень много пользы внутри.",
+    image: require("../../img/feedbackphoto.png"),
+    name: "Christopher Lo",
+    mail: "@ChristopherLoCC",
+  },
 ];
 
 export const Feedback = () => {
-	const [size, setSize] = useState<number>(0);
-	const [gap, setGap] = useState<number>(0);
-	const [translate, setTranslate] = useState<number>(0);
-	const ref = useRef<HTMLDivElement | null>(null);
-	const number = useRef(0);
-
-	const counterStars = (rate: number): string[] => {
-		return ' '.repeat(rate).split('');
-	};
-
-	React.useEffect(() => {
-		setSize(Number(ref.current?.getBoundingClientRect().width));
-		setGap((window.innerWidth / 1920) * 40);
-	}, [document.documentElement.clientWidth]);
-
-	const right = () => {
-		if (number.current <= data.length - 4) {
-			number.current = number.current + 1;
-			setTranslate((prev) => number.current * (size + gap));
-		}
-	};
-
-	const left = () => {
-		if (number.current > 0) {
-			number.current = number.current - 1;
-			setTranslate((prev) => number.current * (size + gap));
-		}
-	};
-
-	return (
-		<div
-			className="mb-[72rem] gap-[10rem] 
-    lg:overflow-hidden lg:gap-[15rem] lg:mb-[150rem]">
-			<div
-				className="flex flex-row mb-[22rem] space-x-[200rem] justify-between 
-      lg:mb-[64rem]">
-				<div
-					className="font-[600] text-[36rem] leading-[42rem] text-[#1F2117] 
-        lg:leading-[75.14rem] lg:text-[64rem]">
-					Отзывы
-				</div>
-				<div className="hidden lg:flex lg:flex-row lg:gap-[10rem]">
-					<button
-						className="rounded-full border-[1px] border-[#1F2117] w-[56rem] h-[56rem] text-black grid place-content-center cursor-pointer group/arrow1 hover:bg-[#FFB700] hover:text-white hover:border-none duration-[200ms] 
-          lg:w-[56rem] lg:h-[56rem]"
-						onClick={left}>
-						<svg
-							className="w-[18rem] h-[18rem] stroke-black group-hover/arrow1:stroke-white 
-              lg:w-[24rem] lg:h-[24rem]"
-							viewBox="0 0 24 25"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg">
-							<path
-								d="M20.25 12.5L3.75 12.5"
-								strokeWidth="1.4"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-							/>
-							<path
-								d="M10.5 19.25L3.75 12.5L10.5 5.75"
-								strokeWidth="1.4"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-							/>
-						</svg>
-					</button>
-					<button
-						className="rounded-full border-[1px]w-[56rem] h-[56rem] grid place-content-center mr-[120rem] cursor-pointer group/arrow2 bg-[#FFB700] hover:bg-[#F0AD04] text-black border-none duration-[200ms] 
-          lg:w-[56rem] lg:h-[56rem] lg:mr-[120rem]"
-						onClick={right}>
-						<svg
-							className="w-[18rem] h-[18rem] stroke-white group-hover/arrow2:stroke-white 
-              lg:w-[24rem] lg:h-[24rem]"
-							viewBox="0 0 24 24"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg">
-							<path
-								d="M3.75 12L20.25 12"
-								strokeWidth="1.4"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-							/>
-							<path
-								d="M13.5 18.75L20.25 12L13.5 5.25"
-								strokeWidth="1.4"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-							/>
-						</svg>
-					</button>
-				</div>
-			</div>
-			<div
-				className="overflow-hidden"
-				style={{ width: `${window.innerWidth >= 1024 ? `${96}` : ''}%` }}>
-				<div
-					className="ml-[20rem] flex flex-row gap-[16rem] duration-[600ms] h-[290rem] items-center snap-mandatory snap-x overflow-scroll    
-          lg:snap-none lg:overflow-visible lg:h-[350rem] lg:gap-[40rem]"
-					style={{ transform: `translateX(-${translate}px)` }}>
-					{data.map((e, i) => {
-						return (
-							<div ref={ref} key={i} className="snap-center  drop-shadow-drop">
-								<div
-									key={i}
-									className="w-[300rem] h-[234rem] rounded-[20rem] p-[16rem] bg-white
-                lg:justify-between lg:w-[500rem] lg:h-[319rem] lg:p-[24rem] lg:flex lg:flex-col">
-									<div
-										className="font-bodyalt tracking-[0.02em] font-[600] h-[114rem] text-[16rem] text-[#1F2117] leading-[16.71rem] mb-[17.4rem] 
-                  lg:text-[22rem] lg:leading-[32rem]">
-										{e.text}
-									</div>
-									<div className="lg:grid lg:grid-cols-2">
-										<div
-											className="mb-[17.4rem] flex flex-row  
-                    lg:order-2 lg:justify-end lg:items-end lg:mb-[0rem]">
-											{counterStars(e.rate).map((_, i) => {
-												return (
-													<div key={i}>
-														<svg
-															className="w-[13.88rem] h-[13.2rem] 
-                              lg:w-[20.82rem] lg:h-[19.8rem]"
-															width="22"
-															height="20"
-															viewBox="0 0 22 20"
-															fill="none"
-															xmlns="http://www.w3.org/2000/svg">
-															<path
-																d="M11.0961 0.105469L14.3135 6.62453L21.5077 7.66991L16.3019 12.7443L17.5308 19.9094L11.0961 16.5265L4.66143 19.9094L5.89035 12.7443L0.68457 7.66991L7.87879 6.62453L11.0961 0.105469Z"
-																fill="#FFB700"
-															/>
-														</svg>
-													</div>
-												);
-											})}
-										</div>
-										<div
-											className="flex flex-row gap-[8rem] 
-                    lg:order-1 lg:gap-[14rem]">
-											<img
-												src={e.img}
-												alt={e.name}
-												className="rounded-full w-[40rem] h-[40rem] 
-                      lg:w-[64rem] lg:h-[64rem]"
-											/>
-											<div className="flex flex-col justify-center">
-												<p
-													className="w-max font-bodyalt font-[400] text-[16rem] leading-[19rem] text-[#1F2117] mb-[2rem] 
-                        lg:font-[500] lg:text-[18rem] lg:leading-[21.48rem] lg:mb-[6rem]">
-													{e.name}
-												</p>
-												<p
-													className="font-bodyalt font-[400] text-[10rem] leading-[12rem] text-[#1F2117]/60 
-                        lg:text-[14rem] lg:leading-[16.71rem]">
-													{e.prof}
-												</p>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						);
-					})}
-				</div>
-			</div>
-		</div>
-	);
+  return (
+    <div className="px-[16rem] lg:px-[120rem] lg:h-[1241rem] bg-[#16191C] overflow-hidden ">
+      <div className="h-max pt-[32rem] lg:pt-[100rem] mb-[32rem] lg:mb-[64rem] text-[36rem] font-[500] lg:text-[64rem] font-body lg:font-[600] leading-[46rem] lg:leading-[60rem] text-[#FFFFFF]">
+        <span className="text-[#FFB700]">Отзывы</span> о приложении
+      </div>
+      <div className="mb-[72rem] lg:mb-[0rem] overflow-hidden">
+        <div className="lg:flex-wrap flex flex-row overflow-x-scroll lg:overflow-hidden lg:flex-col lg:gap-x-[30rem] lg:h-max gap-y-[24rem] lg:max-h-[882rem] snap-mandatory lg:snap-none snap-x -wekbit-scrollbar:w-[0rem] gap-x-[8rem]">
+          {data.map((e, i) => {
+            return (
+              <div
+                key={i}
+                className="h-[264rem] cursor-pointer p-[20rem] lg:h-max min-w-full lg:min-w-0 w-[340rem] lg:w-[312rem] bg-[#2C3034] hover:bg-[#3D4044] lg:p-[24rem] rounded-[16rem] snap-center"
+              >
+                <div className="mb-[20rem] flex flex-row gap-[15rem]">
+                  <img
+                    className="w-[50rem] h-[50rem]"
+                    src={e.image}
+                    alt="pho"
+                  />
+                  <div className="flex flex-col gap-[4rem]">
+                    <div className="text-[18rem] text-[#FFFFFF] leading-[22rem] font-[600] font-bodyalt">
+                      {e.name}
+                    </div>
+                    <div className="text-[16rem] text-[#FFFFFF] leading-[19rem] font-[400] font-bodyalt">
+                      {e.mail}
+                    </div>
+                  </div>
+                </div>
+                <div className="w-[295rem] lg:w-[263rem] text-[16rem] leading-[22rem] lg:text-[22rem] text-[#FFFFFF] lg:leading-[32rem] font-[500] font-body">
+                  {e.text}
+                </div>
+                {e.mail === "@FKN" && (
+                  <div className="pt-[20rem] flex flex-row text-[22rem] gap-[20rem]   ">
+                    <div className="cursor-pointer text-[#FFF] decoration-[#FFF] hover:text-[#FFB700] underline hover:decoration-[#FFB700]">
+                      App Store
+                    </div>
+                    <div className="cursor-pointer text-[#FFF] decoration-[#FFF] hover:text-[#FFB700] underline hover:decoration-[#FFB700]">
+                      Google Play
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
 };
