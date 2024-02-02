@@ -1,3 +1,5 @@
+import IMG1 from '../../img/min1Fkn.png'
+
 type dataCard = {
 	text: string
 	image: string
@@ -79,8 +81,8 @@ const data: dataCard[] = [
 		mail: '@ChristopherLoCC',
 	},
 	{
-		text: 'Узнай еще больше о приложении',
-		image: require('../../img/feedbackphoto.png'),
+		text: 'Узнай еще больше о приложении 🥦',
+		image: IMG1,
 		name: 'Фитнесс как наука',
 		mail: '@FKN',
 	},
@@ -107,7 +109,7 @@ export const Feedback = () => {
 						return (
 							<div
 								key={i}
-								className="h-[264rem] cursor-pointer p-[20rem] lg:h-max min-w-full lg:min-w-0 w-[340rem] lg:w-[312rem] bg-[#2C3034] hover:bg-[#3D4044] lg:p-[24rem] rounded-[16rem] snap-center"
+								className="h-[264rem] cursor-pointer p-[20rem] lg:h-max min-w-full lg:min-w-0 w-[343rem] lg:w-[312rem] bg-[#2C3034] hover:bg-[#3D4044] lg:p-[24rem] rounded-[16rem] snap-center"
 							>
 								<div className="mb-[20rem] flex flex-row gap-[15rem]">
 									<img
@@ -124,11 +126,11 @@ export const Feedback = () => {
 										</div>
 									</div>
 								</div>
-								<div className="w-[295rem] lg:w-[263rem] text-[16rem] leading-[22rem] lg:text-[22rem] text-[#FFFFFF] lg:leading-[32rem] font-[500] font-body">
+								<div className="w-[290rem] lg:w-[263rem] text-[16rem] leading-[22rem] lg:text-[22rem] text-[#FFFFFF] lg:leading-[32rem] font-[500] font-body">
 									{e.text}
 								</div>
 								{e.mail === '@FKN' && (
-									<div className="pt-[20rem] flex flex-row text-[22rem] gap-[20rem]   ">
+									<div className="pt-[20rem] flex flex-row text-[22rem] gap-[40rem] lg:gap-[20rem]  ">
 										<div className="cursor-pointer text-[#FFF] decoration-[#FFF] hover:text-[#FFB700] underline hover:decoration-[#FFB700]">
 											App Store
 										</div>
