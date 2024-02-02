@@ -1,17 +1,15 @@
 import {
-  lazy,
-  Suspense,
-  createContext,
-  useState,
-  useEffect,
-  useLayoutEffect,
-} from "react";
-import { Route, Routes } from "react-router-dom";
+	lazy,
+	Suspense,
+	// createContext,
+	// useState,
+	// useEffect,
+	// useLayoutEffect,
+} from 'react'
+import { Route, Routes } from 'react-router-dom'
 // import { deviceType } from 'react-device-detect';
 // import { Helmet } from 'react-helmet';
 // import axios from 'axios';
-import HomePage from "./js/Pages/Home";
-// import Spinner from './js/components/Spinner';
 // import { User, CardInfo, userPaymentMethod, ActiveSub, ProfileContext } from './js/@types/appTypes';
 // import { setCookie, getCookie } from './js/util/CookieM';
 
@@ -36,11 +34,14 @@ import HomePage from "./js/Pages/Home";
 // const ChangePassword = lazy(() => import('./js/Pages/ChangePassword'));
 // const ChangePassword2 = lazy(() => import('./js/Pages/ChangePassword2'));
 // const ChangePassword3 = lazy(() => import('./js/Pages/ChangePassword3'));
-const UserAgreements = lazy(() => import("./js/Pages/UserAgreements"));
-const PrivacyPolicy = lazy(() => import("./js/Pages/PrivacyPolicy"));
-const NotFound = lazy(() => import("./js/Pages/PageNotFound"));
 // const Maintenance = lazy(() => import('./js/Pages/Maintanance'));
 // const CookiePopup = lazy(() => import('./js/components/CookiePopup'));
+import HomePage from './js/Pages/Home'
+import Spinner from './js/components/Spinner'
+
+const UserAgreements = lazy(() => import('./js/Pages/UserAgreements'))
+const PrivacyPolicy = lazy(() => import('./js/Pages/PrivacyPolicy'))
+const NotFound = lazy(() => import('./js/Pages/PageNotFound'))
 
 // const ProfileUser: ProfileContext = {
 // 	user: null,
@@ -68,79 +69,79 @@ const NotFound = lazy(() => import("./js/Pages/PageNotFound"));
 // export const Profile = createContext<ProfileContext>(ProfileUser);
 
 function App() {
-  // const [user, setUser] = useState<User | null>(null);
-  // const [cardInfo, setCardInfo] = useState<CardInfo | null>(null);
-  // const [reload, setReload] = useState(true);
-  // const [activeSub, setActiveSub] = useState<ActiveSub | null>(null);
-  // const [selectedPlan, setSelectedPlan] = useState<ActiveSub | null>(null);
-  // const [yandexToken, setYandexToken] = useState<string | null>(null);
-  // const [userPaymentMethod, setUserPaymentMethod] = useState<userPaymentMethod | null>(null);
-  // const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  // const [errorLoadCheckout, setErrorLoadCheckout] = useState<boolean | null>(null);
-  // const [clickCookie, setClickCookie] = useState<boolean | null>(getCookie('notification'));
+	// const [user, setUser] = useState<User | null>(null);
+	// const [cardInfo, setCardInfo] = useState<CardInfo | null>(null);
+	// const [reload, setReload] = useState(true);
+	// const [activeSub, setActiveSub] = useState<ActiveSub | null>(null);
+	// const [selectedPlan, setSelectedPlan] = useState<ActiveSub | null>(null);
+	// const [yandexToken, setYandexToken] = useState<string | null>(null);
+	// const [userPaymentMethod, setUserPaymentMethod] = useState<userPaymentMethod | null>(null);
+	// const [errorMessage, setErrorMessage] = useState<string | null>(null);
+	// const [errorLoadCheckout, setErrorLoadCheckout] = useState<boolean | null>(null);
+	// const [clickCookie, setClickCookie] = useState<boolean | null>(getCookie('notification'));
 
-  // const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  // const navigate = useNavigate();
-  // let deviceName = deviceType;
+	// const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+	// const navigate = useNavigate();
+	// let deviceName = deviceType;
 
-  // const localUser = localStorage.getItem('user');
+	// const localUser = localStorage.getItem('user');
 
-  // if (localUser) {
-  // 	const token = JSON.parse(localUser).token;
-  // 	axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  // }
-  // axios.defaults.headers.common['Content-Type'] = 'application/json';
-  // axios.defaults.headers.common['Timezone'] = `${timezone}`;
-  // axios.defaults.headers.common['Client-Platform'] = 'web';
+	// if (localUser) {
+	// 	const token = JSON.parse(localUser).token;
+	// 	axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+	// }
+	// axios.defaults.headers.common['Content-Type'] = 'application/json';
+	// axios.defaults.headers.common['Timezone'] = `${timezone}`;
+	// axios.defaults.headers.common['Client-Platform'] = 'web';
 
-  // useLayoutEffect(() => {
-  // 	deviceName = deviceType;
-  // }, []);
+	// useLayoutEffect(() => {
+	// 	deviceName = deviceType;
+	// }, []);
 
-  // useEffect(() => {
-  // 	if (reload && localUser && JSON.parse(localUser).token) {
-  // 		// https://stage.fitnesskaknauka.com/
-  // 		axios
-  // 			.get('/api/customer')
-  // 			.then((res) => {
-  // 				setUser((prev) => ({
-  // 					...prev,
-  // 					email: res.data.email,
-  // 					name: res.data.name === null ? '' : res.data.name,
-  // 					lastName: res.data.lastName === null ? '' : res.data.lastName,
-  // 					avatar: res.data.avatar,
-  // 					uuid: res.data.uuid,
-  // 					isExternalRegistration: res.data.isExternalRegistration,
-  // 				}));
-  // 			})
-  // 			.catch((error) => {
-  // 				if (error.response.status === 401) {
-  // 					localStorage.clear();
-  // 					navigate('/');
-  // 				}
-  // 				if (error.response.status === 503) {
-  // 					localStorage.clear();
-  // 					navigate('/maintenance');
-  // 				}
-  // 			});
-  // 		setReload(false);
-  // 	}
-  // }, [reload]);
+	// useEffect(() => {
+	// 	if (reload && localUser && JSON.parse(localUser).token) {
+	// 		// https://stage.fitnesskaknauka.com/
+	// 		axios
+	// 			.get('/api/customer')
+	// 			.then((res) => {
+	// 				setUser((prev) => ({
+	// 					...prev,
+	// 					email: res.data.email,
+	// 					name: res.data.name === null ? '' : res.data.name,
+	// 					lastName: res.data.lastName === null ? '' : res.data.lastName,
+	// 					avatar: res.data.avatar,
+	// 					uuid: res.data.uuid,
+	// 					isExternalRegistration: res.data.isExternalRegistration,
+	// 				}));
+	// 			})
+	// 			.catch((error) => {
+	// 				if (error.response.status === 401) {
+	// 					localStorage.clear();
+	// 					navigate('/');
+	// 				}
+	// 				if (error.response.status === 503) {
+	// 					localStorage.clear();
+	// 					navigate('/maintenance');
+	// 				}
+	// 			});
+	// 		setReload(false);
+	// 	}
+	// }, [reload]);
 
-  // useEffect(() => {
-  // 	window.addEventListener('popstate', function (event) {
-  // 		setYandexToken(null);
-  // 	});
-  // 	return () => {
-  // 		window.removeEventListener('popstate', function (event) {
-  // 			setYandexToken(null);
-  // 		});
-  // 	};
-  // }, []);
+	// useEffect(() => {
+	// 	window.addEventListener('popstate', function (event) {
+	// 		setYandexToken(null);
+	// 	});
+	// 	return () => {
+	// 		window.removeEventListener('popstate', function (event) {
+	// 			setYandexToken(null);
+	// 		});
+	// 	};
+	// }, []);
 
-  return (
-    <div className="font-body relative">
-      {/* {clickCookie ? null : <CookiePopup setClickCookie={setClickCookie} />}
+	return (
+		<div className="font-body relative">
+			{/* {clickCookie ? null : <CookiePopup setClickCookie={setClickCookie} />}
 			<Profile.Provider
 				value={{
 					user,
@@ -228,14 +229,19 @@ function App() {
 					</Routes>
 				</Suspense>
 			</Profile.Provider> */}
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/policy" element={<PrivacyPolicy />} />
-        <Route path="/userAgreements" element={<UserAgreements />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </div>
-  );
+			<Suspense fallback={<Spinner />}>
+				<Routes>
+					<Route path="/" element={<HomePage />} />
+					<Route path="/policy" element={<PrivacyPolicy />} />
+					<Route
+						path="/userAgreements"
+						element={<UserAgreements />}
+					/>
+					<Route path="*" element={<NotFound />} />
+				</Routes>
+			</Suspense>
+		</div>
+	)
 }
 
-export default App;
+export default App
