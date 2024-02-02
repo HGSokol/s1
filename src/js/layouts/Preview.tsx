@@ -234,7 +234,7 @@ export const Preview = () => {
 					</div>
 				</div>
 			</div>
-			<div className="flex lg:absolute flex-col gap-[9rem] lg:translate-y-[-165rem] lg:translate-x-[960rem]">
+			<div className="-z-[1] flex lg:absolute flex-col gap-[9rem] lg:translate-y-[-165rem] lg:translate-x-[960rem]">
 				<img
 					className="w-[375rem] lg:w-[845rem] h-[435rem] lg:h-[1039rem]"
 					src={PREVIEW}
