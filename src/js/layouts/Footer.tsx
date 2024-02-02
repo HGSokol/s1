@@ -85,7 +85,7 @@ export const Footer = () => {
 						/>
 					</svg>
 				</div>
-				<div className="order-4 lg:order-none mx-auto lg:mr-[721rem] flex flex-col gap-[24rem] lg:items-start lg:justify-center lg:mx-0 lg:my-auto lg:gap-[16rem]">
+				<div className="order-4 lg:order-none mx-auto lg:mr-[731rem] flex flex-col gap-[24rem] lg:items-start lg:justify-center lg:mx-0 lg:my-auto lg:gap-[16rem]">
 					<div className="text-white flex flex-col lg:flex-row gap-[16rem] items-center">
 						<div className="flex flex-row justify-center gap-[8rem]">
 							<div className="font-[700] font-body text-[16rem] lg:text-[18rem] text-[#CBCBCB] leading-[19rem] lg:leading-[21rem]">
@@ -195,20 +195,20 @@ export const Footer = () => {
 				<div className="mb-[40rem] lg:mb-[0rem] order-3 lg:order-none flex flex-col lg:flex-row lg:gap-[50rem]">
 					<div
 						onClick={() => navigate('/userAgreements')}
-						className="hover:text-[#ffb700] lg:mr-[525rem] font-body font-[400] text-[16rem] leading-[22rem] text-white
+						className="hover:text-[#ffb700] lg:order-2  font-body font-[400] text-[16rem] leading-[22rem] text-white
         lg:leading-[19rem] lg:text-[16rem] mb-[16rem] lg:mb-[12rem] cursor-pointer"
 					>
 						Пользовательское соглашение
 					</div>
 					<div
 						onClick={() => navigate('/policy')}
-						className="hover:text-[#ffb700] font-body font-[400] text-[16rem] mb-[12rem] leading-[22rem] text-white
+						className="hover:text-[#ffb700] lg:order-3 font-body font-[400] text-[16rem] mb-[16rem] leading-[22rem] text-white
         lg:leading-[19rem] lg:text-[16rem] cursor-pointer"
 					>
 						Политика конфиденциальности
 					</div>
 					<div
-						className="hover:text-[#ffb700] font-body font-[400] text-[16rem] leading-[22rem] text-white
+						className="hover:text-[#ffb700] lg:mr-[548rem] lg:order-1 font-body font-[400] text-[16rem] leading-[22rem] text-white
         lg:leading-[19rem] lg:text-[16rem] cursor-pointer"
 					>
 						Политика использования файлов cookie
