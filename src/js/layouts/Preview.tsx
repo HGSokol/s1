@@ -9,7 +9,7 @@ export const Preview = () => {
 	// 	const { user, activeSub } = useContext(Profile);
 
 	return (
-		<div className="relative z-[10] px-[16rem] lg:px-[120rem] w-full h-min relative flex flex-col lg:flex-row mb-[54rem] lg:mb-[324rem]">
+		<div className=" z-[10] px-[16rem] lg:px-[120rem] w-full h-min relative flex flex-col lg:flex-row mb-[54rem] lg:mb-[324rem]">
 			<div className="max-w-[950rem] mb-[22rem] lg:mb-[0rem]">
 				<div className="text-[35rem] lg:text-[82rem] font-bodyalt leading-[44rem] lg:leading-[104rem] font-[600] mb-[31rem] lg:mb-[48rem]">
 					Построй{' '}
