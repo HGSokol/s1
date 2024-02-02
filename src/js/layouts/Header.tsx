@@ -14,7 +14,7 @@ export const Header = () => {
 	const navData = ['Главная', 'О приложении', 'Эксперты', 'Отзывы']
 	return (
 		<div
-			className=" z-40 px-[16rem] lg:px-[120rem] pt-[25rem] flex flex-row justify-between items-center mb-[60rem]
+			className="relative z-40 px-[16rem] lg:px-[120rem] pt-[25rem] flex flex-row justify-between items-center mb-[60rem]
     lg:mb-[140rem] lg:pt-[22rem]
     "
 		>

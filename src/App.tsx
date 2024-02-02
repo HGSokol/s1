@@ -1,11 +1,11 @@
 import {
-	lazy,
 	Suspense,
 	// createContext,
 	// useState,
 	// useEffect,
 	// useLayoutEffect,
 } from 'react'
+import { createLazyComponent } from './js/util/createLazeComponent'
 import { Route, Routes } from 'react-router-dom'
 // import { deviceType } from 'react-device-detect';
 // import { Helmet } from 'react-helmet';
@@ -39,9 +39,13 @@ import { Route, Routes } from 'react-router-dom'
 import HomePage from './js/Pages/Home'
 import Spinner from './js/components/Spinner'
 
-const UserAgreements = lazy(() => import('./js/Pages/UserAgreements'))
-const PrivacyPolicy = lazy(() => import('./js/Pages/PrivacyPolicy'))
-const NotFound = lazy(() => import('./js/Pages/PageNotFound'))
+const UserAgreements = createLazyComponent(
+	() => import('./js/Pages/UserAgreements')
+)
+const PrivacyPolicy = createLazyComponent(
+	() => import('./js/Pages/PrivacyPolicy')
+)
+const NotFound = createLazyComponent(() => import('./js/Pages/PageNotFound'))
 
 // const ProfileUser: ProfileContext = {
 // 	user: null,
