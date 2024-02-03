@@ -52,7 +52,7 @@ const data: dataAboutCard[] = [
 export const About = () => {
 	return (
 		<div
-			id="about"
+			id="О приложении"
 			className="px-[16rem] lg:px-[120rem] mb-[72rem] lg:mb-[180rem] h-max w-full"
 		>
 			<div className="flex flex-col gap-[72rem] lg:gap-[140rem]">

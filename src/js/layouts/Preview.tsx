@@ -13,7 +13,7 @@ export const Preview = () => {
 			<div className="max-w-[950rem] mb-[22rem] lg:mb-[0rem]">
 				<div className="text-[35rem] lg:text-[82rem] font-bodyalt leading-[44rem] lg:leading-[104rem] font-[600] mb-[31rem] lg:mb-[48rem]">
 					Построй{' '}
-					<span className="inline-flex bg-[#FFB700]  items-center justify-center h-[37rem] lg:h-[96rem] px-[7rem] lg:px-[0rem] rounded-[6rem] lg:rounded-[15rem] rotate-[-4deg] pb-[6rem] lg:pb-[10rem] shadow-dsm lg:shadow-dl">
+					<span className="inline-flex bg-[#FFB700] lg:px-[18rem] items-center justify-center h-[37rem] lg:h-[96rem] px-[7rem] rounded-[6rem] lg:rounded-[15rem] rotate-[-4deg] pb-[6rem] lg:pb-[10rem] shadow-dsm lg:shadow-dl">
 						здоровое
 					</span>{' '}
 					и красивое тело вместе с ФКН

@@ -107,9 +107,13 @@ export const Feedback = () => {
 				<div className="lg:flex-wrap flex flex-row overflow-x-scroll lg:overflow-hidden lg:flex-col lg:gap-x-[30rem] lg:h-max gap-y-[24rem] lg:max-h-[882rem] snap-mandatory lg:snap-none snap-x -wekbit-scrollbar:w-[0rem] gap-x-[8rem]">
 					{data.map((e, i) => {
 						return (
-							<div
+							<a
+								href={`${i % 2 === 0 ? '#Главная' : '#Отзывы'}`}
+								onClick={(event) =>
+									e.mail === '@FKN' && event.preventDefault()
+								}
 								key={i}
-								className="h-[264rem] cursor-pointer p-[20rem] lg:h-max min-w-full lg:min-w-0 w-[343rem] lg:w-[312rem] bg-[#2C3034] hover:bg-[#3D4044] lg:p-[24rem] rounded-[16rem] snap-center"
+								className="h-[264rem] cursor-pointer p-[20rem] lg:h-max min-w-full lg:min-w-0 w-[343rem] lg:w-[312rem] bg-[#2C3034] hover:bg-[#3D4044] transition duration-300 lg:p-[24rem] rounded-[16rem] snap-center"
 							>
 								<div className="mb-[20rem] flex flex-row gap-[15rem]">
 									<img
@@ -131,15 +135,15 @@ export const Feedback = () => {
 								</div>
 								{e.mail === '@FKN' && (
 									<div className="pt-[20rem] flex flex-row text-[22rem] gap-[40rem] lg:gap-[20rem]  ">
-										<div className="cursor-pointer text-[#FFF] decoration-[#FFF] hover:text-[#FFB700] underline hover:decoration-[#FFB700]">
+										<div className="transition duration-300 cursor-pointer text-[#ffb700] decoration-[#ffb700] hover:text-[#fff] underline hover:decoration-[#fff]">
 											App Store
 										</div>
-										<div className="cursor-pointer text-[#FFF] decoration-[#FFF] hover:text-[#FFB700] underline hover:decoration-[#FFB700]">
+										<div className="transition duration-300 cursor-pointer text-[#ffb700] decoration-[#ffb700] hover:text-[#fff] underline hover:decoration-[#fff]">
 											Google Play
 										</div>
 									</div>
 								)}
-							</div>
+							</a>
 						)
 					})}
 				</div>

@@ -14,15 +14,12 @@ export const Header = () => {
 	const navData = ['Главная', 'О приложении', 'Эксперты', 'Отзывы']
 	return (
 		<div
-			className="relative z-40 px-[16rem] lg:px-[120rem] pt-[25rem] flex flex-row justify-between items-center mb-[60rem]
+			id="Главная"
+			className=" relative z-40 px-[16rem] lg:px-[120rem] pt-[25rem] flex flex-row justify-between items-center mb-[60rem]
     lg:mb-[140rem] lg:pt-[22rem]
     "
 		>
-			<div
-				id="Главная"
-				className="cursor-pointer"
-				onClick={() => navigate('/')}
-			>
+			<div className="cursor-pointer" onClick={() => navigate('/')}>
 				<svg
 					viewBox="0 0 126 56"
 					fill="none"

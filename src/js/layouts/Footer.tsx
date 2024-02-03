@@ -129,7 +129,7 @@ export const Footer = () => {
 						>
 							<div
 								className="w-[36rem] h-[36rem] rounded-full  grid place-items-center 
-               lg:w-[44rem] lg:h-[44rem] bg-[#FFB700] group-hover/item3:bg-[#f1f1f1] group-hover/item3:border-[1rem] group-hover/item3:border-white"
+               lg:w-[44rem] lg:h-[44rem]  bg-[#FFB700] group-hover/item3:bg-[#f1f1f1] group-hover/item3:border-[1rem] group-hover/item3:border-white"
 							>
 								<FaFacebookF
 									className="w-[18rem] h-[18rem]
@@ -195,20 +195,20 @@ export const Footer = () => {
 				<div className="mb-[40rem] lg:mb-[0rem] order-3 lg:order-none flex flex-col lg:flex-row lg:gap-[50rem]">
 					<div
 						onClick={() => navigate('/userAgreements')}
-						className="hover:text-[#ffb700] lg:order-2  font-body font-[400] text-[16rem] leading-[22rem] text-white
+						className="hover:text-[#ffb700] transition duration-300 lg:order-2  font-body font-[400] text-[16rem] leading-[22rem] text-white
         lg:leading-[19rem] lg:text-[16rem] mb-[16rem] lg:mb-[12rem] cursor-pointer"
 					>
 						Пользовательское соглашение
 					</div>
 					<div
 						onClick={() => navigate('/policy')}
-						className="hover:text-[#ffb700] lg:order-3 font-body font-[400] text-[16rem] mb-[16rem] leading-[22rem] text-white
+						className="hover:text-[#ffb700] transition duration-300 lg:order-3 font-body font-[400] text-[16rem] mb-[16rem] leading-[22rem] text-white
         lg:leading-[19rem] lg:text-[16rem] cursor-pointer"
 					>
 						Политика конфиденциальности
 					</div>
 					<div
-						className="hover:text-[#ffb700] lg:mr-[548rem] lg:order-1 font-body font-[400] text-[16rem] leading-[22rem] text-white
+						className="hover:text-[#ffb700] transition duration-300 lg:mr-[548rem] lg:order-1 font-body font-[400] text-[16rem] leading-[22rem] text-white
         lg:leading-[19rem] lg:text-[16rem] cursor-pointer"
 					>
 						Политика использования файлов cookie

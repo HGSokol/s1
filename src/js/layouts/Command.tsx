@@ -3,7 +3,9 @@ import { FaTelegramPlane } from 'react-icons/fa'
 import { AiFillInstagram } from 'react-icons/ai'
 import { ImYoutube2 } from 'react-icons/im'
 
-import IMG1 from '../../img/about1.png'
+import IMG1 from '../../img/command1.png'
+import IMG2 from '../../img/command2.png'
+import IMG3 from '../../img/command3.png'
 import MinImg1 from '../../img/min1.png'
 import MinImg2 from '../../img/min2.png'
 import MinImg3 from '../../img/min3.png'
@@ -35,7 +37,7 @@ const data: dataCard[] = [
 		},
 	},
 	{
-		img: IMG1,
+		img: IMG2,
 		minImg: MinImg2,
 		prof: 'Тренер',
 		name: 'Владислав Лапшин',
@@ -45,7 +47,7 @@ const data: dataCard[] = [
 		},
 	},
 	{
-		img: IMG1,
+		img: IMG3,
 		minImg: MinImg3,
 		prof: 'Врач',
 		name: 'Олег Ирышкин',
@@ -66,7 +68,7 @@ const data: dataCard[] = [
 		},
 	},
 	{
-		img: IMG1,
+		img: IMG2,
 		prof: 'Тренер',
 		name: 'Юлия Галкина',
 		description:
@@ -76,7 +78,7 @@ const data: dataCard[] = [
 		},
 	},
 	{
-		img: IMG1,
+		img: IMG3,
 		prof: 'Тренер',
 		name: 'Алексей Кузнецов',
 		description: `Профессиональный бодибилдер IFBB Pro\nЛюбительская карьера:\nЧемпион Северо-Запада России\nЧемпион России\nЧемпион Европы\nВице-Чемпион Мира\nПрофессиональная карьера:\nМистер Европа – 2 место\nАрнольд Классик и Чемпионат Мира по профессионалам – 3 место\nСайбериан Пауэр Шоу Про – 2 место\nПрофессиональную карьеру продолжаю…😉`,
@@ -94,7 +96,7 @@ const data: dataCard[] = [
 		},
 	},
 	{
-		img: IMG1,
+		img: IMG2,
 		prof: 'Тренер',
 		name: 'Ярослав Бражников',
 		description: `Мастер спорта по акробатике. 2-х кратный чемпион России по спортивной акробатике, призер международных соревнований, член сборной России\nС 2015 года выступающий атлет в категории пляжный бодибилдинг Чемпион Москвы, Чемпион Южного Федерального Округа, вице чемпион России\nУчастник проекта Ninja Warrior на первом канале, принимал участие в съёмка кино, сериалах а так же тв шоу.`,
@@ -252,20 +254,12 @@ export const Command = () => {
 								<div
 									ref={ref}
 									className={`relative h-[355rem] bg-cover bg-center delay-300 duration-[500ms] rounded-[20rem] z-0 w-[320rem]
-                  lg:h-[420rem] lg:w-[533rem] lg:rounded-[20rem] ${
-						i === 1
-							? 'bg-[center_bottom_-100rem] lg:bg-[center_bottom_-300rem]'
-							: i === 6
-							? 'bg-[center_bottom_-100rem] lg:bg-[center_bottom_-200rem]'
-							: i === 2
-							? 'bg-top'
-							: 'bg-top'
-					}`}
-									//   style={{ backgroundImage: `url(${e.img})` }}
+                  lg:h-[420rem] lg:w-[533rem] lg:rounded-[20rem]`}
+									style={{ backgroundImage: `url(${e.img})` }}
 								>
 									<div
 										className="w-full h-full rounded-[20rem] group-hover/about:bg-yellow-500/30 duration-[400ms] -z-1 absolute
-                    lg:rounded-[20rem] bg-[linear-gradient(360deg,_#000_-2.8%,_rgba(0,_0,_0,_0)_100%)]"
+                    lg:rounded-[20rem] bg-[linear-gradient(360deg,_rgba(0,_0,_0,_0.6)_-2.8%,_rgba(0,_0,_0,_0)_100%)]"
 									></div>
 									<div
 										className={`relative grid grid-cols-[1fr_1fr] p-[16rem] z-5 place-items-end w-full h-full dulay-100 animate-wiggle
