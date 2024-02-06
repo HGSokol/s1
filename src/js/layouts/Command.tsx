@@ -3,7 +3,7 @@ import { FaTelegramPlane } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
 import { ImYoutube2 } from "react-icons/im";
 
-import { teamInfo as data } from "../components/data/teamInfo";
+import { teamInfo as data } from "../data/teamInfo";
 
 export const Command = () => {
   const [size, setSize] = useState<number>(0);

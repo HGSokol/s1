@@ -1,4 +1,5 @@
-import { commentText as data } from "../components/data/commentText";
+import { commentText as data } from "../data/commentText";
+import { APPLE_LINK, GOOGLE_LINK } from "../constants";
 
 export const Feedback = () => {
   return (
@@ -14,11 +15,7 @@ export const Feedback = () => {
           {data.map((e, i) => {
             return (
               <a
-                href={`${
-                  i % 2 === 0
-                    ? "https://play.google.com/store/apps/details?id=ru.likosoftdev.fitnesskaknauka&pcampaignid=web_share"
-                    : "https://apps.apple.com/by/app/fkn-%D1%82%D1%80%D0%B5%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B8-%D0%B4%D0%BB%D1%8F-%D0%BF%D0%BE%D1%85%D1%83%D0%B4%D0%B5%D0%BD%D0%B8%D1%8F/id1634415981"
-                }`}
+                href={`${i % 2 === 0 ? `${GOOGLE_LINK}` : `${APPLE_LINK}`}`}
                 onClick={(event) =>
                   e.mail === "@FKN" && event?.preventDefault()
                 }
@@ -47,36 +44,22 @@ export const Feedback = () => {
                 </div>
                 {e.mail === "@FKN" && (
                   <div className="pt-[20rem] flex flex-row text-[22rem] gap-[40rem] lg:gap-[20rem]  ">
-                    <a
+                    <div
                       onClick={() =>
-                        window.open(
-                          "https://apps.apple.com/by/app/fkn-%D1%82%D1%80%D0%B5%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B8-%D0%B4%D0%BB%D1%8F-%D0%BF%D0%BE%D1%85%D1%83%D0%B4%D0%B5%D0%BD%D0%B8%D1%8F/id1634415981",
-                          "_blank",
-                          "noreferrer"
-                        )
+                        window.open(`${APPLE_LINK}`, "_blank", "noreferrer")
                       }
-                      href="https://apps.apple.com/by/app/fkn-%D1%82%D1%80%D0%B5%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B8-%D0%B4%D0%BB%D1%8F-%D0%BF%D0%BE%D1%85%D1%83%D0%B4%D0%B5%D0%BD%D0%B8%D1%8F/id1634415981"
-                      target="_blank"
-                      rel="noreferrer"
                       className="transition duration-300 cursor-pointer text-[#ffb700] decoration-[#ffb700] hover:text-[#fff] underline hover:decoration-[#fff]"
                     >
                       App Store
-                    </a>
-                    <a
+                    </div>
+                    <div
                       onClick={() =>
-                        window.open(
-                          "https://play.google.com/store/apps/details?id=ru.likosoftdev.fitnesskaknauka&pcampaignid=web_share",
-                          "_blank",
-                          "noreferrer"
-                        )
+                        window.open(`${GOOGLE_LINK}`, "_blank", "noreferrer")
                       }
-                      href="https://play.google.com/store/apps/details?id=ru.likosoftdev.fitnesskaknauka&pcampaignid=web_share"
-                      target="_blank"
-                      rel="noreferrer"
                       className="transition duration-300 cursor-pointer text-[#ffb700] decoration-[#ffb700] hover:text-[#fff] underline hover:decoration-[#fff]"
                     >
                       Google Play
-                    </a>
+                    </div>
                   </div>
                 )}
               </a>

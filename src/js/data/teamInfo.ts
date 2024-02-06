@@ -1,10 +1,10 @@
-import { dataCard } from "../../@types/appTypes";
-import IMG1 from "../../../img/command1.png";
-import IMG2 from "../../../img/command2.png";
-import IMG3 from "../../../img/command3.png";
-import MinImg1 from "../../../img/min1.png";
-import MinImg2 from "../../../img/min2.png";
-import MinImg3 from "../../../img/min3.png";
+import { dataCard } from "../@types/appTypes";
+import IMG1 from "../../img/command1.png";
+import IMG2 from "../../img/command2.png";
+import IMG3 from "../../img/command3.png";
+import MinImg1 from "../../img/min1.png";
+import MinImg2 from "../../img/min2.png";
+import MinImg3 from "../../img/min3.png";
 
 export const teamInfo: dataCard[] = [
   {

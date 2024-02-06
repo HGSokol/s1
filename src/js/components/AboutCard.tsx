@@ -1,3 +1,5 @@
+import { APPLE_LINK, GOOGLE_LINK } from "../constants";
+
 export const AboutCard = (props: any) => {
   const { name, title, text, img, num, button } = props;
 
@@ -21,11 +23,7 @@ export const AboutCard = (props: any) => {
           <div className="mt-[32rem] lg:mt-[0rem] order-4 flex flex-col lg:flex-row gap-[14rem] lg:gap-[20rem]">
             <div
               onClick={() =>
-                window.open(
-                  "https://apps.apple.com/by/app/fkn-%D1%82%D1%80%D0%B5%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B8-%D0%B4%D0%BB%D1%8F-%D0%BF%D0%BE%D1%85%D1%83%D0%B4%D0%B5%D0%BD%D0%B8%D1%8F/id1634415981",
-                  "_blank",
-                  "noreferrer"
-                )
+                window.open(`${APPLE_LINK}`, "_blank", "noreferrer")
               }
               className="group/app cursor-pointer flex items-center justify-center rounded-[12rem] px-[18rem] lg:px-[24rem] py-[16rem] bg-[#16191C] duration-300 hover:bg-[#2e3134] text-[#FFFFFF] text-[16rem] leading-[19rem] font-bodyalt font-[600]"
             >
@@ -56,11 +54,7 @@ export const AboutCard = (props: any) => {
             </div>
             <div
               onClick={() =>
-                window.open(
-                  "https://play.google.com/store/apps/details?id=ru.likosoftdev.fitnesskaknauka&pcampaignid=web_share",
-                  "_blank",
-                  "noreferrer"
-                )
+                window.open(`${GOOGLE_LINK}`, "_blank", "noreferrer")
               }
               className="group/google cursor-pointer flex items-center duration-300 hover:bg-[#ffb700] justify-center rounded-[12rem] px-[18rem] lg:px-[24rem] py-[16rem] text-[#16191C] text-[16rem] leading-[19rem] font-bodyalt font-[600] border-[1rem] hover:border-[#ffb700] border-[#16191C]"
             >

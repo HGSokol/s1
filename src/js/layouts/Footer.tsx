@@ -8,7 +8,7 @@ export const Footer = () => {
   return (
     <div
       className="bg-[#16191C] h-[510rem] py-[32rem] flex
-    flex-col lg:h-[231rem] lg:py-[48rem] lg:px-[120rem] lg:gap-[50rem] items-center lg:items-start text-center lg:text-start"
+    flex-col lg:h-[231rem] lg:py-[48rem] px-[20rem] lg:px-[120rem] lg:gap-[50rem] items-center lg:items-start text-center lg:text-start"
     >
       <div className="contents lg:flex flex-col lg:flex-row">
         <div

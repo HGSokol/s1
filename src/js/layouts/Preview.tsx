@@ -2,6 +2,7 @@
 // import { Link } from 'react-router-dom';
 // import { Profile } from '../../App';
 // import IMG1 from '../../img/preview1.png';
+import { APPLE_LINK, GOOGLE_LINK } from "../constants";
 import SM from "../../img/sm.png";
 import PREVIEW from "../../img/previewi.png";
 
@@ -37,13 +38,7 @@ export const Preview = () => {
         </div>
         <div className="flex flex-row gap-[15rem] lg:gap-[32rem]">
           <div
-            onClick={() =>
-              window.open(
-                "https://apps.apple.com/by/app/fkn-%D1%82%D1%80%D0%B5%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B8-%D0%B4%D0%BB%D1%8F-%D0%BF%D0%BE%D1%85%D1%83%D0%B4%D0%B5%D0%BD%D0%B8%D1%8F/id1634415981",
-                "_blank",
-                "noreferrer"
-              )
-            }
+            onClick={() => window.open(`${APPLE_LINK}`, "_blank", "noreferrer")}
             className="cursor-pointer w-[165rem] lg:w-[225rem] h-[48rem] lg:h-[65rem]"
           >
             <svg
@@ -156,11 +151,7 @@ export const Preview = () => {
           </div>
           <div
             onClick={() =>
-              window.open(
-                "https://play.google.com/store/apps/details?id=ru.likosoftdev.fitnesskaknauka&pcampaignid=web_share",
-                "_blank",
-                "noreferrer"
-              )
+              window.open(`${GOOGLE_LINK}`, "_blank", "noreferrer")
             }
             className="cursor-pointer w-[165rem] lg:w-[225rem] h-[48rem] lg:h-[65rem]"
           >
